@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateDeliveryManTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,16 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('delivery_man', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('shop_id')->unsigned()->index();
+            $table->foreign('shop_id')->references('id')->on('shops');
             $table->string('name');
             $table->string('family');
             $table->string('cellphone');
-            $table->date('birth_date');
-            $table->date('register_date');
-            $table->string('address');
-            $table->integer('capital_city_id');
-            $table->integer('town_city_id');
-            $table->string('telephone');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->integer('delivery_man_status_id')->unsigned()->index();
+            $table->foreign('delivery_man_status_id')->references('id')->on('delivery_man_status');
             $table->tinyInteger('active')->default('1');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -39,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('delivery_man');
     }
 }
