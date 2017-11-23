@@ -12,6 +12,7 @@
 */
 
 Route::get('/','IndexController@index');
+Route::get('/index','IndexController@home');
 
 
 Route::get('addNewCategory','ProductController@addNewCategory');

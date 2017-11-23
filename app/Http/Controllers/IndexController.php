@@ -11,4 +11,8 @@ class IndexController extends Controller
     {
         return view('layouts.adminLayout');
     }
+    public function home()
+    {
+        return view('layouts.main');
+    }
 }
