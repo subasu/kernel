@@ -26,4 +26,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    //relation of users and baskets
+    public function baskets()
+    {
+        return $this->hasMany('App\Models\Basket','user_id');
+    }
 }
