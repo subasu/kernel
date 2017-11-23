@@ -6,6 +6,11 @@
 *{
   font-family:Yekan;
 }
+.font-size-s {
+  font-size: 13.5px;
+  direction: rtl;
+  text-align: right;
+}
 .mytable th,.mytable td{
   text-align: center !important;
 }

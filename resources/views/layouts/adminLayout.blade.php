@@ -97,47 +97,63 @@
                             {{--//system manager menu--}}
                             <li><a><i class="fa f a-home"></i> مدیر سیستم<span></span></a>
                             </li>
-                            <li><a><i class="fa fa-users"></i> مدیریت کارمندان<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-users"></i> مدیریت محصولات<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('usersManage')}}"> نمایش و مدیریت کارمندان</a>
+                                    <li><a href="{{url('usersManage')}}"> نمایش و مدیریت محصولات</a>
                                     </li>
-                                    <li><a href="{{url('admin/usersCreate')}}">درج کارمند جدید </a>
+                                    <li><a href="{{url('admin/usersCreate')}}">درج محصول جدید </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-laptop"></i> مدیریت پروژه ها<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-th-list"></i> مدیریت دسته بندی ها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('systemManager')}}"> نمایش و مدیریت پروژه ها</a>
+                                    <li><a href="{{url('usersManage')}}"> نمایش و مدیریت دسته بندی ها</a>
                                     </li>
-                                    <li><a href="{{url('systemManager')}}">درج پروژه جدید </a>
+                                    <li><a href="{{url('admin/usersCreate')}}">درج دسته بندی جدید </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-newspaper-o"></i> مدیریت اخبار<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-cubes"></i> مدیریت سفارشات<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('systemManager')}}"> نمایش و مدیریت اخبار</a>
+                                    <li><a href="{{url('systemManager')}}"> نمایش و مدیریت سفارشات</a>
                                     </li>
-                                    <li><a href="{{url('systemManager')}}">درج اخبار جدید </a>
+                                    <li><a href="{{url('systemManager')}}">درج سفارش جدید </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-window-restore"></i> مدیریت کارآموزی<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-motorcycle"></i> مدیریت پیک ها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('systemManager')}}"> نمایش و مدیریت فرم های کارآموزی</a>
+                                    <li><a href="{{url('systemManager')}}"> نمایش و مدیریت پیک ها</a>
+                                    </li>
+                                    <li><a href="{{url('systemManager')}}">درج پیک جدید </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-users"></i> مدیریت کاربران<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('systemManager')}}"> نمایش و مدیریت کاربران</a>
                                     </li>
                                     <li><a href="{{url('systemManager')}}">درج تصویر کارآموزی جدید </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-th-list"></i> مدیریت دسته بندی پروژه<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('systemManager')}}"> نمایش و مدیریت دسته بندی های پروژه</a>
-                                    </li>
-                                    <li><a href="{{url('systemManager')}}">درج دسته بندی جدید </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="{{url('/')}}"><i class="fa fa-th-list"></i>صفحه ی اصلی سایت</a>
+                            {{--<li><a><i class="fa fa-comments"></i> مدیریت نظرات<span class="fa fa-chevron-down"></span></a>--}}
+                                {{--<ul class="nav child_menu" style="display: none">--}}
+                                    {{--<li><a href="{{url('systemManager')}}"> نمایش و مدیریت دسته بندی های پروژه</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li><a href="{{url('systemManager')}}">درج دسته بندی جدید </a>--}}
+                                    {{--</li>--}}
+                                {{--</ul>--}}
+                            {{--</li>--}}
+                            {{--<li><a><i class="fa fa-star-half-full"></i> مدیریت امتیازات<span class="fa fa-chevron-down"></span></a>--}}
+                                {{--<ul class="nav child_menu" style="display: none">--}}
+                                    {{--<li><a href="{{url('systemManager')}}"> نمایش و مدیریت دسته بندی های پروژه</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li><a href="{{url('systemManager')}}">درج دسته بندی جدید </a>--}}
+                                    {{--</li>--}}
+                                {{--</ul>--}}
+                            {{--</li>--}}
+                            <li><a href="{{url('/')}}"><i class="fa fa-laptop"></i>صفحه ی اصلی سایت</a>
                             </li>
 
                             {{--//End User menu--}}
@@ -145,36 +161,30 @@
                             <li><a style="background-color: rgba(231, 76, 60, 0.88)" href="{{url('/logout')}}"><i
                                             class="fa fa-sign-out"></i>خروج</a>
                             </li>
-                            {{--
-                            <li><a href="{{url('/logout')}}" style="font-size:20px;padding:3px 0 3px 0" --}}
-                                   {{--class="btn btn-danger col-md-10 col-md-offset-1"><i class="fa fa-sign-out"
-                                                                                           aria-hidden="true"></i>خروج</a>--}}
-                                {{--
-                            </li>
-                            --}}
+
                         </ul>
                     </div>
                 </div>
                 <!-- /sidebar menu -->
-                {{--<!-- /menu footer buttons -->--}}
-                {{--
-                <div class="sidebar-footer hidden-small">--}}
-                    {{--<a data-toggle="tooltip" data-placement="top" title="تنظیمات">--}}
-                        {{--<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>--}}
-                        {{--</a>--}}
-                    {{--<a data-toggle="tooltip" data-placement="top" title="بزرگ کردن صفحه">--}}
-                        {{--<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>--}}
-                        {{--</a>--}}
-                    {{--<a data-toggle="tooltip" data-placement="top" title="قفل کردن">--}}
-                        {{--<span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>--}}
-                        {{--</a>--}}
-                    {{--<a data-toggle="tooltip" data-placement="top" title="خروج">--}}
-                        {{--<span class="glyphicon glyphicon-off" aria-hidden="true"></span>--}}
-                        {{--</a>--}}
-                    {{--
+                <!-- /menu footer buttons -->
+<?php /*
+                <div class="sidebar-footer hidden-small">
+                    <a data-toggle="tooltip" data-placement="top" title="تنظیمات">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                    <a data-toggle="tooltip" data-placement="top" title="بزرگ کردن صفحه">
+                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                    <a data-toggle="tooltip" data-placement="top" title="قفل کردن">
+                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                    <a data-toggle="tooltip" data-placement="top" title="خروج">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+
                 </div>
-                --}}
-                {{--<!-- /menu footer buttons -->--}}
+*/?>
+                <!-- /menu footer buttons -->
             </div>
         </div>
         <!-- top navigation -->
@@ -189,155 +199,111 @@
                         <a id="back" class="btn btn-info">بازگشت به صفحه قبل</a>
                     </div>
 
-                    {{--
-                    <ul class="nav navbar-nav navbar-right">--}}
-                        {{--
-                        <li class="">--}}
-                            {{--<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" --}}
-                                   {{--aria-expanded="false">--}}
-                                {{--<img src="{{url('public/dashboard/images/img.png')}}" alt="">--}}
-                                {{--<span class=" fa fa-angle-down"></span>--}}
-                                {{--</a>--}}
-                            {{--
-                            <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">--}}
-                                {{--
-                                <li><a href="javascript:;"> مشخصات کاربری من</a>--}}
-                                    {{--
-                                </li>
-                                --}}
-                                {{--
-                                <li>--}}
-                                    {{--<a href="javascript:;">راهنما</a>--}}
-                                    {{--
-                                </li>
-                                --}}
-                                {{--
-                                <li>--}}
-                                    {{--<a href="javascript:;">--}}
-                                        {{--<span class="badge bg-red pull-right">50%</span>--}}
-                                        {{--<span>تنظیمات</span>--}}
-                                        {{--</a>--}}
-                                    {{--
-                                </li>
-                                --}}
-                                {{--
-                                <li><a href="{{url('/logout')}}"><i class="fa fa-sign-out pull-right"></i> خروج</a>--}}
-                                    {{--
-                                </li>
-                                --}}
-                                {{--
-                            </ul>
-                            --}}
-                            {{--
-                        </li>
-                        --}}
+<?php /*
+                    <ul class="nav navbar-nav navbar-right">
 
-                        {{--
-                        <li role="presentation" class="dropdown">--}}
-                            {{--<a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" --}}
-                                   {{--aria-expanded="false">--}}
-                                {{--<i class="fa fa-envelope-o"></i>--}}
-                                {{--<span class="badge bg-green">6</span>--}}
-                                {{--</a>--}}
-                            {{--
+                        <li class="">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                                   aria-expanded="false">
+                                <img src="{{url('public/dashboard/images/img.png')}}" alt="">
+                                <span class=" fa fa-angle-down"></span>
+                                </a>
+                            <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+                                <li><a href="javascript:;"> مشخصات کاربری من</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">راهنما</a>
+
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span class="badge bg-red pull-right">50%</span>
+                                        <span>تنظیمات</span>
+                                        </a>
+                                </li>
+                                <li><a href="{{url('/logout')}}"><i class="fa fa-sign-out pull-right"></i> خروج</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
+                                   aria-expanded="false">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="badge bg-green">6</span>
+                                </a>
                             <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                                --}}
-                                {{--
-                                <li>--}}
-                                    {{--<a>--}}
-                                        {{--<span class="image">--}}
-                    {{--<img src="{{URL::asset('public/dashboard/images/img.png')}}" --}}
-                             {{--alt="Profile Image"/>--}}
-                    {{--</span>--}}
-                                        {{--<span>--}}
-                    {{--<span>John Smith</span>--}}
-                    {{--<span class="time">3 mins ago</span>--}}
-                    {{--</span>--}}
-                                        {{--<span class="message">--}}
-                    {{--Film festivals used to be do-or-die moments for movie makers. They were where...--}}
-                    {{--</span>--}}
-                                        {{--</a>--}}
-                                    {{--
+                                <li>
+                                    <a>
+                                        <span class="image">
+                    <img src="{{URL::asset('public/dashboard/images/img.png')}}"
+                             alt="Profile Image"/>
+                    </span>
+                                        <span>
+                    <span>John Smith</span>
+                    <span class="time">3 mins ago</span>
+                    </span>
+                                        <span class="message">
+                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
+                                        </a>
                                 </li>
-                                --}}
-                                {{--
-                                <li>--}}
-                                    {{--<a>--}}
-                                        {{--<span class="image">--}}
-                    {{--<img src="{{URL::asset('public/dashboard/images/img.png')}}" --}}
-                             {{--alt="Profile Image"/>--}}
-                    {{--</span>--}}
-                                        {{--<span>--}}
-                    {{--<span>John Smith</span>--}}
-                    {{--<span class="time">3 mins ago</span>--}}
-                    {{--</span>--}}
-                                        {{--<span class="message">--}}
-                    {{--Film festivals used to be do-or-die moments for movie makers. They were where...--}}
-                    {{--</span>--}}
-                                        {{--</a>--}}
-                                    {{--
+                                <li>
+                                    <a>
+                                        <span class="image">
+                    <img src="{{URL::asset('public/dashboard/images/img.png')}}"
+                             alt="Profile Image"/>
+                    </span>
+                                        <span>
+                    <span>John Smith</span>
+                    <span class="time">3 mins ago</span>
+                    </span>
+                                        <span class="message">
+                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
+                                        </a>
                                 </li>
-                                --}}
-                                {{--
-                                <li>--}}
-                                    {{--<a>--}}
-                                        {{--<span class="image">--}}
-                    {{--<img src="{{URL::asset('public/dashboard/images/img.png')}}" --}}
-                             {{--alt="Profile Image"/>--}}
-                    {{--</span>--}}
-                                        {{--<span>--}}
-                    {{--<span>John Smith</span>--}}
-                    {{--<span class="time">3 mins ago</span>--}}
-                    {{--</span>--}}
-                                        {{--<span class="message">--}}
-                    {{--Film festivals used to be do-or-die moments for movie makers. They were where...--}}
-                    {{--</span>--}}
-                                        {{--</a>--}}
-                                    {{--
+                                <li>
+                                    <a>
+                                        <span class="image">
+                    <img src="{{URL::asset('public/dashboard/images/img.png')}}"
+                             alt="Profile Image"/>
+                    </span>
+                                        <span>
+                    <span>John Smith</span>
+                    <span class="time">3 mins ago</span>
+                    </span>
+                                        <span class="message">
+                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
+                                        </a>
                                 </li>
-                                --}}
-                                {{--
-                                <li>--}}
-                                    {{--<a>--}}
-                                        {{--<span class="image">--}}
-                    {{--<img src="{{URL::asset('public/dashboard/images/img.png')}}" --}}
-                             {{--alt="Profile Image"/>--}}
-                    {{--</span>--}}
-                                        {{--<span>--}}
-                    {{--<span>John Smith</span>--}}
-                    {{--<span class="time">3 mins ago</span>--}}
-                    {{--</span>--}}
-                                        {{--<span class="message">--}}
-                    {{--Film festivals used to be do-or-die moments for movie makers. They were where...--}}
-                    {{--</span>--}}
-                                        {{--</a>--}}
-                                    {{--
+                                <li>
+                                    <a>
+                                        <span class="image">
+                    <img src="{{URL::asset('public/dashboard/images/img.png')}}"
+                             alt="Profile Image"/>
+                    </span>
+                                        <span>
+                    <span>John Smith</span>
+                    <span class="time">3 mins ago</span>
+                    </span>
+                                        <span class="message">
+                    Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
+                                        </a>
                                 </li>
-                                --}}
-                                {{--
-                                <li>--}}
-                                    {{--
-                                    <div class="text-center">--}}
-                                        {{--<a href="inbox.html">--}}
-                                            {{--<strong>See All Alerts</strong>--}}
-                                            {{--<i class="fa fa-angle-right"></i>--}}
-                                            {{--</a>--}}
-                                        {{--
+                                <li>
+                                    <div class="text-center">
+                                        <a href="inbox.html">
+                                            <strong>See All Alerts</strong>
+                                            <i class="fa fa-angle-right"></i>
+                                            </a>
                                     </div>
-                                    --}}
-                                    {{--
                                 </li>
-                                --}}
-                                {{--
                             </ul>
-                            --}}
-                            {{--
                         </li>
-                        --}}
-
-                        {{--
                     </ul>
-                    --}}
+                    */?>
                 </nav>
             </div>
 
@@ -594,267 +560,6 @@
 </script>
 <!-- /datepicker -->
 <!-- /footer content -->
-{{--
-<script>--
-    }}
-    {
-        {
-            --function unit_count() {
-                --
-            }
-        }
-        {
-            {
-                --$.ajax({--
-            }
-            }
-            {
-                {
-                    --url
-                :
-                    "{{ url('/unit_count') }}", --
-                }
-            }
-            {
-                {
-                    --type
-                :
-                    'GET', --
-                }
-            }
-            {
-                {
-                    --dataType
-                :
-                    'json', --
-                }
-            }
-            {
-                {
-                    --success
-                :
-                    function (response) {
-                        --
-                    }
-                }
-                {
-                    {
-                        --
-                        var html;
-                        --
-                    }
-                }
-                {
-                    {
-                        --$.each(response.unit_counts, function (index, value) {
-                            --
-                        }
-                    }
-                    {
-                        {
-                            --html += '<option value="' + value + '">' + value['title'] + '</option>';
-                            --
-                        }
-                    }
-                    {
-                        {
-                            --
-                        }
-                    )
-    ;--
-    }}
-    {
-        {
-            --$("#unit_count").html(html);
-            --
-        }
-    }
-    {
-        {
-            --
-        }
-    ,
-        --
-    }
-    }
-    {
-        {
-            --error
-        :
-            function (error) {
-                --
-            }
-        }
-        {
-            {
-                --
-                var errors = error.responseJSON;
-                --
-            }
-        }
-        {
-            {
-                --console.log(errors);
-                --
-            }
-        }
-        {
-            {
-                --
-            }
-            --
-        }
-    }
-    {
-        {
-            --
-        }
-    )
-    ;--
-    }}
-    {
-        {
-            --
-        }
-        --
-    }
-    }
-    {
-        {
-            --
-            var record_count = 0;
-            --
-        }
-    }
-    {
-        {
-            --function unit_count_each_record(select_id) {
-                --
-            }
-        }
-        {
-            {
-                --$.ajax({--
-            }
-            }
-            {
-                {
-                    --url
-                :
-                    "{{ url('/unit_count') }}", --
-                }
-            }
-            {
-                {
-                    --type
-                :
-                    'GET', --
-                }
-            }
-            {
-                {
-                    --dataType
-                :
-                    'json', --
-                }
-            }
-            {
-                {
-                    --success
-                :
-                    function (response) {
-                        --
-                    }
-                }
-                {
-                    {
-                        --
-                        var html;
-                        --
-                    }
-                }
-                {
-                    {
-                        --$.each(response.unit_counts, function (index, value) {
-                            --
-                        }
-                    }
-                    {
-                        {
-                            --//                   html += '<option value="' + value + '">' +  value['title'] + '</option>';--}}
-                                {
-                            {
-                                --html += '<option value="' + value + '">' + value['title'] + '</option>';
-                                --
-                            }
-                        }
-                            {
-                                {
-                                    --
-                                }
-                            )
-    ;--
-    }}
-    {
-        {
-            --$("#" + select_id).html(html);
-            --
-        }
-    }
-    {
-        {
-            --
-        }
-    ,
-        --
-    }
-    }
-    {
-        {
-            --error
-        :
-            function (error) {
-                --
-            }
-        }
-        {
-            {
-                --
-                var errors = error.responseJSON;
-                --
-            }
-        }
-        {
-            {
-                --console.log(errors);
-                --
-            }
-        }
-        {
-            {
-                --
-            }
-            --
-        }
-    }
-    {
-        {
-            --
-        }
-    )
-    ;--
-    }}
-    {
-        {
-            --
-        }
-        --
-    }
-    }
-    {
-        {
-            --</script>
---}}
 <script>
     $(document).ready(function () {
         $('#back').click(function () {
