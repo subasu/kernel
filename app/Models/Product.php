@@ -52,4 +52,23 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\ProductSize','product_id');
     }
+
+    //relation of products and unit_count
+    public function unitCounts()
+    {
+        return $this->belongsTo('App\Models\UnitCount');
+    }
+
+    //relation of products and sub_unit_counts
+    public function subUnitCounts()
+    {
+        return $this->belongsTo('App\Models\SubUnitCount');
+    }
+
+    //relation of product and score
+    public function scores()
+    {
+        return $this->hasMany('App\Models\ProductScore','product_id');
+    }
+
 }

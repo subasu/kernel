@@ -32,4 +32,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Basket','user_id');
     }
+
+    //relation of user and orders
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order','user_id');
+    }
+
 }
