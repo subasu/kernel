@@ -8,10 +8,12 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     //
-    public function addNewCategory()
+    public function addNewCategory(Request $request)
     {
         $add = new AddCategory();
-        $name="sabre ayoob";
-        $add->addNewCategory($name,null);
+
+        $add->addNewCategory($request->category);
     }
+
+
 }

@@ -109,7 +109,7 @@
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('usersManage')}}"> نمایش و مدیریت دسته بندی ها</a>
                                     </li>
-                                    <li><a href="{{url('admin/usersCreate')}}">درج دسته بندی جدید </a>
+                                    <li><a href="{{url('addCategory')}}">درج دسته بندی جدید </a>
                                     </li>
                                 </ul>
                             </li>

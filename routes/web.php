@@ -14,4 +14,4 @@
 Route::get('/','IndexController@index');
 Route::get('/index','IndexController@home');
 Route::get('/addCategory','IndexController@addCategory');
-Route::get('addNewCategory','ProductController@addNewCategory');
+Route::post('addNewCategory','ProductController@addNewCategory');
