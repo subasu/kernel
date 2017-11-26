@@ -39,10 +39,14 @@
                                 </label>
                             </div>
                             <div class="ln_solid"></div>
-                            <div class="item form-group" id="categories">
+                            <div class="item form-group">
                                 <div id="showCategories" style="display: none; !important;">
                                     <div class="col-md-8 col-sm-6 col-xs-9">
-                                        <select  id="categories" class="form-control col-md-7 col-xs-12" name="categories">
+                                        <select id="categories"  class="form-control" name="categories">
+
+                                        </select>
+                                        <br/>
+                                        <select id="subCategories"  class="form-control" name="subCategories" style="display: none;">
 
                                         </select>
 
@@ -60,17 +64,18 @@
 
                             <div class="item form-group" id="change" style="display:none;!important;">
 
-                                <div class="col-md-1" style="margin-left: 6.333333%;margin-right: 2%;">
-                                    <a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle="" title="افزودن زیر دسته" ></a>
-                                </div>
+                                    <div class="col-md-1" style="margin-left: 6.333333%;margin-right: 2%;">
+                                        <a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle="" title="افزودن زیر دسته" ></a>
+                                    </div>
 
-                                <div class="col-md-6 col-sm-6 col-xs-9">
-                                    <input id="category" class="form-control col-md-7 col-xs-12" name="category[]" placeholder=""
-                                           required="required" type="text">
-                                </div>
-                                <label class="control-label col-md-4 col-sm-4 col-xs-3" for="name"> نام دسته بندی جدید : <span
-                                            class="required star" title="پر کردن این فیلد الزامی است">*</span>
-                                </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-9">
+                                        <input id="category" class="form-control col-md-7 col-xs-12" name="category[]" placeholder=""
+                                               required="required" type="text">
+                                    </div>
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-3" for="name"> نام دسته بندی جدید : <span
+                                                class="required star" title="پر کردن این فیلد الزامی است">*</span>
+                                    </label>
+
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -81,6 +86,7 @@
                             <div class="form-group">
                                 <div class="col-md-8">
                                     <button id="reg" type="button" class="col-md-12 btn btn-primary">ثبت نهایی</button>
+                                    <button id="add" type="button" class="col-md-12 btn btn-success" style="display: none;">اضافه کردن دسته جدید</button>
                                 </div>
                             </div>
 
@@ -146,19 +152,28 @@
         {{--create user by AJAX and show result alert and redirect to usersList page --}}
         <script>
             $(function () {
+                var option = '';
                 $.ajax({
-                    cache:false,
-                    url:"{{url('api/v1/getMainCategories')}}",
-                    type:'get',
-                    success:function (response) {
+
+                    cache    :false,
+                    url      :"{{url('api/v1/getMainCategories')}}",
+                    type     :'get',
+                    dataType :'json',
+                    success  :function (response) {
                         console.log(response);
                         if(response != 0)
                         {
                             $('#showCategories').css('display','block');
-                            var item=$("#categories");
-                            item.empty();
+                            $('#reg').css('display','none');
+                            $('#add').css('display','block');
+
                             $.each(response,function (key,value) {
-                                item.append('<option>'+value+'</option>');
+                                var item = $('#categories');
+                                item.empty();
+                                item.append
+                                (
+                                     option +="<option id='"+value.id+"' >"+value.title+"</option>"
+                                );
                             })
                         }else if(response == 0)
                             {
@@ -173,21 +188,133 @@
         </script>
         <script>
             $(document).on('click','#reg',function(){
+                var option = '';
                 var formData = $('#categoryForm').serialize();
                 $.ajax
                 ({
-                   url  : "{{url('addNewCategory')}}",
-                   type : "post",
-                   data : formData,
-                   success : function(response)
+                   cache    : "false",
+                   url      : "{{url('addNewCategory')}}",
+                   type     : "post",
+                   //dataType : "JSON",
+                   data     : formData,
+                   success  : function(response)
                    {
-                       alert(response);
+                       swal({
+                           title: "",
+                           text: response,
+                           type: "info",
+                           confirmButtonText: "بستن"
+                       });
+                       $.ajax({
+
+                           cache:false,
+                           url:"{{url('api/v1/getMainCategories')}}",
+                           type:'get',
+                           dataType:"json",
+                           success:function (response) {
+                               console.log(response);
+                               if(response != 0)
+                               {
+                                   $('#showCategories').css('display','block');
+                                   $('#reg').css('display','none');
+                                   $.each(response,function (key,value) {
+                                       var item = $('#categories');
+                                       item.empty();
+                                       item.append
+                                       (
+                                           option += "<option id='"+value.id+"'>"+value.title+"</option>"
+                                       );
+                                   });
+
+                                   $('#change').css('display','none');
+                                   $('#change').empty();
+                                   $('#add').css('display','block');
+                               }
+
+                           }
+
+                       })
                    },error:function(error)
                     {
                         console.log(error);
-                       alert(error);
+                        swal({
+                            title: "",
+                            text: 'خطایی رخ داده است، با بخش پشتیبانی تماس بگیرید',
+                            type: "warning",
+                            confirmButtonText: "بستن"
+                        });
                     }
                 });
+            })
+        </script>
+        <script>
+            $(document).on('click','#add',function () {
+                $('#add').fadeOut(2000);
+                $('#showCategories').fadeOut(2000);
+                $('#change').empty();
+                $('#change').css('display','block');
+                setTimeout(function () {
+                    $('#change').append
+                    (
+                        '<div class="col-md-1" style="margin-left: 6.333333%;margin-right: 2%;">'+
+                        '<a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle="" title="افزودن زیر دسته" ></a>'+
+                        '</div>'+
+
+                        '<div class="col-md-6 col-sm-6 col-xs-9">'+
+                        '<input id="category" class="form-control col-md-7 col-xs-12" name="category[]" placeholder="" required="required" type="text">'+
+                        '</div>'+
+                        '<label class="control-label col-md-4 col-sm-4 col-xs-3" for="name"> نام دسته بندی جدید :' +
+                        ' <span class="required star" title="پر کردن این فیلد الزامی است">*</span>'+
+                        '</label>'
+                    );
+                    $('#reg').fadeIn(3000);
+                },2000);
+            })
+        </script>
+        <!-- below scripy to get sub category -->
+        <script>
+            $(function(){
+                var option = '';
+                $('#categories').click(function () {
+                    $("[name = 'categories'] option:selected").each(function(){
+                        var id = $(this).attr('id');
+
+                        getSubCategory(id);
+
+                        function getSubCategory (id) {
+                            var option="";
+                                $.ajaxSetup({
+                                headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                                }
+                                })
+                                $.ajax
+                                ({
+                                    cache :false,
+                                    url: "{{Url('api/v1/getSubCategories')}}/" + id,
+                                    dataType: "json",
+                                    type: "get",
+                                    success: function (response)
+                                    {
+
+                                        console.log(response);
+
+                                        $.each(response, function (key, value) {
+                                            var item = $('#subCategories');
+                                            item.empty();
+                                            item.append
+                                            (
+                                                option +="<option id='"+value.id+"' >"+value.title+"</option>"
+
+                                            );
+
+                                        });
+                                        $('#subCategories').css('display','block');
+                                    }
+                                });
+                        }
+                    })
+                })
             })
         </script>
 @endsection

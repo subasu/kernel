@@ -22,4 +22,17 @@ class CommonController extends Controller
             }
 
     }
+    public function getSubCategories($id)
+    {
+        $subCategories = Categories::where([['parent_id',$id],['active',1]])->get();
+        if(count($subCategories) > 0 )
+        {
+            return response()->json($subCategories);
+        }
+        else
+        {
+            return response()->json(0);
+        }
+
+    }
 }
