@@ -14,6 +14,10 @@ class ProductController extends Controller
 
         $add->addNewCategory($request->category);
     }
+    public function addProduct(Request $request)
+    {
+        return view('admin.addProduct');
+    }
 
 
 }

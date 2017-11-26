@@ -103,6 +103,8 @@
                                     </li>
                                     <li><a href="{{url('admin/usersCreate')}}">درج محصول جدید </a>
                                     </li>
+                                    <li><a href="{{url('admin/usersCreate')}}">درج واحد شمارش و زیرواحد شمارش </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-th-list"></i> مدیریت دسته بندی ها<span class="fa fa-chevron-down"></span></a>
