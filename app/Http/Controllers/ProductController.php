@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\SelfClasses\AddCategory;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -17,6 +18,11 @@ class ProductController extends Controller
     public function addProduct(Request $request)
     {
         return view('admin.addProduct');
+    }
+    public function productManagement()
+    {
+        $data=Product::all();
+        return view('admin.productManagement',compact('data'));
     }
 
 

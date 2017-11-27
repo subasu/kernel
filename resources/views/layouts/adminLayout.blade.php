@@ -135,8 +135,6 @@
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('systemManager')}}"> نمایش و مدیریت کاربران</a>
                                     </li>
-                                    <li><a href="{{url('systemManager')}}">درج تصویر کارآموزی جدید </a>
-                                    </li>
                                 </ul>
                             </li>
                             {{--<li><a><i class="fa fa-comments"></i> مدیریت نظرات<span class="fa fa-chevron-down"></span></a>--}}
