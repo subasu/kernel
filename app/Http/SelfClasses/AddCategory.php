@@ -10,7 +10,6 @@ class AddCategory
     //
     public function addNewCategory($category)
     {
-        print_r($category);
         $checkDbNotToBeNull = DB::table('categories')->first();
         $counter = 0;
         if(count($checkDbNotToBeNull) > 0)
