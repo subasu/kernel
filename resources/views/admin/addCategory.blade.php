@@ -14,7 +14,7 @@
     </style>
     <div class="clearfix"></div>
     <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+        <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
             <div class="x_panel">
                 <div class="x_title">
                     <h2> فرم ایجاد دسته
@@ -34,28 +34,31 @@
                         <form class="form-horizontal form-label-left" id="categoryForm" method="POST" style="direction: rtl !important;">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label class="control-label col-md-12 col-sm-4 col-xs-3 font-size-s" for="name">  <span
+                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                    <a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle="" title="افزودن زیر دسته" ></a>
+                                </div>
+                                <label class="control-label col-md-11 col-sm-11 col-xs-11 font-size-s" for="name">  <span
                                             class="required star" title="پر کردن این فیلد الزامی است">نکته:</span>شما حداکثر میتوانید تا سه سطح دسته بندی نمائید و سطح چهارم محصول شما خواهد بود.
                                 </label>
                             </div>
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div id="showCategories" style="display: none; !important;">
-                                    <div class="col-md-8 col-sm-6 col-xs-9">
+                                    <div class="col-md-9 col-sm-6 col-xs-9">
                                         <select id="categories"  class="form-control" name="categories">
-
                                         </select>
                                         <br/>
                                         <select id="subCategories"  class="form-control" name="subCategories" style="display: none;">
-
                                         </select>
+
                                         <br/>
                                         <select id="brands"  class="form-control" name="brands" style="display: none;">
 
                                         </select>
 
+
                                     </div>
-                                <label class="control-label col-md-4 col-sm-4 col-xs-3" for="title"> دسته های موجود : <span
+                                <label class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> دسته های موجود : <span
                                             class="required star" title="پر کردن این فیلد الزامی است"></span>
                                 </label>
                                     @if ($errors->has('name'))
@@ -67,16 +70,15 @@
                             </div>
 
                             <div class="item form-group" id="change" style="display:none;!important;">
-
-                                    <div class="col-md-1" style="margin-left: 6.333333%;margin-right: 2%;">
-                                        <a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle="" title="افزودن زیر دسته" ></a>
+                                    <div class="col-md-4 col-sm-6 col-xs-9">
+                                        <input id="file" class="form-control col-md-7 col-xs-12" name="file[]" placeholder=""
+                                               required="required" type="file">
                                     </div>
-
-                                    <div class="col-md-6 col-sm-6 col-xs-9">
+                                <div class="col-md-5 col-sm-6 col-xs-9">
                                         <input id="category" class="form-control col-md-7 col-xs-12" name="category[]" placeholder=""
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-4 col-sm-4 col-xs-3" for="name"> نام دسته بندی جدید : <span
+                                    <label class="control-label col-md-3 col-sm-4 col-xs-3" for="name"> نام دسته بندی جدید : <span
                                                 class="required star" title="پر کردن این فیلد الزامی است">*</span>
                                     </label>
 
@@ -88,8 +90,8 @@
 
                             </div>
                             <div class="form-group">
-                                <div class="col-md-8">
-                                    <button id="reg" type="button" class="col-md-12 btn btn-primary">ثبت نهایی</button>
+                                <div class="col-md-12">
+                                    <button id="reg" type="button" class="col-md-4 btn btn-primary">ثبت نهایی</button>
                                     <button id="add" type="button" class="col-md-12 btn btn-success" style="display: none;">اضافه کردن دسته جدید</button>
                                 </div>
                             </div>
@@ -112,13 +114,14 @@
                         $('#change').append
                         (
                             "<br/><br/><br/>"+
-                            "<div class='col-md-1' style='margin-left: 6.333333%;margin-right: 2%;'>"+
 
+                            "<div class='col-md-4 col-sm-6 col-xs-9'>"+
+                            '<input id="file" class="form-control col-md-7 col-xs-12" name="file[]"  type="file">'+
                             "</div>"+
-                            "<div class='col-md-6 col-sm-6 col-xs-9'>"+
+                            "<div class='col-md-5 col-sm-6 col-xs-9'>"+
                             "<input id='category' class='form-control col-md-12 col-xs-12' name='category[]' placeholder='' required='required' type='text'>"+
                             "</div>"+
-                            "<label class='control-label col-md-4 col-sm-4 col-xs-3' for='name'>نام زیر دسته:"+
+                            "<label class='control-label col-md-3 col-sm-4 col-xs-3' for='name'>نام زیر دسته:"+
                             "<span class='required star' title='پر کردن این فیلد الزامی است'>*</span>"+
                             "</label>"
                         );
@@ -128,13 +131,14 @@
                         $('#change').append
                         (
                             "<br/><br/><br/>"+
-                            "<div class='col-md-1' style='margin-left: 6.333333%;margin-right: 2%;'>"+
 
+                            "<div class='col-md-4 col-sm-6 col-xs-9'>"+
+                            '<input id="file" class="form-control col-md-7 col-xs-12" name="file[]"  type="file">'+
                             "</div>"+
-                            "<div class='col-md-6 col-sm-6 col-xs-9'>"+
+                            "<div class='col-md-5 col-sm-6 col-xs-9'>"+
                             "<input id='category' class='form-control col-md-12 col-xs-12' name='category[]' placeholder='' required='required' type='text'>"+
                             "</div>"+
-                            "<label class='control-label col-md-4 col-sm-4 col-xs-3' for='name'>برند:"+
+                            "<label class='control-label col-md-3 col-sm-4 col-xs-3' for='name'>برند:"+
                             "<span class='required star' title='پر کردن این فیلد الزامی است'>*</span>"+
                             "</label>"
                         );
@@ -264,10 +268,10 @@
                         '<a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle="" title="افزودن زیر دسته" ></a>'+
                         '</div>'+
 
-                        '<div class="col-md-6 col-sm-6 col-xs-9">'+
+                        '<div class="col-md-5 col-sm-6 col-xs-9">'+
                         '<input id="category" class="form-control col-md-7 col-xs-12" name="category[]" placeholder="" required="required" type="text">'+
                         '</div>'+
-                        '<label class="control-label col-md-4 col-sm-4 col-xs-3" for="name"> نام دسته بندی جدید :' +
+                        '<label class="control-label col-md-3 col-sm-4 col-xs-3" for="name"> نام دسته بندی جدید :' +
                         ' <span class="required star" title="پر کردن این فیلد الزامی است">*</span>'+
                         '</label>'
                     );
