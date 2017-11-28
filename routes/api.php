@@ -20,4 +20,10 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('getMainCategories','CommonController@getMainCategories');
     Route::get('getSubCategories/{id}','CommonController@getSubCategories');
     Route::get('getBrands/{id}','CommonController@getBrands');
+
+    Route::post('addNewProduct','ProductController@addNewProduct');// add new product in database
+    Route::post('addNewDeliveryMan','ProductController@addNewDeliveryMan');// add new DeliveryMan in database
+    Route::post('addNewUnit','ProductController@addNewUnit');// add new Unit in database
+    Route::post('addNewCategory','ProductController@addNewCategory');// add new category in database
+
 });
