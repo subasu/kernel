@@ -207,13 +207,41 @@
                                     </span>
                                     @endif
                                 </div>
-                                <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
+                                <div class="col-md-10 col-md-offset-1 margin-1 ">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="name" class="form-control col-md-12 col-xs-12" name="name"
                                                required="required" type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> محل فیزیکی در
                                         انبار :
+                                        <span class="required star" title="پر کردن این فیلد الزامی است"></span>
+                                    </label>
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 margin-1">
+                                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                                        <input id="name" class="form-control col-md-12 col-xs-12" name="name"
+                                               required="required" type="text">
+                                    </div>
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> مدت زمان آماده سازی :
+                                        <span class="required star" title="پر کردن این فیلد الزامی است"></span>
+                                    </label>
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
+                                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                                        <input id="name" class="form-control col-md-12 col-xs-12" name="name"
+                                               required="required" type="text">
+                                    </div>
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> بارکد :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
                                     @if ($errors->has('name'))
