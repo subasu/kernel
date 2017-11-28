@@ -119,8 +119,6 @@
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('systemManager')}}"> نمایش و مدیریت سفارشات</a>
                                     </li>
-                                    <li><a href="{{url('systemManager')}}">درج سفارش جدید </a>
-                                    </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-motorcycle"></i> مدیریت پیک ها<span class="fa fa-chevron-down"></span></a>
@@ -134,8 +132,6 @@
                             <li><a><i class="fa fa-users"></i> مدیریت کاربران<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('systemManager')}}"> نمایش و مدیریت کاربران</a>
-                                    </li>
-                                    <li><a href="{{url('systemManager')}}">درج تصویر کارآموزی جدید </a>
                                     </li>
                                 </ul>
                             </li>
