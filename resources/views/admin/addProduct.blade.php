@@ -31,7 +31,6 @@
           type="text/css"/>
     <div class="clearfix"></div>
     <div class="row">
-
         <div class="container">
             <form class="form-horizontal form-label-left" id="categoryForm" method="POST"
                   style="direction: rtl !important;">
@@ -57,6 +56,7 @@
                         <div id="step-1" class="">
                             <br>
                             <div class="container">
+                                <br>
                                 <div class="col-md-10 col-md-offset-1">
                                     <div class="col-md-1" style="margin-left: 6.333333%;margin-right: 2%;">
                                         <a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle=""
@@ -227,7 +227,7 @@
                                         <input id="name" class="form-control col-md-12 col-xs-12" name="name"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> مدت زمان آماده سازی :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> زمان آماده شدن :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
                                     @if ($errors->has('name'))
@@ -254,6 +254,7 @@
                         </div>
                         <div id="step-3" class="">
                             <div class="container">
+
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="price" class="form-control col-md-12 col-xs-12" name="price"
@@ -345,23 +346,29 @@
                         <div id="step-4" class="">
                             <div class="container">
                                 <h2>تصاویر محصول</h2>
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div action="choices/form_upload.html" class="dropzone" style="border: 1px solid #e5e5e5; height: 300px; "></div>
+                                    </div>
+                                </div>
+                            <!-- /*
                                 <div class="input-group image-preview col-md-8 col-md-offset-2"
                                      style="padding:0px 10px !important;float: left;">
                                     <input type="text" class="form-control image-preview-filename" disabled="disabled">
-                                    <!-- don't give a name === doesn't send on POST/GET -->
+                                    <!-- don't give a name === doesn't send on POST/GET
                                     <span class="input-group-btn">
-                                        <!-- image-preview-clear button -->
+                                        <!-- image-preview-clear button
                                         <button type="button" class="btn btn-default image-preview-clear"
                                                 style="display:none;">
                                             <span class="glyphicon glyphicon-remove"></span> پاک کردن
                                         </button>
-                                        <!-- image-preview-input -->
+                                        <!-- image-preview-input
                                         <div class="btn btn-default image-preview-input ">
                                             <span class="glyphicon glyphicon-folder-open"></span>
                                             <span class="image-preview-input-title2" id="pic">انتخاب تصویر محصول</span>
                                             <input type="file" id="pic" accept="image/png, image/jpeg, image/gif"
                                                    name="image"/>
-                                            <!-- rename it -->
+                                            <!-- rename it
                                         </div>
                                         </span>
                                 </div><!-- /input-group image-preview [TO HERE]-->

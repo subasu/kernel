@@ -189,7 +189,7 @@
             $(this).closest('.vertical-menu-content').find('li.cat-link-orther').each(function(){
                 $(this).slideUp();
             });
-            $(this).addClass('open-cate').removeClass('colse-cate').html('All Categories');
+            $(this).addClass('open-cate').removeClass('colse-cate').html('All Category');
             return false;
         })
         // bar ontop click
