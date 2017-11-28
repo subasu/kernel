@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => '/v1'], function () {
     Route::get('getMainCategories','CommonController@getMainCategories');
     Route::get('getSubCategories/{id}','CommonController@getSubCategories');
+    Route::get('getBrands/{id}','CommonController@getBrands');
 });

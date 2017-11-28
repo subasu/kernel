@@ -49,6 +49,10 @@
                                         <select id="subCategories"  class="form-control" name="subCategories" style="display: none;">
 
                                         </select>
+                                        <br/>
+                                        <select id="brands"  class="form-control" name="brands" style="display: none;">
+
+                                        </select>
 
                                     </div>
                                 <label class="control-label col-md-4 col-sm-4 col-xs-3" for="title"> دسته های موجود : <span
@@ -172,7 +176,7 @@
                                 item.empty();
                                 item.append
                                 (
-                                     option +="<option id='"+value.id+"' >"+value.title+"</option>"
+                                     option +="<option id='"+value.id+"' name='"+value.depth+"' >"+value.title+"</option>"
                                 );
                             })
                         }else if(response == 0)
@@ -222,7 +226,7 @@
                                        item.empty();
                                        item.append
                                        (
-                                           option += "<option id='"+value.id+"'>"+value.title+"</option>"
+                                           option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
                                        );
                                    });
 
@@ -271,49 +275,141 @@
                 },2000);
             })
         </script>
-        <!-- below scripy to get sub category -->
+
+        <!-- below script to get sub category -->
         <script>
             $(function(){
                 var option = '';
                 $('#categories').click(function () {
                     $("[name = 'categories'] option:selected").each(function(){
                         var id = $(this).attr('id');
-
-                        getSubCategory(id);
-
-                        function getSubCategory (id) {
-                            var option="";
-                                $.ajaxSetup({
-                                headers: {
-                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                                }
-                                })
-                                $.ajax
-                                ({
-                                    cache :false,
-                                    url: "{{Url('api/v1/getSubCategories')}}/" + id,
-                                    dataType: "json",
-                                    type: "get",
-                                    success: function (response)
+                        var depth = $(this).attr('name');
+                        if(depth != 0)
+                        {
+                            swal({
+                                    title: "دسته انتخاب شده دارای زیر دسته میباشد،آیا تمایل دارید زیر دسته ها را مشاهده نمایید؟",
+                                    text: "",
+                                    type: "info",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "	#5cb85c",
+                                    cancelButtonText: "خیر ، منصرف شدم",
+                                    confirmButtonText: "بله ، زیر دسته ها نمایش داده شود",
+                                    closeOnConfirm: true,
+                                    closeOnCancel: false
+                                },
+                                function (isConfirm) {
+                                    if (isConfirm)
                                     {
+                                        getSubCategory(id);
 
-                                        console.log(response);
+                                        function getSubCategory (id) {
+                                            var option="";
+                                            $.ajaxSetup({
+                                                headers: {
+                                                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                                                }
+                                            })
+                                            $.ajax
+                                            ({
+                                                cache :false,
+                                                url: "{{Url('api/v1/getSubCategories')}}/" + id,
+                                                dataType: "json",
+                                                type: "get",
+                                                success: function (response)
+                                                {
 
-                                        $.each(response, function (key, value) {
-                                            var item = $('#subCategories');
-                                            item.empty();
-                                            item.append
-                                            (
-                                                option +="<option id='"+value.id+"' >"+value.title+"</option>"
+                                                    console.log(response);
 
-                                            );
+                                                    $.each(response, function (key, value) {
+                                                        var item = $('#subCategories');
+                                                        item.empty();
+                                                        item.append
+                                                        (
+                                                            option +="<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
 
-                                        });
-                                        $('#subCategories').css('display','block');
+                                                        );
+
+                                                    });
+                                                    $('#subCategories').css('display','block');
+                                                }
+                                            });
+                                        }
                                     }
-                                });
+
+
+                                })
                         }
+
+
                     })
+                })
+            })
+        </script>
+
+        <!-- below script ot get brands -->
+        <script>
+            $(function(){
+                var option = '';
+                    $('#subCategories').click(function () {
+                        $("[name = 'subCategories'] option:selected ").each(function () {
+                            var id = $(this).attr('id');
+                            var depth = $(this).attr('name');
+                            if(depth != 0)
+                            {
+                                swal({
+                                        title: "دسته انتخاب شده دارای زیر دسته میباشد،آیا تمایل دارید زیر دسته ها را مشاهده نمایید؟",
+                                        text: "",
+                                        type: "info",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "	#5cb85c",
+                                        cancelButtonText: "خیر ، منصرف شدم",
+                                        confirmButtonText: "بله ، زیر دسته ها نمایش داده شود",
+                                        closeOnConfirm: true,
+                                        closeOnCancel: false
+                                    },
+                                    function (isConfirm) {
+                                        if (isConfirm)
+                                        {
+                                            getBrands(id);
+
+                                            function getBrands (id) {
+                                                var option="";
+                                                $.ajaxSetup({
+                                                    headers: {
+                                                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                                                    }
+                                                })
+                                                $.ajax
+                                                ({
+                                                    cache :false,
+                                                    url: "{{Url('api/v1/getBrands')}}/" + id,
+                                                    dataType: "json",
+                                                    type: "get",
+                                                    success: function (response)
+                                                    {
+
+                                                        console.log(response);
+
+                                                        $.each(response, function (key, value) {
+                                                            var item = $('#brands');
+                                                            item.empty();
+                                                            item.append
+                                                            (
+                                                                option +="<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+
+                                                            );
+
+                                                        });
+                                                        $('#brands').css('display','block');
+                                                    }
+                                                });
+                                            }
+                                        }
+
+
+                                    })
+                            }
+                        })
                 })
             })
         </script>
