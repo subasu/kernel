@@ -99,17 +99,18 @@
                             </li>
                             <li><a><i class="fa fa-users"></i> مدیریت محصولات<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('usersManage')}}"> نمایش و مدیریت محصولات</a>
+                                    <li><a href="{{url('productsManagement')}}"> نمایش و مدیریت محصولات</a>
                                     </li>
-                                    <li><a href="{{url('admin/usersCreate')}}">درج محصول جدید </a>
+                                    <li><a href="{{url('addProduct')}}">درج محصول جدید </a>
                                     </li>
-                                    <li><a href="{{url('admin/usersCreate')}}">درج واحد شمارش و زیرواحد شمارش </a>
+                                    <li><a href="{{url('unitsManagement')}}"> نمایش و مدیریت واحد شمارش </a>
+                                    <li><a href="{{url('addUnit')}}">درج واحد شمارش و زیرواحد شمارش </a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-th-list"></i> مدیریت دسته بندی ها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('usersManage')}}"> نمایش و مدیریت دسته بندی ها</a>
+                                    <li><a href="{{url('categoriesManagement')}}"> نمایش و مدیریت دسته بندی ها</a>
                                     </li>
                                     <li><a href="{{url('addCategory')}}">درج دسته بندی جدید </a>
                                     </li>
@@ -117,21 +118,21 @@
                             </li>
                             <li><a><i class="fa fa-cubes"></i> مدیریت سفارشات<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('systemManager')}}"> نمایش و مدیریت سفارشات</a>
+                                    <li><a href="{{url('ordersManagement')}}"> نمایش و مدیریت سفارشات</a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-motorcycle"></i> مدیریت پیک ها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('systemManager')}}"> نمایش و مدیریت پیک ها</a>
+                                    <li><a href="{{url('deliveryMansManagement')}}"> نمایش و مدیریت پیک ها</a>
                                     </li>
-                                    <li><a href="{{url('systemManager')}}">درج پیک جدید </a>
+                                    <li><a href="{{url('addDeliveryMan')}}">درج پیک جدید </a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-users"></i> مدیریت کاربران<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('systemManager')}}"> نمایش و مدیریت کاربران</a>
+                                    <li><a href="{{url('usersManagement')}}"> نمایش و مدیریت کاربران</a>
                                     </li>
                                 </ul>
                             </li>
@@ -151,7 +152,7 @@
                                     {{--</li>--}}
                                 {{--</ul>--}}
                             {{--</li>--}}
-                            <li><a href="{{url('/')}}"><i class="fa fa-laptop"></i>صفحه ی اصلی سایت</a>
+                            <li><a href="{{url('/index')}}"><i class="fa fa-laptop"></i>صفحه ی اصلی سایت</a>
                             </li>
 
                             {{--//End User menu--}}

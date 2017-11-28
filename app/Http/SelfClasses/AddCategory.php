@@ -2,7 +2,7 @@
 
 namespace App\Http\SelfClasses;
 
-use App\Models\Categories;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 
 class AddCategory

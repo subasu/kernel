@@ -92,7 +92,7 @@
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <button id="reg" type="button" class="col-md-4 btn btn-primary">ثبت نهایی</button>
-                                    <button id="add" type="button" class="col-md-12 btn btn-success" style="display: none;">اضافه کردن دسته جدید</button>
+                                    <button id="add" type="button" class="col-md-4 btn btn-success" style="display: none;">اضافه کردن دسته جدید</button>
                                 </div>
                             </div>
 

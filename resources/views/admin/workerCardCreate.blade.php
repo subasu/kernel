@@ -74,26 +74,17 @@
                                            <button id="addWorkerCard" type="button" class="btn btn-success col-md-12"> ثبت کارت
                                            </button>
                                        </div>
-
                             </div>
                         </form>
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
     <script src="{{URL::asset('public/js/persianDatepicker.js')}}"></script>
     <script>
         $('#date').persianDatepicker();
     </script>
-
-
     <script>
         $(document).on('click','#addWorkerCard',function(){
            // alert('hello');
