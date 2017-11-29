@@ -370,13 +370,20 @@
                                     });
                                 }
 
+
+                                            );
+                                        });
+                                        $('#subCategories').css('display','block');
+                                    }
+                                });
                             }
+                        }else
+                            {
+                                    alert('زیر دسته ای وجود ندارد.');
 
-
+                            }
                     })
                 })
-
-
                 // below script ot get brands
                 $(document).on('change','#subCategories',function () {
                     $("[name = 'subCategories'] option:selected ").each(function () {

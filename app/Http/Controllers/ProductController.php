@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryFilesValidate;
 use App\Http\SelfClasses\AddCategory;
+use App\Http\SelfClasses\AddProduct;
 use App\Models\Category;
 use App\Models\DeliveryMan;
 use App\Http\SelfClasses\CheckFiles;
@@ -17,7 +18,6 @@ class ProductController extends Controller
     //
     public function addNewCategory(Request $request)
     {
-        //if($request)
         $checkFiles = new CheckFiles();
         $result =$checkFiles->checkCategoryFiles($request);
         if(is_bool($result))
@@ -34,11 +34,14 @@ class ProductController extends Controller
             {
                 return response()->json($result);
             }
-
     }
     public function addProduct(Request $request)
     {
-        return view('admin.addProduct');
+        $x=1;
+        $product=new AddProduct();
+        $ans=$product->addProduct($x);
+//        dd($ans);
+        return view ('admin.addProduct');
     }
     public function productsManagement()
     {

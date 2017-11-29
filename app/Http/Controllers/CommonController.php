@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\SubUnitCount;
+use App\Models\UnitCount;
 use Illuminate\Http\Request;
 
 class CommonController extends Controller
@@ -49,5 +51,33 @@ class CommonController extends Controller
         {
             return response()->json(0);
         }
+    }
+    //below function is to get main categories from database
+    public function getMainUnits()
+    {
+        $mainUnits = UnitCount::all();
+        if(count($mainUnits) > 0 )
+        {
+            return response()->json($mainUnits);
+        }
+        else
+        {
+            return response()->json(0);
+        }
+
+    }
+    //below function is to get sub categories from database
+    public function getSubunits($id)
+    {
+        $subUnits = SubUnitCount::where('id','=',$id)->get();
+        if(count($subUnits) > 0 )
+        {
+            return response()->json($subUnits);
+        }
+        else
+        {
+            return response()->json(0);
+        }
+
     }
 }
