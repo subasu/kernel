@@ -23,17 +23,21 @@ class CategoryFilesValidate extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-            'file' => 'max:150000|image'
-        ];
+        $rules =
+
+        $files = count($this->input('file'));
+        foreach(range(0, $files) as $index) {
+            $rules['files.' . $index] = 'image|mimes:jpeg,bmp,png|max:15000';
+        }
+
+        return $rules;
     }
     public function messages()
     {
-        return
-            [
-                'file.max' => ' حجم فایل یا فایل های انتخاب شده بیش از حد مجاز میباشد',
-                'file.image' => 'پسوند فایل یا فایل های انتخاب شده  مجاز نمیباشد'
-            ];
+//        return
+//            [
+//                'file.max' => ' حجم فایل یا فایل های انتخاب شده بیش از حد مجاز میباشد',
+//                'file.image' => 'پسوند فایل یا فایل های انتخاب شده  مجاز نمیباشد'
+//            ];
     }
 }
