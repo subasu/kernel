@@ -11,6 +11,9 @@
         input, label {
             font-size: 15px;
         }
+        .myAlertColor{
+            background-color: #28a745!important
+        }
     </style>
     <div class="clearfix"></div>
     <div class="row">
@@ -72,6 +75,12 @@
                             </div>
 
                             <div class="item form-group" id="change" style="display:none;!important;">
+                                <div id="main" class="col-md-5 col-md-offset-4">
+
+                                </div>
+                                <br/>
+                                <br/>
+                                <br/>
                                     <div class="col-md-4 col-sm-6 col-xs-9">
                                         <input id="file" class="form-control col-md-7 col-xs-12" name="file[]" placeholder=""
                                                required="required" type="file">
@@ -80,7 +89,7 @@
                                         <input id="category" class="form-control col-md-7 col-xs-12" name="category[]" placeholder=""
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-3 col-sm-4 col-xs-3" for="name"> نام دسته اصلی : <span
+                                    <label class="control-label col-md-3 col-sm-4 col-xs-3" for="name"> نام دسته  : <span
                                                 class="required star" title="پر کردن این فیلد الزامی است">*</span>
                                     </label>
 
@@ -94,10 +103,12 @@
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <button id="reg" type="button" class="col-md-4 btn btn-primary">ثبت نهایی</button>
-                                    <button id="add" type="button" class="col-md-4 btn btn-success" style="display: none;">اضافه کردن دسته جدید</button>
+                                    <button id="addMainCategory" type="button" class="col-md-4 btn btn-success" style="display: none;">اضافه کردن دسته اصلی جدید</button>
+                                    {{--<button id="addSubCategory" type="button" class="col-md-4 btn btn-info" style="display: none;">اضافه کردن زیر دسته</button>--}}
                                 </div>
                             </div>
-
+                            <input type="hidden" id="mainId" name="mainId" value="">
+                            <input type="hidden" id="subId" name="subId" value="">
                         </form>
                     </div>
                 </div>
@@ -119,7 +130,7 @@
                             "<div class='col-md-5 col-sm-6 col-xs-9'>"+
                             "<input id='category' class='form-control col-md-12 col-xs-12' name='category[]' placeholder='' required='required' type='text'>"+
                             "</div>"+
-                            "<label class='control-label col-md-3 col-sm-4 col-xs-3' for='name'>نام دسته اصلی :"+
+                            "<label class='control-label col-md-3 col-sm-4 col-xs-3' for='name'>نام دسته  :"+
                             "<span class='required star' title='پر کردن این فیلد الزامی است'>*</span>"+
                             "</label>"
                         );
@@ -137,7 +148,7 @@
                     type        : "post",
                     processData : false,
                     contentType : false,
-                    //dataType : "JSON",
+                    dataType : "JSON",
                     data        : formData,
                     success     : function(response)
                     {
@@ -159,27 +170,27 @@
                                 {
                                     $('#showCategories').css('display','block');
                                     $('#reg').css('display','none');
-                                    var i = 0;
+
                                     $.each(response,function (key,value) {
                                         var item = $('#categories');
                                         item.empty();
-                                        if(i == 0)
-                                        {
+//
                                             item.append
                                             (
-                                                "<option selected='true' disabled='disabled'>لطفا دسته مورد نظر را انتخاب نمایید</option>"
+                                                "<option selected='true' disabled='disabled'>برای اضافه کردن زیر دسته ها ، دسته ای را انتخاب کنید</option>"
                                             )
-                                        }
+
                                         item.append
                                         (
                                             option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
                                         );
-                                        i++;
+
                                     });
                                     depth == 0;
                                     $('#change').css('display','none');
                                     $('#change').empty();
-                                    $('#add').css('display','block');
+                                    $('#addMainCategory').css('display','block');
+                                    $('#addSubCategory').css('display','block');
                                 }
 
                             }
@@ -221,25 +232,25 @@
                         {
                             $('#showCategories').css('display','block');
                             $('#reg').css('display','none');
-                            $('#add').css('display','block');
+                            $('#addMainCategory').css('display','block');
+                            $('#addSubCategory').css('display','block');
                             $('#addInput').css('display','none');
-                            var i = 0;
+
                             $.each(response,function (key,value) {
                                 var item = $('#categories');
                                 item.empty();
-//                                if(i == 0)
-//                                {
+
                                     item.append
                                     (
-                                        "<option selected='true' disabled='disabled'>لطفا دسته مورد نظر  انتخاب نمایید</option>"
+                                        "<option selected='true' disabled='disabled'>برای اضافه کردن زیر دسته ها ، دسته ای را انتخاب کنید</option>"
                                     )
 
-                                //}
+
                                 item.append
                                 (
                                      option +="<option id='"+value.id+"' name='"+value.depth+"' >"+value.title+"</option>"
                                 );
-                                i++;
+
                             })
                         }else if(response == 0)
                             {
@@ -259,15 +270,15 @@
             $(function () {
                 var catId    = '';
                 var depth    = '';
-                $(document).on('click','#add',function () {
-                    //alert(catId);
-                    if(catId == '')
-                    {
+                $(document).on('click','#addMainCategory',function () {
+
                         $('#change').css('display','block');
                         $('#showCategories').css('display','none');
-                        $('#add').css('display','none');
+                        $('#addInput').css('display','block');
                         $('#reg').css('display','block');
-                    }
+                        $('#addMainCategory').css('display','none');
+                        //$('#addSubCategory').css('display','none');
+
                 })
 
 
@@ -278,58 +289,87 @@
                     $("[name = 'categories'] option:selected").each(function(){
 
                         var id = $(this).attr('id');
-                        catId = '';
-                        catId += id;
+                        $('#mainId').val(id);
+                        var title = $(this).val();
                         var depth = $(this).attr('name');
-                        //            alert(id);
-                        if(depth != 0)
+                        if(depth)
                         {
+                            swal({
+                                    title:  " آیا شما دسته  " +title+ " را انتخاب نمودید؟ ",
+                                    text: "",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "	#5cb85c",
+                                    cancelButtonText: "خیر",
+                                    confirmButtonText: "آری",
+                                    closeOnConfirm: true,
+                                    closeOnCancel: true
+                                },
+                                function (isConfirm) {
+                                    if (isConfirm) {
+                                        $('#main').append
+                                        (
+                                            '<input value="'+title+'" class="form-control col-md-6" disabled  style="text-align: center; font-size: 120%;">'+
+                                            '<b>'
+                                                +'<lable style="margin-right:-60%;" class="control-label" for="name">نام دسته منتخب:</lable>'+
+                                            '</b>'
 
-                            getSubCategory(id);
+                                        );
+                                        $('#change').css('display', 'block');
 
-                            function getSubCategory (id) {
-                                var option="";
-                                $.ajaxSetup({
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                                    }
-                                })
-                                $.ajax
-                                ({
-                                    cache :false,
-                                    url: "{{Url('api/v1/getSubCategories')}}/" + id,
-                                    dataType: "json",
-                                    type: "get",
-                                    success: function (response)
-                                    {
-
-                                        console.log(response);
-                                        var i = 0;
-                                        $.each(response, function (key, value) {
-                                            var item = $('#subCategories');
-                                            item.empty();
-//                                            if(i == 0)
-//                                            {
-                                            item.append
-                                            (
-                                                "<option selected='true' disabled='disabled'>لطفا زیر دسته مورد نظر را انتخاب نمایید</option>"
-                                            )
-                                            //                            }
-                                            item.append
-                                            (
-
-                                                option +="<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
-
-                                            );
-                                        });
-                                        i++;
-                                        $('#subCategories').css('display','block');
+                                        $('#showCategories').css('display', 'none');
+                                        $('#addInput').css('display', 'block');
+                                        $('#reg').css('display', 'block');
+                                        $('#addMainCategory').css('display', 'none');
                                     }
                                 });
-                            }
                         }else
                             {
-                                    alert('زیر دسته ای وجود ندارد.');
+                                getSubCategory(id);
+
+                                function getSubCategory (id) {
+
+                                    return false;
+                                    var option="";
+                                    $.ajaxSetup({
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                                        }
+                                    })
+                                    $.ajax
+                                    ({
+                                        cache :false,
+                                        url: "{{Url('api/v1/getSubCategories')}}/" + id,
+                                        dataType: "json",
+                                        type: "get",
+                                        success: function (response)
+                                        {
+
+                                            console.log(response);
+                                            var i = 0;
+                                            $.each(response, function (key, value) {
+                                                var item = $('#subCategories');
+                                                item.empty();
+//                                            if(i == 0)
+//                                            {
+                                                item.append
+                                                (
+                                                    "<option selected='true' disabled='disabled'>لطفا زیر دسته مورد نظر را انتخاب نمایید</option>"
+                                                )
+                                                //                            }
+                                                item.append
+                                                (
+
+                                                    option +="<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+
+                                                );
+                                            });
+                                            i++;
+                                            $('#subCategories').css('display','block');
+                                        }
+                                    });
+                                }
+
                             }
 
 

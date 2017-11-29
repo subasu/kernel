@@ -24,6 +24,6 @@ Route::group(['prefix' => '/v1'], function () {
     Route::post('addNewProduct','ProductController@addNewProduct');// add new product in database
     Route::post('addNewDeliveryMan','ProductController@addNewDeliveryMan');// add new DeliveryMan in database
     Route::post('addNewUnit','ProductController@addNewUnit');// add new Unit in database
-    Route::post('addNewCategory','ProductController@addNewCategory');// add new category in database
+
 
 });

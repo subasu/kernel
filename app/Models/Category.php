@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+
     //relation of product and category n:m
     public function products()
     {

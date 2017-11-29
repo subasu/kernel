@@ -6,7 +6,7 @@ use App\Http\Requests\CategoryFilesValidate;
 use App\Http\SelfClasses\AddCategory;
 use App\Models\Category;
 use App\Models\DeliveryMan;
-use App\Http\SelfClasses\CheckCategoryFiles;
+use App\Http\SelfClasses\CheckFiles;
 use App\Models\Product;
 use App\Models\UnitCount;
 use App\User;
@@ -17,13 +17,23 @@ class ProductController extends Controller
     //
     public function addNewCategory(Request $request)
     {
-        $checkCategoryFiles = new AddCategory();
-        $checkCategoryFiles->checkCategoryFiles($request);
-        if($checkCategoryFiles == true)
+        //if($request)
+        $checkFiles = new CheckFiles();
+        $result =$checkFiles->checkCategoryFiles($request);
+        if(is_bool($result))
         {
-            $add = new AddCategory();
-            $add->addNewCategory($request->category,$request);
-        }
+
+            $addNewCategory = new AddCategory();
+            $result1 = $addNewCategory->addNewCategory($request->category,$request);
+            if($result1)
+            {
+                return response()->json($result1);
+            }
+
+        }else
+            {
+                return response()->json($result);
+            }
 
     }
     public function addProduct(Request $request)

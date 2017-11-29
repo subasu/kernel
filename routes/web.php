@@ -16,6 +16,7 @@ Route::get('index','IndexController@home');
 //categories
 Route::get('addCategory','IndexController@addCategory');//show add category view
 Route::get('categoriesManagement','ProductController@categoriesManagement');//show view of all category
+Route::post('addNewCategory','ProductController@addNewCategory');// add new category in database
 //units
 Route::get('addUnit','ProductController@addUnit');//show add unit view
 Route::get('unitsManagement','ProductController@unitsManagement');//show view of all units and subUnits
