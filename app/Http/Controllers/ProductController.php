@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryFilesValidate;
 use App\Http\SelfClasses\AddCategory;
+use App\Http\SelfClasses\AddProduct;
 use App\Models\Category;
 use App\Models\DeliveryMan;
 use App\Http\SelfClasses\CheckCategoryFiles;
@@ -24,11 +25,14 @@ class ProductController extends Controller
             $add = new AddCategory();
             $add->addNewCategory($request->category,$request);
         }
-
     }
     public function addProduct(Request $request)
     {
-        return view('admin.addProduct');
+        $x=1;
+        $product=new AddProduct();
+        $ans=$product->addProduct($x);
+//        dd($ans);
+        return view ('admin.addProduct');
     }
     public function productsManagement()
     {

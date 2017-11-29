@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class UnitCount extends Model
 {
-    protected $table="unit_count";
     //relation of unit_count and products
     public function products()
     {
