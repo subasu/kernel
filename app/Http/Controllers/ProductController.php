@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryFilesValidate;
 use App\Http\SelfClasses\AddCategory;
 use App\Models\Category;
 use App\Models\DeliveryMan;
+use App\Http\SelfClasses\CheckCategoryFiles;
 use App\Models\Product;
 use App\Models\UnitCount;
 use App\User;
@@ -15,9 +17,14 @@ class ProductController extends Controller
     //
     public function addNewCategory(Request $request)
     {
-        $add = new AddCategory();
+        $checkCategoryFiles = new AddCategory();
+        $checkCategoryFiles->checkCategoryFiles($request);
+        if($checkCategoryFiles == true)
+        {
+            $add = new AddCategory();
+            $add->addNewCategory($request->category,$request);
+        }
 
-        $add->addNewCategory($request->category);
     }
     public function addProduct(Request $request)
     {
