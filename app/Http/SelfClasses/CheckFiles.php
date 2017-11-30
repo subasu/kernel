@@ -20,7 +20,6 @@ class CheckFiles
             $allowedExtensions = array('png','jpg');
             $allowedSize       = array('150000');
             $count             = count($request->file);
-            $count1            = count($request);
             $sentExtensions    = '';
             $sentSizes         = '';
             $i = 0;
@@ -56,8 +55,6 @@ class CheckFiles
             }
             else
             {
-//                $sentExtensions = '';
-//                $sentExtensionsArray = [];
                 return('پسوند فایل یا فایل های انتخاب شده مجاز نمیباشد');
                 //return false;
             }
@@ -66,7 +63,5 @@ class CheckFiles
             {
                 return true;
             }
-
     }
-
 }
