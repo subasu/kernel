@@ -200,59 +200,59 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="name" class="form-control col-md-12 col-xs-12" name="warehouse_count"
+                                        <input id="warehouse_count" class="form-control col-md-12 col-xs-12" name="warehouse_count"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> تعداد موجود در
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="warehouse_count"> تعداد موجود در
                                         انبار :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('warehouse_count'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('warehouse_count') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 ">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="name" class="form-control col-md-12 col-xs-12" name="warehouse_place"
+                                        <input id="warehouse_place" class="form-control col-md-12 col-xs-12" name="warehouse_place"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> محل فیزیکی در
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="warehouse_place"> محل فیزیکی در
                                         انبار :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('warehouse_place'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('warehouse_place') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="name" class="form-control col-md-12 col-xs-12" name="ready_time"
+                                        <input id="ready_time" class="form-control col-md-12 col-xs-12" name="ready_time"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> زمان آماده شدن :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="ready_time"> زمان آماده شدن بر حسب ساعت :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('ready_time'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('ready_time') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="name" class="form-control col-md-12 col-xs-12" name="barcode"
+                                        <input id="barcode" class="form-control col-md-12 col-xs-12" name="barcode"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> بارکد :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="barcode"> بارکد :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('barcode'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('barcode') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -266,7 +266,7 @@
                                         <input id="price" class="form-control col-md-12 col-xs-12" name="price"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="main_price"> قیمت اصلی :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="main_price"> قیمت اصلی (تومان) :
                                         <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
                                     </label>
                                     @if ($errors->has('price'))
@@ -277,58 +277,72 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="price" class="form-control col-md-12 col-xs-12" name="price"
+                                        <input id="Sales_price" class="form-control col-md-12 col-xs-12" name="Sales_price"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="sale_price"> قیمت حراج :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="sale_price"> قیمت حراج (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('price'))
+                                    @if ($errors->has('Sales_price'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('price') }}</strong>
+                                        <strong>{{ $errors->first('Sales_price') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="name" class="form-control col-md-12 col-xs-12" name="special_price"
+                                        <input id="special_price" class="form-control col-md-12 col-xs-12" name="special_price"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> قیمت ویژه :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="special_price"> قیمت ویژه (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('special_price'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('special_price') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="name" class="form-control col-md-12 col-xs-12" name="Wholesale_price"
+                                        <input id="Wholesale_price" class="form-control col-md-12 col-xs-12" name="Wholesale_price"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> قیمت عمده :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="Wholesale_price"> قیمت عمده (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('Wholesale_price'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('Wholesale_price') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="name" class="form-control col-md-12 col-xs-12" name="discount_volume"
+                                        <input id="discount_volume" class="form-control col-md-12 col-xs-12" name="discount_volume"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> حجم/تعداد مشمول
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount_volume"> حجم/تعداد مشمول
                                         تخفیف :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('discount_volume'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('discount_volume') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
+                                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                                        <input id="discount" class="form-control col-md-12 col-xs-12" name="discount"
+                                               required="required" type="text">
+                                    </div>
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount">                                         درصد تخفیف :
+                                        <span class="required star" title="پر کردن این فیلد الزامی است"></span>
+                                    </label>
+                                    @if ($errors->has('discount'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('discount') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -337,13 +351,13 @@
                                         <input id="name" class="form-control col-md-12 col-xs-12" name="delivery_volume"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="name"> حجم/تعداد مشمول
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="delivery_volume"> حجم/تعداد مشمول
                                         پیک رایگان :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('delivery_volume'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('delivery_volume') }}</strong>
                                     </span>
                                     @endif
                                 </div>
