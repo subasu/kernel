@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\SelfClasses\AddProduct;
+use App\Http\SelfClasses\CheckProduct;
 use App\Models\Category;
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
@@ -52,7 +54,7 @@ class CommonController extends Controller
             return response()->json(0);
         }
     }
-    //below function is to get main categories from database
+    //below function is to get main units from database
     public function getMainUnits()
     {
         $mainUnits = UnitCount::all();
@@ -66,7 +68,7 @@ class CommonController extends Controller
         }
 
     }
-    //below function is to get sub categories from database
+    //below function is to get sub units from database
     public function getSubunits($id)
     {
         $subUnits = SubUnitCount::where('id','=',$id)->get();
@@ -79,5 +81,24 @@ class CommonController extends Controller
             return response()->json(0);
         }
 
+    }
+    //add new product to database
+    public function addNewProduct(Request $request)
+    {
+        $checkProduct = new CheckProduct();
+        $result =$checkProduct->ProductValidate($request);
+        //return response()->json($result);
+        if($result == "true")
+        {
+            $addNewProduct = new AddProduct();
+            $result1 = $addNewProduct->addProduct($request);
+            if($result1)
+            {
+                return response()->json($result1);
+            }
+        }else
+        {
+            return response()->json($result);
+        }
     }
 }

@@ -395,26 +395,26 @@
 <link rel="stylesheet" href="{{URL::asset('public/css/persianDatepicker-default.css')}}"/>
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#datatable').dataTable();
-        $('#datatable-keytable').DataTable({
-            keys: true
-        });
-        $('#datatable-responsive').DataTable();
-        $('#datatable-scroller').DataTable({
-            ajax: "{{URL::asset('public/dashboard/js/datatables/json/scroller-demo.json')}}",
-            deferRender: true,
-            scrollY: 380,
-            scrollCollapse: true,
-            scroller: true
-        });
-        var table = $('#datatable-fixed-header').DataTable({
-            fixedHeader: true
-        });
-    });
-    TableManageButtons.init();
-</script>
+{{--<script type="text/javascript">--}}
+    {{--$(document).ready(function () {--}}
+        {{--$('#datatable').dataTable();--}}
+        {{--$('#datatable-keytable').DataTable({--}}
+            {{--keys: true--}}
+        {{--});--}}
+        {{--$('#datatable-responsive').DataTable();--}}
+        {{--$('#datatable-scroller').DataTable({--}}
+            {{--ajax: "{{URL::asset('public/dashboard/js/datatables/json/scroller-demo.json')}}",--}}
+            {{--deferRender: true,--}}
+            {{--scrollY: 380,--}}
+            {{--scrollCollapse: true,--}}
+            {{--scroller: true--}}
+        {{--});--}}
+        {{--var table = $('#datatable-fixed-header').DataTable({--}}
+            {{--fixedHeader: true--}}
+        {{--});--}}
+    {{--});--}}
+    {{--TableManageButtons.init();--}}
+{{--</script>--}}
 <!-- pace -->
 <script src="{{ URL::asset('public/dashboard/js/pace/pace.min.js')}}"></script>
 {{--User passChange--}}
@@ -519,41 +519,41 @@
     });
 </script>
 <!-- /editor -->
-<script>
-    // initialize the validator function
-    validator.message['date'] = 'not a real date';
-    // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-    $('form')
-        .on('blur', 'input[required], input.optional, select.required', validator.checkField)
-        .on('change', 'select.required', validator.checkField)
-        .on('keypress', 'input[required][pattern]', validator.keypress);
-    $('.multi.required')
-        .on('keyup blur', 'input', function () {
-            validator.checkField.apply($(this).siblings().last()[0]);
-        });
-    // bind the validation to the form submit event
-    //$('#send').click('submit');//.prop('disabled', true);
-    $('form').submit(function (e) {
-        e.preventDefault();
-        var submit = true;
-        // evaluate the form using generic validaing
-        if (!validator.checkAll($(this))) {
-            submit = false;
-        }
-        if (submit)
-            this.submit();
-        return false;
-    });
-    /* FOR DEMO ONLY */
-    $('#vfields').change(function () {
-        $('form').toggleClass('mode2');
-    }).prop('checked', false);
-    $('#alerts').change(function () {
-        validator.defaults.alerts = (this.checked) ? false : true;
-        if (this.checked)
-            $('form .alert').remove();
-    }).prop('checked', false);
-</script>
+{{--<script>--}}
+    {{--// initialize the validator function--}}
+    {{--validator.message['date'] = 'not a real date';--}}
+    {{--// validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':--}}
+    {{--$('form')--}}
+        {{--.on('blur', 'input[required], input.optional, select.required', validator.checkField)--}}
+        {{--.on('change', 'select.required', validator.checkField)--}}
+        {{--.on('keypress', 'input[required][pattern]', validator.keypress);--}}
+    {{--$('.multi.required')--}}
+        {{--.on('keyup blur', 'input', function () {--}}
+            {{--validator.checkField.apply($(this).siblings().last()[0]);--}}
+        {{--});--}}
+    {{--// bind the validation to the form submit event--}}
+    {{--//$('#send').click('submit');//.prop('disabled', true);--}}
+    {{--$('form').submit(function (e) {--}}
+        {{--e.preventDefault();--}}
+        {{--var submit = true;--}}
+        {{--// evaluate the form using generic validaing--}}
+        {{--if (!validator.checkAll($(this))) {--}}
+            {{--submit = false;--}}
+        {{--}--}}
+        {{--if (submit)--}}
+            {{--this.submit();--}}
+        {{--return false;--}}
+    {{--});--}}
+    {{--/* FOR DEMO ONLY */--}}
+    {{--$('#vfields').change(function () {--}}
+        {{--$('form').toggleClass('mode2');--}}
+    {{--}).prop('checked', false);--}}
+    {{--$('#alerts').change(function () {--}}
+        {{--validator.defaults.alerts = (this.checked) ? false : true;--}}
+        {{--if (this.checked)--}}
+            {{--$('form .alert').remove();--}}
+    {{--}).prop('checked', false);--}}
+{{--</script>--}}
 <script>
     NProgress.done();
 </script>
