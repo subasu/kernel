@@ -11,9 +11,9 @@ namespace App\Http\SelfClasses;
 
 class AddProduct
 {
-    public function addProduct($xx)
+    public function addProduct($product)
     {
-        if($xx==1)
+        if($product)
         {
             return "ok";
         }

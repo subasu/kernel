@@ -32,7 +32,7 @@
     <div class="clearfix"></div>
     <div class="row">
         <div class="container">
-            <form class="form-horizontal form-label-left" id="productForm" method="POST"
+            <form class="form-horizontal form-label-left" id="productForm" method="POST" enctype="multipart/form-data"
                   style="direction: rtl !important;">
                 <!-- SmartWizard 1 html -->
                 <div id="smartwizard">
@@ -51,7 +51,7 @@
                             </a></li>
                     </ul>
                     <div>
-                        <div id="step-1" class="">
+                        <div id="step-4" class="">
                             <br>
                             <div class="container">
                                 <br>
@@ -132,7 +132,8 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <select id="subunit" class="form-control col-md-7 col-xs-12" name="sub_unit_count_id">
+                                        <select id="subunit" class="form-control col-md-7 col-xs-12"
+                                                name="sub_unit_count_id">
                                         </select>
 
                                     </div>
@@ -158,7 +159,7 @@
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="produce_date"> تاریخ
                                         تولید :
-                                        <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
+                                        <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
                                     @if ($errors->has('produce_date'))
                                         <span class="help-block">
@@ -174,7 +175,7 @@
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="expire_date"> تاریخ
                                         انقضا :
-                                        <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
+                                        <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
                                     @if ($errors->has('expire_date'))
                                         <span class="help-block">
@@ -200,10 +201,12 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="warehouse_count" class="form-control col-md-12 col-xs-12" name="warehouse_count"
+                                        <input id="warehouse_count" class="form-control col-md-12 col-xs-12"
+                                               name="warehouse_count"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="warehouse_count"> تعداد موجود در
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="warehouse_count"> تعداد
+                                        موجود در
                                         انبار :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
@@ -215,10 +218,12 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 ">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="warehouse_place" class="form-control col-md-12 col-xs-12" name="warehouse_place"
+                                        <input id="warehouse_place" class="form-control col-md-12 col-xs-12"
+                                               name="warehouse_place"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="warehouse_place"> محل فیزیکی در
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="warehouse_place"> محل
+                                        فیزیکی در
                                         انبار :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
@@ -230,10 +235,12 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="ready_time" class="form-control col-md-12 col-xs-12" name="ready_time"
+                                        <input id="ready_time" class="form-control col-md-12 col-xs-12"
+                                               name="ready_time"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="ready_time"> زمان آماده شدن بر حسب ساعت :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="ready_time"> زمان آماده
+                                        شدن بر حسب ساعت :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
                                     @if ($errors->has('ready_time'))
@@ -266,7 +273,8 @@
                                         <input id="price" class="form-control col-md-12 col-xs-12" name="price"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="main_price"> قیمت اصلی (تومان) :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="main_price"> قیمت اصلی
+                                        (تومان) :
                                         <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
                                     </label>
                                     @if ($errors->has('price'))
@@ -277,10 +285,12 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="Sales_price" class="form-control col-md-12 col-xs-12" name="Sales_price"
+                                        <input id="Sales_price" class="form-control col-md-12 col-xs-12"
+                                               name="Sales_price"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="sale_price"> قیمت حراج (تومان):
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="sale_price"> قیمت حراج
+                                        (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
                                     @if ($errors->has('Sales_price'))
@@ -291,10 +301,12 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="special_price" class="form-control col-md-12 col-xs-12" name="special_price"
+                                        <input id="special_price" class="form-control col-md-12 col-xs-12"
+                                               name="special_price"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="special_price"> قیمت ویژه (تومان):
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="special_price"> قیمت
+                                        ویژه (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
                                     @if ($errors->has('special_price'))
@@ -305,10 +317,12 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="Wholesale_price" class="form-control col-md-12 col-xs-12" name="Wholesale_price"
+                                        <input id="Wholesale_price" class="form-control col-md-12 col-xs-12"
+                                               name="Wholesale_price"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="Wholesale_price"> قیمت عمده (تومان):
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="Wholesale_price"> قیمت
+                                        عمده (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
                                     @if ($errors->has('Wholesale_price'))
@@ -319,10 +333,12 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="discount_volume" class="form-control col-md-12 col-xs-12" name="discount_volume"
+                                        <input id="discount_volume" class="form-control col-md-12 col-xs-12"
+                                               name="discount_volume"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount_volume"> حجم/تعداد مشمول
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount_volume">
+                                        حجم/تعداد مشمول
                                         تخفیف :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
@@ -337,7 +353,7 @@
                                         <input id="discount" class="form-control col-md-12 col-xs-12" name="discount"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount">                                         درصد تخفیف :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount"> درصد تخفیف :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
                                     @if ($errors->has('discount'))
@@ -348,10 +364,12 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="name" class="form-control col-md-12 col-xs-12" name="delivery_volume"
+                                        <input id="delivery_volume" class="form-control col-md-12 col-xs-12"
+                                               name="delivery_volume"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="delivery_volume"> حجم/تعداد مشمول
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="delivery_volume">
+                                        حجم/تعداد مشمول
                                         پیک رایگان :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
@@ -363,40 +381,37 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="step-4" class="">
+                        <div id="step-1" class="">
                             <div class="container">
-                                <h2>تصاویر محصول</h2>
-                                <div class="row">
-                                    <div class="col-md-10 col-md-offset-1">
-                                        <input action="choices/form_upload.html" class="dropzone"
-                                             style="border: 1px solid #e5e5e5; height: 300px; "/>
+                                <div id="addPic">
+                                <div class="col-md-12 margin-1" id="">
+                                    <div class="col-md-1 col-sm-1 col-xs-1 col-md-offset-2">
+                                        <a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle=""
+                                           title="افزودن تصویر"></a>
                                     </div>
+                                    <div class="col-md-5 col-sm-6 col-xs-9 ">
+                                        <input class="form-control col-md-12 col-xs-12"
+                                               type="file" name="pic[]" id="pic"/>
+                                    </div>
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic"> تصویر محصول :
+                                        <span class="required star"></span>
+                                    </label>
                                 </div>
-                                <!-- /*
-                                    <div class="input-group image-preview col-md-8 col-md-offset-2"
-                                         style="padding:0px 10px !important;float: left;">
-                                        <input type="text" class="form-control image-preview-filename" disabled="disabled">
-                                        <!-- don't give a name === doesn't send on POST/GET
-                                        <span class="input-group-btn">
-                                            <!-- image-preview-clear button
-                                            <button type="button" class="btn btn-default image-preview-clear"
-                                                    style="display:none;">
-                                                <span class="glyphicon glyphicon-remove"></span> پاک کردن
-                                            </button>
-                                            <!-- image-preview-input
-                                            <div class="btn btn-default image-preview-input ">
-                                                <span class="glyphicon glyphicon-folder-open"></span>
-                                                <span class="image-preview-input-title2" id="pic">انتخاب تصویر محصول</span>
-                                                <input type="file" id="pic" accept="image/png, image/jpeg, image/gif"
-                                                       name="image"/>
-                                                <!-- rename it
-                                            </div>
-                                            </span>
-                                    </div><!-- /input-group image-preview [TO HERE]-->
-                                <br>
-                                <br>
-                                <br>
-                                <h2 style="display: block;">ویدئوی محصول</h2>
+                                </div>
+                                <div class="col-md-10 ">
+                                    <hr>
+                                </div>
+                                <div class="col-md-12 margin-bot-1">
+                                    <div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3">
+                                        <input class="form-control col-md-12 col-xs-12"
+                                               type="file" name="video_src" id="video_src"/>
+                                    </div>
+
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="video_src"> ویدئوی
+                                        محصول :
+                                        <span class="required star"></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -414,23 +429,27 @@
                 var btnFinish = $('<button></button>').text('پایان')
                     .addClass('btn btn-info')
                     .on('click', function () {
-                        var formData=new FormData($("#productForm")[0])
+                        var formData = new FormData($("#productForm")[0])
                         $.ajax({
-                            url:'{{url('api/v1/addNewProduct')}}',
-                            type:'post',
-                            cashe:false,
-                            data:formData,
-                            dataType:'json',
-                            contentType:false,
-                            processData:false,
-                            success:function(data){
+                            url: '{{url('api/v1/addNewProduct')}}',
+                            type: 'post',
+                            cashe: false,
+                            data: formData,
+                            dataType: 'json',
+                            contentType: false,
+                            processData: false,
+                            success: function (data) {
+                                var x = '';
+                                $.each(data, function (key, val) {
+                                    x += val + '\n'
+                                });
                                 swal({
                                     title: '',
-                                    text: 'محصول شما با مؤفقیت درج شد',
+                                    text: x,
                                     type: "info",
                                 })
                             },
-                            error:function (xhr) {
+                            error: function (xhr) {
                                 swal({
                                     title: '',
                                     text: xhr,
@@ -482,6 +501,26 @@
         <!-- send product form -->
         <script>
             $(document).ready(function () {
+                //add input type file for add pic for product
+                var counter = 0
+                $('#addInput').on('click', function () {
+
+                    if (counter < 2) {
+                        $('#addPic').append
+                        (
+                            '<div class="col-md-12 margin-1 col-md-offset-3" style="padding-right: -1% !important;">'+
+                            '<div class="col-md-5 col-sm-6 col-xs-9 ">' +
+                            '<input class="form-control col-md-12 col-xs-12" type="file" name="pic[]" id="pic"/>' +
+                            '</div>' +
+                            '<label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic"> تصویر محصول :' +
+                            '<span class="required star"></span>' +
+                            '</label></div>'
+                        );
+                        counter++;
+                    }
+                    else {
+                    }
+                })
                 //load all main category in select box in addProductForm
                 $.ajax({
                     cache: false,
@@ -503,13 +542,12 @@
                             $.each(response, function (key, value) {
                                 item.append
                                 (
-                                    "<option value='" + value.id + "' name='" + value.depth + "'>" + value.title + "</option>"
+                                    "<option value='" + value.id + "'>" + value.title + "</option>"
                                 );
                             });
-                            depth == 0;
                         }
                         else {
-                            location.href = '{{url("addUnit")}}';
+                            {{--                            location.href = '{{url("addCategory")}}';--}}
                         }
                     }
                 })
@@ -555,7 +593,7 @@
                                             $.each(response, function (key, value) {
                                                 item.append
                                                 (
-                                                    "<option value='" + value.id + "' name='" + value.depth + "'>" + value.title + "</option>"
+                                                    "<option value='" + value.id + "'>" + value.title + "</option>"
                                                 );
                                             });
                                             $('#subCategoriesDiv').css('display', 'block');
@@ -610,7 +648,7 @@
                                             $.each(response, function (key, value) {
                                                 item.append
                                                 (
-                                                    "<option value='" + value.id + "' name='" + value.depth + "'>" + value.title + "</option>"
+                                                    "<option value='" + value.id + "'>" + value.title + "</option>"
                                                 );
                                             });
                                             $('#BrandsDiv').css('display', 'block');
@@ -647,8 +685,7 @@
                     dataType: "json",
                     type: "get",
                     success: function (response) {
-                        if(response!=0)
-                        {
+                        if (response != 0) {
                             var item = $('#unit');
                             item.empty();
                             item.append

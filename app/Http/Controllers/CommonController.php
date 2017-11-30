@@ -87,11 +87,11 @@ class CommonController extends Controller
     {
         $checkProduct = new CheckProduct();
         $result =$checkProduct->ProductValidate($request);
-        return response()->json($result);
-        if(is_bool($result))
+        //return response()->json($result);
+        if($result == "true")
         {
             $addNewProduct = new AddProduct();
-            $result1 = $addNewProduct->addNewCategory($request->category,$request);
+            $result1 = $addNewProduct->addProduct($request);
             if($result1)
             {
                 return response()->json($result1);
