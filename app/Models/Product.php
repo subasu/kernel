@@ -15,7 +15,7 @@ class Product extends Model
     //relation of product and category n:m
     public function categories()
     {
-        return $this->belongsToMany('Categories');
+        return $this->belongsToMany('Category');
     }
 
     //relation of products and baskets
