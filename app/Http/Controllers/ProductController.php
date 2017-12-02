@@ -35,13 +35,9 @@ class ProductController extends Controller
                 return response()->json(['message' => $result , 'code' => '1']);
             }
     }
-    public function addProduct(Request $request)
+    public function addProduct()
     {
-        $x=1;
-        $product=new AddProduct();
-        $ans=$product->addProduct($x);
-//        dd($ans);
-        return view ('admin.addProduct');
+        return view('admin.addProduct',compact('data'));
     }
     public function productsManagement()
     {

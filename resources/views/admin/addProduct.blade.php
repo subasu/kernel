@@ -51,7 +51,7 @@
                             </a></li>
                     </ul>
                     <div>
-                        <div id="step-4" class="">
+                        <div id="step-1" class="">
                             <br>
                             <div class="container">
                                 <br>
@@ -148,6 +148,21 @@
                                     </span>
                                     @endif
                                 </div>
+                                <div class="col-md-10 col-md-offset-1 margin-1">
+                                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                                        <input id="price" class="form-control col-md-12 col-xs-12" name="price"
+                                               required="required" type="text">
+                                    </div>
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="main_price"> قیمت اصلی
+                                        (تومان) :
+                                        <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
+                                    </label>
+                                    @if ($errors->has('price'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('price') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <div id="step-2" class="">
@@ -155,9 +170,9 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="produce_date" class="form-control col-md-12 col-xs-12"
-                                               name="produce_date" required="required" type="text">
+                                               name="produce_date" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="produce_date"> تاریخ
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for=""> تاریخ
                                         تولید :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
@@ -170,8 +185,7 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="expire_date" class="form-control col-md-12 col-xs-12"
-                                               name="expire_date"
-                                               required="required" type="text">
+                                               name="expire_date" type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="expire_date"> تاریخ
                                         انقضا :
@@ -186,8 +200,7 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="produce_place" class="form-control col-md-12 col-xs-12"
-                                               name="produce_place"
-                                               required="required" type="text">
+                                               name="produce_place" type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="produce_place"> محل
                                         تولید :
@@ -202,8 +215,7 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="warehouse_count" class="form-control col-md-12 col-xs-12"
-                                               name="warehouse_count"
-                                               required="required" type="text">
+                                               name="warehouse_count" type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="warehouse_count"> تعداد
                                         موجود در
@@ -220,7 +232,7 @@
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="warehouse_place" class="form-control col-md-12 col-xs-12"
                                                name="warehouse_place"
-                                               required="required" type="text">
+                                                type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="warehouse_place"> محل
                                         فیزیکی در
@@ -237,7 +249,7 @@
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="ready_time" class="form-control col-md-12 col-xs-12"
                                                name="ready_time"
-                                               required="required" type="text">
+                                                type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="ready_time"> زمان آماده
                                         شدن بر حسب ساعت :
@@ -252,7 +264,7 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="barcode" class="form-control col-md-12 col-xs-12" name="barcode"
-                                               required="required" type="text">
+                                                type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="barcode"> بارکد :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
@@ -267,27 +279,11 @@
                         </div>
                         <div id="step-3" class="">
                             <div class="container">
-
-                                <div class="col-md-10 col-md-offset-1 margin-1">
-                                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="price" class="form-control col-md-12 col-xs-12" name="price"
-                                               required="required" type="text">
-                                    </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="main_price"> قیمت اصلی
-                                        (تومان) :
-                                        <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
-                                    </label>
-                                    @if ($errors->has('price'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('price') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="Sales_price" class="form-control col-md-12 col-xs-12"
                                                name="Sales_price"
-                                               required="required" type="text">
+                                                type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="sale_price"> قیمت حراج
                                         (تومان):
@@ -303,7 +299,7 @@
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="special_price" class="form-control col-md-12 col-xs-12"
                                                name="special_price"
-                                               required="required" type="text">
+                                                type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="special_price"> قیمت
                                         ویژه (تومان):
@@ -319,7 +315,7 @@
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="Wholesale_price" class="form-control col-md-12 col-xs-12"
                                                name="Wholesale_price"
-                                               required="required" type="text">
+                                                type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="Wholesale_price"> قیمت
                                         عمده (تومان):
@@ -335,7 +331,7 @@
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="discount_volume" class="form-control col-md-12 col-xs-12"
                                                name="discount_volume"
-                                               required="required" type="text">
+                                                type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount_volume">
                                         حجم/تعداد مشمول
@@ -351,7 +347,7 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="discount" class="form-control col-md-12 col-xs-12" name="discount"
-                                               required="required" type="text">
+                                                type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount"> درصد تخفیف :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
@@ -365,8 +361,7 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="delivery_volume" class="form-control col-md-12 col-xs-12"
-                                               name="delivery_volume"
-                                               required="required" type="text">
+                                               name="delivery_volume">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="delivery_volume">
                                         حجم/تعداد مشمول
@@ -381,22 +376,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="step-1" class="">
+                        <div id="step-4" class="">
                             <div class="container">
                                 <div id="addPic">
-                                <div class="col-md-12 margin-1" id="">
-                                    <div class="col-md-1 col-sm-1 col-xs-1 col-md-offset-2">
-                                        <a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle=""
-                                           title="افزودن تصویر"></a>
+                                    <div class="col-md-12 margin-1">
+                                        <div class="col-md-1 col-sm-1 col-xs-1 col-md-offset-2">
+                                            <a id="addInput" class="glyphicon glyphicon-plus btn btn-success"
+                                               data-toggle=""
+                                               title="افزودن تصویر"></a>
+                                        </div>
+                                        <div class="col-md-5 col-sm-6 col-xs-9 ">
+                                            <input class="form-control col-md-12 col-xs-12"
+                                                   type="file" name="pic[]" id="pic"/>
+                                        </div>
+                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic"> تصویر محصول :
+                                            <span class="required star"></span>
+                                        </label>
                                     </div>
-                                    <div class="col-md-5 col-sm-6 col-xs-9 ">
-                                        <input class="form-control col-md-12 col-xs-12"
-                                               type="file" name="pic[]" id="pic"/>
-                                    </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic"> تصویر محصول :
-                                        <span class="required star"></span>
-                                    </label>
-                                </div>
                                 </div>
                                 <div class="col-md-10 ">
                                     <hr>
@@ -426,7 +422,7 @@
             $(document).ready(function () {
 
                 // Toolbar extra buttons
-                var btnFinish = $('<button></button>').text('پایان')
+                var btnFinish = $('<button></button>').text('ثبت محصول')
                     .addClass('btn btn-info')
                     .on('click', function () {
                         var formData = new FormData($("#productForm")[0])
@@ -497,19 +493,17 @@
 //
             });
         </script>
-
         <!-- send product form -->
         <script>
             $(document).ready(function () {
                 //add input type file for add pic for product
                 var counter = 0
                 $('#addInput').on('click', function () {
-
-                    if (counter < 2) {
+                    if (counter < 3) {
                         $('#addPic').append
                         (
-                            '<div class="col-md-12 margin-1 col-md-offset-3" style="padding-right: -1% !important;">'+
-                            '<div class="col-md-5 col-sm-6 col-xs-9 ">' +
+                            '<div class="col-md-12 margin-1">' +
+                            '<div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3">' +
                             '<input class="form-control col-md-12 col-xs-12" type="file" name="pic[]" id="pic"/>' +
                             '</div>' +
                             '<label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic"> تصویر محصول :' +
@@ -669,7 +663,7 @@
                     }
                 })
 
-                //load brands
+                //load units
                 $('#unit').on("change", function () {
                     var id = $(this).val();
                     if (id == 0000) {

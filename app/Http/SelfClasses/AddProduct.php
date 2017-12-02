@@ -15,7 +15,7 @@ class AddProduct
     {
         if($product)
         {
-            return "ok";
+            return $product;
         }
         else
         {
