@@ -87,7 +87,6 @@ class CommonController extends Controller
     {
         $checkProduct = new CheckProduct();
         $result =$checkProduct->ProductValidate($request);
-        //return response()->json($result);
         if($result == "true")
         {
             $addNewProduct = new AddProduct();
@@ -100,5 +99,12 @@ class CommonController extends Controller
         {
             return response()->json($result);
         }
+
+        //        $product=new AddProduct();
+//        $ans=$product->addProduct($request);
+//        if($ans=="1")
+//            return response()->json(['data'=>'محصول شما با مؤفقیت درج شد']);
+//        elseif($ans=="0")
+//            return response()->json(['data'=>'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.']);
     }
 }

@@ -20,8 +20,7 @@
         <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2> فرم ایجاد دسته
-                    </h2>
+                    <h2> فرم ایجاد دسته</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -75,23 +74,7 @@
                             </div>
 
                             <div class="item form-group" id="change" style="display:none;!important;">
-                                <div id="main" class="col-md-5 col-md-offset-4">
 
-                                </div>
-                                <br/>
-                                <br/>
-                                <br/>
-                                    <div class="col-md-4 col-sm-6 col-xs-9">
-                                        <input id="file" class="form-control col-md-7 col-xs-12" name="file[]" placeholder=""
-                                               required="required" type="file">
-                                    </div>
-                                <div class="col-md-5 col-sm-6 col-xs-9">
-                                        <input id="category" class="form-control col-md-7 col-xs-12" name="category[]" placeholder=""
-                                               required="required" type="text">
-                                    </div>
-                                    <label class="control-label col-md-3 col-sm-4 col-xs-3" for="name"> نام دسته  : <span
-                                                class="required star" title="پر کردن این فیلد الزامی است">*</span>
-                                    </label>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -103,8 +86,9 @@
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <button id="reg" type="button" class="col-md-4 btn btn-primary">ثبت نهایی</button>
-                                    <button id="addMainCategory" type="button" class="col-md-4 btn btn-success" style="display: none;">اضافه کردن دسته اصلی جدید</button>
-                                    {{--<button id="addSubCategory" type="button" class="col-md-4 btn btn-info" style="display: none;">اضافه کردن زیر دسته</button>--}}
+                                    <button id="addMainCategory" type="button" class="col-md-3 btn btn-success" style="display: none;">اضافه کردن دسته اصلی جدید</button>
+                                    <button id="addSubCategory" type="button" class="col-md-3 btn btn-info" style="display: none;!important;"> اضافه کردن زیر دسته جدید</button>
+                                    <button id="addBrands" type="button" class="col-md-3 btn btn-primary" style="display: none;!important;"> اضافه کردن برند جدید</button>
                                 </div>
                             </div>
                             <input type="hidden" id="mainId" name="mainId" value="">
@@ -116,28 +100,81 @@
             </div>
         </div>
 
+        <!-- below script is to append html element to change tag -->
+        <script>
+            function appendToChange()
+            {
+                $('#change').append
+                (
+                    "<br/><br/>"+
+
+                    "<div class='col-md-4 col-sm-6 col-xs-9'>"+
+                    '<input id="file" class="form-control col-md-7 col-xs-12" name="file[]"  type="file">'+
+                    "</div>"+
+                    "<div class='col-md-5 col-sm-6 col-xs-9'>"+
+                    "<input id='category' class='form-control col-md-12 col-xs-12' name='category[]' placeholder='' required='required' type='text'>"+
+                    "</div>"+
+                    "<label class='control-label col-md-3 col-sm-4 col-xs-3' for='name'>نام دسته  :"+
+                    "<span class='required star' title='پر کردن این فیلد الزامی است'>*</span>"+
+                    "</label>"
+                );
+            }
+
+        </script>
+
+        <!-- below script is to handle when we want to add main category or sub category -->
+        <script>
+            function untimelyAddCategory(title) {
+                swal({
+                        title:  " آیا شما دسته  " +title+ " را انتخاب نمودید؟ ",
+                        text: "",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "	#5cb85c",
+                        cancelButtonText: "خیر",
+                        confirmButtonText: "آری",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $('#change').css('display', 'block');
+                            $('#showCategories').css('display', 'none');
+                            $('#addInput').css('display', 'block');
+                            $('#reg').css('display', 'block');
+                            $('#addMainCategory').css('display', 'none');
+                            $('#addSubCategory').css('display', 'none');
+                            $('#addBrands').css('display', 'none');
+                            $('#subCategories').empty();
+
+
+                            $('#change').append
+                            (
+                                '<div id="main" class="col-md-5 col-md-offset-4">'+
+                                '<input value="'+title+'" class="form-control col-md-6" disabled  style="text-align: center; font-size: 120%;">'+
+                                '<b>'
+                                +'<lable style="margin-right:-60%;" class="control-label" for="name">نام دسته منتخب:</lable>'+
+                                '</b>'+
+                                '</div>'
+                            );
+                            appendToChange();
+                        }else
+                        {
+                            $('#subCategories').css('display','none');
+                            $('#addSubCategory').css('display','none');
+                        }
+                    });
+            }
+        </script>
+
+        <!-- below script is related to append input -->
         <script>
             var depth = 0;
             $(document).on('click','#addInput',function(){
-
-                        $('#change').append
-                        (
-                            "<br/><br/>"+
-
-                            "<div class='col-md-4 col-sm-6 col-xs-9'>"+
-                            '<input id="file" class="form-control col-md-7 col-xs-12" name="file[]"  type="file">'+
-                            "</div>"+
-                            "<div class='col-md-5 col-sm-6 col-xs-9'>"+
-                            "<input id='category' class='form-control col-md-12 col-xs-12' name='category[]' placeholder='' required='required' type='text'>"+
-                            "</div>"+
-                            "<label class='control-label col-md-3 col-sm-4 col-xs-3' for='name'>نام دسته  :"+
-                            "<span class='required star' title='پر کردن این فیلد الزامی است'>*</span>"+
-                            "</label>"
-                        );
-
-
-
+                    appendToChange();
             })
+
+
             $(document).on('click','#reg',function(){
                 var option = '';
                 var formData = new FormData ($('#categoryForm')[0]);
@@ -190,7 +227,9 @@
                                     $('#change').css('display','none');
                                     $('#change').empty();
                                     $('#addMainCategory').css('display','block');
-                                    $('#addSubCategory').css('display','block');
+                                    $('#addInput').css('display','none');
+                                    $('#subCategories').empty();
+                                    $('#subCategories').css('display','none');
                                 }
 
                             }
@@ -233,7 +272,7 @@
                             $('#showCategories').css('display','block');
                             $('#reg').css('display','none');
                             $('#addMainCategory').css('display','block');
-                            $('#addSubCategory').css('display','block');
+                            $('#addSubCategory').css('display','none');
                             $('#addInput').css('display','none');
 
                             $.each(response,function (key,value) {
@@ -254,6 +293,7 @@
                             })
                         }else if(response == 0)
                             {
+                                appendToChange();
                                 $('#change').css('display','block');
                             }
 
@@ -263,27 +303,81 @@
             })
 
         </script>
-        <script>
-
-        </script>
+        <!-- below script is related to add main category button  -->
         <script>
             $(function () {
-                var catId    = '';
-                var depth    = '';
-                $(document).on('click','#addMainCategory',function () {
+                   $(document).on('click','#addMainCategory',function () {
+                   $('#change').css('display','block');
+                   appendToChange();
+                   $('#showCategories').css('display','none');
+                   $('#addInput').css('display','block');
+                   $('#reg').css('display','block');
+                   $('#addMainCategory').css('display','none');
+                   $('#addSubCategory').css('display','none');
+                });
+            })
+        </script>
 
-                        $('#change').css('display','block');
-                        $('#showCategories').css('display','none');
-                        $('#addInput').css('display','block');
-                        $('#reg').css('display','block');
-                        $('#addMainCategory').css('display','none');
-                        //$('#addSubCategory').css('display','none');
-
+        <!-- below script is related to add sub category button  -->
+        <script>
+            $(function () {
+                $(document).on('click','#addSubCategory',function () {
+                    var mainTitle = '';
+                    $("[name = 'categories'] option:selected ").each(function(){
+                         mainTitle += $(this).val();
+                         $('#mainId').val($(this).attr('id'));
+                    });
+                    if(mainTitle == '')
+                    {
+                        swal({
+                            title: "",
+                            text: 'لطفا دسته ای را انتخاب نمایید!',
+                            type: "warning",
+                            confirmButtonText: "بستن"
+                        });
+                    }else
+                        {
+                            //alert(mainTitle);
+                            untimelyAddCategory(mainTitle);
+                        }
                 })
+            })
+        </script>
 
+        <!-- below script is related to add brands button -->
+        <script>
+            $(function () {
+                $(document).on('click','#addBrands',function () {
+                    var mainTitle = '';
+                    var subTitle  = '';
+                    $("[name = 'categories'] option:selected ").each(function(){
+                        mainTitle += $(this).val();
+                        $('#mainId').val($(this).attr('id'));
+                    });
+                    $("[name = 'subCategories'] option:selected ").each(function(){
+                        subTitle += $(this).val();
+                        $('#subId').val($(this).attr('id'));
+                    });
+                    if(subTitle == '')
+                    {
+                        swal({
+                            title: "",
+                            text: 'لطفا زیر دسته ای را انتخاب کنید!',
+                            type: "warning",
+                            confirmButtonText: "بستن"
+                        });
+                    }else
+                    {
+                        //alert(mainTitle);
+                        untimelyAddCategory(subTitle);
+                    }
+                })
+            })
+        </script>
 
-                //below script to get sub category
-
+        <!-- below script to get sub category -->
+        <script>
+            $(function () {
                 $(document).on('change','#categories',function () {
 
                     $("[name = 'categories'] option:selected").each(function(){
@@ -292,107 +386,73 @@
                         $('#mainId').val(id);
                         var title = $(this).val();
                         var depth = $(this).attr('name');
-                        if(depth)
+                        //alert(depth);
+                        if(depth != 0)
                         {
-                            swal({
-                                    title:  " آیا شما دسته  " +title+ " را انتخاب نمودید؟ ",
-                                    text: "",
-                                    type: "warning",
-                                    showCancelButton: true,
-                                    confirmButtonColor: "	#5cb85c",
-                                    cancelButtonText: "خیر",
-                                    confirmButtonText: "آری",
-                                    closeOnConfirm: true,
-                                    closeOnCancel: true
-                                },
-                                function (isConfirm) {
-                                    if (isConfirm) {
-                                        $('#main').append
-                                        (
-                                            '<input value="'+title+'" class="form-control col-md-6" disabled  style="text-align: center; font-size: 120%;">'+
-                                            '<b>'
-                                                +'<lable style="margin-right:-60%;" class="control-label" for="name">نام دسته منتخب:</lable>'+
-                                            '</b>'
+                            getSubCategory(id);
 
-                                        );
-                                        $('#change').css('display', 'block');
+                            function getSubCategory (id) {
 
-                                        $('#showCategories').css('display', 'none');
-                                        $('#addInput').css('display', 'block');
-                                        $('#reg').css('display', 'block');
-                                        $('#addMainCategory').css('display', 'none');
+                             //   return false;
+                                var option="";
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                                     }
-                                });
-                        }else
-                            {
-                                getSubCategory(id);
+                                })
+                                $.ajax
+                                ({
+                                    cache :false,
+                                    url: "{{Url('api/v1/getSubCategories')}}/" + id,
+                                    dataType: "json",
+                                    type: "get",
+                                    contentType : false,
+                                    success: function (response)
+                                    {
 
-                                function getSubCategory (id) {
-
-                                    return false;
-                                    var option="";
-                                    $.ajaxSetup({
-                                        headers: {
-                                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                                        }
-                                    })
-                                    $.ajax
-                                    ({
-                                        cache :false,
-                                        url: "{{Url('api/v1/getSubCategories')}}/" + id,
-                                        dataType: "json",
-                                        type: "get",
-                                        success: function (response)
-                                        {
-
-                                            console.log(response);
-                                            var i = 0;
-                                            $.each(response, function (key, value) {
-                                                var item = $('#subCategories');
-                                                item.empty();
+                                        console.log(response);
+                                        var i = 0;
+                                        $.each(response, function (key, value) {
+                                            var item = $('#subCategories');
+                                            item.empty();
 //                                            if(i == 0)
 //                                            {
-                                                item.append
-                                                (
-                                                    "<option selected='true' disabled='disabled'>لطفا زیر دسته مورد نظر را انتخاب نمایید</option>"
-                                                )
-                                                //                            }
-                                                item.append
-                                                (
+                                            item.append
+                                            (
+                                                "<option selected='true' disabled='disabled'>لطفا زیر دسته مورد نظر را انتخاب نمایید</option>"
+                                            )
+                                            //                            }
+                                            item.append
+                                            (
 
-                                                    option +="<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
-
-                                                );
-                                            });
-                                            i++;
-                                            $('#subCategories').css('display','block');
-                                        }
-                                    });
-                                }
-
+                                                option +="<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
 
                                             );
                                         });
+                                        i++;
                                         $('#subCategories').css('display','block');
+                                        $('#addSubCategory').css('display','block');
                                     }
                                 });
                             }
                         }else
                             {
-                                    alert('زیر دسته ای وجود ندارد.');
-
+                                   untimelyAddCategory(title);
                             }
                     })
                 })
-                // below script ot get brands
+            })
+         </script>
+
+         <!-- below script ot get brands -->
+         <script>
                 $(document).on('change','#subCategories',function () {
                     $("[name = 'subCategories'] option:selected ").each(function () {
 
-
                         var id = $(this).attr('id');
-                        catId ='';
-                        catId +=id;
                         var depth = $(this).attr('name');
+                        var subTitle = $(this).val();
+                        $('#subId').val(id);
                         if(depth != 0)
                         {
 
@@ -427,19 +487,16 @@
 
                                         });
                                         $('#brands').css('display','block');
+                                        $('#addBrands').css('display','block');
                                     }
                                 });
                             }
                         }else
                             {
-                                alert('زیر دسته ای وجود ندارد.')
+                                untimelyAddCategory(subTitle);
                             }
-
-
                     })
 
                 })
-            })
-
         </script>
 @endsection

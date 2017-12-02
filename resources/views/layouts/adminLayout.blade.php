@@ -194,9 +194,9 @@
                     <div class="nav toggle">
                         <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                     </div>
-                    <div class="" style="float: right;padding: 1% 2% 0 0 !important;">
-                        <a id="back" class="btn btn-info">بازگشت به صفحه قبل</a>
-                    </div>
+                    {{--<div class="" style="float: right;padding: 1% 2% 0 0 !important;">--}}
+                        {{--<a id="back" class="btn btn-info">بازگشت به صفحه قبل</a>--}}
+                    {{--</div>--}}
 
 <?php /*
                     <ul class="nav navbar-nav navbar-right">
