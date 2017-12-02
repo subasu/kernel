@@ -25,7 +25,7 @@ Route::group(['prefix' => '/v1'], function () {
     Route::post('addNewProduct','CommonController@addNewProduct');// add new product in database
     Route::post('addNewDeliveryMan','ProductController@addNewDeliveryMan');// add new DeliveryMan in database
     Route::post('addNewUnit','ProductController@addNewUnit');// add new Unit in database
-    
+
     Route::get('getMainUnits','CommonController@getMainUnits');
     Route::get('getSubunits/{id}','CommonController@getSubunits');
 });

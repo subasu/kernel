@@ -9,17 +9,21 @@
 namespace App\Http\SelfClasses;
 
 
+use App\Models\Product;
+
 class AddProduct
 {
     public function addProduct($product)
     {
         if($product)
         {
-            return $product;
+            $pr=new Product();
+            $title=$product->title;
+            return ($title);
         }
         else
         {
-            return "no";
+            return (false);
         }
     }
 }

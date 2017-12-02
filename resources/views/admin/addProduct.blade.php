@@ -446,6 +446,7 @@
                                 })
                             },
                             error: function (xhr) {
+                                console.log(xhr)
                                 swal({
                                     title: '',
                                     text: xhr,
