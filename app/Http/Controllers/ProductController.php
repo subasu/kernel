@@ -27,12 +27,12 @@ class ProductController extends Controller
             $result1 = $addNewCategory->addNewCategory($request->category,$request);
             if($result1)
             {
-                return response()->json($result1);
+                return response()->json(['message' => $result1]);
             }
 
         }else
             {
-                return response()->json($result);
+                return response()->json(['message' => $result , 'code' => '1']);
             }
     }
     public function addProduct(Request $request)
