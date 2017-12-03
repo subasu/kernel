@@ -91,22 +91,18 @@ class CommonController extends Controller
         if($result == "true")
         {
             $addNewProduct = new AddProduct();
-            $result1 = $addNewProduct->addProduct($request);
-            if($result1)
-            {
-                return response()->json($result1);
-            }
+            $ans = $addNewProduct->addProduct($request);
+//            if($ans=="1")
+////            return response()->json(['data'=>'محصول شما با مؤفقیت درج شد']);
+            return ($ans);
+//        elseif($ans=="0")
+            return response()->json(['data'=>'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.']);
+
         }else
         {
             return response()->json($result);
         }
 
-        //        $product=new AddProduct();
-//        $ans=$product->addProduct($request);
-//        if($ans=="1")
-//            return response()->json(['data'=>'محصول شما با مؤفقیت درج شد']);
-//        elseif($ans=="0")
-//            return response()->json(['data'=>'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.']);
     }
 
     public function getExistedCategories($id)

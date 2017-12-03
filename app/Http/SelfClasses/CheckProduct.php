@@ -33,7 +33,7 @@ class CheckProduct
             'price' => 'required|numeric',
             'sales_price' => 'sometimes|nullable||numeric',
             'special_price' => 'sometimes|nullable||numeric',
-            'Wholesale_price' => 'sometimes|nullable||numeric',
+            'wholesale_price' => 'sometimes|nullable||numeric',
             'discount' => 'sometimes|nullable||numeric|min:1|max:3',
             'discount_volume' => 'sometimes|nullable|numeric',
             'delivery_volume' => 'sometimes|nullable|numeric',

@@ -71,7 +71,7 @@
                                         <select id="subCategories" class="form-control col-md-12" name="subCategories">
                                         </select>
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته ی دسته اصلی :
                                         <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
                                     </label>
                                 </div>
@@ -80,8 +80,16 @@
                                         <select id="brands" class="form-control col-md-12" name="brands">
                                         </select>
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> برند :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته دسته ی فوق :
                                         <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 margin-1" id="oldProduct" >
+                                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                                        <select id="oldProduct" class="form-control col-md-12" name="oldProduct">
+                                        </select>
+                                    </div>
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> محصولات موجود در دسته :
                                     </label>
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
@@ -130,7 +138,7 @@
                                     </span>
                                     @endif
                                 </div>
-                                <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
+                                <div class="col-md-10 col-md-offset-1 margin-1 ">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <select id="subunit" class="form-control col-md-7 col-xs-12"
                                                 name="sub_unit_count_id">
@@ -148,12 +156,12 @@
                                     </span>
                                     @endif
                                 </div>
-                                <div class="col-md-10 col-md-offset-1 margin-1">
+                                <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="price" class="form-control col-md-12 col-xs-12" name="price"
                                                required="required" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="main_price"> قیمت اصلی
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="price"> قیمت اصلی
                                         (تومان) :
                                         <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
                                     </label>
@@ -281,25 +289,22 @@
                             <div class="container">
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="Sales_price" class="form-control col-md-12 col-xs-12"
-                                               name="Sales_price"
-                                                type="text">
+                                        <input id="sales_price" class="form-control col-md-12 col-xs-12"
+                                               name="sales_price" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="sale_price"> قیمت حراج
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="sales_price"> قیمت حراج
                                         (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('Sales_price'))
+                                    @if ($errors->has('sales_price'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('Sales_price') }}</strong>
+                                        <strong>{{ $errors->first('sales_price') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="special_price" class="form-control col-md-12 col-xs-12"
-                                               name="special_price"
-                                                type="text">
+                                        <input id="special_price" class="form-control col-md-12 col-xs-12" name="special_price">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="special_price"> قیمت
                                         ویژه (تومان):
@@ -313,17 +318,16 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="Wholesale_price" class="form-control col-md-12 col-xs-12"
-                                               name="Wholesale_price"
-                                                type="text">
+                                        <input id="wholesale_price" class="form-control col-md-12 col-xs-12"
+                                               name="wholesale_price" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="Wholesale_price"> قیمت
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="wholesale_price"> قیمت
                                         عمده (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('Wholesale_price'))
+                                    @if ($errors->has('wholesale_price'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('Wholesale_price') }}</strong>
+                                        <strong>{{ $errors->first('wholesale_price') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -446,6 +450,7 @@
                                 })
                             },
                             error: function (xhr) {
+                                console.log(xhr)
                                 swal({
                                     title: '',
                                     text: xhr,
@@ -454,10 +459,12 @@
                             }
                         })
                     });
-                var btnCancel = $('<button></button>').text('ریست')
+                var btnCancel = $('<button></button>').text('شروع مجدد')
                     .addClass('btn btn-danger')
                     .on('click', function () {
                         $('#smartwizard').smartWizard("reset");
+                        $('#productForm')[0].reset();
+
                     });
 
                 $('#smartwizard').smartWizard({
@@ -610,7 +617,7 @@
                     else {
                         swal({
                                 title: '',
-                                text: 'آیا میخواهید برندهای زیردسته ی منتخب را ببینید و محصول را در یکی از برندها ذخیره کنید؟',
+                                text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از برندها ذخیره کنید؟',
                                 type: "warning",
                                 showCancelButton: true,
                                 confirmButtonColor: "  #5cb85c",
@@ -633,11 +640,11 @@
                                             item.empty();
                                             item.append
                                             (
-                                                "<option selected='true' disabled='disabled'>لطفا برند مورد نظر را انتخاب نمایید</option>"
+                                                "<option selected='true' disabled='disabled'>لطفا زیردسته ی مورد نظر را انتخاب نمایید</option>"
                                             )
                                             item.append
                                             (
-                                                "<option value='000'>اگر برند مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید</option>"
+                                                "<option value='000'>اگر زیردسته ی مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید</option>"
                                             )
                                             $.each(response, function (key, value) {
                                                 item.append

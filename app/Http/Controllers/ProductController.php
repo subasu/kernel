@@ -37,7 +37,7 @@ class ProductController extends Controller
     }
     public function addProduct()
     {
-        return view('admin.addProduct',compact('data'));
+        return view('admin.addProduct');
     }
     public function productsManagement()
     {
