@@ -47,7 +47,6 @@ class CheckFiles
                     {
                         $notAllowedSize ++;
                     }
-
                     if($notAllowedSize == 0)
                     {
                         return true;

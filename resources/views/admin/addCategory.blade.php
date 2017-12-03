@@ -40,7 +40,7 @@
                             <div class="form-group">
                                 <a  class="btn btn-info" onclick="window.location.reload(true)">شروع دوباره</a>
                                 <div class="col-md-1 col-sm-1 col-xs-1">
-                                    <a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle="" title="افزودن زیر دسته" ></a>
+                                    <a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle="" title=" افزودن زیر دسته" ></a>
                                 </div>
                                 <div class="col-md-1 col-sm-1 col-xs-1">
                                     <a id="removeInput" class="glyphicon glyphicon-remove btn btn-danger" data-toggle="" title="حذف زیر دسته" ></a>
@@ -69,13 +69,13 @@
 
                                     </div>
                                 <label class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> دسته های اصلی  موجود : <span
-                                            class="required star" title="پر کردن این فیلد الزامی است"></span>
+                                            class="star" title="پر کردن این فیلد الزامی است"></span>
                                 </label>
-                                <label id="existedSub" style="display: none; margin-top: 3%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> زیر دسته های موجود : <span
-                                            class="required star" title="پر کردن این فیلد الزامی است"></span>
+                                <label id="existedSub" style="display: none; margin-top: 3%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> زیر دسته های دسته اصلی : <span
+                                            class="star" title="پر کردن این فیلد الزامی است"></span>
                                 </label>
-                                <label id="existedBrands" style="display: none; margin-top: 3%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> برندهای موجود : <span
-                                            class="required star" title="پر کردن این فیلد الزامی است"></span>
+                                <label id="existedBrands" style="display: none; margin-top: 3%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> زیر دسته های دسته فوق : <span
+                                            class="star" title="پر کردن این فیلد الزامی است"></span>
                                 </label>
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -88,6 +88,11 @@
                             <div class="item form-group" id="change" style="display:none;!important;">
 
 
+                                <div  id="existedDiv" style="display: none;">
+                                    <select id="existed" class="form-control" style="margin-right: 67%; margin-top: 0%; width: 30.75%; position: absolute;">'+
+                                        <option>زیر دسته ای برای دسته منتخب در نظر گرفته نشده است</option>
+                                    </select>
+                                    </div>
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -96,11 +101,11 @@
 
                             </div>
                             <div class="form-group">
-                                <div class="col-md-12">
+                                <div class="col-md-12" style="margin-top: 2%;">
                                     <button id="reg" type="button" class="col-md-9 btn btn-primary">ثبت نهایی</button>
-                                    <button id="addMainCategory" type="button" class="col-md-3 btn btn-success" style="display: none;">اضافه کردن دسته اصلی جدید</button>
-                                    <button id="addSubCategory" type="button" class="col-md-3 btn btn-info" style="display: none;!important;"> اضافه کردن زیر دسته جدید</button>
-                                    <button id="addBrands" type="button" class="col-md-3 btn btn-primary" style="display: none;!important;"> اضافه کردن برند جدید</button>
+                                    <button id="addMainCategory" type="button" class="col-md-9 btn btn-success" style="display: none;">اضافه کردن دسته اصلی جدید</button>
+                                    <button id="addSubCategory" type="button" class="col-md-9 btn btn-info" style="display: none;!important;">  اضافه کردن زیر دسته برای دسته اصلی انتخاب شده</button>
+                                    <button id="addBrands" type="button" class="col-md-9 btn btn-primary" style="display: none;!important;"> اضافه کردن زیر دسته برای زیر دسته انتخاب شده</button>
                                 </div>
                             </div>
                             <input type="hidden" id="mainId" name="mainId" value="">
@@ -128,7 +133,7 @@
                         "<input id='category' class='form-control col-md-12 col-xs-12 required' name='category[]' placeholder='' required='required' type='text'>"+
                         "</div>"+
                         "<label class='control-label col-md-3 col-sm-4 col-xs-3' for='name'>عنوان  :"+
-                        "<span class='required star' title='پر کردن این فیلد الزامی است'>*</span>"+
+                        "<span class='star' title='پر کردن این فیلد الزامی است'>*</span>"+
                         "</label>"+
                     "</div>"
                 );
@@ -139,10 +144,11 @@
         <!-- below script is to handle when we want to add main category or sub category -->
         <script>
             function untimelyAddCategory(title,id) {
+
                 swal({
-                        title:  " آیا شما دسته  " +title+ " را انتخاب نمودید؟ ",
+                        title:   " آیا در نظر دارید برای دسته " +"(( "+ title +" ))"+  " زیر دسته انتخاب نمایید؟ ",
                         text: "",
-                        type: "warning",
+                        type: "info",
                         showCancelButton: true,
                         confirmButtonColor: "	#5cb85c",
                         cancelButtonText: "خیر",
@@ -161,7 +167,32 @@
                             $('#addSubCategory').css('display', 'none');
                             $('#addBrands').css('display', 'none');
                             $('#subCategories').empty();
+                            if(id)
+                            {
+                                $.ajax
+                                ({
+                                    url      : "{{url('api/v1/getExistedCategories')}}/"+id,
+                                    dataType : 'json',
+                                    type     : 'get',
+                                    success  : function (result)
+                                    {
+                                        console.log(result);
+                                        var option = '';
+                                        $.each(result,function (key,value) {
+                                            $('#existed').empty();
+                                            $('#existed').append
+                                            (
+                                                "<option>زیر دسته های دستهء منتخب</option>"
+                                            )
+                                            $('#existed').append
+                                            (
+                                                option += "<option selected='true' disabled='disabled' id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                                            );
+                                        });
 
+                                    }
+                                })
+                            }
 
                             $('#change').append
                             (
@@ -171,9 +202,12 @@
                                 +'<lable style="margin-right:-60%;" class="control-label" for="name">عنوان دسته منتخب:</lable>'+
                                 '</b>'+
                                 '</div>'
+
                             );
 
+                            $('#existedDiv').css('display','block');
                             appendToChange();
+
                         }else
                         {
                             $('#subCategories').css('display','none');
@@ -226,7 +260,7 @@
                     beforeSend:function () {
                         var counter = 0;
                         $(".required").each(function() {
-                            if ($(this).val() === "") {
+                            if ($(this).val() == "") {
                                 $(this).css("border-color" , "red");
                                 counter++;
                             }
@@ -248,7 +282,7 @@
                         swal({
                             title: "",
                             text: res.message,
-                            type: "info",
+                            type: "success",
                             confirmButtonText: "بستن"
                         });
                         if(res.code != 1)
@@ -375,6 +409,7 @@
                    $(document).on('click','#addMainCategory',function () {
                    $('#mainId').val('');
                    $('#subId').val('');
+                   $('#change').empty();
                    $('#change').css('display','block');
                    appendToChange();
                    $('#showCategories').css('display','none');
@@ -412,7 +447,7 @@
                         {
                             //alert(mainTitle);
 
-                            untimelyAddCategory(mainTitle);
+                            untimelyAddCategory(mainTitle,id);
                         }
                 })
             })
@@ -424,6 +459,7 @@
                 $(document).on('click','#addBrands',function () {
                     var mainTitle = '';
                     var subTitle  = '';
+                    var subId     = 0;
                     $("[name = 'categories'] option:selected ").each(function(){
                         mainTitle += $(this).val();
                         $('#mainId').val($(this).attr('id'));
@@ -431,6 +467,7 @@
                     $("[name = 'subCategories'] option:selected ").each(function(){
                         subTitle += $(this).val();
                         $('#subId').val($(this).attr('id'));
+                        subId += $(this).attr('id');
                     });
                     if(subTitle == '')
                     {
@@ -444,7 +481,7 @@
                     {
                         //alert(mainTitle);
 
-                        untimelyAddCategory(subTitle);
+                        untimelyAddCategory(subTitle,subId);
                     }
                 })
             })
@@ -466,8 +503,6 @@
                         if(depth != 0)
                         {
                             getSubCategory(id);
-
-
                         }else
                             {
                                    untimelyAddCategory(title);

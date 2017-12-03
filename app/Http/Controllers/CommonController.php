@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CommonController extends Controller
 {
@@ -106,5 +107,18 @@ class CommonController extends Controller
 //            return response()->json(['data'=>'محصول شما با مؤفقیت درج شد']);
 //        elseif($ans=="0")
 //            return response()->json(['data'=>'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.']);
+    }
+
+    public function getExistedCategories($id)
+    {
+        $existedCategories = DB::table('categories')->where([['parent_id',$id],['active',1]])->get();
+        if(count($existedCategories) > 0 )
+        {
+            return response()->json($existedCategories);
+        }
+        else
+        {
+            return response()->json(0);
+        }
     }
 }
