@@ -72,7 +72,7 @@ class CommonController extends Controller
     //below function is to get sub units from database
     public function getSubunits($id)
     {
-        $subUnits = SubUnitCount::where('id','=',$id)->get();
+        $subUnits = SubUnitCount::where([['unit_count_id',$id],['active',1]])->get();
         if(count($subUnits) > 0 )
         {
             return response()->json($subUnits);

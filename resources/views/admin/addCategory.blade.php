@@ -229,9 +229,11 @@
                     removeFromChange();
                 });
                 function removeFromChange() {
-                    if ($('#change > div').length > 2) {
-                        $('#change > div').last().remove();
+                    if ($('#change > #child').length >= 2 )
+                    {
+                        $('#change > #child').last().remove();
                     };
+
                 }
             });
 
@@ -408,18 +410,48 @@
         <script>
             $(function () {
                    $(document).on('click','#addMainCategory',function () {
+
                    $('#mainId').val('');
                    $('#subId').val('');
-                   $('#change').empty();
-                   $('#change').css('display','block');
-                   appendToChange();
-                   $('#showCategories').css('display','none');
-                   $('#addInput').css('display','block');
-                   $('#removeInput').css('display','block');
-                   $('#reg').css('display','block');
-                   $('#addMainCategory').css('display','none');
-                   $('#addSubCategory').css('display','none');
-                   $('#addBrands').css('display','none');
+                       var option = '';
+                       $.ajax
+                       ({
+
+                           cache    :false,
+                           url      :"{{url('api/v1/getMainCategories')}}",
+                           type     :'get',
+                           dataType :'json',
+                           success  :function (response)
+                           {
+
+                               $.each(response,function (key,value) {
+                                   var item = $('#categories');
+                                   item.empty();
+
+                                   item.append
+                                   (
+                                       "<option selected='true' disabled='disabled'>دسته های موجود</option>"
+                                   )
+
+
+                                   item.append
+                                   (
+                                       option +="<option selected='true' disabled='disabled' id='"+value.id+"' name='"+value.depth+"' >"+value.title+"</option>"
+                                   );
+
+                               })
+                               $('#change').empty();
+                               $('#change').css('display','block');
+                               appendToChange();
+                               $('#showCategories').css('display','block');
+                               $('#addInput').css('display','block');
+                               $('#removeInput').css('display','block');
+                               $('#reg').css('display','block');
+                               $('#addMainCategory').css('display','none');
+                               $('#addSubCategory').css('display','none');
+                               $('#addBrands').css('display','none');
+                           }
+                    });
                 });
             })
         </script>

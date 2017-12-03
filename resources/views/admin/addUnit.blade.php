@@ -38,7 +38,7 @@
                         <form  class="form-horizontal form-label-left" id="unitForm"  method="POST" style="direction: rtl !important;">
                             {{ csrf_field() }}
                             <div class="form-group">
-
+                                <a  class="btn btn-info" onclick="window.location.reload(true)">شروع دوباره</a>
                                 <div class="col-md-1 col-sm-1 col-xs-1">
                                     <a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle="" title=" افزودن فیلد" ></a>
                                 </div>
@@ -102,7 +102,7 @@
                                     {{--<button id="addBrands" type="button" class="col-md-9 btn btn-primary" style="display: none;!important;"> اضافه کردن زیر دسته برای زیر دسته انتخاب شده</button>--}}
                                 </div>
                             </div>
-                            {{--<input type="hidden" id="mainId" name="mainId" value="">--}}
+                            <input type="hidden" id="unitId" name="unitId" value="">
                             {{--<input type="hidden" id="subId" name="subId" value="">--}}
                         </form>
                     </div>
@@ -192,8 +192,8 @@
                     removeFromChange();
                 });
                 function removeFromChange() {
-                    if ($('#change > div').length > 2) {
-                        $('#change > div').last().remove();
+                    if ($('#change > #child').length > 1) {
+                        $('#change > #child').last().remove();
                     };
                 }
             });
@@ -203,13 +203,41 @@
     <!-- below script is to handle addMainUnit  -->
     <script>
         $(document).on('click','#addMainUnit',function () {
-            $('#addMainUnit').css('display','none');
-            $('#addInput').css('display','block');
-            $('#removeInput').css('display','block');
-            $('#reg').css('display','block');
-            $('#showUnits').css('display','none');
-            $('#change').css('display','block');
-            appendToChange();
+
+            var option = '';
+            $.ajax
+            ({
+                cache: false,
+                url: "{{Url('api/v1/getMainUnits')}}",
+                dataType: "json",
+                type: "get",
+                success: function (response)
+                {
+                    $('#showUnits').css('display','block');
+                    $('#change').empty();
+                    var item = $('#units');
+                    $.each(response, function (key, value) {
+                        item.empty();
+                        item.append
+                        (
+                            "<option selected='true' disabled='disabled'>واحد های شمارش موجود</option>"
+                        )
+                        item.append
+                        (
+                            option += "<option selected='true' disabled='disabled' id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                        );
+
+                    });
+                    $('#addMainUnit').css('display','none');
+                    $('#addInput').css('display','block');
+                    $('#removeInput').css('display','block');
+                    $('#reg').css('display','block');
+                    //$('#showUnits').css('display','none');
+                    $('#change').css('display','block');
+                    appendToChange();
+                }
+            });
+
         })
     </script>
 
@@ -287,6 +315,7 @@
 
                                     })
                                     $('#change').empty();
+                                    $('#addMainUnit').css('display','block');
 
                                 }
 
@@ -313,5 +342,149 @@
                 }
             });
         })
+    </script>
+
+
+    <!-- below script is to get sub unit count  if exist and if not guide it to make sub unit-->
+    <script>
+        $(function () {
+            $(document).on('change','#units',function () {
+
+                $("[name = 'units'] option:selected").each(function(){
+
+                    var id = $(this).attr('id');
+                    //alert(id);
+                    $('#unitId').val(id);
+                    var title = $(this).val();
+                    if(id != 0)
+                    {
+                        $.ajax
+                        ({
+                            cache: false,
+                            url: "{{Url('api/v1/getSubunits')}}/" + id,
+                            dataType: "json",
+                            type: "get",
+                            success: function (response)
+                            {
+                                console.log(response);
+                                var option = '';
+                                if(response != 0)
+                                {
+                                    $.each(response,function (key,value) {
+                                        var item = $('#subUnits');
+                                        item.empty();
+                                        //
+                                        item.append
+                                        (
+                                            "<option selected='true' disabled='disabled'>زیر واحد های موجود</option>"
+                                        )
+
+                                        item.append
+                                        (
+                                            option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                                        );
+
+                                    })
+                                    $('#showUnits').css('display','block');
+                                }else
+                                    {
+                                        untimelyAddCategory(title,id);
+                                    }
+                            }
+                        });
+                    }
+                })
+            })
+        })
+    </script>
+
+
+    <script>
+        function untimelyAddCategory(title,id)
+        {
+
+            swal
+            ({
+                    title:   " آیا در نظر دارید برای واحد " +"(( "+ title +" ))"+  " زیر واحد انتخاب نمائید؟ ",
+                    text: "",
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonColor: "	#5cb85c",
+                    cancelButtonText: "خیر",
+                    confirmButtonText: "آری",
+                    closeOnConfirm: true,
+                    closeOnCancel: true
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        if(id)
+                        {
+                            $.ajax
+                            ({
+                                url      : "{{url('api/v1/getSubunits')}}/"+id,
+                                dataType : 'json',
+                                type     : 'get',
+                                success  : function (result)
+                                {
+
+                                    console.log(result);
+                                    console.log('I am result');
+                                    if(result != 0)
+                                    {
+                                        var option = '';
+                                        $.each(result,function (key,value) {
+                                            $('#existed').empty();
+                                            $('#existed').append
+                                            (
+                                                "<option>زیر واحد های درج شده</option>"
+                                            )
+                                            $('#existed').append
+                                            (
+                                                option += "<option selected='true' disabled='disabled' id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                                            );
+                                        });
+                                        $('#subUnits').css('display','block');
+                                    }else
+                                        {
+                                            $('#existed').empty();
+                                            $('#existed').append
+                                            (
+                                                "<option>هنوز زیر واحدی برای این واحد در نظر گرفته نشده است!</option>"
+                                            )
+                                         //   $('#change').empty();
+                                            $('#showUnits').css('display','none');
+                                            $('#change').css('display','block');
+                                            $('#addMainUnit').css('display','none');
+                                            $('#reg').css('display','block');
+                                            $('#addInput').css('display','block');
+                                            $('#removeInput').css('display','block');
+                                        }
+
+                                }
+                            })
+                        }else
+                            {
+
+                            }
+                        $('#change').append
+                        (
+                            '<div id="main" class="col-md-5 col-md-offset-4">'+
+                            '<input value="'+title+'" class="form-control col-md-6" disabled  style="text-align: center; font-size: 120%;">'+
+                            '<b>'
+                            +'<lable style="margin-right:-60%;" class="control-label" for="name">عنوان دسته منتخب:</lable>'+
+                            '</b>'+
+                            '</div>'
+
+                        );
+
+                        $('#existedDiv').css('display','block');
+                        appendToChange();
+                    }
+
+
+
+                }
+            );
+        }
     </script>
 @endsection

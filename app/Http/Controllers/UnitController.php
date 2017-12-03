@@ -15,21 +15,44 @@ class UnitController extends Controller
             abort(403);
         }else
             {
-                $count = count($request->unit);
+
+
                 // dd($count);
-                $i = 0;
-                while ($i < $count)
+                if($request->unitId == '')
                 {
-                    $insert = DB::table('unit_counts')->insertGetId
-                    ([
-                       'title' => trim($request->unit[$i]),
-                    ]);
-                    $i++;
-                }
-                if($insert)
-                {
-                    return response()->json('اطلاعات با موفقیت ثبت شد');
-                }
+                    $count = count($request->unit);
+                    $i = 0;
+                    while ($i < $count)
+                    {
+                        $insert = DB::table('unit_counts')->insertGetId
+                        ([
+                            'title' => trim($request->unit[$i]),
+                        ]);
+                        $i++;
+                    }
+                    if($insert)
+                    {
+                        return response()->json('اطلاعات با موفقیت ثبت شد');
+                    }
+                }else
+                    {
+                        $count = count($request->unit);
+                        $i = 0;
+                        while ($i < $count)
+                        {
+                            $insert = DB::table('sub_unit_counts')->insertGetId
+                            ([
+                                'title'   => trim($request->unit[$i]),
+                                'unit_count_id' => $request->unitId,
+                            ]);
+                            $i++;
+                        }
+                        if($insert)
+                        {
+                            return response()->json('اطلاعات با موفقیت ثبت شد');
+                        }
+                    }
+
             }
     }
 
