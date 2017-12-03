@@ -116,6 +116,14 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li><a><i class="fa fa-th-list"></i> مدیریت واحد های شمارش<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('unitCountManagement')}}"> نمایش و مدیریت واحد های شمارش</a>
+                                    </li>
+                                    <li><a href="{{url('addUnit')}}">درج واحد های شمارش  جدید </a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li><a><i class="fa fa-cubes"></i> مدیریت سفارشات<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('ordersManagement')}}"> نمایش و مدیریت سفارشات</a>

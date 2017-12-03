@@ -116,6 +116,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-12"></div>
             </div>
         </div>
+    </div>
 
         <!-- below script is to append html element to change tag -->
         <script>
@@ -228,7 +229,7 @@
                     removeFromChange();
                 });
                 function removeFromChange() {
-                    if ($('#change > div').length > 1) {
+                    if ($('#change > div').length > 2) {
                         $('#change > div').last().remove();
                     };
                 }

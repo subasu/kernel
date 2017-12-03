@@ -20,6 +20,7 @@ Route::post('addNewCategory','ProductController@addNewCategory');// add new cate
 //units
 Route::get('addUnit','ProductController@addUnit');//show add unit view
 Route::get('unitsManagement','ProductController@unitsManagement');//show view of all units and subUnits
+Route::post('addNewUnit','UnitController@addNewUnit');//show view of all units and subUnits
 //products
 Route::get('addProduct','ProductController@addProduct');//show add product view
 Route::get('productsManagement','ProductController@productsManagement');//show view of all product's details
