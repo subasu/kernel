@@ -32,8 +32,9 @@
     <div class="clearfix"></div>
     <div class="row">
         <div class="container">
-            <form class="form-horizontal form-label-left" id="productForm" method="POST" enctype="multipart/form-data"
+            <form class="form-horizontal form-label-left" id="productForm" enctype="multipart/form-data"
                   style="direction: rtl !important;">
+            {{ csrf_field() }}
                 <!-- SmartWizard 1 html -->
                 <div id="smartwizard">
                     <ul>
@@ -94,8 +95,7 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="title" class="form-control col-md-12 col-xs-12" name="title"
-                                               required="required" type="text">
+                                        <input id="title" class="form-control col-md-12 col-xs-12" name="title">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> نام محصول :
                                         <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
@@ -110,8 +110,7 @@
                                     {{--<div class="col-md-1" style="margin-left: 6.333333%;margin-right: 2%;"></div>--}}
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <textarea id="description" class="form-control col-md-12 col-xs-12 overflow-x"
-                                                  name="description"
-                                                  required="required" type="text"></textarea>
+                                                  name="description"></textarea>
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="description"> توضیح
                                         محصول :
@@ -145,10 +144,7 @@
                                         </select>
 
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="subunit"> زیر واحد
-                                        شمارش
-                                        : <span
-                                                class="required star" title="پر کردن این فیلد الزامی است">*</span>
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="subunit"> زیر واحد شمارش:
                                     </label>
                                     @if ($errors->has('subunit'))
                                         <span class="help-block">
@@ -159,7 +155,7 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="price" class="form-control col-md-12 col-xs-12" name="price"
-                                               required="required" type="text">
+                                              type="number">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="price"> قیمت اصلی
                                         (تومان) :
@@ -331,6 +327,21 @@
                                     </span>
                                     @endif
                                 </div>
+                                <div class="col-md-10 col-md-offset-1 margin-1">
+                                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                                        <input id="free_price" class="form-control col-md-12 col-xs-12"
+                                               name="free_price" type="text">
+                                    </div>
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="free_price"> قیمت
+                                        عمده (تومان):
+                                        <span class="required star" title="پر کردن این فیلد الزامی است"></span>
+                                    </label>
+                                    @if ($errors->has('free_price'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('free_price') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="discount_volume" class="form-control col-md-12 col-xs-12"
@@ -424,14 +435,22 @@
                 src="{{url('public/dashboard/stepWizard/js/jquery.smartWizard.min.js')}}"></script>
         <script type="text/javascript">
             $(document).ready(function () {
+                $("#productForm").submit(function(e){
+                    e.preventDefault();
+                });
 
                 // Toolbar extra buttons
                 var btnFinish = $('<button></button>').text('ثبت محصول')
                     .addClass('btn btn-info')
                     .on('click', function () {
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            }
+                        })
                         var formData = new FormData($("#productForm")[0])
                         $.ajax({
-                            url: '{{url('api/v1/addNewProduct')}}',
+                            url: '{{url('addNewProduct')}}',
                             type: 'post',
                             cashe: false,
                             data: formData,
@@ -439,6 +458,7 @@
                             contentType: false,
                             processData: false,
                             success: function (data) {
+                                console.log(data)
                                 var x = '';
                                 $.each(data, function (key, val) {
                                     x += val + '\n'
@@ -462,7 +482,7 @@
                 var btnCancel = $('<button></button>').text('شروع مجدد')
                     .addClass('btn btn-danger')
                     .on('click', function () {
-                        $('#smartwizard').smartWizard("reset");
+//                        $('#smartwizard').smartWizard("reset");
                         $('#productForm')[0].reset();
 
                     });
@@ -543,7 +563,7 @@
                             $.each(response, function (key, value) {
                                 item.append
                                 (
-                                    "<option value='" + value.id + "'>" + value.title + "</option>"
+                                    "<option value='" + value.id + "' depth='"+value.depth+"'>" + value.title + "</option>"
                                 );
                             });
                         }
@@ -556,10 +576,12 @@
                 //load subcategory
                 $('#categories').on("change", function () {
                     var id = $(this).val();
+                    var depth = $(this).find("option:selected ").attr('depth');
                     if (id == 000) {
                         location.href = '{{url("addCategory")}}';
                     }
-                    else {
+                    else if(depth!=0)
+                    {
                         swal({
                                 title: '',
                                 text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از زیر دسته ها ذخیره کنید؟',
@@ -594,7 +616,7 @@
                                             $.each(response, function (key, value) {
                                                 item.append
                                                 (
-                                                    "<option value='" + value.id + "'>" + value.title + "</option>"
+                                                    "<option value='" + value.id + "' depth='"+value.depth+"'>" + value.title + "</option>"
                                                 );
                                             });
                                             $('#subCategoriesDiv').css('display', 'block');
@@ -606,15 +628,17 @@
                                 }
                             });
                     }
+                    else{}
                 })
 
                 //load brands
                 $('#subCategories').on("change", function () {
                     var id = $(this).val();
+                    var depth1 = $(this).find("option:selected ").attr('depth');
                     if (id == 000) {
                         location.href = '{{url("addCategory")}}';
                     }
-                    else {
+                    else if(depth1!=0){
                         swal({
                                 title: '',
                                 text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از برندها ذخیره کنید؟',
@@ -700,7 +724,7 @@
                             $.each(response, function (key, value) {
                                 item.append
                                 (
-                                    "<option value='" + value.id + "'>" + value.title + "</option>"
+                                    "<option value='" + value.title + "'>" + value.title + "</option>"
                                 );
                             });
                         }

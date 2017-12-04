@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\SelfClasses\AddProduct;
 use App\Http\SelfClasses\CheckProduct;
 use App\Models\Category;
+use App\Models\CategoryProduct;
+use App\Models\Product;
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
 use Illuminate\Http\Request;
@@ -83,28 +85,6 @@ class CommonController extends Controller
         }
 
     }
-    //add new product to database
-    public function addNewProduct(Request $request)
-    {
-        $checkProduct = new CheckProduct();
-        $result =$checkProduct->ProductValidate($request);
-        if($result == "true")
-        {
-            $addNewProduct = new AddProduct();
-            $ans = $addNewProduct->addProduct($request);
-//            if($ans=="1")
-////            return response()->json(['data'=>'محصول شما با مؤفقیت درج شد']);
-            return ($ans);
-//        elseif($ans=="0")
-            return response()->json(['data'=>'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.']);
-
-        }else
-        {
-            return response()->json($result);
-        }
-
-    }
-
     public function getExistedCategories($id)
     {
         $existedCategories = DB::table('categories')->where([['parent_id',$id],['active',1]])->get();
@@ -115,6 +95,17 @@ class CommonController extends Controller
         else
         {
             return response()->json(0);
+        }
+    }
+    public function findCategoryProduct($id)
+    {
+        //$titles = CategoryProduct::where([['category_id',$id],['active',1]])->value('product_id');
+        $category = Category::find($id);
+        foreach ($category->products as $pr)
+        {
+            $title = Product::where([['id',$pr->pivot->product_id],['active',1]])->value('title');
+            return response()->json($title);
+
         }
     }
 }
