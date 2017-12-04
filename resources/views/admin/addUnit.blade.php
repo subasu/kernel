@@ -98,7 +98,7 @@
                                 <div class="col-md-12" style="margin-top: 2%;">
                                     <button id="reg" type="button" class="col-md-9 btn btn-primary">ثبت نهایی</button>
                                     <button id="addMainUnit" type="button" class="col-md-9 btn btn-success" style="display: none;">اضافه کردن واحد اصلی جدید</button>
-                                    <button id="addSubUnit" type="button" class="col-md-9 btn btn-info" style="display: none;!important;">  اضافه کردن زیر واحد برای واحد انتخاب شده</button>
+                                    <button id="addSubUnit" type="button" class="col-md-9 btn btn-info" style="display: none;">  اضافه کردن زیر واحد برای واحد انتخاب شده</button>
                                     {{--<button id="addBrands" type="button" class="col-md-9 btn btn-primary" style="display: none;!important;"> اضافه کردن زیر دسته برای زیر دسته انتخاب شده</button>--}}
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-12"></div>
             </div>
         </div>
-    </div>
+
 
 
     <!-- below script is to get main units -->
@@ -234,6 +234,8 @@
                     $('#reg').css('display','block');
                     //$('#showUnits').css('display','none');
                     $('#change').css('display','block');
+                    $('#addSubUnit').css('display','none');
+                    $('#subUnits').css('display','none');
                     appendToChange();
                 }
             });
@@ -297,6 +299,7 @@
                                 if(response)
                                 {
                                     $('#showUnits').css('display','block');
+                                    $('#subUnits').css('display','none');
                                     $('#reg').css('display','none');
 
                                     $.each(response,function (key,value) {
@@ -377,7 +380,7 @@
                                         item.append
                                         (
                                             "<option selected='true' disabled='disabled'>زیر واحد های موجود</option>"
-                                        )
+                                        );
 
                                         item.append
                                         (
@@ -385,7 +388,8 @@
                                         );
 
                                     })
-                                    $('#showUnits').css('display','block');
+                                    $('#subUnits').css('display','block');
+                                    $('#addSubUnit').css('display','block');
                                 }else
                                     {
                                         untimelyAddCategory(title,id);
@@ -417,22 +421,21 @@
                 },
                 function (isConfirm) {
                     if (isConfirm) {
-                        if(id)
-                        {
+
+                        if (id) {
+
                             $.ajax
                             ({
-                                url      : "{{url('api/v1/getSubunits')}}/"+id,
-                                dataType : 'json',
-                                type     : 'get',
-                                success  : function (result)
-                                {
+                                url: "{{url('api/v1/getSubunits')}}/" + id,
+                                dataType: 'json',
+                                type: 'get',
+                                success: function (result) {
 
                                     console.log(result);
                                     console.log('I am result');
-                                    if(result != 0)
-                                    {
+                                    if (result != 0) {
                                         var option = '';
-                                        $.each(result,function (key,value) {
+                                        $.each(result, function (key, value) {
                                             $('#existed').empty();
                                             $('#existed').append
                                             (
@@ -440,51 +443,69 @@
                                             )
                                             $('#existed').append
                                             (
-                                                option += "<option selected='true' disabled='disabled' id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                                                option += "<option selected='true' disabled='disabled' id='" + value.id + "' name='" + value.depth + "'>" + value.title + "</option>"
                                             );
                                         });
-                                        $('#subUnits').css('display','block');
-                                    }else
-                                        {
-                                            $('#existed').empty();
-                                            $('#existed').append
-                                            (
-                                                "<option>هنوز زیر واحدی برای این واحد در نظر گرفته نشده است!</option>"
-                                            )
-                                         //   $('#change').empty();
-                                            $('#showUnits').css('display','none');
-                                            $('#change').css('display','block');
-                                            $('#addMainUnit').css('display','none');
-                                            $('#reg').css('display','block');
-                                            $('#addInput').css('display','block');
-                                            $('#removeInput').css('display','block');
-                                        }
+                                        $('#subUnits').css('display', 'block');
+                                        $('#showUnits').css('display', 'none');
+                                        $('#existed').css('display', 'block');
+                                        $('#change').css('display', 'block');
+                                        $('#addSubUnit').css('display', 'none');
+                                        $('#addMainUnit').css('display', 'none');
+                                        $('#addInput').css('display', 'block');
+                                        $('#removeInput').css('display', 'block');
+                                        $('#reg').css('display', 'block');
+                                    } else {
+                                        $('#existed').empty();
+                                        $('#existed').append
+                                        (
+                                            "<option>هنوز زیر واحدی برای این واحد در نظر گرفته نشده است!</option>"
+                                        )
+                                        //   $('#change').empty();
+                                        $('#showUnits').css('display', 'none');
+                                        $('#change').css('display', 'block');
+                                        $('#addMainUnit').css('display', 'none');
+                                        $('#reg').css('display', 'block');
+                                        $('#addInput').css('display', 'block');
+                                        $('#removeInput').css('display', 'block');
+                                        $('#addSubUnit').css('display', 'none');
+                                    }
 
                                 }
                             })
-                        }else
-                            {
+                        }
+                        else {
 
-                            }
+                        }
                         $('#change').append
                         (
-                            '<div id="main" class="col-md-5 col-md-offset-4">'+
-                            '<input value="'+title+'" class="form-control col-md-6" disabled  style="text-align: center; font-size: 120%;">'+
+                            '<div id="main" class="col-md-5 col-md-offset-4">' +
+                            '<input value="' + title + '" class="form-control col-md-6" disabled  style="text-align: center; font-size: 120%;">' +
                             '<b>'
-                            +'<lable style="margin-right:-60%;" class="control-label" for="name">عنوان دسته منتخب:</lable>'+
-                            '</b>'+
+                            + '<lable style="margin-right:-60%;" class="control-label" for="name">عنوان دسته منتخب:</lable>' +
+                            '</b>' +
                             '</div>'
-
                         );
 
-                        $('#existedDiv').css('display','block');
+                        $('#existedDiv').css('display', 'block');
                         appendToChange();
                     }
-
-
-
-                }
-            );
+                });
         }
     </script>
+
+    <!-- below script is to handle addSubUnit button -->
+    <script>
+        $(document).on('click','#addSubUnit',function(){
+            $("[name = 'units'] option:selected").each(function(){
+
+                var id = $(this).attr('id');
+                //alert(id);
+                $('#unitId').val(id);
+                var title = $(this).val();
+                untimelyAddCategory(title,id);
+        })
+     })
+    </script>
+
 @endsection

@@ -15,8 +15,5 @@ class IndexController extends Controller
     {
         return view('layouts.main');
     }
-    public function addCategory()
-    {
-        return view('admin.addCategory');
-    }
+
 }
