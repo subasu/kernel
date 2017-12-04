@@ -203,7 +203,7 @@
     <!-- below script is to handle addMainUnit  -->
     <script>
         $(document).on('click','#addMainUnit',function () {
-
+            $('#unitId').val('');
             var option = '';
             $.ajax
             ({

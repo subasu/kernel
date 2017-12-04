@@ -15,7 +15,7 @@ class Product extends Model
     //relation of product and category n:m
     public function categories()
     {
-        return $this->belongsToMany('Category');
+        return $this->belongsToMany('App\Models\Category');
     }
 
     //relation of products and baskets
@@ -54,10 +54,10 @@ class Product extends Model
     }
 
     //relation of products and unit_count
-    public function unitCounts()
-    {
-        return $this->belongsTo('App\Models\UnitCount');
-    }
+//    public function unitCounts()
+//    {
+//        return $this->belongsTo('App\Models\UnitCount');
+//    }
 
     //relation of products and sub_unit_counts
     public function subUnitCounts()
