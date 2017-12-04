@@ -19,6 +19,7 @@ Route::get('addCategory','CategoryController@addCategory');//show add category v
 Route::get('categoriesManagement','CategoryController@categoriesManagement');//show view of all category
 Route::post('addNewCategory','CategoryController@addNewCategory');// add new category in database
 
+
 //units
 Route::get('addUnit','UnitController@addUnit');//show add unit view
 Route::get('unitsManagement','UnitController@unitsManagement');//show view of all units and subUnits
@@ -27,6 +28,7 @@ Route::post('addNewUnit','UnitController@addNewUnit');//show view of all units a
 //products
 Route::get('addProduct','ProductController@addProduct');//show add product view
 Route::get('productsManagement','ProductController@productsManagement');//show view of all product's details
+Route::get('productDetails/{id}','ProductController@productDetailsGet');
 
 //users
 Route::get('usersManagement','UserController@usersManagement');//show view of all customer's details

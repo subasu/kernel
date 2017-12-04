@@ -448,6 +448,8 @@
                                $('#removeInput').css('display','block');
                                $('#reg').css('display','block');
                                $('#addMainCategory').css('display','none');
+                               $('#subCategories').css('display','none');
+                               $('#existedSub').css('display','none');
                                $('#addSubCategory').css('display','none');
                                $('#addBrands').css('display','none');
                            }

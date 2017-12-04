@@ -21,9 +21,18 @@ class ProductController extends Controller
     {
         return view('admin.addProduct');
     }
+    //
     public function productsManagement()
     {
         $data=Product::all();
         return view('admin.productManagement',compact('data'));
+    }
+
+    //
+    public function productDetailsGet($id)
+    {
+        $data = Product::where([['id',$id],['active',1]])->get();
+        //dd($data);
+        return view('admin.productDetails',compact('data'));
     }
 }
