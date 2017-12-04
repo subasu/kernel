@@ -32,7 +32,7 @@
     <div class="clearfix"></div>
     <div class="row">
         <div class="container">
-            <form class="form-horizontal form-label-left" id="productForm" method="POST" enctype="multipart/form-data"
+            <form class="form-horizontal form-label-left" id="productForm" enctype="multipart/form-data"
                   style="direction: rtl !important;">
                 <!-- SmartWizard 1 html -->
                 <div id="smartwizard">
@@ -424,7 +424,9 @@
                 src="{{url('public/dashboard/stepWizard/js/jquery.smartWizard.min.js')}}"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-
+                $("#productForm").submit(function(e){
+                    e.preventDefault();
+                });
                 // Toolbar extra buttons
                 var btnFinish = $('<button></button>').text('ثبت محصول')
                     .addClass('btn btn-info')
@@ -439,13 +441,14 @@
                             contentType: false,
                             processData: false,
                             success: function (data) {
+                                console.log(data)
                                 var x = '';
                                 $.each(data, function (key, val) {
-                                    x += val + '\n'
+                                    x += data.val + '\n'
                                 });
                                 swal({
                                     title: '',
-                                    text: x,
+                                    text: "hvv"+data,
                                     type: "info",
                                 })
                             },
