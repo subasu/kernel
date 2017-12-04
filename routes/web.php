@@ -27,6 +27,7 @@ Route::post('addNewUnit','UnitController@addNewUnit');//show view of all units a
 //products
 Route::get('addProduct','ProductController@addProduct');//show add product view
 Route::get('productsManagement','ProductController@productsManagement');//show view of all product's details
+Route::post('addNewProduct','ProductController@addNewProduct');// add new product in database
 
 //users
 Route::get('usersManagement','UserController@usersManagement');//show view of all customer's details

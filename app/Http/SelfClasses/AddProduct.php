@@ -26,16 +26,6 @@ class AddProduct
             $productCategory->active = 1;
             $productCategory->save();
         }
-
-        function addProductFlag($title, $price, $lastProductId)
-        {
-            $prices = new ProductFlag();
-            $prices->title = $title;
-            $prices->product_id = $lastProductId;
-            $prices->active = 0;
-            $prices->price = $price;
-            $prices->save();
-        }
         //add a flags with flag's price in product flags
         function addProductFlag($title, $price, $lastProductId)
         {
@@ -76,6 +66,9 @@ class AddProduct
         }
         if (!empty($product->sales_price)) {
             addProductFlag('sales_price', $product->sales_price, $lastProductId);
+        }
+        if (!empty($product->free_price)) {
+            addProductFlag('free_price', $product->free_price, $lastProductId);
         }
         /**this section check user select which level of categories
          * if didn't select lastest level make a subcategiries with 'سایر' title in category table

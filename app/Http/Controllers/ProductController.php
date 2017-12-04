@@ -2,21 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CategoryFilesValidate;
-use App\Http\SelfClasses\AddCategory;
 use App\Http\SelfClasses\AddProduct;
-use App\Models\Category;
-use App\Models\DeliveryMan;
-use App\Http\SelfClasses\CheckFiles;
+use App\Http\SelfClasses\CheckProduct;
 use App\Models\Product;
-use App\Models\UnitCount;
-use App\User;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    //
-
     public function addProduct()
     {
         return view('admin.addProduct');
@@ -25,5 +17,27 @@ class ProductController extends Controller
     {
         $data=Product::all();
         return view('admin.productManagement',compact('data'));
+    }
+    //add new product to database
+    public function addNewProduct(Request $request)
+    {
+        $checkProduct = new CheckProduct();
+        $result =$checkProduct->ProductValidate($request);
+        if($result == "true")
+        {
+            $addNewProduct = new AddProduct();
+            $ans = $addNewProduct->addProduct($request);
+//            if($ans=="1")
+//            return response()->json(['data'=>'محصول شما با مؤفقیت درج شد']);
+//            return ($ans);
+//        elseif($ans=="0")
+            return response()->json(['data'=>'1']);
+//            return response()->json(['data'=>'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.']);
+
+        }else
+        {
+            return response()->json($result);
+        }
+
     }
 }
