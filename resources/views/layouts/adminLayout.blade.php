@@ -103,9 +103,9 @@
                                     </li>
                                     <li><a href="{{url('addProduct')}}">درج محصول جدید </a>
                                     </li>
-                                    <li><a href="{{url('unitsManagement')}}"> نمایش و مدیریت واحد شمارش </a>
-                                    <li><a href="{{url('addUnit')}}">درج واحد شمارش و زیرواحد شمارش </a>
-                                    </li>
+                                    {{--<li><a href="{{url('unitsManagement')}}"> نمایش و مدیریت واحد شمارش </a>--}}
+                                    {{--<li><a href="{{url('addUnit')}}">درج واحد شمارش و زیرواحد شمارش </a>--}}
+                                    {{--</li>--}}
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-th-list"></i> مدیریت دسته بندی ها<span class="fa fa-chevron-down"></span></a>

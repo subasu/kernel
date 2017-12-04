@@ -13,21 +13,27 @@
 //main site
 Route::get('/','IndexController@index');
 Route::get('index','IndexController@home');
+
 //categories
-Route::get('addCategory','IndexController@addCategory');//show add category view
-Route::get('categoriesManagement','ProductController@categoriesManagement');//show view of all category
-Route::post('addNewCategory','ProductController@addNewCategory');// add new category in database
+Route::get('addCategory','CategoryController@addCategory');//show add category view
+Route::get('categoriesManagement','CategoryController@categoriesManagement');//show view of all category
+Route::post('addNewCategory','CategoryController@addNewCategory');// add new category in database
+
 //units
-Route::get('addUnit','ProductController@addUnit');//show add unit view
-Route::get('unitsManagement','ProductController@unitsManagement');//show view of all units and subUnits
+Route::get('addUnit','UnitController@addUnit');//show add unit view
+Route::get('unitsManagement','UnitController@unitsManagement');//show view of all units and subUnits
 Route::post('addNewUnit','UnitController@addNewUnit');//show view of all units and subUnits
+
 //products
 Route::get('addProduct','ProductController@addProduct');//show add product view
 Route::get('productsManagement','ProductController@productsManagement');//show view of all product's details
+
 //users
-Route::get('usersManagement','ProductController@usersManagement');//show view of all customer's details
+Route::get('usersManagement','UserController@usersManagement');//show view of all customer's details
+
 //orders
-Route::get('ordersManagement','ProductController@ordersManagement');//show view of all orders
+Route::get('ordersManagement','OrderController@ordersManagement');//show view of all orders
+
 //deliveryMan
-Route::get('addDeliveryMan','ProductController@addDeliveryMan');//show add DeliveryMan view
-Route::get('deliveryMansManagement','ProductController@deliveryMansManagement');//show view of all deliveryMans's details
+Route::get('addDeliveryMan','DeliveryManController@addDeliveryMan');//show add DeliveryMan view
+Route::get('deliveryMansManagement','DeliveryManController@deliveryMansManagement');//show view of all deliveryMans's details
