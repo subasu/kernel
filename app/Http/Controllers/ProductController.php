@@ -49,10 +49,24 @@ class ProductController extends Controller
     }
 
     //
-    public function productDetailsGet($id)
+   public function productDetailsGet($id)
     {
+
         $data = Product::where([['id', $id], ['active', 1]])->get();
         //dd($data);
         return view('admin.productDetails', compact('data'));
+
+
+        $products = Product::where([['id',$id],['active',1]])->get();
+        if(count($products) > 0)
+        {
+            return view('admin.productDetails',compact('products'));
+        }else
+            {
+                return view('errors.403');
+            }
+
+
     }
 }
+
