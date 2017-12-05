@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\SelfClasses\AddCategory;
 use App\Http\SelfClasses\CheckFiles;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -37,7 +38,7 @@ class CategoryController extends Controller
     //below function is to returns all categories to the categoriesManagement blade....
     public function categoriesManagement()
     {
-        $data=Category::all();
-        return view('admin.categoriesManagement',compact('data'));
+        $categories = Category::where([['active',1],['parent_id',0]])->get();
+        return view('admin.categoriesManagement',compact('categories'));
     }
 }
