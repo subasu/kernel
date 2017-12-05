@@ -58,9 +58,10 @@
                                     <br>
                                     <div class="col-md-10 col-md-offset-1 margin-1">
                                         <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                                            <div class="col-md-12">
                                             <input disabled id="lastCategory" class="form-control col-md-12"
                                                    name="lastCategory" value="{{$products[0]->categories[0]->title}}">
-
+                                            </div>
                                         </div>
                                         <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> آخرین دسته
                                             مربوطه :
