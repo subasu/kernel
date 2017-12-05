@@ -11,6 +11,7 @@ use App\Models\SubUnitCount;
 use App\Models\UnitCount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\Array_;
 
 class CommonController extends Controller
 {
@@ -101,11 +102,13 @@ class CommonController extends Controller
     {
         //$titles = CategoryProduct::where([['category_id',$id],['active',1]])->value('product_id');
         $category = Category::find($id);
+        $title=Array();
+        $i=0;
         foreach ($category->products as $pr)
         {
-            $title = Product::where([['id',$pr->pivot->product_id],['active',1]])->value('title');
-            return response()->json($title);
-
+            $title[$i] = Product::where([['id',$pr->pivot->product_id],['active',1]])->value('title') ;
+            $i++;
         }
+        return response()->json($title);
     }
 }

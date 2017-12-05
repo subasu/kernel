@@ -85,7 +85,7 @@
                                         <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
                                     </label>
                                 </div>
-                                <div class="col-md-10 col-md-offset-1 margin-1" id="oldProduct" >
+                                <div class="col-md-10 col-md-offset-1 margin-1" id="" >
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <select id="oldProduct" class="form-control col-md-12" name="oldProduct">
                                         </select>
@@ -620,6 +620,8 @@
                                                 );
                                             });
                                             $('#subCategoriesDiv').css('display', 'block');
+                                            findTitle(id)
+
                                         }
                                     });
                                 }
@@ -677,6 +679,7 @@
                                                 );
                                             });
                                             $('#BrandsDiv').css('display', 'block');
+                                            findTitle(id)
                                         }
                                     });
                                 }
@@ -692,6 +695,7 @@
                     if (id == 000) {
                         location.href = '{{url("addCategory")}}';
                     }
+                    findTitle(id)
                 })
 
                 //load units
@@ -767,7 +771,31 @@
                             }
                         });
                     }
-                })
+                });
+
+                //find categori's selected product title
+                function findTitle(cid)
+                {
+                    $.ajax
+                    ({
+                        cache: false,
+                        url: "{{url('api/v1/findCategoryProduct')}}/" + cid,
+                        dataType: "json",
+                        type: "get",
+                        success: function (response) {
+                            console.log(response);
+                            var item = $('#oldProduct');
+                            item.empty();
+                            $.each(response, function (key, value) {
+                                item.append
+                                (
+                                    "<option disabled='disabled' selected='selected'>" + value + "</option>"
+                                );
+                            });
+
+                        }
+                    });
+                }
             });
         </script>
         <script src="{{ URL::asset('public/js/persianDatepicker.js')}}"></script>
