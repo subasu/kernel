@@ -7,7 +7,6 @@
             padding-right: 4px;
             padding-left: 4px;
         }
-
         input, label {
             font-size: 15px;
         }
@@ -15,11 +14,9 @@
         .margin-1 {
             margin-top: 1%;
         }
-
         .margin-bot-1 {
             margin-bottom: 1%;
         }
-
         .overflow-x {
             overflow-x: hidden;
         }
@@ -35,7 +32,7 @@
             <form class="form-horizontal form-label-left" id="productForm" enctype="multipart/form-data"
                   style="direction: rtl !important;">
             {{ csrf_field() }}
-                <!-- SmartWizard 1 html -->
+            <!-- SmartWizard 1 html -->
                 <div id="smartwizard">
                     <ul>
                         <li><a href="#step-1">اطلاعات اصلی محصول<br/>
@@ -72,7 +69,8 @@
                                         <select id="subCategories" class="form-control col-md-12" name="subCategories">
                                         </select>
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته ی دسته اصلی :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته ی دسته
+                                        اصلی :
                                         <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
                                     </label>
                                 </div>
@@ -81,16 +79,18 @@
                                         <select id="brands" class="form-control col-md-12" name="brands">
                                         </select>
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته دسته ی فوق :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته دسته ی
+                                        فوق :
                                         <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
                                     </label>
                                 </div>
-                                <div class="col-md-10 col-md-offset-1 margin-1" id="oldProduct" >
+                                <div class="col-md-10 col-md-offset-1 margin-1" id="">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <select id="oldProduct" class="form-control col-md-12" name="oldProduct">
+                                        <select id="oldProduct" class="form-control col-md-12">
                                         </select>
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> محصولات موجود در دسته :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> محصولات موجود
+                                        در دسته :
                                     </label>
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <select id="unit" class="form-control col-md-7 col-xs-12" name="unit_count_id">
+                                        <select id="unit" class="form-control col-md-7 col-xs-12" name="unit_count_title">
                                         </select>
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="unit"> واحد شمارش :
@@ -140,11 +140,12 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1 ">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <select id="subunit" class="form-control col-md-7 col-xs-12"
-                                                name="sub_unit_count_id">
+                                                name="sub_unit_count_title">
                                         </select>
 
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="subunit"> زیر واحد شمارش:
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="subunit"> زیر واحد
+                                        شمارش:
                                     </label>
                                     @if ($errors->has('subunit'))
                                         <span class="help-block">
@@ -155,7 +156,7 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="price" class="form-control col-md-12 col-xs-12" name="price"
-                                              type="number">
+                                               type="number">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="price"> قیمت اصلی
                                         (تومان) :
@@ -236,7 +237,7 @@
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="warehouse_place" class="form-control col-md-12 col-xs-12"
                                                name="warehouse_place"
-                                                type="text">
+                                               type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="warehouse_place"> محل
                                         فیزیکی در
@@ -253,7 +254,7 @@
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="ready_time" class="form-control col-md-12 col-xs-12"
                                                name="ready_time"
-                                                type="text">
+                                               type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="ready_time"> زمان آماده
                                         شدن بر حسب ساعت :
@@ -268,7 +269,7 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="barcode" class="form-control col-md-12 col-xs-12" name="barcode"
-                                                type="text">
+                                               type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="barcode"> بارکد :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
@@ -300,7 +301,8 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="special_price" class="form-control col-md-12 col-xs-12" name="special_price">
+                                        <input id="special_price" class="form-control col-md-12 col-xs-12"
+                                               name="special_price">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="special_price"> قیمت
                                         ویژه (تومان):
@@ -346,7 +348,7 @@
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="discount_volume" class="form-control col-md-12 col-xs-12"
                                                name="discount_volume"
-                                                type="text">
+                                               type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount_volume">
                                         حجم/تعداد مشمول
@@ -362,7 +364,7 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="discount" class="form-control col-md-12 col-xs-12" name="discount"
-                                                type="text">
+                                               type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount"> درصد تخفیف :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
@@ -402,9 +404,9 @@
                                         </div>
                                         <div class="col-md-5 col-sm-6 col-xs-9 ">
                                             <input class="form-control col-md-12 col-xs-12"
-                                                   type="file" name="pic[]" id="pic"/>
+                                                   type="file" name="file[]" id="pic"/>
                                         </div>
-                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic"> تصویر محصول :
+                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="file"> تصویر محصول :
                                             <span class="required star"></span>
                                         </label>
                                     </div>
@@ -435,7 +437,7 @@
                 src="{{url('public/dashboard/stepWizard/js/jquery.smartWizard.min.js')}}"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#productForm").submit(function(e){
+                $("#productForm").submit(function (e) {
                     e.preventDefault();
                 });
 
@@ -471,9 +473,13 @@
                             },
                             error: function (xhr) {
                                 console.log(xhr)
+                                var x;
+                                $.each(data, function (key, val) {
+                                    x += val + '\n'
+                                });
                                 swal({
                                     title: '',
-                                    text: xhr,
+                                    text: x,
                                     type: "info",
                                 })
                             }
@@ -550,38 +556,27 @@
                     dataType: "json",
                     success: function (response) {
                         if (response != 0) {
-                            var item = $('#categories');
-                            item.empty();
-                            item.append
-                            (
-                                "<option selected='true' disabled='disabled'>لطفا دسته مورد نظر خود را انتخاب نمایید</option>"
-                            )
-                            item.append
-                            (
-                                "<option value='000'>اگر دسته مورد نظر در این لیست وجود ندارد این گزینه را انتخاب نمایید</option>"
-                            )
-                            $.each(response, function (key, value) {
-                                item.append
-                                (
-                                    "<option value='" + value.id + "' depth='"+value.depth+"'>" + value.title + "</option>"
-                                );
-                            });
+                            var responses = response;
+                            var selectBoxId = "#categories";
+                            var msgOpt1 = "لطفا دسته مورد نظر خود را انتخاب نمایید";
+                            var msgOpt2 = "اگر دسته مورد نظر در این لیست وجود ندارد این گزینه را انتخاب نمایید";
+                            var valueOption2 = "000";
+                            loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                         }
                         else {
-                            {{--                            location.href = '{{url("addCategory")}}';--}}
+                            location.href = '{{url("addCategory")}}';
                         }
                     }
                 })
 
-                //load subcategory
+                //load subCategories after ask do you want load it's sub Categories or no then load product title related selected category
                 $('#categories').on("change", function () {
                     var id = $(this).val();
                     var depth = $(this).find("option:selected ").attr('depth');
                     if (id == 000) {
                         location.href = '{{url("addCategory")}}';
                     }
-                    else if(depth!=0)
-                    {
+                    else if (depth != 0) {
                         swal({
                                 title: '',
                                 text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از زیر دسته ها ذخیره کنید؟',
@@ -603,42 +598,40 @@
                                         dataType: "json",
                                         type: "get",
                                         success: function (response) {
-                                            var item = $('#subCategories');
-                                            item.empty();
-                                            item.append
-                                            (
-                                                "<option selected='true' disabled='disabled'>لطفا زیر دسته مورد نظر را انتخاب نمایید</option>"
-                                            )
-                                            item.append
-                                            (
-                                                "<option value='000'>اگر زیر دسته مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید</option>"
-                                            )
-                                            $.each(response, function (key, value) {
-                                                item.append
-                                                (
-                                                    "<option value='" + value.id + "' depth='"+value.depth+"'>" + value.title + "</option>"
-                                                );
-                                            });
+                                            var responses = response;
+                                            var selectBoxId = '#subCategories';
+                                            var msgOpt1 = "لطفا زیر دسته مورد نظر را انتخاب نمایید";
+                                            var msgOpt2 = "اگر زیر دسته مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
+                                            var valueOption2 = "000";
+                                            loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                                             $('#subCategoriesDiv').css('display', 'block');
+                                            findTitle(id)
                                         }
                                     });
                                 }
                                 else {
                                     $('#subCategoriesDiv').css('display', 'none');
+                                    findTitle(id)
                                 }
                             });
                     }
-                    else{}
+                    else {
+                        $('#subCategoriesDiv').css('display', 'none');
+                        $('#BrandsDiv').css('display', 'none');
+                        $('#subCategories').empty();
+                        $('#brands').empty();
+                        findTitle(id)
+                    }
                 })
 
-                //load brands
+                //load brands after ask do you want load it's brands or no then load product title related selected subCategory
                 $('#subCategories').on("change", function () {
                     var id = $(this).val();
                     var depth1 = $(this).find("option:selected ").attr('depth');
                     if (id == 000) {
                         location.href = '{{url("addCategory")}}';
                     }
-                    else if(depth1!=0){
+                    else if (depth1 != 0) {
                         swal({
                                 title: '',
                                 text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از برندها ذخیره کنید؟',
@@ -660,41 +653,39 @@
                                         dataType: "json",
                                         type: "get",
                                         success: function (response) {
-                                            var item = $('#brands');
-                                            item.empty();
-                                            item.append
-                                            (
-                                                "<option selected='true' disabled='disabled'>لطفا زیردسته ی مورد نظر را انتخاب نمایید</option>"
-                                            )
-                                            item.append
-                                            (
-                                                "<option value='000'>اگر زیردسته ی مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید</option>"
-                                            )
-                                            $.each(response, function (key, value) {
-                                                item.append
-                                                (
-                                                    "<option value='" + value.id + "'>" + value.title + "</option>"
-                                                );
-                                            });
+                                            var responses = response;
+                                            var selectBoxId = '#brands';
+                                            var msgOpt1 = "لطفا زیر دسته مورد نظر را انتخاب نمایید";
+                                            var msgOpt2 = "اگر زیر دسته مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
+                                            var valueOption2 = "000";
+                                            loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                                             $('#BrandsDiv').css('display', 'block');
+                                            findTitle(id)
                                         }
                                     });
                                 }
                                 else {
                                     $('#BrandsDiv').css('display', 'none');
+                                    findTitle(id)
                                 }
                             });
                     }
+                    else {
+                        $('#BrandsDiv').css('display', 'none');
+                        $('#brands').empty();
+                        findTitle(id)
+                    }
                 })
-
+                //check option 2 selected or not, if yes redirect to addCategory view
                 $('#brands').on("change", function () {
                     var id = $(this).val();
                     if (id == 000) {
                         location.href = '{{url("addCategory")}}';
                     }
+                    findTitle(id)
                 })
 
-                //load units
+                //check option 2 selected or not, if yes redirect to add unit view
                 $('#unit').on("change", function () {
                     var id = $(this).val();
                     if (id == 0000) {
@@ -702,7 +693,7 @@
                     }
                 })
 
-                //load MainUnitsCount
+                //load MainUnitsCount if there is no category in table redirect addCategory
                 $.ajax
                 ({
                     cache: false,
@@ -711,22 +702,12 @@
                     type: "get",
                     success: function (response) {
                         if (response != 0) {
-                            var item = $('#unit');
-                            item.empty();
-                            item.append
-                            (
-                                "<option selected='true' disabled='disabled'>لطفا واحد شمارش مورد نظر خود را انتخاب نمایید</option>"
-                            )
-                            item.append
-                            (
-                                "<option value='0000'>اگر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید</option>"
-                            )
-                            $.each(response, function (key, value) {
-                                item.append
-                                (
-                                    "<option value='" + value.title + "'>" + value.title + "</option>"
-                                );
-                            });
+                            var responses = response;
+                            var selectBoxId = '#unit';
+                            var msgOpt1 = "لطفا واحد شمارش مورد نظر خود را انتخاب نمایید";
+                            var msgOpt2 = "اگر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
+                            var valueOption2 = "0000";
+                            loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                         }
                         else {
                             location.href = '{{url("addCategory")}}';
@@ -734,6 +715,7 @@
                     }
                 });
                 //load brands
+                //id = 0000 it's for second option for redirect to add unit
                 $('#unit').on("change", function () {
                     var id = $(this).val();
                     if (id == 0000) {
@@ -747,27 +729,51 @@
                             dataType: "json",
                             type: "get",
                             success: function (response) {
-                                var item = $('#subunit ');
-                                item.empty();
-                                item.append
-                                (
-                                    "<option selected='true' disabled='disabled'>لطفا واحد شمارش مورد نظر خود را انتخاب نمایید</option>"
-                                )
-                                item.append
-                                (
-                                    "<option value='001'>اگر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید</option>"
-                                )
-                                $.each(response, function (key, value) {
-                                    item.append
-                                    (
-                                        "<option value='" + value.id + "'>" + value.title + "</option>"
-                                    );
-                                });
-
+                                var responses = response;
+                                var selectBoxId = '#subunit';
+                                var msgOpt1 = "لطفا زیر واحد شمارش مورد نظر خود را انتخاب نمایید";
+                                var msgOpt2 = "اگر زیر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
+                                var valueOption2 = "001";
+                                loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                             }
                         });
                     }
-                })
+                });
+
+                //load item in select box
+                function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2)
+                {
+                    var item = $(selectBoxId);item.empty();
+                    item.append("<option selected='true' disabled='disabled'>" + msgOption1 + "</option>")
+                    item.append("<option value='" + valueOption2 + "'>" + msgOption2 + "</option>")
+                    $.each(responses, function (key, value) {
+                        item.append
+                        ("<option value='" + value.id + "' depth='" + value.depth + "'>" + value.title + "</option>");
+                    });
+                }
+
+                //find categori's selected product title
+                function findTitle(cid) {
+                    $.ajax
+                    ({
+                        cache: false,
+                        url: "{{url('api/v1/findCategoryProduct')}}/" + cid,
+                        dataType: "json",
+                        type: "get",
+                        success: function (response) {
+                            var item = $('#oldProduct');item.empty();
+                            if (response  != 0 ) {
+                                $.each(response, function (key, value) {
+                                    item.append("<option disabled='disabled' selected='selected'>" + value + "</option>");
+                                });
+                            }
+                            else {
+                                item.append("<option  selected='selected'>تا کنون برای این دسته محصولی ثبت نشده است</option>");
+                            }
+
+                        }
+                    });
+                }
             });
         </script>
         <script src="{{ URL::asset('public/js/persianDatepicker.js')}}"></script>

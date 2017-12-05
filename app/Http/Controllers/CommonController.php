@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\SelfClasses\AddProduct;
-use App\Http\SelfClasses\CheckProduct;
 use App\Models\Category;
-use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CommonController extends Controller
 {
-
     //below function is to get main categories from database
     public function getMainCategories()
     {
@@ -101,11 +96,13 @@ class CommonController extends Controller
     {
         //$titles = CategoryProduct::where([['category_id',$id],['active',1]])->value('product_id');
         $category = Category::find($id);
+        $title=Array();
+        $i=0;
         foreach ($category->products as $pr)
         {
-            $title = Product::where([['id',$pr->pivot->product_id],['active',1]])->value('title');
-            return response()->json($title);
-
+            $title[$i] = Product::where([['id',$pr->pivot->product_id],['active',1]])->value('title') ;
+            $i++;
         }
+        return response()->json($title);
     }
 }

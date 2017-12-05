@@ -8,9 +8,6 @@
 
 namespace App\Http\SelfClasses;
 
-
-use Illuminate\Support\Facades\DB;
-
 class CheckFiles
 {
     public function checkCategoryFiles($request)
@@ -18,7 +15,7 @@ class CheckFiles
         if(count($request->file) > 0)
         {
             $allowedExtensions = array('png','jpg');
-            $allowedSize       = 150000;
+            $allowedSize       = 200000;
             $count             = count($request->file);
             $sentExtensions    = '';
             $sentSizes         = '';
@@ -53,7 +50,7 @@ class CheckFiles
                     }
                     else
                     {
-                        return('سایز هیچکدام از فایل های انتخاب شده نباید بیش از 150 کیلوبایت باشد');
+                        return('سایز هیچکدام از فایل های انتخاب شده نباید بیش از 200 کیلوبایت باشد');
                         // return false;
                     }
                 }
