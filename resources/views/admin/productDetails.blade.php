@@ -699,7 +699,7 @@
                                             <div class="parent" name="parent">
                                                 <div class="col-md-10 margin-1">
 
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-2 col-md-offset-3">
                                                         <a class="glyphicon glyphicon-edit btn btn-success editPic"
                                                            products-toggle=""
                                                            title="ویرایش "></a>

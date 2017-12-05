@@ -18,7 +18,7 @@
                 </div>
 
 
-                <a href="{{url('admin/addProduct')}}" id="user-send" type="button" class="col-md-2 btn btn-primary" style="font-weight: bold;">
+                <a href="{{url('addCategory')}}" id="user-send" type="button" class="col-md-2 btn btn-primary" style="font-weight: bold;">
                     <i class="fa fa-th-list"></i>                    افزودن دسته ی جدید                </a>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
