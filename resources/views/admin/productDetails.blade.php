@@ -500,7 +500,7 @@
                         })
                     });
                 var btnCancel = $('<button></button>').text('شروع مجدد')
-                    .addClass('btn btn-danger')
+                    .addClass('btn btn-danger').css("display","none")
                     .on('click', function () {
                         $('#smartwizard').smartWizard("reset");
                         $('#productForm')[0].reset();

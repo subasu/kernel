@@ -15,14 +15,12 @@ class CategoryController extends Controller
         $result =$checkFiles->checkCategoryFiles($request);
         if(is_bool($result))
         {
-
             $addNewCategory = new AddCategory();
             $result1 = $addNewCategory->addNewCategory($request->category,$request);
             if($result1)
             {
                 return response()->json(['message' => $result1]);
             }
-
         }else
         {
             return response()->json(['message' => $result , 'code' => '1']);

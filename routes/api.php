@@ -26,5 +26,6 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('findCategoryProduct/{id}','CommonController@findCategoryProduct');
 
     Route::get('getSubunits/{id}','CommonController@getSubunits');
+    Route::get('getMainUnits','CommonController@getMainUnits');
 
 });
