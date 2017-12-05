@@ -52,6 +52,7 @@ class ProductController extends Controller
    public function productDetailsGet($id)
     {
 
+
         $products = Product::where([['id',$id],['active',1]])->get();
         if(count($products) > 0)
         {
