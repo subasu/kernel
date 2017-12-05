@@ -773,31 +773,31 @@
                     }
                 });
 
-                //find categori's selected product title
-                function findTitle(cid)
-                {
-                    $.ajax
-                    ({
-                        cache: false,
-                        url: "{{url('api/v1/findCategoryProduct')}}/" + cid,
-                        dataType: "json",
-                        type: "get",
-                        success: function (response) {
-                            console.log(response);
-                            var item = $('#oldProduct');
-                            item.empty();
-                            $.each(response, function (key, value) {
-                                item.append
-                                (
-                                    "<option disabled='disabled'>" + value + "</option>"
-                                );
-                            });
 
-                        }
-                    });
-                }
             });
-        </script>
+        </script>//find categori's selected product title
+        function findTitle(cid)
+        {
+        $.ajax
+        ({
+        cache: false,
+        url: "{{url('api/v1/findCategoryProduct')}}/" + cid,
+        dataType: "json",
+        type: "get",
+        success: function (response) {
+        console.log(response);
+        var item = $('#oldProduct');
+        item.empty();
+        $.each(response, function (key, value) {
+        item.append
+        (
+        "<option disabled='disabled'>" + value + "</option>"
+        );
+        });
+
+        }
+        });
+        }
         <script src="{{ URL::asset('public/js/persianDatepicker.js')}}"></script>
         {{--persianDatepicker--}}
         <script>
