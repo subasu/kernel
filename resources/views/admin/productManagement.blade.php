@@ -6,7 +6,8 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2> مدیریت کاربران</h2>
+                    <h2> مدیریت محصولات</h2>
+
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link" data-toggle="tooltip" title="جمع کردن"><i
                                         class="fa fa-chevron-up"></i></a>
@@ -14,11 +15,14 @@
                         <li><a class="close-link" data-toggle="tooltip" title="بستن"><i class="fa fa-close"></i></a>
                         </li>
                     </ul>
+
                     <div class="clearfix"></div>
                 </div>
 
 
-                <a href="{{url('admin/addProduct')}}" id="user-send" type="button" class="col-md-2 btn btn-primary" style="font-weight: bold;"><i class="fa fa-user-plus"></i>                    افزودن کاربر جدید                </a>
+                <div style="">
+                    <a href="{{url('addProduct')}}" id="user-send" type="button" class="col-md-2 btn btn-primary" style=" font-weight: bold; margin-left: 39%;"><i class="fa fa-plus"></i>افزودن محصول جدید</a>
+                </div>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
                     <table style="direction:rtl;text-align: center" id="example"
@@ -26,59 +30,24 @@
                         <input type="hidden" id="token" value="{{ csrf_token() }}">
                         <thead>
                         <tr>
-                            <th style="text-align: center">ردیف</th>
-                            <th style="text-align: center">نام محصول</th>
-                            <th style="text-align: center">توضیحات</th>
-                            <th style="text-align: center"> تولید</th>
-                            <th style="text-align: center"> انقضا</th>
-                            <th style="text-align: center">محل تولید</th>
-                            <th style="text-align: center">واحد</th>
-                            <th style="text-align: center">زیرواحد</th>
-                            <th style="text-align: center">تعداد فروش</th>
-                            <th style="text-align: center">مجموع فروشهای محصول</th>
-                            <th style="text-align: center">تعداد بازدید</th>
-                            <th style="text-align: center">مدت زمان آماده شدن کالا</th>
-                            <th style="text-align: center">درصد تخفیف</th>
-                            <th style="text-align: center">شرط تعداد/حجم تخفیف</th>
-                            <th style="text-align: center">شرط پیک رایگان</th>
-                            <th style="text-align: center">مکان انبار</th>
-                            <th style="text-align: center">تعداد موجود در انبار</th>
-                            <th style="text-align: center">بارکد</th>
-                            <th style="text-align: center">ویدئو</th>
-                            <th style="text-align: center">تصاویر</th>
-                            <th style="text-align: center;border-right: 1px solid #d6d6c2">ویرایش</th>
+                            <th style="text-align: center">شناسه محصول</th>
+                            <th style="text-align: center">عنوان محصول</th>
+                            <th style="text-align: center">تاریخ ثبت محصول</th>
+                            <th style="text-align: center">مشاهده جزییات</th>
 
                         </tr>
                         </thead>
 
                         <tbody>
-                        <?php $i = 0 ?>
-                        @foreach($data as $val)
-                            {{--                            @if($val->unit_id!=3)--}}
+
+                        @foreach($data as $datum)
                             <tr class="unit">
-                                <td style="font-size:18px;@if($val->is_supervisor==1) background-color:#ffff80 @endif">{{++$i}}</td>
-                                <td>{{$val->title. ' '.$val->name.' '.$val->family}}</td>
-                                <td>@if($val->username!=null){{$val->username}} @endif</td>
-                                <td>{{$val->cellphone}} </td>
-                                <td>{{$val->unit->title}}</td>
-                                <td>{{$val->user->title.' '.$val->user->name .' '.$val->user->family }}</td>
-                                <td>
-                                    @if($val->unit_id!=3)
-                                        @if($val->active === 0)
-                                            <button  id="{{$val->id}}" value="{{$val->active}}" class="btn btn-danger">غیرفعال</button>
-                                        @else
-                                            <button  id="{{$val->id}}" value="{{$val->active}}" class="btn btn-success">فعال</button>
-                                        @endif
-                                    @endif
-                                </td>
-                                <td id="{{$val->id}}">
-                                    <a class="btn btn-primary" href="{{url('systemManager/access_level/'.$val->id)}}">تعیین سطح دسترسی</a>
-                                </td>
-                                <td style="border-right: 1px solid #d6d6c2" id="{{$val->id}}">
-                                    <a class="btn btn-info" href="{{url('admin/usersUpdate'.'/'.$val->id)}}">ویرایش</a>
-                                </td>
+                                <td >{{$datum->id}}</td>
+                                <td >{{$datum->title}}</td>
+                                <td >{{$datum->created_at}}</td>
+                                <td ><strong><a href="{{url('productDetails/'.$datum->id)}}"> برای مشاهده جزئیات کلیک نمایید</a></strong></td>
+
                             </tr>
-                            {{--@endif--}}
                         @endforeach
                         </tbody>
                     </table>

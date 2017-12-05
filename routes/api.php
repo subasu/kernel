@@ -21,8 +21,10 @@ Route::group(['prefix' => '/v1'], function () {
 
     Route::get('getSubCategories/{id}','CommonController@getSubCategories');
     Route::get('getBrands/{id}','CommonController@getBrands');
+
     Route::get('getExistedCategories/{id}','CommonController@getExistedCategories'); //get existed categories to show to shop manager not to be confused
     Route::get('findCategoryProduct/{id}','CommonController@findCategoryProduct');
+
     Route::get('getSubunits/{id}','CommonController@getSubunits');
 
 });
