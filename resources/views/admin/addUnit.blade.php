@@ -11,14 +11,16 @@
         input, label {
             font-size: 15px;
         }
+        .myAlertColor{
+            background-color: #28a745!important
+        }
     </style>
     <div class="clearfix"></div>
     <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+        <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2> فرم ایجاد پیک
-                    </h2>
+                    <h2> فرم ایجاد واحدها</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -26,67 +28,82 @@
                         </li>
                     </ul>
                     <div class="clearfix"></div>
+
                 </div>
+
                 {{-- table --}}
                 <div class="col-md-3 col-sm-3 col-xs-12"></div>
-                <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
+                <div class="col-md-12 col-sm-6 col-xs-12 ">
                     <div class="x_content">
-                        <form class="form-horizontal form-label-left" id="user-send-form" method="POST"
-                              style="direction: rtl !important;">
+                        <form  class="form-horizontal form-label-left" id="unitForm"  method="POST" style="direction: rtl !important;">
                             {{ csrf_field() }}
-                            <div class="item form-group">
-                                {{--<div class="col-md-8 col-sm-6 col-xs-9">--}}
-                                    {{--<select id="title" class="form-control col-md-7 col-xs-12" name="title">--}}
-                                        {{--<option>آقای</option>--}}
-                                        {{--<option>خانم</option>--}}
-                                    {{--</select>--}}
-
-                                {{--</div>--}}
-                                {{--<label class="control-label col-md-4 col-sm-4 col-xs-3" for="title"> عنوان : <span--}}
-                                            {{--class="required star" title="پر کردن این فیلد الزامی است">*</span>--}}
-                                {{--</label>--}}
-                                {{--@if ($errors->has('name'))--}}
-                                    {{--<span class="help-block">--}}
-                                        {{--<strong>{{ $errors->first('name') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            </div>
-                            <div class="item form-group">
-                                <div class="col-md-8 col-sm-6 col-xs-9">
-                                    <input id="name" class="form-control col-md-7 col-xs-12" name="name" placeholder=""
-                                           required="required" type="text">
+                            <div class="form-group">
+                                <a  class="btn btn-info" onclick="window.location.reload(true)">شروع دوباره</a>
+                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                    <a id="addInput" class="glyphicon glyphicon-plus btn btn-success" data-toggle="" title=" افزودن فیلد" ></a>
                                 </div>
-                                <label class="control-label col-md-4 col-sm-4 col-xs-3" for="name"> واحد : <span
-                                            class="required star" title="پر کردن این فیلد الزامی است">*</span>
-                                </label>
+                                <div class="col-md-1 col-sm-1 col-xs-1">
+                                    <a id="removeInput" class="glyphicon glyphicon-remove btn btn-danger" data-toggle="" title="حذف فیلد" ></a>
+                                </div>
+                                {{--<label class="control-label col-md-11 col-sm-11 col-xs-11 font-size-s" for="name">  <span--}}
+                                {{--class="required star" title="پر کردن این فیلد الزامی است">نکته:</span>شما حداکثر میتوانید تا سه سطح دسته بندی نمائید و سطح چهارم محصول شما خواهد بود.--}}
+                                {{--</label>--}}
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                                <div id="showUnits" style="display: none; !important;">
+                                    <div class="col-md-9 col-sm-6 col-xs-9">
+                                        <select id="units"  class="form-control" name="units">
+
+                                        </select>
+                                        <br/>
+                                        <select id="subUnits"  class="form-control" name="subUnits" style="display: none;">
+
+                                        </select>
+
+
+
+                                    </div>
+                                    <label class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> واحدهای موجود : <span
+                                                class="star" title="پر کردن این فیلد الزامی است"></span>
+                                    </label>
+                                    <label id="existedSub" style="display: none; margin-top: 3%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> زیر واحدهای موجود : <span
+                                                class="star" title="پر کردن این فیلد الزامی است"></span>
+                                    </label>
+
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="item form-group" id="change" style="display:none;!important;">
+
+
+                                <div  id="existedDiv" style="display: none;">
+                                    <select id="existed" class="form-control" style="margin-right: 67%; margin-top: 0%; width: 30.75%; position: absolute;">'+
+                                        <option>زیر دسته ای برای دسته منتخب در نظر گرفته نشده است</option>
+                                    </select>
+                                </div>
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
+
                             </div>
-                            <div class="item form-group {{ $errors->has('family') ? ' has-error' : '' }}">
-                                <div class="col-md-8 col-sm-6 col-xs-9">
-                                    <input id="family" class="form-control col-md-7 col-xs-12" name="family"
-                                           placeholder="" required="required" type="text">
-                                </div>
-                                <label class="control-label col-md-4 col-sm-4 col-xs-3" for="family"> زیرواحد :
-                                    <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
-                                </label>
-                                @if ($errors->has('family'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('family') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                            <div class="ln_solid"></div>
                             <div class="form-group">
-                                <div class="col-md-8">
-                                    <button id="user-send" type="button" class="col-md-12 btn btn-primary">ثبت</button>
-                                    <input type="hidden" name="unitId" id="unitId" value="0">
-                                    <input type="hidden" name="supervisorId" id="supervisorId" value="0">
+                                <div class="col-md-12" style="margin-top: 2%;">
+                                    <button id="reg" type="button" class="col-md-9 btn btn-primary">ثبت نهایی</button>
+                                    <button id="addMainUnit" type="button" class="col-md-9 btn btn-success" style="display: none;">اضافه کردن واحد اصلی جدید</button>
+                                    <button id="addSubUnit" type="button" class="col-md-9 btn btn-info" style="display: none;">  اضافه کردن زیر واحد برای واحد انتخاب شده</button>
+                                    {{--<button id="addBrands" type="button" class="col-md-9 btn btn-primary" style="display: none;!important;"> اضافه کردن زیر دسته برای زیر دسته انتخاب شده</button>--}}
                                 </div>
                             </div>
+                            <input type="hidden" id="unitId" name="unitId" value="">
+                            {{--<input type="hidden" id="subId" name="subId" value="">--}}
                         </form>
                     </div>
                 </div>
@@ -95,155 +112,400 @@
         </div>
 
 
-        {{--create user by AJAX and show result alert and redirect to usersList page --}}
-        <script>
-            $("#user-send").click(function () {
-                var password = $('#password').val();
-                var confirmPassword = $('#password-confirm').val();
-                var formData = new FormData($('#user-send-form')[0]);
-                    var formData = new FormData($('#user-send-form')[0]);
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                        }
-                    });
-                    $.ajax
-                    ({
-                        cache: false,
-                        url: "{{ url('admin/usersCreate') }}",
-                        type: 'post',
-                        //dataType: 'json',
-                        contentType: false,
-                        processData: false,
-                        data: formData,
-                        beforeSend: function () {
-                            if (password !== confirmPassword) {
-                                swal({
-                                    title: "",
-                                    text: 'رمزهای وارد شده با هم مطابقت ندارند',
-                                    type: "warning",
-                                    confirmButtonText: "بستن"
-                                });
-                                return false;
-                            }
-                        },
-                        success: function (response) {
-                            swal
-                            ({
-                                title: "",
-                                text: response,
-                                type: "info",
-                                confirmButtonText: "بستن"
-                            });
-                            setInterval(function () {
-                                window.location.href = '{{url('admin/usersManagement')}}';
-                            }, 2500);
-                        }, error: function (xhr) {
-                            if (xhr.status === 422) {
-                                var x = xhr.responseJSON;
-                                var errorsHtml = '';
-                                var count = 0;
-                                $.each(x, function (key, value) {
-                                    errorsHtml += value[0] + '\n'; //showing only the first error.
-                                });
-                                console.log(count)
-                                swal({
-                                    title: "",
-                                    text: errorsHtml,
-                                    type: "info",
-                                    confirmButtonText: "بستن"
-                                });
-                            }
 
-                            else if (xhr.status === 500) {
-                                swal({
-                                    title: "",
-                                    text: "متاسفانه اطلاعات شما ثبت نشد، با پشتیبانی تماس حاصل فرمائید",
-                                    type: "warning",
-                                    confirmButtonText: "بستن"
-                                });
+    <!-- below script is to get main units -->
+    <script>
+        $(function () {
+            //load MainUnitsCount
+            var option = '';
+            $.ajax
+            ({
+                cache: false,
+                url: "{{Url('api/v1/getMainUnits')}}",
+                dataType: "json",
+                type: "get",
+                success: function (response) {
+                    console.log(response);
+                    if (response != 0) {
+                        $('#showUnits').css('display','block');
+                        var item = $('#units');
+                        $.each(response, function (key, value) {
+                        item.empty();
+                        item.append
+                            (
+                                "<option selected='true' disabled='disabled'>برای اضافه کردن زیر واحد ، واحد اصلی را انتخاب کنید</option>"
+                            )
+                        item.append
+                            (
+                                option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                            );
+                        });
+                        $('#addMainUnit').css('display','block');
+                        $('#addInput').css('display','none');
+                        $('#reg').css('display','none');
+                        $('#removeInput').css('display','none');
 
-                            }
-                        }
-                    });
-
-                {{--$.ajax({--}}
-
-                    {{--cache: false,--}}
-                    {{--url: "{{URL::asset('admin/checkUnitSupervisor')}}",--}}
-                    {{--type: 'post',--}}
-                    {{--data: formData,--}}
-                    {{--contentType: false,--}}
-                    {{--processData: false,--}}
-                    {{--//dataType: 'json',--}}
-                    {{--beforeSend: function () {--}}
-                        {{--if (password !== confirmPassword) {--}}
-                            {{--swal({--}}
-                                {{--title: "",--}}
-                                {{--text: 'رمزهای وارد شده با هم مطابقت ندارند',--}}
-                                {{--type: "warning",--}}
-                                {{--confirmButtonText: "بستن"--}}
-                            {{--});--}}
-                            {{--return false;--}}
-                        {{--}--}}
-                    {{--},--}}
-                    {{--success: function (response) {--}}
-                        {{--swal({--}}
-                                {{--title: "",--}}
-                                {{--text: response,--}}
-                                {{--type: "warning",--}}
-                                {{--showCancelButton: true,--}}
-                                {{--confirmButtonColor: "	#5cb85c",--}}
-                                {{--cancelButtonText: "خیر ، منصرف شدم",--}}
-                                {{--confirmButtonText: "بله ثبت شود",--}}
-                                {{--closeOnConfirm: true,--}}
-                                {{--closeOnCancel: true--}}
-                            {{--}--}}
-                            {{----}}
-                        {{--)--}}
-                    {{--},--}}
-                    {{--error: function (xhr) {--}}
-                        {{--if (xhr.status === 422) {--}}
-                            {{--var x = xhr.responseJSON;--}}
-                            {{--var errorsHtml = '';--}}
-                            {{--var count = 0;--}}
-                            {{--$.each(x, function (key, value) {--}}
-                                {{--errorsHtml += value[0] + '\n'; //showing only the first error.--}}
-                            {{--});--}}
-                            {{--console.log(count)--}}
-                            {{--swal({--}}
-                                {{--title: "",--}}
-                                {{--text: errorsHtml,--}}
-                                {{--type: "info",--}}
-                                {{--confirmButtonText: "بستن"--}}
-                            {{--});--}}
-                        {{--}--}}
-
-                        {{--else if (xhr.status === 500) {--}}
-                            {{--swal({--}}
-                                {{--title: "",--}}
-                                {{--text: "متاسفانه اطلاعات شما ثبت نشد، با پشتیبانی تماس حاصل فرمائید",--}}
-                                {{--type: "warning",--}}
-                                {{--confirmButtonText: "بستن"--}}
-                            {{--});--}}
-
-                        {{--}--}}
-                    {{--}--}}
-                {{--});--}}
-            });
-        </script>
-        <script>
-            $(function () {
-                $(':checkbox').change(function () {
-
-                    if ($(this).val() == 1) {
-                        $(this).val(0);
                     }
                     else {
-                        $(this).val(1);
+                            $('#change').css('display','block');
+
+                            appendToChange();
                     }
-                });
+                }
+            });
             })
 
-        </script>
+    </script>
+
+    <!-- below script is to append html element to change tag -->
+    <script>
+        function appendToChange()
+        {
+            $('#change').append
+            (
+                "<div id='child'>"+
+                "<br/><br/>"+
+
+                    "<div class='col-md-9 col-sm-9 col-xs-9'>"+
+                        "<input id='unit' class='form-control col-md-12 col-xs-12 required' name='unit[]' placeholder='' required='required' type='text'>"+
+                    "</div>"+
+                    "<label class='control-label col-md-3 col-sm-4 col-xs-3' for='name'>عنوان  :"+
+                        "<span class='star' title='پر کردن این فیلد الزامی است'>*</span>"+
+                    "</label>"+
+                "</div>"
+            );
+        }
+
+    </script>
+
+    <!-- below script is to append input type -->
+    <script>
+        $(document).on('click','#addInput',function () {
+            appendToChange();
+        })
+    </script>
+    
+    <!-- below script is to remove input type -->
+    <script>
+            $(function () {
+                $(document).on('click','#removeInput',function () {
+                    removeFromChange();
+                });
+                function removeFromChange() {
+                    if ($('#change > #child').length > 1) {
+                        $('#change > #child').last().remove();
+                    };
+                }
+            });
+
+    </script>
+
+    <!-- below script is to handle addMainUnit  -->
+    <script>
+        $(document).on('click','#addMainUnit',function () {
+            $('#unitId').val('');
+            var option = '';
+            $.ajax
+            ({
+                cache: false,
+                url: "{{Url('api/v1/getMainUnits')}}",
+                dataType: "json",
+                type: "get",
+                success: function (response)
+                {
+                    $('#showUnits').css('display','block');
+                    $('#change').empty();
+                    var item = $('#units');
+                    $.each(response, function (key, value) {
+                        item.empty();
+                        item.append
+                        (
+                            "<option selected='true' disabled='disabled'>واحد های شمارش موجود</option>"
+                        )
+                        item.append
+                        (
+                            option += "<option selected='true' disabled='disabled' id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                        );
+
+                    });
+                    $('#addMainUnit').css('display','none');
+                    $('#addInput').css('display','block');
+                    $('#removeInput').css('display','block');
+                    $('#reg').css('display','block');
+                    //$('#showUnits').css('display','none');
+                    $('#change').css('display','block');
+                    $('#addSubUnit').css('display','none');
+                    $('#subUnits').css('display','none');
+                    appendToChange();
+                }
+            });
+
+        })
+    </script>
+
+
+    <!-- below script is to send data to server side -->
+    <script>
+        $(document).on('click','#reg',function(){
+            var option = '';
+            var formData = new FormData ($('#unitForm')[0]);
+            $.ajax
+            ({
+                cache       : false,
+                url         : "{{url('addNewUnit')}}",
+                type        : "post",
+                processData : false,
+                contentType : false,
+                dataType    : "json",
+                data        : formData,
+                beforeSend:function () {
+                    var counter = 0;
+                    $(".required").each(function() {
+                        if ($(this).val() == "") {
+                            $(this).css("border-color" , "red");
+                            counter++;
+                        }
+                    });
+                    if(counter > 0){
+                        swal
+                        ({
+                            title: '',
+                            text: 'تعدادی از فیلدهای فرم خالی است.لطفا فیلدها را پر نمایید سپس ثبت نهایی را بزنید',
+                            type:'warning',
+                            confirmButtonText: "بستن"
+                        });
+                        return false;
+                    }
+                },
+                success     : function(res)
+                {
+                    console.log(res);
+                    swal({
+                        title: "",
+                        text: res,
+                        type: "success",
+                        confirmButtonText: "بستن"
+                    });
+
+                        $.ajax({
+
+                            cache:false,
+                            url:"{{url('api/v1/getMainUnits')}}",
+                            type:'get',
+                            dataType:"json",
+                            success:function (response) {
+                                console.log(response);
+                                console.log(response);
+                                if(response)
+                                {
+                                    $('#showUnits').css('display','block');
+                                    $('#subUnits').css('display','none');
+                                    $('#reg').css('display','none');
+
+                                    $.each(response,function (key,value) {
+                                        var item = $('#units');
+                                        item.empty();
+                                        //
+                                        item.append
+                                        (
+                                            "<option selected='true' disabled='disabled'>برای اضافه کردن زیر واحد ، واحد اصلی را انتخاب کنید</option>"
+                                        )
+
+                                        item.append
+                                        (
+                                            option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                                        );
+
+                                    })
+                                    $('#change').empty();
+                                    $('#addMainUnit').css('display','block');
+
+                                }
+
+                            }
+
+                        })
+
+                },error:function(error)
+                {
+                    if(error.status === 500)
+                    {
+                        console.log(error);
+                        swal({
+                            title: "",
+                            text: 'خطایی رخ داده است، با بخش پشتیبانی تماس بگیرید',
+                            type: "warning",
+                            confirmButtonText: "بستن"
+                        });
+                    }else if(error.status === 422)
+                    {
+                        console.log(error);
+                    }
+
+                }
+            });
+        })
+    </script>
+
+
+    <!-- below script is to get sub unit count  if exist and if not guide it to make sub unit-->
+    <script>
+        $(function () {
+            $(document).on('change','#units',function () {
+
+                $("[name = 'units'] option:selected").each(function(){
+
+                    var id = $(this).attr('id');
+                    //alert(id);
+                    $('#unitId').val(id);
+                    var title = $(this).val();
+                    if(id != 0)
+                    {
+                        $.ajax
+                        ({
+                            cache: false,
+                            url: "{{Url('api/v1/getSubunits')}}/" + id,
+                            dataType: "json",
+                            type: "get",
+                            success: function (response)
+                            {
+                                console.log(response);
+                                var option = '';
+                                if(response != 0)
+                                {
+                                    $.each(response,function (key,value) {
+                                        var item = $('#subUnits');
+                                        item.empty();
+                                        //
+                                        item.append
+                                        (
+                                            "<option selected='true' disabled='disabled'>زیر واحد های موجود</option>"
+                                        );
+
+                                        item.append
+                                        (
+                                            option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                                        );
+
+                                    })
+                                    $('#subUnits').css('display','block');
+                                    $('#addSubUnit').css('display','block');
+                                }else
+                                    {
+                                        untimelyAddCategory(title,id);
+                                    }
+                            }
+                        });
+                    }
+                })
+            })
+        })
+    </script>
+
+
+    <script>
+        function untimelyAddCategory(title,id)
+        {
+
+            swal
+            ({
+                    title:   " آیا در نظر دارید برای واحد " +"(( "+ title +" ))"+  " زیر واحد انتخاب نمائید؟ ",
+                    text: "",
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonColor: "	#5cb85c",
+                    cancelButtonText: "خیر",
+                    confirmButtonText: "آری",
+                    closeOnConfirm: true,
+                    closeOnCancel: true
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+
+                        if (id) {
+
+                            $.ajax
+                            ({
+                                url: "{{url('api/v1/getSubunits')}}/" + id,
+                                dataType: 'json',
+                                type: 'get',
+                                success: function (result) {
+
+                                    console.log(result);
+                                    console.log('I am result');
+                                    if (result != 0) {
+                                        var option = '';
+                                        $.each(result, function (key, value) {
+                                            $('#existed').empty();
+                                            $('#existed').append
+                                            (
+                                                "<option>زیر واحد های درج شده</option>"
+                                            )
+                                            $('#existed').append
+                                            (
+                                                option += "<option selected='true' disabled='disabled' id='" + value.id + "' name='" + value.depth + "'>" + value.title + "</option>"
+                                            );
+                                        });
+                                        $('#subUnits').css('display', 'block');
+                                        $('#showUnits').css('display', 'none');
+                                        $('#existed').css('display', 'block');
+                                        $('#change').css('display', 'block');
+                                        $('#addSubUnit').css('display', 'none');
+                                        $('#addMainUnit').css('display', 'none');
+                                        $('#addInput').css('display', 'block');
+                                        $('#removeInput').css('display', 'block');
+                                        $('#reg').css('display', 'block');
+                                    } else {
+                                        $('#existed').empty();
+                                        $('#existed').append
+                                        (
+                                            "<option>هنوز زیر واحدی برای این واحد در نظر گرفته نشده است!</option>"
+                                        )
+                                        //   $('#change').empty();
+                                        $('#showUnits').css('display', 'none');
+                                        $('#change').css('display', 'block');
+                                        $('#addMainUnit').css('display', 'none');
+                                        $('#reg').css('display', 'block');
+                                        $('#addInput').css('display', 'block');
+                                        $('#removeInput').css('display', 'block');
+                                        $('#addSubUnit').css('display', 'none');
+                                    }
+
+                                }
+                            })
+                        }
+                        else {
+
+                        }
+                        $('#change').append
+                        (
+                            '<div id="main" class="col-md-5 col-md-offset-4">' +
+                            '<input value="' + title + '" class="form-control col-md-6" disabled  style="text-align: center; font-size: 120%;">' +
+                            '<b>'
+                            + '<lable style="margin-right:-60%;" class="control-label" for="name">عنوان دسته منتخب:</lable>' +
+                            '</b>' +
+                            '</div>'
+                        );
+
+                        $('#existedDiv').css('display', 'block');
+                        appendToChange();
+                    }
+                });
+        }
+    </script>
+
+    <!-- below script is to handle addSubUnit button -->
+    <script>
+        $(document).on('click','#addSubUnit',function(){
+            $("[name = 'units'] option:selected").each(function(){
+
+                var id = $(this).attr('id');
+                //alert(id);
+                $('#unitId').val(id);
+                var title = $(this).val();
+                untimelyAddCategory(title,id);
+        })
+     })
+    </script>
+
 @endsection

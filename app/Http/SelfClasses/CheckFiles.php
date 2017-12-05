@@ -18,10 +18,11 @@ class CheckFiles
         if(count($request->file) > 0)
         {
             $allowedExtensions = array('png','jpg');
-            $allowedSize       = array('150000');
+            $allowedSize       = 150000;
             $count             = count($request->file);
             $sentExtensions    = '';
             $sentSizes         = '';
+            $notAllowedSize    = 0;
             $i = 0;
             while($i < $count)
             {
@@ -34,24 +35,29 @@ class CheckFiles
                 $i++;
             }
             $sentExtensions = substr($sentExtensions,1);
-            //print($sentExtensions);
             $sentExtensionsArray = explode('-',$sentExtensions);
             $extensionArrayDiff = array_diff($sentExtensionsArray,$allowedExtensions);
-           // print_r($extensionArrayDiff);
             if($extensionArrayDiff == null)
             {
                 $sentSizes = substr($sentSizes,1);
                 $sentSizesArray = explode('-',$sentSizes);
-                $sizeArrayDiff  = array_diff($sentSizesArray,$allowedSize);
-                if($sizeArrayDiff != null)
+                foreach ($sentSizesArray as $item)
                 {
-                    return true;
+                    if($item > $allowedSize)
+                    {
+                        $notAllowedSize ++;
+                    }
+                    if($notAllowedSize == 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return('سایز هیچکدام از فایل های انتخاب شده نباید بیش از 150 کیلوبایت باشد');
+                        // return false;
+                    }
                 }
-                else
-                {
-                    return('سایز هیچکدام از فایل های انتخاب شده نباید بیش از 150 کیلوبایت باشد');
-                   // return false;
-                }
+
             }
             else
             {

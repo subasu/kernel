@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\SelfClasses\AddProduct;
 use App\Http\SelfClasses\CheckProduct;
 use App\Models\Category;
+use App\Models\CategoryProduct;
+use App\Models\Product;
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CommonController extends Controller
 {
@@ -71,7 +74,7 @@ class CommonController extends Controller
     //below function is to get sub units from database
     public function getSubunits($id)
     {
-        $subUnits = SubUnitCount::where('id','=',$id)->get();
+        $subUnits = SubUnitCount::where([['unit_count_id',$id],['active',1]])->orderBy('title')->get();
         if(count($subUnits) > 0 )
         {
             return response()->json($subUnits);
@@ -82,23 +85,27 @@ class CommonController extends Controller
         }
 
     }
-    //add new product to database
-    public function addNewProduct(Request $request)
+    public function getExistedCategories($id)
     {
-        $checkProduct = new CheckProduct();
-        $result =$checkProduct->ProductValidate($request);
-        //return response()->json($result);
-        if($result == "true")
+        $existedCategories = DB::table('categories')->where([['parent_id',$id],['active',1]])->get();
+        if(count($existedCategories) > 0 )
         {
-            $addNewProduct = new AddProduct();
-            $result1 = $addNewProduct->addProduct($request);
-            if($result1)
-            {
-                return response()->json($result1);
-            }
-        }else
+            return response()->json($existedCategories);
+        }
+        else
         {
-            return response()->json($result);
+            return response()->json(0);
+        }
+    }
+    public function findCategoryProduct($id)
+    {
+        //$titles = CategoryProduct::where([['category_id',$id],['active',1]])->value('product_id');
+        $category = Category::find($id);
+        foreach ($category->products as $pr)
+        {
+            $title = Product::where([['id',$pr->pivot->product_id],['active',1]])->value('title');
+            return response()->json($title);
+
         }
     }
 }

@@ -22,7 +22,7 @@ class CheckProduct
             'title' => 'required|max:255',
             'description' => 'required',
             'unit_count_id' => 'required|numeric',
-            'sub_unit_count_id' => 'required|numeric',
+            'sub_unit_count_id' => 'sometimes|nullable|numeric',
             'produce_date' => 'sometimes|nullable|max:10|min:8',
             'expire_date' => 'sometimes|nullable|max:10|min:8',
             'produce_place' => '',
@@ -33,14 +33,26 @@ class CheckProduct
             'price' => 'required|numeric',
             'sales_price' => 'sometimes|nullable||numeric',
             'special_price' => 'sometimes|nullable||numeric',
-            'Wholesale_price' => 'sometimes|nullable||numeric',
+            'wholesale_price' => 'sometimes|nullable||numeric',
+            'free_price' => 'sometimes|nullable||numeric',
             'discount' => 'sometimes|nullable||numeric|min:1|max:3',
             'discount_volume' => 'sometimes|nullable|numeric',
             'delivery_volume' => 'sometimes|nullable|numeric',
             'video_src' => 'sometimes|nullable|mimtypes:video/avi,video/mpeg,video/quicktime',
             'pic1' => 'sometimes|nullable|image',
 
-        ]);
+        ],
+            [
+                'categories.numeric'=>'فیلد دسته بندی را دستکاری نفرمائید',
+                'categories.required'=>'فیلد دسته بندی الزامی است',
+                'title.required'=>'فیلد عنوان الزامی است',
+                'description.required'=>'فیلد توضیحات الزامی است',
+                'unit_count_id.required'=>'فیلد واحد شمارش الزامی است',
+                'sub_unit_count_id.required'=>'فیلد زیرواحد شمارش الزامی است',
+                'price.required'=>'فیلد قیمت الزامی است',
+
+
+            ]);
         $errors = $validation->errors();
         if(!$errors->isEmpty())
             return $errors;
