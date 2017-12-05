@@ -24,30 +24,35 @@ class ProductController extends Controller
     public function addNewProduct(Request $request)
     {
         $checkProduct = new CheckProduct();
-        $result =$checkProduct->ProductValidate($request);
-        if($result == "true")
-        {
+        $result = $checkProduct->ProductValidate($request);
+        if ($result == "true") {
             $addNewProduct = new AddProduct();
             $ans = $addNewProduct->addProduct($request);
 //            if($ans=="1")
 //            return response()->json(['data'=>'محصول شما با مؤفقیت درج شد']);
 //            return ($ans);
 //        elseif($ans=="0")
-            return response()->json(['data'=>'1']);
+            return response()->json(['data' => '1']);
 //            return response()->json(['data'=>'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.']);
 
-        }else
-        {
+        } else {
             return response()->json($result);
         }
-
+    }
 
 
     //
     public function productDetailsGet($id)
     {
-        $data = Product::where([['id',$id],['active',1]])->get();
-        //dd($data);
-        return view('admin.productDetails',compact('data'));
+
+        $products = Product::where([['id',$id],['active',1]])->get();
+        if(count($products) > 0)
+        {
+            return view('admin.productDetails',compact('products'));
+        }else
+            {
+                return view('errors.403');
+            }
+
     }
 }
