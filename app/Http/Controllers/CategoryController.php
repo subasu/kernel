@@ -41,4 +41,17 @@ class CategoryController extends Controller
         $categories = Category::where([['active',1],['parent_id',0]])->get();
         return view('admin.categoriesManagement',compact('categories'));
     }
+
+    //below function is related to edit main category
+    public function editCategory($id)
+    {
+        $categoryInfo = Category::where('id',$id)->get();
+        return view('admin.editCategory',compact('categoryInfo'));
+    }
+    //below function is related to edit main category
+    public function editSubCategory($id)
+    {
+        $categoryInfo = Category::where('parent_id',$id)->get();
+        return view('admin.editSubCategory',compact('categoryInfo'));
+    }
 }

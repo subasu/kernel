@@ -43,12 +43,12 @@
                                 <td>{{$category->title}}</td>
                                 <td>{{$category->depth}}</td>
                                 @if($category->image_src == null)
-                                    <td>تصویر ندارد </td>
+                                    <td><strong>تصویر ندارد</strong></td>
                                 @endif
                                 @if($category->image_src != null)
                                     <td>{{$category->image_src}} </td>
                                 @endif
-                                <td><stron>ویرایش</stron> </td>
+                                <td><strong><a class="glyphicon glyphicon-edit" title="ویرایش" data-toggle="" href="{{url('editCategory/'.$category->id)}}"></a></strong> </td>
                             </tr>
                         @endforeach
                         </tbody>
