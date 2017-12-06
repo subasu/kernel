@@ -449,6 +449,8 @@
                                $('#reg').css('display','block');
                                $('#addMainCategory').css('display','none');
                                $('#subCategories').css('display','none');
+                               $('#brands').css('display','none');
+                               $('#existedBrands').css('display','none');
                                $('#existedSub').css('display','none');
                                $('#addSubCategory').css('display','none');
                                $('#addBrands').css('display','none');

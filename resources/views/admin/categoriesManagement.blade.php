@@ -28,7 +28,7 @@
                         <thead>
                         <tr>
                             <th style="text-align: center">ردیف</th>
-                            <th style="text-align: center">نام دسته</th>
+                            <th style="text-align: center">عنوان دسته</th>
                             <th style="text-align: center">سطح دسته</th>
                             <th style="text-align: center">تصویر</th>
                             <th style="text-align: center;border-right: 1px solid #d6d6c2">ویرایش</th>
@@ -37,32 +37,19 @@
 
                         <tbody>
                         <?php $i = 0 ?>
-                        @foreach($data as $val)
-                            {{--                            @if($val->unit_id!=3)--}}
+                        @foreach($categories as $category)
                             <tr class="unit">
-                                <td style="font-size:18px;@if($val->is_supervisor==1) background-color:#ffff80 @endif">{{++$i}}</td>
-                                <td>{{$val->title. ' '.$val->name.' '.$val->family}}</td>
-                                <td>@if($val->username!=null){{$val->username}} @endif</td>
-                                <td>{{$val->cellphone}} </td>
-                                <td>{{$val->unit->title}}</td>
-                                <td>{{$val->user->title.' '.$val->user->name .' '.$val->user->family }}</td>
-                                <td>
-                                    @if($val->unit_id!=3)
-                                        @if($val->active === 0)
-                                            <button  id="{{$val->id}}" value="{{$val->active}}" class="btn btn-danger">غیرفعال</button>
-                                        @else
-                                            <button  id="{{$val->id}}" value="{{$val->active}}" class="btn btn-success">فعال</button>
-                                        @endif
-                                    @endif
-                                </td>
-                                <td id="{{$val->id}}">
-                                    <a class="btn btn-primary" href="{{url('systemManager/access_level/'.$val->id)}}">تعیین سطح دسترسی</a>
-                                </td>
-                                <td style="border-right: 1px solid #d6d6c2" id="{{$val->id}}">
-                                    <a class="btn btn-info" href="{{url('admin/usersUpdate'.'/'.$val->id)}}">ویرایش</a>
-                                </td>
+                                <td style="font-size:18px;@if($category->is_supervisor==1) background-color:#ffff80 @endif">{{++$i}}</td>
+                                <td>{{$category->title}}</td>
+                                <td>{{$category->depth}}</td>
+                                @if($category->image_src == null)
+                                    <td>تصویر ندارد </td>
+                                @endif
+                                @if($category->image_src != null)
+                                    <td>{{$category->image_src}} </td>
+                                @endif
+                                <td><stron>ویرایش</stron> </td>
                             </tr>
-                            {{--@endif--}}
                         @endforeach
                         </tbody>
                     </table>

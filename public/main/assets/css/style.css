@@ -1,4 +1,11 @@
-/*------------------------------------------------------------------
+@font-face {
+    font-family: "Yekan";
+    src: url("../../../dashboard/fonts/Yekan.eot");
+    src: local( "?" ), url( "../../../dashboard/fonts/W_YEKAN_0.TTF" )format( "truetype" );
+}
+*{
+    font-family:Yekan;
+}/*------------------------------------------------------------------
 [Table of contents]
 
 1. Common styles
@@ -1064,9 +1071,10 @@ span.notify-right{
   color: #fff;
 }
 .box-vertical-megamenus .vertical-menu-list>li>a{
-  padding-left: 20px;
+  padding-right: 20px;/*f*/
   line-height: 36px;
   display: block;
+    text-align: right;/*f*/
 }
 .box-vertical-megamenus .vertical-menu-content ul>li>a.parent:before {
   display: inline-block;
@@ -1076,10 +1084,10 @@ span.notify-right{
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  content: "\f105";
+  content: "\f104";
   position: absolute;
   top: 10px;
-  right: 8px;
+  left: 8px;
   color: #666;
 }
 .box-vertical-megamenus .vertical-menu-content ul>li>a.parent:after {
@@ -1115,7 +1123,7 @@ span.notify-right{
 }
 .box-vertical-megamenus .vertical-menu-content ul li img.icon-menu{
     vertical-align: middle;
-    padding-right: 15px;
+    padding-left: 15px;
 }
 
 .box-vertical-megamenus .all-category{
@@ -1147,7 +1155,7 @@ span.notify-right{
 .vertical-dropdown-menu{
   position: absolute;
   top: -15px;
-  left: 100%;
+  right: 100%;
   z-index: 900;
   -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
   transition: opacity 0.5s, transform 0.5s;
@@ -2038,7 +2046,7 @@ span.notify-right{
 
 }
 .product-list li .add-to-cart:hover{
-  background-color: rgba(255,51,102,0.5);
+  background-color: rgba(21, 117, 0, 0.8);
 }
 .product-list li .add-to-cart a{
     background: url("../images/add-cart.png") no-repeat left center;
@@ -2125,7 +2133,7 @@ span.notify-right{
 }
 .product-list li .group-price .product-sale{
     color: #fff;
-    float: left;
+    float: right;
     line-height: 22px;
     text-align: center;
     font-size: 12px;
@@ -2137,7 +2145,7 @@ span.notify-right{
 
 .product-list li .product-star{
     width: auto;
-    float: right;
+    float: left;
     color: #ff9900;
     text-align: right;
      display: inline-block;

@@ -17,8 +17,6 @@ class AddCategory
             //the below block of code is related to step one that shop manager wants to register main categories
             $count = count($category);
             if($count > 0) {
-
-
                 if ($request->mainId == '' && $request->subId == '') {
 
                     // dd($count);

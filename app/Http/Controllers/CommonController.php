@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\SelfClasses\AddProduct;
-use App\Http\SelfClasses\CheckProduct;
 use App\Models\Category;
-use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\Array_;
 
 class CommonController extends Controller
 {
-
     //below function is to get main categories from database
     public function getMainCategories()
     {

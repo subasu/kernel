@@ -21,8 +21,8 @@ class CheckProduct
             'brands' => 'numeric',
             'title' => 'required|max:255',
             'description' => 'required',
-            'unit_count_id' => 'required|numeric',
-            'sub_unit_count_id' => 'sometimes|nullable|numeric',
+            'unit_count_title' => 'required',
+            'sub_unit_count_title' => 'sometimes|nullable',
             'produce_date' => 'sometimes|nullable|max:10|min:8',
             'expire_date' => 'sometimes|nullable|max:10|min:8',
             'produce_place' => '',
@@ -38,9 +38,8 @@ class CheckProduct
             'discount' => 'sometimes|nullable||numeric|min:1|max:3',
             'discount_volume' => 'sometimes|nullable|numeric',
             'delivery_volume' => 'sometimes|nullable|numeric',
-            'video_src' => 'sometimes|nullable|mimtypes:video/avi,video/mpeg,video/quicktime',
-            'pic1' => 'sometimes|nullable|image',
-
+            'video_src' => 'sometimes|nullable|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:4096',
+            'pic[]' => 'sometimes|nullable|image|max:2',
         ],
             [
                 'categories.numeric'=>'فیلد دسته بندی را دستکاری نفرمائید',
@@ -50,8 +49,8 @@ class CheckProduct
                 'unit_count_id.required'=>'فیلد واحد شمارش الزامی است',
                 'sub_unit_count_id.required'=>'فیلد زیرواحد شمارش الزامی است',
                 'price.required'=>'فیلد قیمت الزامی است',
-
-
+                'video_src.mimetypes'=>'فرمت ویدئوی انتخاب شده اشتباه است ',
+                'pic[].image'=>'فرمت تصویر یا تصاویر انتخاب شده اشتباه است ',
             ]);
         $errors = $validation->errors();
         if(!$errors->isEmpty())

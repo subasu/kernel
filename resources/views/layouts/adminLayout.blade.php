@@ -8,7 +8,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-{{--<title>{{$pageTitle}}</title>--}}
+<title>@if(!empty($pageTitle)){{$pageTitle}}@endif</title>
 <link rel="short icon" href="{{URL::asset('public/main/assets/img/logo.png')}}"/>
 
 <!-- Bootstrap core CSS -->
