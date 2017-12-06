@@ -1,27 +1,22 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\SelfClasses\AddProduct;
 use App\Http\SelfClasses\CheckFiles;
 use App\Http\SelfClasses\CheckProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
 class ProductController extends Controller
 {
     public function addProduct()
     {
-        return view('admin.addProduct');
+        $pageTitle='درج محصول';
+        return view('admin.addProduct',compact('pageTitle'));
     }
-
-    //
     public function productsManagement()
     {
         $data = Product::all();
         return view('admin.productManagement', compact('data'));
     }
-
     //add new product to database
     public function addNewProduct(Request $request)
     {
@@ -40,29 +35,21 @@ class ProductController extends Controller
 //              return response()->json(['data'=>'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.']);
             }
             else
-            return response()->json(['message' => $result , 'code' => '1']);
-
+                return response()->json(['message' => $result , 'code' => '1']);
         } else {
             return response()->json($result);
         }
-
     }
-
     //
-   public function productDetailsGet($id)
+    public function productDetailsGet($id)
     {
-
-
         $products = Product::where([['id',$id],['active',1]])->get();
         if(count($products) > 0)
         {
             return view('admin.productDetails',compact('products'));
         }else
-            {
-                return view('errors.403');
-            }
-
-
+        {
+            return view('errors.403');
+        }
     }
 }
-

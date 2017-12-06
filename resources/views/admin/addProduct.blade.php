@@ -10,7 +10,6 @@
         input, label {
             font-size: 15px;
         }
-
         .margin-1 {
             margin-top: 1%;
         }
@@ -440,7 +439,6 @@
                 $("#productForm").submit(function (e) {
                     e.preventDefault();
                 });
-
                 // Toolbar extra buttons
                 var btnFinish = $('<button></button>').text('ثبت محصول')
                     .addClass('btn btn-info')
@@ -490,9 +488,7 @@
                     .on('click', function () {
 //                        $('#smartwizard').smartWizard("reset");
                         $('#productForm')[0].reset();
-
                     });
-
                 $('#smartwizard').smartWizard({
                     selected: 0,
                     theme: 'arrows',
@@ -509,13 +505,11 @@
                     $('#smartwizard').smartWizard("reset");
                     return true;
                 });
-
                 $("#prev-btn").on("click", function () {
                     // Navigate previous
                     $('#smartwizard').smartWizard("قبلی");
                     return true;
                 });
-
                 $("#next-btn").on("click", function () {
                     // Navigate next
                     $('#smartwizard').smartWizard("بعدی");
@@ -568,7 +562,6 @@
                         }
                     }
                 })
-
                 //load subCategories after ask do you want load it's sub Categories or no then load product title related selected category
                 $('#categories').on("change", function () {
                     var id = $(this).val();
@@ -623,7 +616,6 @@
                         findTitle(id)
                     }
                 })
-
                 //load brands after ask do you want load it's brands or no then load product title related selected subCategory
                 $('#subCategories').on("change", function () {
                     var id = $(this).val();
@@ -684,7 +676,6 @@
                     }
                     findTitle(id)
                 })
-
                 //check option 2 selected or not, if yes redirect to add unit view
                 $('#unit').on("change", function () {
                     var id = $(this).val();
@@ -692,7 +683,6 @@
                         location.href = '{{url("addUnit")}}';
                     }
                 })
-
                 //load MainUnitsCount if there is no category in table redirect addCategory
                 $.ajax
                 ({
@@ -739,7 +729,6 @@
                         });
                     }
                 });
-
                 //load item in select box
                 function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2)
                 {
@@ -751,7 +740,6 @@
                         ("<option value='" + value.id + "' depth='" + value.depth + "'>" + value.title + "</option>");
                     });
                 }
-
                 //find categori's selected product title
                 function findTitle(cid) {
                     $.ajax
@@ -770,7 +758,6 @@
                             else {
                                 item.append("<option  selected='selected'>تا کنون برای این دسته محصولی ثبت نشده است</option>");
                             }
-
                         }
                     });
                 }
