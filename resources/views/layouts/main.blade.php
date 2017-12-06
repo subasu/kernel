@@ -97,13 +97,13 @@
             </div>
             <div id="cart-block" class="col-xs-5 col-sm-2 shopping-cart-box">
                 <a class="cart-link" href="order.html">
-                    <span class="title">Shopping cart</span>
-                    <span class="total">2 items - 122.38 €</span>
+                    <span class="title">سبدخرید شما<span class="">(2)</span></span>
+                    <span class="total">12000 تومان</span>
                     <span class="notify notify-left">2</span>
                 </a>
                 <div class="cart-block">
                     <div class="cart-block-content">
-                        <h5 class="cart-title">2 Items in my cart</h5>
+                        <h5 class="cart-title" dir="rtl">2 مورد در کارت شما وجود دارد</h5>
                         <div class="cart-block-list">
                             <ul>
                                 <li class="product-info">
@@ -127,19 +127,19 @@
                                         </a>
                                     </div>
                                     <div class="p-right">
-                                        <p class="p-name">Donec Ac Tempus</p>
-                                        <p class="p-rice">61,19 €</p>
-                                        <p>Qty: 1</p>
+                                        <p class="p-name">عنوان محصول</p>
+                                        <p class="p-rice">61,19 تومان</p>
+                                        <p>تعداد: 1</p>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                        <div class="toal-cart">
-                            <span>Total</span>
-                            <span class="toal-price pull-right">122.38 €</span>
+                        <div class="toal-cart" style="text-align: right;direction: rtl" >
+                            <span class="pull-right">جمع کل</span>
+                            <span class="toal-price pull-left">122.38 تومان</span>
                         </div>
                         <div class="cart-buttons">
-                            <a href="order.html" class="btn-check-out">Checkout</a>
+                            <a href="order.html" class="btn-check-out">پرداخت</a>
                         </div>
                     </div>
                 </div>
@@ -1069,14 +1069,14 @@
     <div class="container">
         <!-- featured category fashion -->
         <div class="category-featured">
-            <nav class="navbar nav-menu nav-menu-red show-brand">
+            <nav class="navbar nav-menu nav-menu-red show-brand" >
               <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                   <div class="navbar-brand"><a href="#"><img alt="fashion"  src="public/main/assets/data/fashion.png" />fashion</a></div>
                   <span class="toggle-menu"></span>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse">           
-                  <ul class="nav navbar-nav">
+                  <ul class="nav navbar-nav" style="margin-right: 6% ;">
                     <li class="active"><a data-toggle="tab" href="#tab-4">Best Seller</a></li>
                     <li><a data-toggle="tab" href="#tab-5">Most Viewed</a></li>
                     <li><a href="#">Women</a></li>

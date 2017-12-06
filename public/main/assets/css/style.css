@@ -835,6 +835,9 @@ img.alignright{
     display: block;
     position: relative;
     padding: 2px 41px 0 15px;
+    line-height: 1.3;
+    direction: rtl;
+    text-align: right;
 }
 .main-header .shopping-cart-box a.cart-link:hover:after{
     opacity: 0.8;
@@ -842,10 +845,12 @@ img.alignright{
 
 .main-header .shopping-cart-box a.cart-link .title{
     width: 100%;
-    float: left;
-    text-transform: uppercase;
+    float: right;/*f*/
     font-weight: bold;
     margin-top: 2px;
+    direction: rtl;
+    text-align: right;
+    padding-right:3.5%;
 }
 
 .main-header .shopping-cart-box a.cart-link:after{
@@ -893,7 +898,7 @@ img.alignright{
     font-size: 12px;
 }
 .cart-block .cart-block-content .cart-block-list{
-    
+    text-align: right;
 }
 .cart-block .cart-block-content  .product-info{
     margin-top: 10px;
@@ -997,7 +1002,7 @@ span.notify{
 span.notify-left{
     background: url('../images/notify.png') no-repeat;
     right: 25px;
-    top: -8px;
+    top: -15px;
 }
 span.notify-right{
     background: url('../images/notify-right.png') no-repeat;
@@ -5215,4 +5220,7 @@ span.notify-right{
 .block-popular-cat .more:hover{
   color: #fff;
   opacity: 0.8;
+}
+.total{
+    padding-right: 4%;
 }
