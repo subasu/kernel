@@ -1,5 +1,30 @@
 @extends('layouts.adminLayout')
 @section('content')
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog" dir="rtl">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">نمایش تصویر دسته</h2>
+                </div>
+                <div class="modal-body">
+                            <img class="image" id="editable"
+                                 style=" height: 350px; width: 350px; margin-left: 80%;"
+                                 src="{{url('public/dashboard/image')}}/{{$categories[0]->image_src}}">
+                </div>
+                <div class="modal-footer" >
+                    <button type="button" class="btn btn-dark col-md-6 col-md-offset-3" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
 
     <div class="clearfix"></div>
     <div class="row">
@@ -18,7 +43,7 @@
                 </div>
 
 
-                <a href="{{url('addCategory')}}" id="user-send" type="button" class="col-md-2 btn btn-primary" style="font-weight: bold;">
+                <a href="{{url('addCategory')}}" id="user-send" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style=" font-weight: bold;">
                     <i class="fa fa-th-list"></i>                    افزودن دسته ی جدید                </a>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
@@ -32,6 +57,7 @@
                             <th style="text-align: center">سطح دسته</th>
                             <th style="text-align: center">تصویر</th>
                             <th style="text-align: center;border-right: 1px solid #d6d6c2">ویرایش</th>
+                            <th  style="text-align: center;border-right: 1px solid #d6d6c2;">مشاهده زیر دسته</th>
                         </tr>
                         </thead>
 
@@ -46,9 +72,15 @@
                                     <td><strong>تصویر ندارد</strong></td>
                                 @endif
                                 @if($category->image_src != null)
-                                    <td>{{$category->image_src}} </td>
+                                    <td><button class="btn btn-basic" id="showPicture">مشاهده تصویر</button></td>
                                 @endif
-                                <td><strong><a class="glyphicon glyphicon-edit" title="ویرایش" data-toggle="" href="{{url('editCategory/'.$category->id)}}"></a></strong> </td>
+                                <td><strong><a class="btn btn-info"   href="{{url('editCategory/'.$category->id)}}">ویرایش</a></strong> </td>
+                                @if($category->depth > 0)
+                                    <td><a  class="btn btn-dark" href="{{url('showSubCategory/'.$category->id)}}">مشاهده زیر دسته</a></td>
+                                @endif
+                                @if($category->depth == 0)
+                                    <td><a  class="btn btn-warning" >فاقد زیر دسته</a></td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>
@@ -56,106 +88,10 @@
                 </div>
             </div>
         </div>
-        {{--edit user's status by user-id --}}
 
         <script>
-            $(document).on('click','.btn-success',function () {
-                var userId = $(this).attr('id');
-                var status = $(this).val();
-                var token  = $('#token').val();
-                var button = $(this);
-                swal({
-                        title: "",
-                        text: "آیا از غیرفعال کردن دسته بندی اطمینان دارید؟",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "	#5cb85c",
-                        cancelButtonText: "خیر ، منصرف شدم",
-                        confirmButtonText: "بله غیرفعال شود",
-                        closeOnConfirm: true,
-                        closeOnCancel: true
-                    },
-                    function () {
-                        $.ajax
-                        ({
-                            url     : "{{Url('admin/changeUserStatus')}}/{{1}}",
-                            type    : 'post',
-                            data    : {'userId':userId,'_token':token},
-                            context :  button,
-                            //dataType:'json',
-                            success : function (response)
-                            {
-                                $(button).text('غیر فعال');
-                                $(button).toggleClass('btn-success btn-danger');
-                                swal({
-                                    title: "",
-                                    text: response,
-                                    type: "info",
-                                    confirmButtonText: "بستن"
-                                });
-                            },
-                            error : function(error)
-                            {
-                                console.log(error);
-                                swal({
-                                    title: "",
-                                    text: "خطایی رخ داده است ، تماس با بخش پشتیبانی",
-                                    type: "warning",
-                                    confirmButtonText: "بستن"
-                                });
-                            }
-                        });
-                    });
+            $(document).on('click','#showPicture',function(){
+                $('#myModal').modal('show');
             })
         </script>
-        <script>
-            $(document).on('click','.btn-danger',function () {
-                var userId = $(this).attr('id');
-                var status = $(this).val();
-                var token = $('#token').val();
-                var button = $(this);
-                swal({
-                        title: "",
-                        text: "آیا از فعال کردن دسته بندی اطمینان دارید؟",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "	#5cb85c",
-                        cancelButtonText: "خیر ، منصرف شدم",
-                        confirmButtonText: "بله فعال شود",
-                        closeOnConfirm: true,
-                        closeOnCancel: true
-                    },
-                    function () {
-                        $.ajax
-                        ({
-                            url: "{{Url('admin/changeUserStatus')}}/{{2}}",
-                            type: 'post',
-                            data: {'userId': userId, '_token': token},
-                            context: button,
-                            //dataType:'json',
-                            success: function (response) {
-                                $(button).text('فعال');
-                                $(button).toggleClass('btn-success btn-danger');
-                                swal({
-                                    title: "",
-                                    text: response,
-                                    type: "info",
-                                    confirmButtonText: "بستن"
-                                });
-                            },
-                            error: function (error) {
-                                console.log(error);
-                                swal({
-                                    title: "",
-                                    text: "خطایی رخ داده است ، تماس با بخش پشتیبانی",
-                                    type: "warning",
-                                    confirmButtonText: "بستن"
-                                });
-                            }
-                        });
-                    }
-                );//end swal
-            });
-        </script>
-
         @endsection

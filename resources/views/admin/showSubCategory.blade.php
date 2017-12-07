@@ -1,6 +1,30 @@
 @extends('layouts.adminLayout')
 @section('content')
 
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog" dir="rtl">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">نمایش تصویر دسته</h2>
+                </div>
+                <div class="modal-body">
+                    <img class="image" id="editable"
+                         style=" height: 350px; width: 350px; margin-left: 80%;"
+                         src="{{url('public/dashboard/image')}}/{{$categoryInfo[0]->image_src}}">
+                </div>
+                <div class="modal-footer" >
+                    <button type="button" class="btn btn-dark col-md-6 col-md-offset-3" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <div class="clearfix"></div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -18,7 +42,7 @@
                 </div>
 
 
-                <a href="{{url('admin/addProduct')}}" id="user-send" type="button" class="col-md-2 btn btn-primary" style="font-weight: bold;">
+                <a href="{{url('addCategory')}}" id="user-send" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style="font-weight: bold;">
                     <i class="fa fa-th-list"></i>                    افزودن دسته ی جدید                </a>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
@@ -27,7 +51,7 @@
                         <input type="hidden" id="token" value="{{ csrf_token() }}">
                         <thead>
                         <tr>
-                            <th style="text-align: center">شناسه دسته</th>
+                            <th style="text-align: center">ردیف</th>
                             <th style="text-align: center">عنوان دسته</th>
                             <th style="text-align: center">سطح دسته</th>
                             <th style="text-align: center">تصویر</th>
@@ -37,26 +61,26 @@
                         </thead>
 
                         <tbody>
-
+                        <?php $i = 0 ?>
                         @foreach($categoryInfo as $category)
                             <form id="editForm">
                                 <tr class="unit">
                                     {{csrf_field()}}
-                                    <td style="font-size:18px;@if($category->is_supervisor==1) background-color:#ffff80 @endif"><input class="form-control" disabled name="id"  value="{{$category->id}}"></td>
-                                    <td><input class="form-control" name="title" value="{{$category->title}}"></td>
-                                    <td><input class="form-control" value="{{$category->depth}}" disabled="disabled" name="depth"></td>
+                                    <td style="font-size:18px">{{++$i}}</td>
+                                    <td style="font-size:18px">{{$category->title}}</td>
+                                    <td style="font-size:18px">{{$category->depth}}</td>
                                     @if($category->image_src == null)
-                                        <td><strong>تصویر ندارد</strong></td>
+                                        <td style="font-size:18px">تصویر ندارد</td>
                                     @endif
                                     @if($category->image_src != null)
-                                        <td>{{$category->image_src}} </td>
+                                        <td><button class="btn btn-basic" id="showPicture">مشاهده تصویر</button></td>
                                     @endif
-                                    <td><button id="edit" class="btn btn-success">ویرایش</button></td>
+                                    <td><a  href="{{url('editCategory/'.$category->id)}}" class="btn btn-info">ویرایش</a></td>
                                     @if($category->depth > 0)
-                                        <td><a  class="btn btn-info" style="width : 82%; text-align: center;" href="{{url('editSubCategory/'.$category->id)}}">مشاهده زیر دسته</a></td>
+                                        <td><a  class="btn btn-dark" style="width : 82%; text-align: center;" href="{{url('showSubCategory/'.$category->id)}}">مشاهده زیر دسته</a></td>
                                     @endif
                                     @if($category->depth == 0)
-                                        <td><a  class="btn btn-danger " style="width : 82%;"  >فاقد زیر دسته</a></td>
+                                        <td><a  class="btn btn-warning " style="width : 82%;"  >فاقد زیر دسته</a></td>
                                     @endif
                                 </tr>
                             </form>
@@ -66,13 +90,11 @@
                 </div>
             </div>
         </div>
-        {{--edit user's status by user-id --}}
+
 
         <script>
-            $(document).on('click','#edit',function () {
-                alert('hello');
+            $(document).on('click','#showPicture',function(){
+                $('#myModal').modal('show');
             })
         </script>
-
-
 @endsection

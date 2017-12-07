@@ -714,7 +714,7 @@
                                                          style="display: block;">
                                                         <img class="image" id="editable"
                                                              style="height: 100px; width: 100px; margin-left: 80%;"
-                                                             src="{{url('public/dashboard/image')}}/{{$image->image_src}}">
+                                                             src="{{url('public/dashboard/productImage')}}/{{$image->image_src}}">
                                                     </div>
 
                                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic">

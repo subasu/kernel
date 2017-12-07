@@ -18,8 +18,9 @@ Route::get('addCategory','CategoryController@addCategory');//show add category v
 Route::get('categoriesManagement','CategoryController@categoriesManagement');//show view of all category
 Route::post('addNewCategory','CategoryController@addNewCategory');// add new category in database
 Route::get('editCategory/{id}','CategoryController@editCategory');//this route is related to edit main category
-Route::get('editSubCategory/{id}','CategoryController@editSubCategory');//this route is related to edit sub category
-
+Route::get('showSubCategory/{id}','CategoryController@showSubCategory');//this route is related to edit sub category
+Route::post('editCategoryPicture','CategoryController@editCategoryPicture');//this route is related to edit category picture
+Route::post('editCategoryTitle','CategoryController@editCategoryTitle');//this route is related ti edit category title
 //units
 Route::get('addUnit','UnitController@addUnit');//show add unit view
 Route::get('unitsManagement','UnitController@unitsManagement');//show view of all units and subUnits

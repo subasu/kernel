@@ -14,10 +14,24 @@
                     <h4 class="modal-title">ویرایش/اضافه کردن تصویر</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Some text in the modal.</p>
+                    <form id="pictureForm" enctype="multipart/form-data">
+                        {{csrf_field()}}
+                    @if($categoryInfo[0]->image_src != null)
+                        <img class="image" id="editable"
+                             style="height: 100px; width: 100px; margin-left: 80%;"
+                             src="{{url('public/dashboard/image')}}/{{$categoryInfo[0]->image_src}}">
+                    @endif
+                    @if($categoryInfo[0]->image_src == null)
+                        <div align="center"><h1>این دسته تصویر ندارد</h1></div>
+                    @endif
+                    <br/><br/>
+                    <input type="file" name="file[]" id="file" class="form-control">
+                    <input type="hidden" name="categoryId" value="{{$categoryInfo[0]->id}}">
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">بستن</button>
+                <div class="modal-footer" >
+                    <button type="button" class="btn btn-default col-md-5 col-md-offset-1" data-dismiss="modal">بستن</button>
+                    <button type="button" content="{{$categoryInfo[0]->id}}" id="editCategoryPicture" class="btn btn-success col-md-5" >ویرایش</button>
                 </div>
             </div>
 
@@ -56,42 +70,177 @@
                             <th style="text-align: center;">سطح دسته</th>
                             <th style="text-align: center">عملیات مربوط به تصویر</th>
                             <th style="text-align: center">ویرایش</th>
-                            <th  style="text-align: center;border-right: 1px solid #d6d6c2;">مشاهده زیر دسته</th>
                         </tr>
                         </thead>
 
                         <tbody>
                         <?php $i = 0 ?>
-                        @foreach($categoryInfo as $category)
-                            <form id="editForm">
+                        <form id="editForm">
+                            {{csrf_field()}}
+                        {{--@foreach($categoryInfo as $category)--}}
                                 <tr class="unit">
-                                    {{csrf_field()}}
                                     <td>{{++$i}}</td>
-                                    <td><input class="form-control" name="title" value="{{$category->title}}"></td>
-                                    <td>{{$category->depth}}</td>
-                                    <td><strong><a class="btn btn-danger" id="editPicture" >مشاهده و ویرایش تصویر</a></strong></td>
-                                    <td><button id="edit" class="btn btn-success">ویرایش</button></td>
-                                    <td><a  class="btn btn-info" href="{{url('editSubCategory/'.$category->id)}}">مشاهده زیر دسته</a></td>
+                                    <td class="col-md-6 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$categoryInfo[0]->title}}"></td>
+                                    <td>{{$categoryInfo[0]->depth}}</td>
+                                    <td><strong><a class="btn btn-danger" id="openModal" >مشاهده و ویرایش تصویر</a></strong></td>
+                                    <td><button id="edit" type="button" class="btn btn-success">ویرایش</button></td>
+                                    <input type="hidden" value="{{$categoryInfo[0]->id}}" id="id" name="id">
+                                    <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
                                 </tr>
-                            </form>
-                        @endforeach
+                        {{--@endforeach--}}
+                        </form>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        {{--edit user's status by user-id --}}
 
+
+
+
+        {{--below script is to edit title of category --}}
         <script>
             $(document).on('click','#edit',function () {
-                alert('hello');
+                var title = $('#title').val();
+                var id   = $('#id').val();
+                var token = $('#token').val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                swal({
+                        title:   " آیا میخواهید ویرایش انجام دهید؟  ",
+                        text: "",
+                        type: "info",
+                        showCancelButton: true,
+                        confirmButtonColor: "	#5cb85c",
+                        cancelButtonText: "خیر",
+                        confirmButtonText: "آری",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $.ajax
+                            ({
+                                cache: false,
+                                url: "{{url('editCategoryTitle')}}",
+                                data: {'title': title, 'id': id, '_token': token},
+                                type: "post",
+                                dataType: "JSON",
+                                beforeSend: function () {
+                                    if ($('#title').val() == null || $('#title').val() == '') {
+                                        $('#title').css('border-color', 'red');
+                                        swal({
+                                            title: "",
+                                            text: 'پر کردن عنوان دسته الزامی است',
+                                            type: "warning",
+                                            confirmButtonText: "بستن"
+                                        });
+                                        return false;
+                                    }
+                                },
+                                success: function (response) {
+                                    if (response.code == 1) {
+                                        swal({
+                                            title: "",
+                                            text: response.message,
+                                            type: "success",
+                                            confirmButtonText: "بستن"
+                                        });
+                                        setTimeout(function () {
+                                            window.location.href = document.referrer;
+                                        },3000);
+                                    } else {
+                                        swal({
+                                            title: "",
+                                            text: response.message,
+                                            type: "warning",
+                                            confirmButtonText: "بستن"
+                                        });
+                                    }
+
+                                }, error: function (error) {
+                                    console.log(error);
+                                    if (error.status === 500) {
+                                        swal({
+                                            title: "",
+                                            text: 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید',
+                                            type: "warning",
+                                            confirmButtonText: "بستن"
+                                        });
+                                    }
+                                }
+                            })
+
+                        }
+                   })
             })
         </script>
 
-        <!-- below script is to handle bootstrap -->
+        <!-- below script is to handle bootstrap  modal and show modal-->
         <script>
-            $(document).on('click','#editPicture',function () {
+            $(document).on('click','#openModal',function () {
                 $('#myModal').modal('show');
             })
         </script>
+
+        <!-- below script is to edit category picture -->
+        <script>
+            $(document).on('click','#editCategoryPicture',function(){
+                var formData = new FormData($('#pictureForm')[0]);
+                $.ajax
+                ({
+                    cache        : false,
+                    url          : "{{url('editCategoryPicture')}}",
+                    type         : "post",
+                    data         : formData,
+                    dataType     : "JSON",
+                    processData  : false,
+                    contentType  : false,
+                    beforeSend   : function () {
+                        if($('#file').val() == null || $('#file').val() == '' )
+                        {
+                            $('#file').css('border-color','red');
+                            swal({
+                                title: "",
+                                text: 'لطفا ابتدا فایلی را انتخاب نمایید، سپس  ویرایش را بزنید',
+                                type: "warning",
+                                confirmButtonText: "بستن"
+                            });
+                            return false;
+                        }
+                    },
+                    success : function(response)
+                    {
+                        if(response.code == 1)
+                        {
+                            swal({
+                                title: "",
+                                text: response.message,
+                                type: "info",
+                                confirmButtonText: "بستن"
+                            });
+                        }else
+                            {
+                                swal({
+                                    title: "",
+                                    text: response,
+                                    type: "success",
+                                    confirmButtonText: "بستن"
+                                });
+                                setTimeout(function(){
+                                    window.location.reload(true);
+                                },3000);
+                            }
+                    },error:function(error)
+                    {
+                        console.log(error);
+                    }
+                })
+            })
+        </script>
+
+
 @endsection
