@@ -4,7 +4,7 @@
     <div id="home-slider">
         <div class="container">
             <div class="row">
-                <div class="col-sm-9 header-top-right">
+                <div class="col-sm-12 header-top-right">
                     <div class="homeslider">
                         <div class="content-slide">
                             <ul id="contenhomeslider">

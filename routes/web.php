@@ -13,6 +13,7 @@
 Route::get('/','IndexController@index');
 Route::get('index','IndexController@home');
 Route::get('products','IndexController@products');
+Route::get('myLogin','IndexController@login');
 
 //categories
 Route::get('addCategory','CategoryController@addCategory');//show add category view
@@ -40,3 +41,6 @@ Route::get('ordersManagement','OrderController@ordersManagement');//show view of
 //deliveryMan
 Route::get('addDeliveryMan','DeliveryManController@addDeliveryMan');//show add DeliveryMan view
 Route::get('deliveryMansManagement','DeliveryManController@deliveryMansManagement');//show view of all deliveryMans's details
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
