@@ -12,6 +12,8 @@
 //main site
 Route::get('/','IndexController@index');
 Route::get('index','IndexController@home');
+Route::get('products','IndexController@products');
+Route::get('myLogin','IndexController@login');
 
 //categories
 Route::get('addCategory','CategoryController@addCategory');//show add category view
@@ -31,8 +33,6 @@ Route::get('addProduct','ProductController@addProduct');//show add product view
 Route::get('productsManagement','ProductController@productsManagement');//show view of all product's details
 Route::post('addNewProduct','ProductController@addNewProduct');// add new product in database
 Route::get('productDetails/{id}','ProductController@productDetailsGet');
-
-
 //users
 Route::get('usersManagement','UserController@usersManagement');//show view of all customer's details
 
@@ -42,3 +42,6 @@ Route::get('ordersManagement','OrderController@ordersManagement');//show view of
 //deliveryMan
 Route::get('addDeliveryMan','DeliveryManController@addDeliveryMan');//show add DeliveryMan view
 Route::get('deliveryMansManagement','DeliveryManController@deliveryMansManagement');//show view of all deliveryMans's details
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
