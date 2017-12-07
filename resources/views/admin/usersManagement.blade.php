@@ -169,4 +169,4 @@
             });
         </script>
 
-        @endsection
+@endsection

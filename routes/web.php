@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +17,8 @@ Route::get('index','IndexController@home');
 Route::get('addCategory','CategoryController@addCategory');//show add category view
 Route::get('categoriesManagement','CategoryController@categoriesManagement');//show view of all category
 Route::post('addNewCategory','CategoryController@addNewCategory');// add new category in database
-
+Route::get('editCategory/{id}','CategoryController@editCategory');//this route is related to edit main category
+Route::get('editSubCategory/{id}','CategoryController@editSubCategory');//this route is related to edit sub category
 
 //units
 Route::get('addUnit','UnitController@addUnit');//show add unit view

@@ -8,7 +8,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-{{--<title>{{$pageTitle}}</title>--}}
+<title>@if(!empty($pageTitle)){{$pageTitle}}@endif</title>
 <link rel="short icon" href="{{URL::asset('public/main/assets/img/logo.png')}}"/>
 
 <!-- Bootstrap core CSS -->
@@ -92,7 +92,7 @@
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section" style="margin-bottom:10px;">
                         <h3 style="font-size: 16px;"><a href="" onclick="alert('این هم چیز واسه تست! ادد باید همینو بزنین :)')"
-                         style="color:white">پروفایل</a></h3>
+                                                        style="color:white">پروفایل</a></h3>
                         <ul class="nav side-menu">
                             {{--//system manager menu--}}
                             <li><a><i class="fa f a-home"></i> مدیر سیستم<span></span></a>
@@ -147,19 +147,19 @@
                             {{--<li><a><i class="fa fa-comments"></i> مدیریت نظرات<span class="fa fa-chevron-down"></span></a>--}}
                                 {{--<ul class="nav child_menu" style="display: none">--}}
                                     {{--<li><a href="{{url('systemManager')}}"> نمایش و مدیریت دسته بندی های پروژه</a>--}}
-                                    {{--</li>--}}
+                                        {{--</li>--}}
                                     {{--<li><a href="{{url('systemManager')}}">درج دسته بندی جدید </a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
+                                        {{--</li>--}}
+                                    {{--</ul>--}}
+                                {{--</li>--}}
                             {{--<li><a><i class="fa fa-star-half-full"></i> مدیریت امتیازات<span class="fa fa-chevron-down"></span></a>--}}
                                 {{--<ul class="nav child_menu" style="display: none">--}}
                                     {{--<li><a href="{{url('systemManager')}}"> نمایش و مدیریت دسته بندی های پروژه</a>--}}
-                                    {{--</li>--}}
+                                        {{--</li>--}}
                                     {{--<li><a href="{{url('systemManager')}}">درج دسته بندی جدید </a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
+                                        {{--</li>--}}
+                                    {{--</ul>--}}
+                                {{--</li>--}}
                             <li><a href="{{url('/index')}}"><i class="fa fa-laptop"></i>صفحه ی اصلی سایت</a>
                             </li>
 
@@ -174,7 +174,7 @@
                 </div>
                 <!-- /sidebar menu -->
                 <!-- /menu footer buttons -->
-<?php /*
+            <?php /*
                 <div class="sidebar-footer hidden-small">
                     <a data-toggle="tooltip" data-placement="top" title="تنظیمات">
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
@@ -188,10 +188,9 @@
                     <a data-toggle="tooltip" data-placement="top" title="خروج">
                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
-
                 </div>
 */?>
-                <!-- /menu footer buttons -->
+            <!-- /menu footer buttons -->
             </div>
         </div>
         <!-- top navigation -->
@@ -203,12 +202,11 @@
                         <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                     </div>
                     {{--<div class="" style="float: right;padding: 1% 2% 0 0 !important;">--}}
-                        {{--<a id="back" class="btn btn-info">بازگشت به صفحه قبل</a>--}}
+                    {{--<a id="back" class="btn btn-info">بازگشت به صفحه قبل</a>--}}
                     {{--</div>--}}
 
-<?php /*
+                    <?php /*
                     <ul class="nav navbar-nav navbar-right">
-
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                    aria-expanded="false">
@@ -220,7 +218,6 @@
                                 </li>
                                 <li>
                                     <a href="javascript:;">راهنما</a>
-
                                 </li>
                                 <li>
                                     <a href="javascript:;">
@@ -404,24 +401,24 @@
 
 
 {{--<script type="text/javascript">--}}
-    {{--$(document).ready(function () {--}}
-        {{--$('#datatable').dataTable();--}}
-        {{--$('#datatable-keytable').DataTable({--}}
-            {{--keys: true--}}
-        {{--});--}}
-        {{--$('#datatable-responsive').DataTable();--}}
-        {{--$('#datatable-scroller').DataTable({--}}
-            {{--ajax: "{{URL::asset('public/dashboard/js/datatables/json/scroller-demo.json')}}",--}}
-            {{--deferRender: true,--}}
-            {{--scrollY: 380,--}}
-            {{--scrollCollapse: true,--}}
-            {{--scroller: true--}}
-        {{--});--}}
-        {{--var table = $('#datatable-fixed-header').DataTable({--}}
-            {{--fixedHeader: true--}}
-        {{--});--}}
-    {{--});--}}
-    {{--TableManageButtons.init();--}}
+{{--$(document).ready(function () {--}}
+{{--$('#datatable').dataTable();--}}
+{{--$('#datatable-keytable').DataTable({--}}
+{{--keys: true--}}
+{{--});--}}
+{{--$('#datatable-responsive').DataTable();--}}
+{{--$('#datatable-scroller').DataTable({--}}
+{{--ajax: "{{URL::asset('public/dashboard/js/datatables/json/scroller-demo.json')}}",--}}
+{{--deferRender: true,--}}
+{{--scrollY: 380,--}}
+{{--scrollCollapse: true,--}}
+{{--scroller: true--}}
+{{--});--}}
+{{--var table = $('#datatable-fixed-header').DataTable({--}}
+{{--fixedHeader: true--}}
+{{--});--}}
+{{--});--}}
+{{--TableManageButtons.init();--}}
 {{--</script>--}}
 <!-- pace -->
 <script src="{{ URL::asset('public/dashboard/js/pace/pace.min.js')}}"></script>
@@ -528,39 +525,39 @@
 </script>
 <!-- /editor -->
 {{--<script>--}}
-    {{--// initialize the validator function--}}
-    {{--validator.message['date'] = 'not a real date';--}}
-    {{--// validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':--}}
-    {{--$('form')--}}
-        {{--.on('blur', 'input[required], input.optional, select.required', validator.checkField)--}}
-        {{--.on('change', 'select.required', validator.checkField)--}}
-        {{--.on('keypress', 'input[required][pattern]', validator.keypress);--}}
-    {{--$('.multi.required')--}}
-        {{--.on('keyup blur', 'input', function () {--}}
-            {{--validator.checkField.apply($(this).siblings().last()[0]);--}}
-        {{--});--}}
-    {{--// bind the validation to the form submit event--}}
-    {{--//$('#send').click('submit');//.prop('disabled', true);--}}
-    {{--$('form').submit(function (e) {--}}
-        {{--e.preventDefault();--}}
-        {{--var submit = true;--}}
-        {{--// evaluate the form using generic validaing--}}
-        {{--if (!validator.checkAll($(this))) {--}}
-            {{--submit = false;--}}
-        {{--}--}}
-        {{--if (submit)--}}
-            {{--this.submit();--}}
-        {{--return false;--}}
-    {{--});--}}
-    {{--/* FOR DEMO ONLY */--}}
-    {{--$('#vfields').change(function () {--}}
-        {{--$('form').toggleClass('mode2');--}}
-    {{--}).prop('checked', false);--}}
-    {{--$('#alerts').change(function () {--}}
-        {{--validator.defaults.alerts = (this.checked) ? false : true;--}}
-        {{--if (this.checked)--}}
-            {{--$('form .alert').remove();--}}
-    {{--}).prop('checked', false);--}}
+{{--// initialize the validator function--}}
+{{--validator.message['date'] = 'not a real date';--}}
+{{--// validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':--}}
+{{--$('form')--}}
+{{--.on('blur', 'input[required], input.optional, select.required', validator.checkField)--}}
+{{--.on('change', 'select.required', validator.checkField)--}}
+{{--.on('keypress', 'input[required][pattern]', validator.keypress);--}}
+{{--$('.multi.required')--}}
+{{--.on('keyup blur', 'input', function () {--}}
+{{--validator.checkField.apply($(this).siblings().last()[0]);--}}
+{{--});--}}
+{{--// bind the validation to the form submit event--}}
+{{--//$('#send').click('submit');//.prop('disabled', true);--}}
+{{--$('form').submit(function (e) {--}}
+{{--e.preventDefault();--}}
+{{--var submit = true;--}}
+{{--// evaluate the form using generic validaing--}}
+{{--if (!validator.checkAll($(this))) {--}}
+{{--submit = false;--}}
+{{--}--}}
+{{--if (submit)--}}
+{{--this.submit();--}}
+{{--return false;--}}
+{{--});--}}
+{{--/* FOR DEMO ONLY */--}}
+{{--$('#vfields').change(function () {--}}
+{{--$('form').toggleClass('mode2');--}}
+{{--}).prop('checked', false);--}}
+{{--$('#alerts').change(function () {--}}
+{{--validator.defaults.alerts = (this.checked) ? false : true;--}}
+{{--if (this.checked)--}}
+{{--$('form .alert').remove();--}}
+{{--}).prop('checked', false);--}}
 {{--</script>--}}
 <script>
     NProgress.done();

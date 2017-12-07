@@ -13,7 +13,8 @@ class IndexController extends Controller
     }
     public function home()
     {
-        return view('layouts.main');
+        $pageTitle='صفحه ی اصلی';
+        return view('main.index',compact('pageTitle'));
     }
 
 }
