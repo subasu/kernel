@@ -16,5 +16,10 @@ class IndexController extends Controller
         $pageTitle='صفحه ی اصلی';
         return view('main.index',compact('pageTitle'));
     }
+    public function products()
+    {
+        $pageTitle='لیست محصولات';
+        return view('main.products',compact('pageTitle'));
+    }
 
 }

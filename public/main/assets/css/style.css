@@ -2828,9 +2828,10 @@ span.notify-right{
   margin: 0;
   padding-bottom: 17px;
   line-height: normal;
+    text-align: right;
 }
 .breadcrumb .navigation-pipe:before{
-    content: "\f105";
+    content: "\f104";
   font-size: 14px;
   display: inline-block;
   text-align: right;
