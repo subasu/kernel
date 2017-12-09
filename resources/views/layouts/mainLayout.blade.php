@@ -298,6 +298,45 @@
 <script type="text/javascript"   src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>
 <script type="text/javascript"   src="{{url('public/main/assets/js/jquery.actual.min.js')}}"></script>
 <script type="text/javascript"   src="{{url('public/main/assets/js/theme-script.js')}}"></script>
+<script>
+    $(document).ready(function () {
+        $(".mainMenu").each(function () {
+            console.log(3);
+            $(this).hover(function () {
+                var id = $(this).attr('name');
+                console.log(id);
+                $.ajax({
+                    dataType: "json",
+                    url: "{{url('api/v1/getSubCategories')}}" + '/' + id,
+                    cashe: false,
+                    type: "get",
+                    success: function (response) {
+                        var item = $(".submenu");
+                        item.empty();
+                        $.each(response, function (key, value) {
+                            console.log(value);
+                            item.append(
+                                '<li class="block-container col-sm-3">' +
+                                    '<ul class="block">' +
+                                        '<li class="img_container">' +
+                                            '<a href="#">' +
+                                                '<img class="img-responsive" src="public/main/assets/data/men.png" alt="sport">' +
+                                            '</a>' +
+                                        '</li>' +
+                                        '<li class="link_container group_header" id="brand">' +
+                                            '<a href="#" '+value.id+'>'+value.title+'</a>' +
+                                        '</li>' +
+                                        '<li class="link_container"><a href="#">'+value.title+'</a></li>' +
+                                    '</ul>' +
+                                '</li>'
+                            );
+                        });
 
+                    }
+                })
+            })
+        })
+    })
+</script>
 </body>
 </html>

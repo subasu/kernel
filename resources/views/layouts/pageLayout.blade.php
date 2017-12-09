@@ -300,6 +300,24 @@
         src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/js/jquery.actual.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>
-
+<script>
+    $(document).ready(function () {
+        $(".mainMenu").each(function () {
+            $(this).onmouseover(function () {
+                var id = $(this).attr('name');console.log(id);
+                $.ajax({
+                    dataType:"json",
+                    url: "{{url('getSubCategories')}}" + '/' + id,
+                    cashe:false,
+                    type:"get",
+                    success:function (response) {
+                        console.log(response);
+                        console.log(2);
+                    }
+                })
+            })
+        })
+    })
+</script>
 </body>
 </html>
