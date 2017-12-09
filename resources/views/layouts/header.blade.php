@@ -136,8 +136,8 @@
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="#">صفحه ی اصلی</a></li>
                                 @foreach($menu as $mnu)
-                                    <li class="dropdown mainMenu" name="{{$mnu->id}}">
-                                        <a href="category.html" class="dropdown-toggle" data-toggle="dropdown">{{$mnu->title}}</a>
+                                    <li class="dropdown mainMenu"  name="{{$mnu->id}}">
+                                        <a class="dropdown-toggle" data-toggle="dropdown">{{$mnu->title}}</a>
                                         <ul class="dropdown-menu mega_dropdown submenu" role="menu" style="width: 830px;">
                                             <li class="block-container col-sm-3">
                                                 <ul class="block">
@@ -258,7 +258,6 @@
                                                 {{--</li>--}}
                                             {{--</ul>--}}
                                         {{--</li>--}}
-
                                     {{--</ul>--}}
                                 {{--</li>--}}
                                 {{--<li class="dropdown">--}}

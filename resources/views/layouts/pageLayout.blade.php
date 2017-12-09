@@ -296,28 +296,53 @@
 <script type="text/javascript" src="{{url('public/main/assets/lib/select2/js/select2.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/jquery.bxslider/jquery.bxslider.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/owl.carousel/owl.carousel.min.js')}}"></script>
-<script type="text/javascript"
-        src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>
+{{--<script type="text/javascript"--}}
+        {{--src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>--}}
 <script type="text/javascript" src="{{url('public/main/assets/js/jquery.actual.min.js')}}"></script>
-<script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>
+{{--<script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>--}}
 <script>
     $(document).ready(function () {
         $(".mainMenu").each(function () {
-            $(this).onmouseover(function () {
-                var id = $(this).attr('name');console.log(id);
+            $(this).mouseover(function () {
+                var id = $(this).attr('name');
                 $.ajax({
-                    dataType:"json",
-                    url: "{{url('getSubCategories')}}" + '/' + id,
-                    cashe:false,
-                    type:"get",
-                    success:function (response) {
-                        console.log(response);
-                        console.log(2);
+                    dataType: "json",
+                    url: "{{url('api/v1/getSubmenu')}}" + '/' + id,
+                    cashe: false,
+                    type: "get",
+                    success: function (response) {
+                        var item = $(".submenu");
+                        item.empty();var x;
+                        if(response.catImg !=null){
+                            x += '<li class="block-container col-sm-3">'+
+                                '<ul class="block">' +
+                                '<li class="img_container">' +
+                                '<img src="public/main/assets/data/banner-topmenu.jpg" alt="' + response.catImg + '" title="' + response.catImg + '" >' +
+                                '</li>' +
+                                '</ul></li>';}
+                        $.each(response, function (key, value) {
+                            x +=    '<li class="block-container col-sm-3" style="float:right">' +
+                                '<ul class="block">' +
+                                '<li class="link_container group_header">' +
+                                '<a href="#">'+value.title+'</a>' +
+                                '</li>' ;
+                            $.each(value.brands, function (key, value) {
+                                x += '<li class="link_container" id="' + value.id + '">' +
+                                    '<a href="#">' + value.title + '</a>' +
+                                    '</li>';
+                            });
+                            x+='</ul>' + '</li>'
+                        });item.append(x);
                     }
                 })
+            });
+            $(this).mouseleave(function () {
+                var item = $(".mainMenu > ul");
+                item.empty();
             })
         })
     })
 </script>
+
 </body>
 </html>

@@ -1434,7 +1434,10 @@ span.notify-right {
     border-right: none;
 }
 
-#main-menu .navbar .navbar-nav > li:hover,
+#main-menu .navbar .navbar-nav > li:hover{
+    background: #72c805;
+    color: #fff;
+}
 #main-menu .navbar .navbar-nav > li.active {
     background: #92c841;
     color: #fff;
@@ -1470,6 +1473,7 @@ span.notify-right {
     visibility: hidden;
     opacity: 0;
     background: #fff;
+    text-align: right;
 }
 
 #main-menu .dropdown-menu.container-fluid {
@@ -6017,3 +6021,4 @@ span.notify-right {
 .total {
     padding-right: 4%;
 }
+.submenu{}
