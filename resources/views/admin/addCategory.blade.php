@@ -170,6 +170,8 @@
                             $('#subCategories').empty();
                             if(id)
                             {
+                                //alert(id);
+                                //return false;
                                 $.ajax
                                 ({
                                     url      : "{{url('api/v1/getExistedCategories')}}/"+id,
@@ -319,7 +321,7 @@
                                             );
 
                                         });
-                                        depth == 0;
+                                        //depth == 0;
                                         $('#change').css('display','none');
                                         $('#change').empty();
                                         $('#addMainCategory').css('display','block');
@@ -331,6 +333,7 @@
                                         $('#brands').css('display','none');
                                         $('#existedSub').css('display','none');
                                         $('#existedBrands').css('display','none');
+                                        $('#existedDiv').css('display','none');
                                     }
 
                                 }
@@ -454,6 +457,7 @@
                                $('#existedSub').css('display','none');
                                $('#addSubCategory').css('display','none');
                                $('#addBrands').css('display','none');
+                               $('#existed').css('display','none');
                            }
                     });
                 });

@@ -6,12 +6,18 @@ use App\Http\SelfClasses\AddCategory;
 use App\Http\SelfClasses\CheckFiles;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
     //below function is related to add new category
     public function addNewCategory(Request $request)
     {
+        if (Category::where('title', '=', $request->title)->exists())
+        {
+            print('hast');
+            return false;
+        }
         $checkFiles = new CheckFiles();
         $result =$checkFiles->checkCategoryFiles($request);
         if(is_bool($result))
