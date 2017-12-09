@@ -65,11 +65,11 @@
                         <?php $i = 0 ?>
                         @foreach($categories as $category)
                             <tr class="unit">
-                                <td style="font-size:18px;@if($category->is_supervisor==1) background-color:#ffff80 @endif">{{++$i}}</td>
-                                <td>{{$category->title}}</td>
-                                <td>{{$category->depth}}</td>
+                                <td style="font-size: 120%">{{++$i}}</td>
+                                <td style="font-size: 120%">{{$category->title}}</td>
+                                <td style="font-size: 120%">{{$category->depth}}</td>
                                 @if($category->image_src == null)
-                                    <td><strong>تصویر ندارد</strong></td>
+                                    <td style="font-size: 120%">تصویر ندارد</td>
                                 @endif
                                 @if($category->image_src != null)
                                     <td><button class="btn btn-basic" id="showPicture">مشاهده تصویر</button></td>

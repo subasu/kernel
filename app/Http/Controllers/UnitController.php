@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UnitCount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -48,13 +49,15 @@ class UnitController extends Controller
     //below function returns addUnit blade...
     public function addUnit()
     {
-        return view('admin.addUnit');
+        $pageTitle = 'افزودن واحد های شمارش';
+        return view('admin.addUnit',compact('pageTitle'));
     }
 
     //below function returns unitsManagement blade ...
-    public function unitsManagement()
+    public function unitCountManagement()
     {
+        $pageTitle = 'مدیریت واحد های شمارش';
         $data=UnitCount::all();
-        return view('admin.unitsManagement',compact('data'));
+        return view('admin.unitCountManagement',compact('data','pageTitle'));
     }
 }

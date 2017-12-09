@@ -25,7 +25,7 @@ Route::post('editCategoryPicture','CategoryController@editCategoryPicture');//th
 Route::post('editCategoryTitle','CategoryController@editCategoryTitle');//this route is related ti edit category title
 //units
 Route::get('addUnit','UnitController@addUnit');//show add unit view
-Route::get('unitsManagement','UnitController@unitsManagement');//show view of all units and subUnits
+Route::get('unitCountManagement','UnitController@unitCountManagement');//show view of all units and subUnits
 Route::post('addNewUnit','UnitController@addNewUnit');//show view of all units and subUnits
 
 //products

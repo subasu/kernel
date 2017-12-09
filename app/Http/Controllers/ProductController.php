@@ -14,8 +14,13 @@ class ProductController extends Controller
     }
     public function productsManagement()
     {
+        $pageTitle = 'مدیریت محصولات';
         $data = Product::all();
-        return view('admin.productManagement', compact('data'));
+        foreach($data as $datum)
+        {
+            $datum->date = $datum->created_at->toDateString();
+        }
+        return view('admin.productManagement', compact('data','pageTitle'));
     }
     //add new product to database
     public function addNewProduct(Request $request)
@@ -43,10 +48,11 @@ class ProductController extends Controller
     //
     public function productDetailsGet($id)
     {
+        $pageTitle = 'ویرایش محصول';
         $products = Product::where([['id',$id],['active',1]])->get();
         if(count($products) > 0)
         {
-            return view('admin.productDetails',compact('products'));
+            return view('admin.productDetails',compact('products','pageTitle'));
         }else
         {
             return view('errors.403');

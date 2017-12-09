@@ -103,7 +103,7 @@
                                     </li>
                                     <li><a href="{{url('addProduct')}}">درج محصول جدید </a>
                                     </li>
-                                    {{--<li><a href="{{url('unitsManagement')}}"> نمایش و مدیریت واحد شمارش </a>--}}
+                                    {{--<li><a href="{{url('unitCountManagement')}}"> نمایش و مدیریت واحد شمارش </a>--}}
                                     {{--<li><a href="{{url('addUnit')}}">درج واحد شمارش و زیرواحد شمارش </a>--}}
                                     {{--</li>--}}
                                 </ul>

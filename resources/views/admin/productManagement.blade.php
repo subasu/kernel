@@ -42,10 +42,10 @@
 
                         @foreach($data as $datum)
                             <tr class="unit">
-                                <td >{{$datum->id}}</td>
-                                <td >{{$datum->title}}</td>
-                                <td >{{$datum->created_at}}</td>
-                                <td ><strong><a href="{{url('productDetails/'.$datum->id)}}"> برای مشاهده جزئیات کلیک نمایید</a></strong></td>
+                                <td style="font-size: 120%"> {{$datum->id}}</td>
+                                <td style="font-size: 120%">{{$datum->title}}</td>
+                                <td style="font-size: 120%">{{$datum->date}}</td>
+                                <td ><strong><a style="font-size: 120%" href="{{url('productDetails/'.$datum->id)}}"> برای مشاهده جزئیات کلیک نمایید</a></strong></td>
 
                             </tr>
                         @endforeach

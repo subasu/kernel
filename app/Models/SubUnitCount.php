@@ -12,9 +12,5 @@ class SubUnitCount extends Model
         return $this->belongsTo('App\Models\UnitCount');
     }
 
-    //relation of products and sub_unit_counts
-    public function products()
-    {
-        return $this->hasMany('App\Models\Product','sub_unit_count_id');
-    }
+
 }

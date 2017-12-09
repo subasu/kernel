@@ -31,15 +31,17 @@ class CategoryController extends Controller
     //below function returns addCategory blade....
     public function addCategory()
     {
-        return view('admin.addCategory');
+        $pageTitle = 'اضافه کردن دسته ها';
+        return view('admin.addCategory',compact('pageTitle'));
     }
 
 
     //below function is to returns all categories to the categoriesManagement blade....
     public function categoriesManagement()
     {
+        $pageTitle = 'مدیریت دسته ها';
         $categories = Category::where([['active',1],['parent_id',0]])->get();
-        return view('admin.categoriesManagement',compact('categories'));
+        return view('admin.categoriesManagement',compact('categories','pageTitle'));
     }
 
     //below function is related to edit main category
