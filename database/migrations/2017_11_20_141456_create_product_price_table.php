@@ -20,7 +20,7 @@ class CreateProductPriceTable extends Migration
 //            $table->integer('price_type_id')->unsigned()->index();
 //            $table->foreign('price_type_id')->references('id')->on('price_types');
             $table->integer('product_id')->unsigned()->index();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('productFiles');
             $table->integer('price');
             $table->tinyInteger('active')->default('1');
             $table->timestamps();

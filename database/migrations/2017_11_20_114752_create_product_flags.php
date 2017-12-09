@@ -19,7 +19,7 @@ class CreateProductFlags extends Migration
             $table->integer('shop_id')->unsigned()->index();
             $table->foreign('shop_id')->references('id')->on('shops');
             $table->integer('product_id')->unsigned()->index();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('productFiles');
             $table->tinyInteger('active')->default('1');
             $table->timestamps();
         });

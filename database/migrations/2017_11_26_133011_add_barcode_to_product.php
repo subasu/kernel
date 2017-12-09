@@ -13,7 +13,7 @@ class AddBarcodeToProduct extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('productFiles', function (Blueprint $table) {
             $table->string('barcode');
         });
     }
@@ -25,7 +25,7 @@ class AddBarcodeToProduct extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('productFiles', function (Blueprint $table) {
             //
         });
     }

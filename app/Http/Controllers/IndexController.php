@@ -28,7 +28,7 @@ class IndexController extends Controller
     {
         $menu=Category::where('depth','=','2')->get();
         $pageTitle='لیست محصولات';
-        return view('main.products',compact('pageTitle','menu'));
+        return view('main.productFiles',compact('pageTitle','menu'));
     }
 
 }

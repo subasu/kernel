@@ -12,7 +12,7 @@
 //main site
 Route::get('/','IndexController@index');
 Route::get('index','IndexController@home');
-Route::get('products','IndexController@products');
+Route::get('productFiles','IndexController@productFiles');
 Route::get('myLogin','IndexController@login');
 
 //categories
@@ -31,7 +31,7 @@ Route::get('subUnitManagement/{id}','UnitController@subUnitManagement');//show v
 Route::get('editUnitCount/{id}','UnitController@editUnitCount');
 Route::post('editUnitCountTitle','UnitController@editUnitCountTitle');
 
-//products
+//productFiles
 Route::get('addProduct','ProductController@addProduct');//show add product view
 Route::get('productsManagement','ProductController@productsManagement');//show view of all product's details
 Route::post('addNewProduct','ProductController@addNewProduct');// add new product in database

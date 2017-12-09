@@ -19,7 +19,7 @@ class CreateProductColorTable extends Migration
             $table->foreign('shop_id')->references('id')->on('shops');
             $table->string('color');
             $table->integer('product_id')->unsigned()->index();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('productFiles');
             $table->tinyInteger('active')->default('1');
             $table->timestamps();
         });
