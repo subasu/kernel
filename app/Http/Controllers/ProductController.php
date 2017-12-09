@@ -58,8 +58,6 @@ class ProductController extends Controller
             return view('errors.403');
         }
     }
-
-
     public function toPersian($date)
     {
         $gDate = $date;
