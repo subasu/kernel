@@ -53,6 +53,23 @@ class CommonController extends Controller
             return response()->json(0);
         }
     }
+    //below function is to get brands from database
+    public function getSubmenu($id)
+    {
+        $submenu = Category::where([['parent_id',$id],['active',1]])->get();
+        foreach ($submenu as $sm)
+        {
+            $sm->brands=Category::where([['parent_id',$sm->id],['active',1]])->get();
+        }
+        if(count($submenu) > 0 )
+        {
+            return response()->json($submenu);
+        }
+        else
+        {
+            return response()->json(0);
+        }
+    }
     //below function is to get main units from database
     public function getMainUnits()
     {

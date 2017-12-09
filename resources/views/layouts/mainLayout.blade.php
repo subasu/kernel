@@ -307,7 +307,7 @@
                 console.log(id);
                 $.ajax({
                     dataType: "json",
-                    url: "{{url('api/v1/getSubCategories')}}" + '/' + id,
+                    url: "{{url('api/v1/getSubmenu')}}" + '/' + id,
                     cashe: false,
                     type: "get",
                     success: function (response) {
@@ -315,21 +315,26 @@
                         item.empty();
                         $.each(response, function (key, value) {
                             console.log(value);
-                            item.append(
-                                '<li class="block-container col-sm-3">' +
-                                    '<ul class="block">' +
-                                        '<li class="img_container">' +
-                                            '<a href="#">' +
-                                                '<img class="img-responsive" src="public/main/assets/data/men.png" alt="sport">' +
-                                            '</a>' +
-                                        '</li>' +
-                                        '<li class="link_container group_header" id="brand">' +
-                                            '<a href="#" '+value.id+'>'+value.title+'</a>' +
-                                        '</li>' +
-                                        '<li class="link_container"><a href="#">'+value.title+'</a></li>' +
-                                    '</ul>' +
-                                '</li>'
-                            );
+                            var x;
+                            x='<li class="block-container col-sm-3">' +
+                                '<ul class="block">'
+                            if(value.image_src != null)
+                            {
+                                x+='<li class="img_container">' +
+                                '<a href="#">' +
+                                '<img class="img-responsive" src="public/main/assets/data/men.png" alt="sport">' +
+                                '</a>' + '</li>';
+                            }
+                                x+='<li class="link_container group_header" id="brand">' +
+                                '<a href="#" '+value.id+'>'+value.title+'</a>' +
+                                '</li>' ;
+                                $.each(value.brands, function (key,value) {
+                                    x+='<li class="link_container"><a href="#">'+value.title+'</a></li>' ;
+                                    console.log(value.title)
+                                })
+                                x+='</ul>' +
+                                '</li>';
+                            item.append(x);
                         });
 
                     }
