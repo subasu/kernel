@@ -79,7 +79,7 @@
                                     <td><a  class="btn btn-dark" href="{{url('showSubCategory/'.$category->id)}}">مشاهده زیر دسته</a></td>
                                 @endif
                                 @if($category->depth == 0)
-                                    <td><a  class="btn btn-warning" >فاقد زیر دسته</a></td>
+                                    <td><a  class="btn btn-danger" >فاقد زیر دسته</a></td>
                                 @endif
                             </tr>
                         @endforeach

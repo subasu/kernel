@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class UnitCount extends Model
 {
 //    relation of unit_count and sub_unit_count
-    public function subUnit()
+    public function subUnits()
     {
-        return $this->hasMany('App\Models\SubUnitCount');
+        return $this->hasMany('App\Models\SubUnitCount','unit_count_id');
     }
 }

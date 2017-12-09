@@ -24,6 +24,29 @@
             overflow-x: hidden;
         }
     </style>
+
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog" dir="rtl">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">ویرایش دسته بندی محصول</h2>
+                </div>
+                <div id="change">
+
+                </div>
+                <div class="modal-footer" >
+                    <button type="button" class="btn btn-dark col-md-6 col-md-offset-3" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <!-- Include SmartWizard CSS -->
     <link href="{{url('public/dashboard/stepWizard/css/smart_wizard.css')}}" rel="stylesheet" type="text/css"/>
     <!-- Optional SmartWizard theme -->
@@ -58,7 +81,14 @@
                                     <br>
                                     <div class="col-md-10 col-md-offset-1 margin-1">
                                         <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                            <div class="col-md-12">
+                                            <div class="col-md-2">
+                                                <a type="button" name="editCategory" id="editCategory"
+                                                   content = "{{$products[0]->categories[0]->id}}"
+                                                   class="glyphicon glyphicon-edit btn btn-success"
+                                                   products-toggle=""
+                                                   title="ویرایش "></a>
+                                            </div>
+                                            <div class="col-md-10">
                                             <input disabled id="lastCategory" class="form-control col-md-12"
                                                    name="lastCategory" value="{{$products[0]->categories[0]->title}}">
                                             </div>
@@ -915,4 +945,12 @@
             })
         </script>
 
+        <!-- below script is to handle category management -->
+        <script>
+            $(document).on('click','#editCategory',function(){
+                    var categoryId = $(this).attr('content');
+                    //alert(categoryId);
+                    $('#myModal').modal('show');
+            })
+        </script>
 @endsection

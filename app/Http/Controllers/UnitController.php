@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SubUnitCount;
 use App\Models\UnitCount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -57,7 +58,77 @@ class UnitController extends Controller
     public function unitCountManagement()
     {
         $pageTitle = 'مدیریت واحد های شمارش';
-        $data=UnitCount::all();
+        $data= UnitCount::where('active',1)->get();
         return view('admin.unitCountManagement',compact('data','pageTitle'));
+    }
+
+    //below function is related to return view show sub unit count
+    public function subUnitManagement($id)
+    {
+        $pageTitle = 'مدیریت زیر واحد های شمارش';
+        $subUnits = SubUnitCount::where('unit_count_id',$id)->get();
+        if(count($subUnits) > 0)
+        {
+            return view('admin.subUnitManagement',compact('subUnits','pageTitle'));
+        }else
+            {
+                return view('errors.403');
+            }
+
+    }
+
+    //below function is to return editUnitCount view
+    public function editUnitCount($id)
+    {
+        $pageTitle = 'ویرایش واحد شمارش';
+        $unitCount = UnitCount::where('id',$id)->get();
+        if(count($unitCount) > 0)
+        {
+            return view('admin.editUnitCount',compact('unitCount','pageTitle'));
+        }else
+        {
+            return view('errors.403');
+        }
+    }
+
+    //below function is related to edit unit count title
+    public function editUnitCountTitle(Request $request)
+    {
+        if(!$request->ajax())
+        {
+            abort(403);
+        }else
+            {
+                switch ($request->parameter)
+                {
+                    case 'unitCount':
+                        $unitCount = UnitCount::find($request->id);
+                        $unitCount->title = trim($request->title);
+                        $unitCount->save();
+                        if($unitCount)
+                        {
+                        return response()->json(['message' => 'ویرایش با موفقیت انجام گردید' , 'code' => 1 ]);
+                        }else
+                        {
+                            return response()->json(['message' => 'خطایی در عملیات ویرایش رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                        }
+                    break;
+
+                    case 'subUnitCount':
+                        $unitCount = SubUnitCount::find($request->id);
+                        $unitCount->title = trim($request->title);
+                        $unitCount->save();
+                        if($unitCount)
+                        {
+                            return response()->json(['message' => 'ویرایش با موفقیت انجام گردید' , 'code' => 1 ]);
+                        }else
+                        {
+                            return response()->json(['message' => 'خطایی در عملیات ویرایش رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                        }
+                    break;
+                }
+
+            }
+
     }
 }

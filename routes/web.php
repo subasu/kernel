@@ -27,6 +27,9 @@ Route::post('editCategoryTitle','CategoryController@editCategoryTitle');//this r
 Route::get('addUnit','UnitController@addUnit');//show add unit view
 Route::get('unitCountManagement','UnitController@unitCountManagement');//show view of all units and subUnits
 Route::post('addNewUnit','UnitController@addNewUnit');//show view of all units and subUnits
+Route::get('subUnitManagement/{id}','UnitController@subUnitManagement');//show view of all units and subUnits
+Route::get('editUnitCount/{id}','UnitController@editUnitCount');
+Route::post('editUnitCountTitle','UnitController@editUnitCountTitle');
 
 //products
 Route::get('addProduct','ProductController@addProduct');//show add product view

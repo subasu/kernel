@@ -21,7 +21,7 @@
 
 
                 <div style="">
-                    <a href="{{url('addProduct')}}" id="user-send" type="button" class="col-md-2 btn btn-primary" style=" font-weight: bold; margin-left: 39%;"><i class="fa fa-plus"></i>افزودن محصول جدید</a>
+                    <a href="{{url('addProduct')}}" id="user-send" type="button" class="col-md-2 btn btn-info" style=" font-weight: bold; margin-left: 39%;">افزودن محصول جدید</a>
                 </div>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
@@ -32,6 +32,8 @@
                         <tr>
                             <th style="text-align: center">شناسه محصول</th>
                             <th style="text-align: center">عنوان محصول</th>
+                            <th style="text-align: center">تعدا بازدید</th>
+                            <th style="text-align: center">تعداد خرید</th>
                             <th style="text-align: center">تاریخ ثبت محصول</th>
                             <th style="text-align: center">مشاهده جزییات</th>
 
@@ -44,8 +46,10 @@
                             <tr class="unit">
                                 <td style="font-size: 120%"> {{$datum->id}}</td>
                                 <td style="font-size: 120%">{{$datum->title}}</td>
+                                <td style="font-size: 120%">{{$datum->seen_count}}</td>
+                                <td style="font-size: 120%">{{$datum->sell_count}}</td>
                                 <td style="font-size: 120%">{{$datum->date}}</td>
-                                <td ><strong><a style="font-size: 120%" href="{{url('productDetails/'.$datum->id)}}"> برای مشاهده جزئیات کلیک نمایید</a></strong></td>
+                                <td ><strong><a style="font-size: 120%" class="btn btn-dark" href="{{url('productDetails/'.$datum->id)}}">مشاهده جزئیات</a></strong></td>
 
                             </tr>
                         @endforeach

@@ -48,7 +48,14 @@ class CategoryController extends Controller
     public function editCategory($id)
     {
         $categoryInfo = Category::where('id',$id)->get();
-        return view('admin.editCategory',compact('categoryInfo'));
+        if(count($categoryInfo) > 0)
+        {
+            return view('admin.editCategory',compact('categoryInfo'));
+        }else
+            {
+                return view('errors.403');
+            }
+
     }
     //below function is related to edit main category
     public function showSubCategory($id)
@@ -82,7 +89,7 @@ class CategoryController extends Controller
     public function editCategoryTitle(Request $request)
     {
         $category = Category::find($request->id);
-        $category->title = $request->title;
+        $category->title = trim($request->title);
         $category->save();
         if($category)
         {

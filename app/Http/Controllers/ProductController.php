@@ -4,6 +4,7 @@ use App\Http\SelfClasses\AddProduct;
 use App\Http\SelfClasses\CheckFiles;
 use App\Http\SelfClasses\CheckProduct;
 use App\Models\Product;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 class ProductController extends Controller
 {
@@ -18,7 +19,7 @@ class ProductController extends Controller
         $data = Product::all();
         foreach($data as $datum)
         {
-            $datum->date = $datum->created_at->toDateString();
+            $datum->date = $this->toPersian($datum->created_at->toDateString());
         }
         return view('admin.productManagement', compact('data','pageTitle'));
     }
@@ -57,5 +58,19 @@ class ProductController extends Controller
         {
             return view('errors.403');
         }
+    }
+
+
+    public function toPersian($date)
+    {
+        $gDate = $date;
+        if ($date = explode('-', $gDate)) {
+            $year = $date[0];
+            $month = $date[1];
+            $day = $date[2];
+        }
+        $date = Verta::getJalali($year, $month, $day);
+        $myDate = $date[0] . '/' . $date[1] . '/' . $date[2];
+        return $myDate;
     }
 }
