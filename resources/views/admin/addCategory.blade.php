@@ -88,11 +88,7 @@
                             <div class="item form-group" id="change" style="display:none;!important;">
 
 
-                                <div  id="existedDiv" style="display: none;">
-                                    <select id="existed" class="form-control" style="margin-right: 67%; margin-top: 0%; width: 30.75%; position: absolute;">'+
-                                        <option>زیر دسته ای برای دسته منتخب در نظر گرفته نشده است</option>
-                                    </select>
-                                    </div>
+
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -145,7 +141,8 @@
         <!-- below script is to handle when we want to add main category or sub category -->
         <script>
             function untimelyAddCategory(title,id) {
-
+                alert(id);
+                //return false;
                 swal({
                         title:   " آیا در نظر دارید برای دسته " +"(( "+ title +" ))"+  " زیر دسته انتخاب نمایید؟ ",
                         text: "",
@@ -195,7 +192,12 @@
 
                                     }
                                 })
+//                                $('#existedDiv').css('display','block');
+//                                appendToChange();
+                                $('#existedDiv').css('display','block');
+                                $('#existed').css('display','block');
                             }
+
 
                             $('#change').append
                             (
@@ -207,8 +209,8 @@
                                 '</div>'
 
                             );
-
                             $('#existedDiv').css('display','block');
+                            $('#existed').css('display','block');
                             appendToChange();
 
                         }else
@@ -323,7 +325,7 @@
                                         });
                                         //depth == 0;
                                         $('#change').css('display','none');
-                                        $('#change').empty();
+                                        //$('#change').empty();
                                         $('#addMainCategory').css('display','block');
                                         $('#addInput').css('display','none');
                                         $('#removeInput').css('display','none');
@@ -334,6 +336,7 @@
                                         $('#existedSub').css('display','none');
                                         $('#existedBrands').css('display','none');
                                         $('#existedDiv').css('display','none');
+                                        $('#existed').empty();
                                     }
 
                                 }
