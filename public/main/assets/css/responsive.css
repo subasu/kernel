@@ -509,7 +509,7 @@
 	#main-menu .navbar-header {
 	  display: block;
 	  margin: 0;
-	  background: #ff3366;
+	  background: #92c841;
 	  color: #fff;
 	  margin-left: 15px;
 	}
@@ -964,7 +964,7 @@
 	#main-menu .navbar-header {
 	  display: block;
 	  margin: 0;
-	  background: #ff3366;
+	  background: #92c841;
 	  color: #fff;
 	  margin-left: 15px;
 	}
@@ -1005,6 +1005,7 @@
 	}
 	#main-menu .navbar .navbar-nav>li{
 		border-bottom: 1px solid #cacaca;
+		text-align: center;
 	}
 	#main-menu .navbar .navbar-nav>li:hover,
 	#main-menu .navbar .navbar-nav>li.active{
@@ -1076,7 +1077,7 @@
 		margin-top: 10px;
 	}
 	.page-order ul.step li.current-step{
-		border-left: 3px solid #ff3366;
+		border-left: 3px solid #92c841;
 		border-bottom: none;
 	}
 	#footer2 .footer-top .footer-menu li{
@@ -1152,5 +1153,8 @@
 	}
 	.hot-deals-box .hot-deals-tab-content{
 		padding: 10px;
+	}
+	.float-xs-none{
+		float:none !important;
 	}
 }
