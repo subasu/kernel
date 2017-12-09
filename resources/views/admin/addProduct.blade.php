@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <select id="unit" class="form-control col-md-7 col-xs-12" name="unit_count_title">
+                                        <select id="unit" class="form-control col-md-7 col-xs-12" name="unit_count">
                                         </select>
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="unit"> واحد شمارش :
@@ -139,7 +139,7 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1 ">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <select id="subunit" class="form-control col-md-7 col-xs-12"
-                                                name="sub_unit_count_title">
+                                                name="sub_unit_count">
                                         </select>
 
                                     </div>
@@ -462,7 +462,7 @@
                                 var x = '';
                                 $.each(data, function (key, val) {
                                     x += val + '\n'
-                                });
+                                });console.log(data.responseText)
                                 swal({
                                     title: '',
                                     text: x,
@@ -470,14 +470,13 @@
                                 })
                             },
                             error: function (xhr) {
-                                console.log(xhr)
                                 var x;
-                                $.each(data, function (key, val) {
+                                $.each(xhr, function (key, val) {
                                     x += val + '\n'
                                 });
                                 swal({
                                     title: '',
-                                    text: x,
+                                    text: xhr,
                                     type: "info",
                                 })
                             }
@@ -531,7 +530,7 @@
                         (
                             '<div class="col-md-12 margin-1">' +
                             '<div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3">' +
-                            '<input class="form-control col-md-12 col-xs-12" type="file" name="pic[]" id="pic"/>' +
+                            '<input class="form-control col-md-12 col-xs-12" type="file" name="file[]" id="file"/>' +
                             '</div>' +
                             '<label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic"> تصویر محصول :' +
                             '<span class="required star"></span>' +

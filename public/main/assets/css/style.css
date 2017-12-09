@@ -5775,7 +5775,7 @@ span.notify-right {
 /*---------------
 [25. Box product]
 */
-/** box-products**/
+/** box-productFiles**/
 .box-products {
     margin-top: 30px;
 }
@@ -5928,7 +5928,7 @@ span.notify-right {
     border-bottom: 3px solid #ffcc00;
 }
 
-/**special-products**/
+/**special-productFiles**/
 .box-products.special-products .box-tabs li > a:after {
     color: #009966;
 }

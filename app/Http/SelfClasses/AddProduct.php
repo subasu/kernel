@@ -13,6 +13,7 @@ use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\ProductFlag;
+use App\Models\ProductImage;
 
 class AddProduct
 {
@@ -36,6 +37,13 @@ class AddProduct
             $prices->price = $price;
             $prices->save();
         }
+        $videoSrc='';
+        if (!empty($product->video_src)) {
+            $file = $product->video_src;
+            $videoSrc = $file->getClientOriginalName();
+            $file->move('public/dashboard/productFiles/video/', $videoSrc);
+        }
+
         //add a new product in product table
         $pr = new Product();
         $pr->title = $product->title;
@@ -44,10 +52,10 @@ class AddProduct
         $pr->produce_date = $product->produce_date;
         $pr->expire_date = $product->expire_date;
         $pr->produce_place = $product->produce_place;
-        $pr->unit_count_id = $product->unit_count_id;
-        $pr->sub_unit_count_id = $product->sub_unit_count_id;
+        $pr->unit_count = $product->unit_count;
+        $pr->sub_unit_count = $product->sub_unit_count;
         $pr->ready_time = $product->ready_time;
-        $pr->video_src = $product->video_src;
+        $pr->video_src = $videoSrc;
         $pr->delivery_volume = $product->delivery_volume;
         $pr->warehouse_count = $product->warehouse_count;
         $pr->warehouse_place = $product->warehouse_place;
@@ -55,6 +63,23 @@ class AddProduct
         $pr->save();
 
         $lastProductId = Product::orderBy('created_at', 'desc')->offset(0)->limit(1)->value('id');
+
+        $count = count($product->file);
+        if($count)
+        {
+            for($i=0;$i<$count;$i++)
+            {
+                $productPicture=new ProductImage();
+                $productPicture->product_id=$lastProductId;
+                $imageName=$product->file[$i]->getClientOriginalName();
+                $productPicture->image_src=$imageName;
+                $product->file[$i]->move('public/dashboard/productFiles/picture/',$imageName);
+                $productPicture->active=1;
+                $productPicture->save();
+
+            }
+
+        }
         addProductFlag('price', $product->price, $lastProductId);
 
         if (!empty($product->special_price)) {
@@ -92,6 +117,6 @@ class AddProduct
             $subCategoriesId = Category::where([['parent_id', $product->categories], ['active', 1]])->where('title', '=', 'سایر')->value('id');
             addCategoryProduct($lastProductId, $subCategoriesId);
         }
-        return ('1');
+        return (true);
     }
 }

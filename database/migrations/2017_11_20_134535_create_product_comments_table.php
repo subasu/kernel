@@ -20,7 +20,7 @@ class CreateProductCommentsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('product_id')->unsigned()->index();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('productFiles');
             $table->string('user_cellphone');
             $table->string('answer');
             $table->tinyInteger('active')->default('1');

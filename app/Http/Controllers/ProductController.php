@@ -34,11 +34,10 @@ class ProductController extends Controller
             if (is_bool($result)) {
                 $addNewProduct = new AddProduct();
                 $ans = $addNewProduct->addProduct($request);
-                return response()->json(['data' => '1']);
-//            if($ans == "1")
-//                return response()->json(['data' => 'محصول شما با مؤفقیت درج شد']);
-//            else
-//              return response()->json(['data'=>'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.']);
+            if($ans == "true")
+                return response()->json(['data' => 'محصول شما با مؤفقیت درج شد']);
+            else
+              return response()->json(['data'=>'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.']);
             }
             else
                 return response()->json(['message' => $result , 'code' => '1']);
