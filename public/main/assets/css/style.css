@@ -575,7 +575,8 @@ img.alignright {
     height: 50px;
     position: absolute;
     top: 0;
-    right: 0;
+    right: -1%;
+    /*mee*/
     display: none;
 }
 
@@ -609,7 +610,8 @@ img.alignright {
     height: 50px;
     position: absolute;
     top: 0;
-    right: 50px;
+    right: -15%;
+    /*mee*/
 }
 
 #user-info-opntop a.current-open span {
@@ -680,8 +682,9 @@ img.alignright {
 #form-search-opntop {
     position: absolute;
     top: 0;
-    right: 100px;
+    right: -20%;
     height: 50px;
+/*mee*/
 }
 
 #form-search-opntop .form-category {
@@ -1400,7 +1403,7 @@ span.notify-right {
  */
 #main-menu {
     padding: 0;
-    margin-left: -15px;
+    margin-left: -5%;
 }
 
 #main-menu .container-fluid {
@@ -5060,7 +5063,7 @@ span.notify-right {
 }
 
 .box-authentication label {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     margin-bottom: 2px;
 }
 
@@ -6024,9 +6027,22 @@ span.notify-right {
 }
 .register-form
 {
-    height: 730px;
+    height: 820px;
 }
 .captcha{
     width: 49%;
     margin-left: 0.5%;
+}
+#captcha{
+    width: 46%;
+    margin-left: 0.5%;
+}
+.captcha-reload{
+    margin: 3% -3% 0 2%;
+    color: #0db9f5;
+}
+.address{
+    height: max-content;
+    overflow-x: hidden;
+    resize: none;
 }
