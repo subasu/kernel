@@ -1,4 +1,4 @@
-@extends('layouts.pageLayout')
+@extends('layouts.mainLayout')
 @section('content')
     <div class="columns-container">
         <div class="container" id="columns">
@@ -17,7 +17,7 @@
             <div class="page-content" dir="rtl">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="box-authentication">
+                        <div class="box-authentication register-form">
                             <h3>ثبت نام</h3>
                             {{--<p>لطفا تلفن خود را برای ثبت نام وارد نمائید</p>--}}
                             {{--<label for="cellphone">نام</label>--}}
@@ -118,7 +118,6 @@
                                     <div class="col-md-9">
                                         <select tabindex="" class="form-control align-right selectpicker required" name="town" id="town"
                                                 data-style="g-select" data-width="100%">
-
                                         </select>
                                     </div>
                                     <label for="town" class="col-md-3 control-label">شهــر</label>
@@ -177,9 +176,11 @@
                                     <label for="captcha" class="col-md-3 control-label"> کد امنیتی</label>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <div class="col-md-9">
-                                        <button type="submit" class="btn btn-primary col-md-4"><i
-                                                    class="fa fa-user-plus"></i></button>
+                                    <div class="col-md-12">
+                                        {{--<button type="submit" class="btn btn-primary col-md-4"><i--}}
+                                                    {{--class="fa fa-user-plus"></i></button>--}}
+                                        <button class="button"><i class="fa fa-user"></i> ثبت نام </button>
+
                                     </div>
                                 </div>
                             </form>
@@ -200,5 +201,36 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><script type="text/javascript" src="{{url('public/main/assets/lib/jquery/jquery-1.11.2.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function () {
+            var capital = $("#capital");
+            $("#capital").on("change", function () {
+                var cid = $(this).val();
+                var token = $(this).data("token");
+                $.ajax({
+                    url: '{{url('town')}}' + '/' + cid,
+                    type: 'get',
+                    dataType: "JSON",
+                    data: {
+                        "id": cid,
+                        "_method": 'get',
+                        "_token": token
+                    },
+                    success: function (data) {
+                        var item = $('#town');
+                        item.empty();
+                        $.each(data, function (index, value) {
+                            item.append('<option value="' + value + '">' + value + '</option>');
+                        });
+
+                    },
+                    error: function (response) {
+                        console.log(response.valueOf(2));
+                    }
+                });
+            });
+        })
+    </script>
 @endsection

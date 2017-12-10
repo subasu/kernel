@@ -6021,4 +6021,7 @@ span.notify-right {
 .total {
     padding-right: 4%;
 }
-.submenu{}
+.register-form
+{
+    height: 730px;
+}

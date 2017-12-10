@@ -14,6 +14,7 @@ Route::get('/','IndexController@index');
 Route::get('index','IndexController@home');
 Route::get('productFiles','IndexController@productFiles');
 Route::get('myLogin','IndexController@login');
+Route::get('town/{cid}','IndexController@town');
 Route::get('products','IndexController@products');
 
 //categories

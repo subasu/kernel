@@ -32,7 +32,7 @@ class IndexController extends Controller
         $pageTitle='لیست محصولات';
         return view('main.products',compact('pageTitle','menu'));
     }
-    public function getTown($cid)
+    public function town($cid)
     {
         $towns=City::where('parent_id','=',$cid)->value('title');
         return response()->json($towns);
