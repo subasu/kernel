@@ -139,19 +139,7 @@
                                     <li class="dropdown mainMenu"  name="{{$mnu->id}}">
                                         <a class="dropdown-toggle" data-toggle="dropdown">{{$mnu->title}}</a>
                                         <ul class="dropdown-menu mega_dropdown submenu" role="menu" style="width: 830px;">
-                                            <li class="block-container col-sm-3">
-                                                <ul class="block">
-                                                    <li class="img_container">
-                                                        <a href="#">
-                                                            <img class="img-responsive" src="public/main/assets/data/men.png" alt="sport">
-                                                        </a>
-                                                    </li>
-                                                    <li class="link_container group_header">
-                                                        <a href="#">ggg</a>
-                                                    </li>
-                                                        <li class="link_container"><a href="#">fgbxfb</a></li>
-                                                </ul>
-                                            </li>
+
                                         </ul>
                                     </li>
                                 @endforeach

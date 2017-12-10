@@ -676,10 +676,17 @@
                     }
                     findTitle(id)
                 })
-                //check option 2 selected or not, if yes redirect to add unit view
+                //check option 2 selected or not, if yes redirect to add unit view//in main unit select box
                 $('#unit').on("change", function () {
                     var id = $(this).val();
-                    if (id == 0000) {
+                    if (id == 0) {
+                        location.href = '{{url("addUnit")}}';
+                    }
+                })
+                //check option 2 selected or not, if yes redirect to add unit //view in subunit select box
+                $('#subunit').on("change", function () {
+                    var id = $(this).val();
+                    if (id == 0) {
                         location.href = '{{url("addUnit")}}';
                     }
                 })
@@ -696,7 +703,7 @@
                             var selectBoxId = '#unit';
                             var msgOpt1 = "لطفا واحد شمارش مورد نظر خود را انتخاب نمایید";
                             var msgOpt2 = "اگر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
-                            var valueOption2 = "0000";
+                            var valueOption2 = 0000;
                             loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                         }
                         else {
@@ -708,7 +715,7 @@
                 //id = 0000 it's for second option for redirect to add unit
                 $('#unit').on("change", function () {
                     var id = $(this).val();
-                    if (id == 0000) {
+                    if (id == 0) {
                         location.href = '{{url("addUnit")}}';
                     }
                     else {
@@ -723,7 +730,8 @@
                                 var selectBoxId = '#subunit';
                                 var msgOpt1 = "لطفا زیر واحد شمارش مورد نظر خود را انتخاب نمایید";
                                 var msgOpt2 = "اگر زیر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
-                                var valueOption2 = "001";
+                                var valueOption2 = 0;
+                                console.log(response);
                                 loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                             }
                         });

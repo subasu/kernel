@@ -168,7 +168,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
-                                        <input type="text" pattern="^\d{11}$" required=" " tabindex="7"
+                                        <input type="text"  required=" " tabindex="7"
                                                value="{{ old('mobile') }}" maxlength="11" name="mobile" id="mobile"
                                                class="form-control">
                                         @if ($errors->has('mobile'))
@@ -177,23 +177,34 @@
                                     </span>
                                         @endif
                                     </div>
-                                    <label for="grade" class="col-md-3 control-label">کد ;n</label>
+                                    <label for="grade" class="col-md-3 control-label">تاریخ تولد</label>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <div class="col-md-9">
+                                        <textarea type="text" required=" " tabindex="7"
+                                               value="{{ old('address') }}" maxlength="11" name="address" id="address"
+                                                  class="form-control"></textarea>
+                                        @if ($errors->has('mobile'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('mobile') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <label for="grade" class="col-md-3 control-label">آدرس</label>
                                 </div>
                                 <div class="form-group col-md-12{{ $errors->has('captcha') ? ' has-error' : '' }}">
                                     <div class="col-md-9">
-
                                         <img src="{{url('public/reload.jpg')}}" class="captcha-reload col-md-1"
-                                              height="25">
-
-                                        <img class="captcha col-md-4" alt="captcha.png" style="width: 41%;margin-right: 1%;padding-right: 0px !important;padding-left: 0px;margin-left: 1%;"/>
+                                             height="25">
+                                        <img class="captcha col-md-4" alt="captcha.png"
+                                             style="width: 41%;margin-right: 1%;padding-right: 0px !important;padding-left: 0px;margin-left: 1%;"/>
                                         @if ($errors->has('captcha'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('captcha') }}</strong>
                                     </span>
                                         @endif
                                         <input id="captcha" class="form-control col-md-4" type="text"
-                                               name="captcha" value="" required
-                                               autofocus>
+                                               name="captcha" value="" required autofocus>
                                     </div>
                                     <label for="captcha" class="col-md-3 control-label"> کد امنیتی</label>
                                 </div>
