@@ -238,13 +238,13 @@
                                                 <div class="col-md-10">
                                                 @if($products[0]->productFlags[0]->title  == 'price')
                                                     <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
+                                                           class="form-control col-md-7 col-xs-12 editable pr"
                                                            name="unit_count_id"
                                                            value="{{number_format($products[0]->productFlags[0]->price)}}">
                                                 @endif
                                                 @if($products[0]->productFlags[0]->title != 'price')
                                                     <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
+                                                           class="form-control col-md-7 col-xs-12 editable pr"
                                                            name="unit_count_id">
                                                 @endif
                                                 </div>
@@ -275,15 +275,15 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->produce_date != null)
+                                                @if($products[0]->produceDate != null)
                                                     <input disabled id="editable"
                                                            class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id" value="{{$products[0]->produce_date}}">
+                                                           name="produce_date" value="{{$products[0]->produceDate}}">
                                                 @endif
-                                                @if($products[0]->produce_date == null)
+                                                @if($products[0]->produceDate == null)
                                                     <input disabled id="editable"
                                                            class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id">
+                                                           name="produce_date">
                                                 @endif
                                                 </div>
                                             </div>
@@ -308,15 +308,15 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->expire_date != null)
+                                                @if($products[0]->expireDate != null)
                                                     <input disabled id="editable"
                                                            class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id" value="{{$products[0]->expire_date}}">
+                                                           name="expire_date" value="{{$products[0]->expireDate}}">
                                                 @endif
-                                                @if($products[0]->expire_date == null)
+                                                @if($products[0]->expireDate == null)
                                                     <input disabled id="editable"
                                                            class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id">
+                                                           name="expire_date">
                                                 @endif
                                                 </div>
                                             </div>
@@ -522,13 +522,13 @@
                                                 <div class="col-md-10">
                                                 @if($products[0]->productFlags[0]->title == 'sales_price')
                                                     <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
+                                                           class="form-control col-md-7 col-xs-12 editable pr"
                                                            name="unit_count_id"
                                                            value="{{number_format($products[0]->productFlags[0]->price)}}">
                                                 @endif
                                                 @if($products[0]->productFlags[0]->title != 'sales_price')
                                                     <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
+                                                           class="form-control col-md-7 col-xs-12 editable pr"
                                                            name="unit_count_id">
                                                 @endif
                                                 </div>
@@ -557,13 +557,13 @@
                                                 <div class="col-md-10">
                                                 @if($products[0]->productFlags[0]->title == 'special_price')
                                                     <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
+                                                           class="form-control col-md-7 col-xs-12 editable pr"
                                                            name="unit_count_id"
                                                            value="{{number_format($products[0]->productFlags[0]->price)}}">
                                                 @endif
                                                 @if($products[0]->productFlags[0]->title != 'special_price')
                                                     <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
+                                                           class="form-control col-md-7 col-xs-12 editable pr"
                                                            name="unit_count_id">
                                                 @endif
                                                 </div>
@@ -592,13 +592,13 @@
                                                 <div class="col-md-10">
                                                 @if($products[0]->productFlags[0]->title == 'wholesale_price')
                                                     <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
+                                                           class="form-control col-md-7 col-xs-12 editable pr"
                                                            name="unit_count_id"
                                                            value="{{number_format($products[0]->productFlags[0]->price)}}">
                                                 @endif
                                                 @if($products[0]->productFlags[0]->title != 'wholesale_price')
                                                     <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
+                                                           class="form-control col-md-7 col-xs-12 editable pr"
                                                            name="unit_count_id">
                                                 @endif
                                                 </div>
@@ -744,7 +744,7 @@
                                                          style="display: block;">
                                                         <img class="image" id="editable"
                                                              style="height: 100px; width: 100px; margin-left: 80%;"
-                                                             src="{{url('public/dashboard/productImage')}}/{{$image->image_src}}">
+                                                             src="{{url('public/dashboard/productFiles/picture')}}/{{$image->image_src}}">
                                                     </div>
 
                                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic">
@@ -771,7 +771,7 @@
                                                     <video disabled="disabled"
                                                            class="form-control col-md-7 col-xs-12 editable"
                                                            id="editable" name="unit_count_id">
-                                                        <source src="{{url('public/dashboard/video')}}/{{$products[0]->video_src}}">
+                                                        <source src="{{url('public/dashboard/productFiles/video')}}/{{$products[0]->video_src}}">
                                                     </video>
                                                 @endif
                                                 @if($products[0]->video_src == null)
@@ -952,5 +952,37 @@
                     //alert(categoryId);
                     $('#myModal').modal('show');
             })
+        </script>
+
+
+        <script src="{{ URL::asset('public/js/persianDatepicker.js')}}"></script>
+        {{--persianDatepicker--}}
+        <script>
+            $(function () {
+                $("[name = 'produce_date']").each(function(){
+                    $(this).persianDatepicker();
+                })
+
+                $("[name = 'expire_date']").each(function () {
+                    $(this).persianDatepicker();
+                })
+            })
+        </script>
+        <script>
+            $(function(){
+                function formatNumber (num) {
+                    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                }
+
+                $(".pr").on('keyup',function () {
+                    var price= $(this);
+                    var v0=price.val();
+                    var v1 = v0.split(',').join('');
+                    var v2=formatNumber(v1);
+                    price.val(v2)
+                })
+
+            })
+
         </script>
 @endsection

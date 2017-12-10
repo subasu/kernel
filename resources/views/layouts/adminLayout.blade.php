@@ -99,54 +99,54 @@
                             </li>
                             <li><a><i class="fa fa-users"></i> مدیریت محصولات<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('productsManagement')}}"> نمایش و مدیریت محصولات</a>
+                                    <li><a href="{{url('admin/productsManagement')}}"> نمایش و مدیریت محصولات</a>
                                     </li>
-                                    <li><a href="{{url('addProduct')}}">درج محصول جدید </a>
+                                    <li><a href="{{url('admin/addProduct')}}">درج محصول جدید </a>
                                     </li>
-                                    {{--<li><a href="{{url('unitCountManagement')}}"> نمایش و مدیریت واحد شمارش </a>--}}
-                                    {{--<li><a href="{{url('addUnit')}}">درج واحد شمارش و زیرواحد شمارش </a>--}}
+                                    {{--<li><a href="{{url('admin/unitCountManagement')}}"> نمایش و مدیریت واحد شمارش </a>--}}
+                                    {{--<li><a href="{{url('admin/addUnit')}}">درج واحد شمارش و زیرواحد شمارش </a>--}}
                                     {{--</li>--}}
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-th-list"></i> مدیریت دسته بندی ها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('categoriesManagement')}}"> نمایش و مدیریت دسته بندی ها</a>
+                                    <li><a href="{{url('admin/categoriesManagement')}}"> نمایش و مدیریت دسته بندی ها</a>
                                     </li>
-                                    <li><a href="{{url('addCategory')}}">درج دسته بندی جدید </a>
+                                    <li><a href="{{url('admin/addCategory')}}">درج دسته بندی جدید </a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-th-list"></i> مدیریت واحد های شمارش<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('unitCountManagement')}}"> نمایش و مدیریت واحد های شمارش</a>
+                                    <li><a href="{{url('admin/unitCountManagement')}}"> نمایش و مدیریت واحد های شمارش</a>
                                     </li>
-                                    <li><a href="{{url('addUnit')}}">درج واحد های شمارش  جدید </a>
+                                    <li><a href="{{url('admin/addUnit')}}">درج واحد های شمارش  جدید </a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-cubes"></i> مدیریت سفارشات<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('ordersManagement')}}"> نمایش و مدیریت سفارشات</a>
+                                    <li><a href="{{url('admin/ordersManagement')}}"> نمایش و مدیریت سفارشات</a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-motorcycle"></i> مدیریت پیک ها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('deliveryMansManagement')}}"> نمایش و مدیریت پیک ها</a>
+                                    <li><a href="{{url('admin/deliveryMansManagement')}}"> نمایش و مدیریت پیک ها</a>
                                     </li>
-                                    <li><a href="{{url('addDeliveryMan')}}">درج پیک جدید </a>
+                                    <li><a href="{{url('admin/addDeliveryMan')}}">درج پیک جدید </a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-users"></i> مدیریت کاربران<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('usersManagement')}}"> نمایش و مدیریت کاربران</a>
+                                    <li><a href="{{url('admin/usersManagement')}}"> نمایش و مدیریت کاربران</a>
                                     </li>
                                 </ul>
                             </li>
                             {{--<li><a><i class="fa fa-comments"></i> مدیریت نظرات<span class="fa fa-chevron-down"></span></a>--}}
                                 {{--<ul class="nav child_menu" style="display: none">--}}
-                                    {{--<li><a href="{{url('systemManager')}}"> نمایش و مدیریت دسته بندی های پروژه</a>--}}
+                                    {{--<li><a href="{{url('admin/systemManager')}}"> نمایش و مدیریت دسته بندی های پروژه</a>--}}
                                         {{--</li>--}}
                                     {{--<li><a href="{{url('systemManager')}}">درج دسته بندی جدید </a>--}}
                                         {{--</li>--}}

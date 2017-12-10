@@ -252,7 +252,7 @@
             $.ajax
             ({
                 cache       : false,
-                url         : "{{url('addNewUnit')}}",
+                url         : "{{url('admin/addNewUnit')}}",
                 type        : "post",
                 processData : false,
                 contentType : false,

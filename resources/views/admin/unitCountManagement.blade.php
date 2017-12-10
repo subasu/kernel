@@ -18,7 +18,7 @@
                 </div>
 
 
-                <a href="{{url('addUnit')}}" id="user-send" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style="font-weight: bold;">
+                <a href="{{url('admin/addUnit')}}" id="user-send" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style="font-weight: bold;">
                                         افزودن واحد شمارش جدید                </a>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
@@ -41,9 +41,9 @@
                             <tr class="unit">
                                 <td style="font-size: 120%;">{{++$i}}</td>
                                 <td style="font-size: 120%;">{{$datum->title}}</td>
-                                <td style="font-size: 120%;"><a class="btn btn-info"  href="{{url('editUnitCount')}}/{{$datum->id}}">ویرایش</a></td>
+                                <td style="font-size: 120%;"><a class="btn btn-info"  href="{{url('admin/editUnitCount')}}/{{$datum->id}}">ویرایش</a></td>
                                 @if(count($datum->subUnits) > 0)
-                                    <td style="font-size: 120%;"><a class="btn btn-dark col-md-5 col-md-offset-3" href="{{url('subUnitManagement')}}/{{$datum->id}}"> مشاهده و ویرایش زیر واحدها </a></td>
+                                    <td style="font-size: 120%;"><a class="btn btn-dark col-md-5 col-md-offset-3" href="{{url('admin/subUnitManagement')}}/{{$datum->id}}"> مشاهده و ویرایش زیر واحدها </a></td>
                                 @endif
                                 @if(count($datum->subUnits) == 0)
                                     <td style="font-size: 120%;"><a class="btn btn-danger col-md-5 col-md-offset-3">فاقد زیر واحد</a></td>

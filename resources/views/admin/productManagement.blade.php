@@ -21,7 +21,7 @@
 
 
                 <div style="">
-                    <a href="{{url('addProduct')}}" id="user-send" type="button" class="col-md-2 btn btn-info" style=" font-weight: bold; margin-left: 39%;">افزودن محصول جدید</a>
+                    <a href="{{url('admin/addProduct')}}" id="user-send" type="button" class="col-md-2 btn btn-info" style=" font-weight: bold; margin-left: 39%;">افزودن محصول جدید</a>
                 </div>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
@@ -49,7 +49,7 @@
                                 <td style="font-size: 120%">{{$datum->seen_count}}</td>
                                 <td style="font-size: 120%">{{$datum->sell_count}}</td>
                                 <td style="font-size: 120%">{{$datum->date}}</td>
-                                <td ><strong><a style="font-size: 120%" class="btn btn-dark" href="{{url('productDetails/'.$datum->id)}}">مشاهده جزئیات</a></strong></td>
+                                <td ><strong><a style="font-size: 120%" class="btn btn-dark" href="{{url('admin/productDetails/'.$datum->id)}}">مشاهده جزئیات</a></strong></td>
 
                             </tr>
                         @endforeach

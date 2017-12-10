@@ -42,7 +42,7 @@
                 </div>
 
 
-                <a href="{{url('addCategory')}}" id="user-send" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style="font-weight: bold;">
+                <a href="{{url('admin/addCategory')}}" id="user-send" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style="font-weight: bold;">
                     <i class="fa fa-th-list"></i>                    افزودن دسته ی جدید                </a>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
@@ -75,9 +75,9 @@
                                     @if($category->image_src != null)
                                         <td><button class="btn btn-basic" id="showPicture">مشاهده تصویر</button></td>
                                     @endif
-                                    <td><a  href="{{url('editCategory/'.$category->id)}}" class="btn btn-info">ویرایش</a></td>
+                                    <td><a  href="{{url('admin/editCategory/'.$category->id)}}" class="btn btn-info">ویرایش</a></td>
                                     @if($category->depth > 0)
-                                        <td><a  class="btn btn-dark" style="width : 82%; text-align: center;" href="{{url('showSubCategory/'.$category->id)}}">مشاهده زیر دسته</a></td>
+                                        <td><a  class="btn btn-dark" style="width : 82%; text-align: center;" href="{{url('admin/showSubCategory/'.$category->id)}}">مشاهده زیر دسته</a></td>
                                     @endif
                                     @if($category->depth == 0)
                                         <td><a  class="btn btn-warning " style="width : 82%;"  >فاقد زیر دسته</a></td>

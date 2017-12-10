@@ -18,7 +18,7 @@
                 </div>
 
 
-                <a href="{{url('unitCountManagement')}}" id="user-send" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style="font-weight: bold;">
+                <a href="{{url('admin/unitCountManagement')}}" id="user-send" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style="font-weight: bold;">
                                     بازگشت به صفحه قبل                </a>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
@@ -80,7 +80,7 @@
                             $.ajax
                             ({
                                 cache: false,
-                                url: "{{url('editUnitCountTitle')}}",
+                                url: "{{url('admin/editUnitCountTitle')}}",
                                 data: {'title': title, 'id': id, '_token': token , 'parameter' : parameter},
                                 type: "post",
                                 dataType: "JSON",
