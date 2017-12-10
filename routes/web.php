@@ -17,6 +17,7 @@ Route::get('myLogin','IndexController@login');
 Route::get('town/{cid}','IndexController@town');
 Route::get('products','IndexController@products');
 Route::get('captcha', 'IndexController@create_image');
+Route::get('getSubmenu/{id}','CommonController@getSubmenu');
 
 
 //categories

@@ -1460,7 +1460,8 @@ span.notify-right {
     border-radius: 0;
     min-width: 200px;
     border-top: none;
-    left: auto;
+    /*left: auto;*/
+    margin-left: 21.1%;
     padding: 30px 15px;
     -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
     transition: opacity 0.5s, transform 0.5s;
