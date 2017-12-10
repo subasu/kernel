@@ -44,14 +44,7 @@ class AddProduct
             $videoSrc = $file->getClientOriginalName();
             $file->move('public/dashboard/productFiles/video/', $videoSrc);
         }
-        $jDate = $request->date;
-        if ($date = explode('/', $jDate)) {
-            $year = $date[0];
-            $month = $date[1];
-            $day = $date[2];
-        }
-        $gDate = $this->jalaliToGregorian($year, $month, $day);
-        $gDate1 = $gDate[0] . '-' . $gDate[1] . '-' . $gDate[2];
+
         //add a new product in product table
         $pr = new Product();
         $pr->title = $product->title;
