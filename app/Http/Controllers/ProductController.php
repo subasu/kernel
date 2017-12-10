@@ -63,6 +63,8 @@ class ProductController extends Controller
         $products = Product::where([['id',$id],['active',1]])->get();
         if(count($products) > 0)
         {
+            $products[0]->produceDate = $this->toPersian($products[0]->produce_date);
+            $products[0]->expireDate = $this->toPersian($products[0]->expire_date);
             return view('admin.productDetails',compact('products','pageTitle'));
         }else
         {
@@ -71,14 +73,18 @@ class ProductController extends Controller
     }
     public function toPersian($date)
     {
-        $gDate = $date;
-        if ($date = explode('-', $gDate)) {
-            $year = $date[0];
-            $month = $date[1];
-            $day = $date[2];
+        if(count($date)>0)
+        {
+            $gDate = $date;
+            if ($date = explode('-', $gDate)) {
+                $year = $date[0];
+                $month = $date[1];
+                $day = $date[2];
+            }
+            $date = Verta::getJalali($year, $month, $day);
+            $myDate = $date[0] . '/' . $date[1] . '/' . $date[2];
+            return $myDate;
         }
-        $date = Verta::getJalali($year, $month, $day);
-        $myDate = $date[0] . '/' . $date[1] . '/' . $date[2];
-        return $myDate;
+        return;
     }
 }
