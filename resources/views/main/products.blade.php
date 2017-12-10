@@ -1,4 +1,4 @@
-@extends('layouts.pageLayout')
+@extends('layouts.mainLayout')
 @section('content')
     <div class="columns-container">
         <div class="container" id="columns">

@@ -1,4 +1,4 @@
-@extends('layouts.pageLayout')
+@extends('layouts.mainLayout')
 @section('content')
     <div class="columns-container">
         <div class="container" id="columns">
@@ -17,12 +17,174 @@
             <div class="page-content" dir="rtl">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="box-authentication">
+                        <div class="box-authentication register-form">
                             <h3>ثبت نام</h3>
-                            <p>لطفا تلفن خود را برای ثبت نام وارد نمائید</p>
-                            <label for="emmail_register">شماره تلفن</label>
-                            <input id="emmail_register" type="text" class="form-control">
-                            <button class="button"><i class="fa fa-user"></i> ثبت نام </button>
+                            {{--<p>لطفا تلفن خود را برای ثبت نام وارد نمائید</p>--}}
+                            {{--<label for="cellphone">نام</label>--}}
+                            {{--<input id="cellphone" type="text" class="form-control">--}}
+                            {{--<label for="cellphone">نام خانوادگی</label>--}}
+                            {{--<input id="cellphone" type="text" class="form-control">--}}
+                            {{--<label for="cellphone">موبایل</label>--}}
+                            {{--<input id="cellphone" type="text" class="form-control">--}}
+                            {{--<label for="cellphone">شماره تلفن</label>--}}
+                            {{--<input id="cellphone" type="text" class="form-control">--}}
+                            {{--<label for="cellphone">آدرس</label>--}}
+                            {{--<input id="cellphone" type="text" class="form-control">--}}
+                            {{--<label for="cellphone">کدپستی</label>--}}
+                            {{--<input id="cellphone" type="text" class="form-control">--}}
+                            {{--<button class="button"><i class="fa fa-user"></i> ثبت نام </button>--}}
+
+                            <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <input type="hidden" value="user" name="frmtype">
+                                <input type="hidden" value="0" name="visitprice">
+                                <div class="form-group col-md-12{{ $errors->has('name') ? ' has-error' : '' }}">
+                                    <div class="col-md-9">
+                                        <input id="name" type="text" class="form-control" name="name"
+                                               value="{{ old('name') }}" required autofocus>
+                                        @if ($errors->has('name'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <label for="name" class="col-md-3 control-label">نام</label>
+                                </div>
+
+                                <div class="form-group col-md-12{{ $errors->has('family') ? ' has-error' : '' }}">
+                                    <div class="col-md-9">
+                                        <input id="family" type="text" class="form-control" name="family"
+                                               value="{{ old('family') }}" required autofocus>
+
+                                        @if ($errors->has('family'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('family') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <label for="family" class="col-md-3 control-label"> نام خانوادگی</label>
+                                </div>
+
+                                <div class="form-group col-md-12{{ $errors->has('email') ? ' has-error' : '' }}">
+                                    <div class="col-md-9">
+                                        <input id="email" class="form-control" name="email" value="{{ old('email') }}"
+                                               required>
+
+                                        @if ($errors->has('email'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <label for="email" class="col-md-3 control-label">نام کاربری یا ایمیل</label>
+                                </div>
+
+                                <div class="form-group col-md-12{{ $errors->has('password') ? ' has-error' : '' }}">
+                                    <div class="col-md-9">
+                                        <input id="password" type="password" class="form-control" name="password" required
+                                               maxlength="20">
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <label for="password" class="col-md-3 control-label">پسورد</label>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <div class="col-md-9">
+                                        <input id="password-confirm" type="password" class="form-control col-md-9"
+                                               name="password_confirmation" placeholder="6 تا 20 کاراکتر" maxlength="20">
+                                    </div>
+                                    <label for="password-confirm" class="col-md-3 control-label">تکرار پسورد</label>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <div class="col-md-9">
+                                        <select tabindex="" class="form-control align-right selectpicker required" name="capital"
+                                                id="capital" data-style="g-select" data-width="100%">
+                                            <option class="align-right" value="-1">لطفا استان مورد نظر خود را انتخاب
+                                                نمایید.
+                                            </option>
+                                            @foreach($capital as $cap)
+                                                <option class="align-right" value="{{$cap->id}}">{{$cap->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <label for="capital" class="col-md-3 control-label">استان</label>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <div class="col-md-9">
+                                        <select tabindex="" class="form-control align-right selectpicker required" name="town" id="town"
+                                                data-style="g-select" data-width="100%">
+                                        </select>
+                                    </div>
+                                    <label for="town" class="col-md-3 control-label">شهــر</label>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <div class="col-md-9">
+                                        <input type="text" pattern="^\d{11}$" required=" " tabindex="6"
+                                               value="{{ old('tel') }}" maxlength="11" name="tel" id="tel"
+                                               class="form-control">
+                                        @if ($errors->has('tel'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('tel') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <label for="grade" class="col-md-3 control-label">تلفن ثابت</label>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <div class="col-md-9">
+                                        <input type="text" pattern="^\d{11}$" required=" " tabindex="7"
+                                               value="{{ old('mobile') }}" maxlength="11" name="mobile" id="mobile"
+                                               class="form-control">
+                                        @if ($errors->has('mobile'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('mobile') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <label for="grade" class="col-md-3 control-label">تلفن همراه</label>
+                                </div>
+                                <div class="form-group col-md-12{{ $errors->has('gender') ? ' has-error' : '' }}">
+                                    <div class="col-md-9">
+                                        <div>
+                                            <input type="radio" tabindex="" name="gender" value="مرد" required=""
+                                                   class="genbtn">
+                                            <label for="gender" class="">مرد</label>
+                                            <input type="radio" tabindex="" name="gender" value="زن" required=""
+                                                   class="genbtn">
+                                            <label for="gender" class="">زن</label>
+                                        </div>
+                                    </div>
+                                    <label for="gender" class="col-md-3 control-label">جنسیت</label>
+                                </div>
+                                <div class="form-group col-md-12{{ $errors->has('captcha') ? ' has-error' : '' }}">
+                                    <div class="col-md-9">
+                                        <input id="captcha" type="text" style="width: 49%;" name="captcha" value="" required
+                                               autofocus>
+                                        <img class="captcha" alt="captcha.png" style="width: 41%;" />
+                                        <img src="{{url('public/reload.jpg')}}" class="captcha-reload" width="25" height="25">
+                                        @if ($errors->has('captcha'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('captcha') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <label for="captcha" class="col-md-3 control-label"> کد امنیتی</label>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <div class="col-md-12">
+                                        {{--<button type="submit" class="btn btn-primary col-md-4"><i--}}
+                                                    {{--class="fa fa-user-plus"></i></button>--}}
+                                        <button class="button"><i class="fa fa-user"></i> ثبت نام </button>
+
+                                    </div>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -39,5 +201,36 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div><script type="text/javascript" src="{{url('public/main/assets/lib/jquery/jquery-1.11.2.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function () {
+            var capital = $("#capital");
+            $("#capital").on("change", function () {
+                var cid = $(this).val();
+                var token = $(this).data("token");
+                $.ajax({
+                    url: '{{url('town')}}' + '/' + cid,
+                    type: 'get',
+                    dataType: "JSON",
+                    data: {
+                        "id": cid,
+                        "_method": 'get',
+                        "_token": token
+                    },
+                    success: function (data) {
+                        var item = $('#town');
+                        item.empty();
+                        $.each(data, function (index, value) {
+                            item.append('<option value="' + value + '">' + value + '</option>');
+                        });
+
+                    },
+                    error: function (response) {
+                        console.log(response.valueOf(2));
+                    }
+                });
+            });
+        })
+    </script>
 @endsection
