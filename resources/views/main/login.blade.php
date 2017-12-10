@@ -166,6 +166,19 @@
                                     </div>
                                     <label for="grade" class="col-md-3 control-label">کد پستی</label>
                                 </div>
+                                <div class="form-group col-md-12">
+                                    <div class="col-md-9">
+                                        <input type="text" pattern="^\d{11}$" required=" " tabindex="7"
+                                               value="{{ old('mobile') }}" maxlength="11" name="mobile" id="mobile"
+                                               class="form-control">
+                                        @if ($errors->has('mobile'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('mobile') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <label for="grade" class="col-md-3 control-label">کد ;n</label>
+                                </div>
                                 <div class="form-group col-md-12{{ $errors->has('captcha') ? ' has-error' : '' }}">
                                     <div class="col-md-9">
 
