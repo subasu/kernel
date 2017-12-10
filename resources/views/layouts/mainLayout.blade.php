@@ -297,17 +297,16 @@
 <script type="text/javascript" src="{{url('public/main/assets/lib/select2/js/select2.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/jquery.bxslider/jquery.bxslider.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/owl.carousel/owl.carousel.min.js')}}"></script>
-{{--<script type="text/javascript"--}}
-{{--        src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>--}}
+<script type="text/javascript"
+        src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/js/jquery.actual.min.js')}}"></script>
-{{--<script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>--}}
+<script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>
 <script>
     $(document).ready(function () {
         $(".mainMenu").each(function () {
             $(this).mouseover(function () {
                 var id = $(this).attr('name');
                 var token = $(this).data("token");
-                console.log(id);
                 $.ajax({
                     dataType: "json",
                     url: "{{url('getSubmenu')}}" + '/' + id,

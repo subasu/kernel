@@ -14,6 +14,8 @@ use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\ProductFlag;
 use App\Models\ProductImage;
+use App\Models\SubUnitCount;
+use App\Models\UnitCount;
 use Hekmatinasser\Verta\Verta;
 
 class AddProduct
@@ -28,6 +30,7 @@ class AddProduct
             $productCategory->active = 1;
             $productCategory->save();
         }
+
         //add a flags with flag's price in product flags
         function addProductFlag($title, $price, $lastProductId)
         {
@@ -35,16 +38,19 @@ class AddProduct
             $prices->title = $title;
             $prices->product_id = $lastProductId;
             $prices->active = 0;
-            $prices->price = str_replace(',','',$price);
+            $prices->price = str_replace(',', '', $price);
             $prices->save();
         }
-        $videoSrc='';
+
+        $videoSrc = '';
         if (!empty($product->video_src)) {
             $file = $product->video_src;
             $videoSrc = $file->getClientOriginalName();
             $file->move('public/dashboard/productFiles/video/', $videoSrc);
         }
 
+        $unit_count=UnitCount::where('id','=',$product->unit_count)->value('title');
+        $sub_unit_count=SubUnitCount::where('id','=',$product->sub_unit_count)->value('title');
         //add a new product in product table
         $pr = new Product();
         $pr->title = $product->title;
@@ -53,8 +59,8 @@ class AddProduct
         $pr->produce_date = $this->dateConvert($product->produce_date);
         $pr->expire_date = $this->dateConvert($product->expire_date);
         $pr->produce_place = $product->produce_place;
-        $pr->unit_count = $product->unit_count;
-        $pr->sub_unit_count = $product->sub_unit_count;
+        $pr->unit_count = $unit_count;
+        $pr->sub_unit_count = $sub_unit_count;
         $pr->ready_time = $product->ready_time;
         $pr->video_src = $videoSrc;
         $pr->delivery_volume = $product->delivery_volume;
@@ -66,16 +72,14 @@ class AddProduct
         $lastProductId = Product::orderBy('created_at', 'desc')->offset(0)->limit(1)->value('id');
 
         $count = count($product->file);
-        if($count)
-        {
-            for($i=0;$i<$count;$i++)
-            {
-                $productPicture=new ProductImage();
-                $productPicture->product_id=$lastProductId;
-                $imageName=$product->file[$i]->getClientOriginalName();
-                $productPicture->image_src=$imageName;
-                $product->file[$i]->move('public/dashboard/productFiles/picture/',$imageName);
-                $productPicture->active=1;
+        if ($count) {
+            for ($i = 0; $i < $count; $i++) {
+                $productPicture = new ProductImage();
+                $productPicture->product_id = $lastProductId;
+                $imageName = $product->file[$i]->getClientOriginalName();
+                $productPicture->image_src = $imageName;
+                $product->file[$i]->move('public/dashboard/productFiles/picture/', $imageName);
+                $productPicture->active = 1;
                 $productPicture->save();
 
             }
@@ -100,16 +104,22 @@ class AddProduct
          * if didn't select lastest level make a subcategiries with 'سایر' title in category table
          *and then insert row to category_product table with this product_id and category_id
          **/
-        $catId=0;
-        if (empty($product->subCategories))
-            $catId=$product->categories;
-        elseif (empty($product->brands))
-            $catId=$product->subCategories;
+        $catId = 0;
+        if (empty($product->subCategories)) {
+            $catId = $product->categories;
+        } elseif (empty($product->brands)) {
+            $catId = $product->subCategories;
+        }
+        else if(!empty($product->brands))
+        {
+            addCategoryProduct($lastProductId, $product->brands);
+        }
+
         //check 'سایر' category exist or not
         $subCatId = Category::where([['parent_id', $catId], ['active', 1]])->where('title', '=', 'سایر')->value('id');
-        if ($subCatId != 0 && $catId != 0) {
+        if ($subCatId != 0 && $catId !=0) {
             addCategoryProduct($lastProductId, $subCatId);
-        } else {
+        } else if($catId !=0) {
             $category = new Category();
             $category->title = 'سایر';
             $category->parent_id = $product->categories;
@@ -125,8 +135,7 @@ class AddProduct
     //below function is related to convert jalali date
     function dateConvert($jalaliDate)
     {
-        if(count($jalaliDate) > 0)
-        {
+        if (count($jalaliDate) > 0) {
             if ($date = explode('/', $jalaliDate)) {
                 $year = $date[0];
                 $month = $date[1];
