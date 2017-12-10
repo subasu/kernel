@@ -5070,7 +5070,7 @@ span.notify-right {
 .box-authentication input,
 .box-authentication textarea {
     border-radius: 0px;
-    border: 1px solid #eaeaea;
+    border: 1px solid #c8c8c8;
     -webkit-box-shadow: inherit;
     box-shadow: inherit;
     width: 50%;
