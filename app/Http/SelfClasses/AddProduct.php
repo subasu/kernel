@@ -14,6 +14,7 @@ use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\ProductFlag;
 use App\Models\ProductImage;
+use Hekmatinasser\Verta\Verta;
 
 class AddProduct
 {
@@ -34,7 +35,7 @@ class AddProduct
             $prices->title = $title;
             $prices->product_id = $lastProductId;
             $prices->active = 0;
-            $prices->price = $price;
+            $prices->price = str_replace(',','',$price);
             $prices->save();
         }
         $videoSrc='';
@@ -43,14 +44,21 @@ class AddProduct
             $videoSrc = $file->getClientOriginalName();
             $file->move('public/dashboard/productFiles/video/', $videoSrc);
         }
-
+        $jDate = $request->date;
+        if ($date = explode('/', $jDate)) {
+            $year = $date[0];
+            $month = $date[1];
+            $day = $date[2];
+        }
+        $gDate = $this->jalaliToGregorian($year, $month, $day);
+        $gDate1 = $gDate[0] . '-' . $gDate[1] . '-' . $gDate[2];
         //add a new product in product table
         $pr = new Product();
         $pr->title = $product->title;
         $pr->description = $product->description;
         $pr->discount = $product->discount;
-        $pr->produce_date = $product->produce_date;
-        $pr->expire_date = $product->expire_date;
+        $pr->produce_date = $this->dateConvert($product->produce_date);
+        $pr->expire_date = $this->dateConvert($product->expireDate);
         $pr->produce_place = $product->produce_place;
         $pr->unit_count = $product->unit_count;
         $pr->sub_unit_count = $product->sub_unit_count;
@@ -118,5 +126,22 @@ class AddProduct
             addCategoryProduct($lastProductId, $subCategoriesId);
         }
         return (true);
+    }
+
+    function dateConvert($jalaliDate)
+    {
+        if ($date = explode('/', $jalaliDate)) {
+            $year = $date[0];
+            $month = $date[1];
+            $day = $date[2];
+        }
+        $gDate = $this->jalaliToGregorian($year, $month, $day);
+        $gDate = $gDate[0] . '-' . $gDate[1] . '-' . $gDate[2];
+        return $gDate;
+    }
+
+    public function jalaliToGregorian($year, $month, $day)
+    {
+        return Verta::getGregorian($year, $month, $day);
     }
 }

@@ -467,6 +467,7 @@
                                     title: '',
                                     text: x,
                                     type: "info",
+                                    confirmButtonText: "بستن"
                                 })
                             },
                             error: function (xhr) {
@@ -773,6 +774,7 @@
                 function formatNumber (num) {
                     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
                 }
+
                 $(".pr").on('keyup',function () {
                     var price= $(this);
                     var v0=price.val();
