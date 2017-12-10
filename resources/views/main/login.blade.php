@@ -81,7 +81,8 @@
 
                                 <div class="form-group col-md-12{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <div class="col-md-9">
-                                        <input id="password" type="password" class="form-control" name="password" required
+                                        <input id="password" type="password" class="form-control" name="password"
+                                               required
                                                maxlength="20">
                                         @if ($errors->has('password'))
                                             <span class="help-block">
@@ -95,20 +96,23 @@
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
                                         <input id="password-confirm" type="password" class="form-control col-md-9"
-                                               name="password_confirmation" placeholder="6 تا 20 کاراکتر" maxlength="20">
+                                               name="password_confirmation" placeholder="6 تا 20 کاراکتر"
+                                               maxlength="20">
                                     </div>
                                     <label for="password-confirm" class="col-md-3 control-label">تکرار پسورد</label>
                                 </div>
 
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
-                                        <select tabindex="" class="form-control align-right selectpicker required" name="capital"
+                                        <select tabindex="" class="form-control align-right selectpicker required"
+                                                name="capital"
                                                 id="capital" data-style="g-select" data-width="100%">
                                             <option class="align-right" value="-1">لطفا استان مورد نظر خود را انتخاب
                                                 نمایید.
                                             </option>
                                             @foreach($capital as $cap)
-                                                <option class="align-right" value="{{$cap->id}}">{{$cap->title}}</option>
+                                                <option class="align-right"
+                                                        value="{{$cap->id}}">{{$cap->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -116,7 +120,8 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
-                                        <select tabindex="" class="form-control align-right selectpicker required" name="town" id="town"
+                                        <select tabindex="" class="form-control align-right selectpicker required"
+                                                name="town" id="town"
                                                 data-style="g-select" data-width="100%">
                                         </select>
                                     </div>
@@ -148,38 +153,42 @@
                                     </div>
                                     <label for="grade" class="col-md-3 control-label">تلفن همراه</label>
                                 </div>
-                                <div class="form-group col-md-12{{ $errors->has('gender') ? ' has-error' : '' }}">
+                                <div class="form-group col-md-12">
                                     <div class="col-md-9">
-                                        <div>
-                                            <input type="radio" tabindex="" name="gender" value="مرد" required=""
-                                                   class="genbtn">
-                                            <label for="gender" class="">مرد</label>
-                                            <input type="radio" tabindex="" name="gender" value="زن" required=""
-                                                   class="genbtn">
-                                            <label for="gender" class="">زن</label>
-                                        </div>
+                                        <input type="text" pattern="^\d{11}$" required=" " tabindex="7"
+                                               value="{{ old('mobile') }}" maxlength="11" name="mobile" id="mobile"
+                                               class="form-control">
+                                        @if ($errors->has('mobile'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('mobile') }}</strong>
+                                    </span>
+                                        @endif
                                     </div>
-                                    <label for="gender" class="col-md-3 control-label">جنسیت</label>
+                                    <label for="grade" class="col-md-3 control-label">کد پستی</label>
                                 </div>
                                 <div class="form-group col-md-12{{ $errors->has('captcha') ? ' has-error' : '' }}">
                                     <div class="col-md-9">
-                                        <input id="captcha" type="text" style="width: 49%;" name="captcha" value="" required
-                                               autofocus>
-                                        <img class="captcha" alt="captcha.png" style="width: 41%;" />
-                                        <img src="{{url('public/reload.jpg')}}" class="captcha-reload" width="25" height="25">
+
+                                        <img src="{{url('public/reload.jpg')}}" class="captcha-reload col-md-1"
+                                              height="25">
+
+                                        <img class="captcha col-md-4" alt="captcha.png" style="width: 41%;margin-right: 1%;padding-right: 0px !important;padding-left: 0px;margin-left: 1%;"/>
                                         @if ($errors->has('captcha'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('captcha') }}</strong>
                                     </span>
                                         @endif
+                                        <input id="captcha" class="form-control col-md-4" type="text"
+                                               name="captcha" value="" required
+                                               autofocus>
                                     </div>
                                     <label for="captcha" class="col-md-3 control-label"> کد امنیتی</label>
                                 </div>
                                 <div class="form-group col-md-12">
                                     <div class="col-md-12">
                                         {{--<button type="submit" class="btn btn-primary col-md-4"><i--}}
-                                                    {{--class="fa fa-user-plus"></i></button>--}}
-                                        <button class="button"><i class="fa fa-user"></i> ثبت نام </button>
+                                        {{--class="fa fa-user-plus"></i></button>--}}
+                                        <button class="button"><i class="fa fa-user"></i> ثبت نام</button>
 
                                     </div>
                                 </div>
@@ -195,13 +204,14 @@
                             <label for="password_login">رمز عبور</label>
                             <input id="password_login" type="password" class="form-control">
                             <p class="forgot-pass"><a href="#">آیا رمز عبور خود را فراموش کرده اید؟</a></p>
-                            <button class="button"><i class="fa fa-lock"></i> ورود </button>
+                            <button class="button"><i class="fa fa-lock"></i> ورود</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div><script type="text/javascript" src="{{url('public/main/assets/lib/jquery/jquery-1.11.2.min.js')}}"></script>
+    </div>
+    <script type="text/javascript" src="{{url('public/main/assets/lib/jquery/jquery-1.11.2.min.js')}}"></script>
 
     <script>
         $(document).ready(function () {
@@ -222,7 +232,7 @@
                         var item = $('#town');
                         item.empty();
                         $.each(data, function (index, value) {
-                            item.append('<option value="' + value + '">' + value + '</option>');
+                            item.append('<option value="' + value.title + '">' + value.title + '</option>');
                         });
 
                     },
@@ -231,6 +241,33 @@
                     }
                 });
             });
+            captcha();
+            function captcha() {
+                var token = $(this).data("token");
+                $.ajax({
+                    url: '{{url('captcha')}}',
+                    type: 'get',
+                    dataType: "JSON",
+                    data: {
+                        "_method": 'get',
+                        "_token": token
+                    },
+                    success: function (data) {
+                        $(".captcha").attr("src", data)
+                    },
+                    error: function (response) {
+                        console.log(response.valueOf(2));
+                    }
+                });
+            }
+
+            $(".captcha").click(function () {
+                captcha();
+            });
+            $(".captcha-reload").click(function () {
+                captcha();
+            });
         })
+
     </script>
 @endsection
