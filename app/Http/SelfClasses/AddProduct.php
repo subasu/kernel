@@ -51,7 +51,7 @@ class AddProduct
         $pr->description = $product->description;
         $pr->discount = $product->discount;
         $pr->produce_date = $this->dateConvert($product->produce_date);
-        $pr->expire_date = $this->dateConvert($product->expireDate);
+        $pr->expire_date = $this->dateConvert($product->expire_date);
         $pr->produce_place = $product->produce_place;
         $pr->unit_count = $product->unit_count;
         $pr->sub_unit_count = $product->sub_unit_count;
