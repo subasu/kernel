@@ -141,8 +141,7 @@
         <!-- below script is to handle when we want to add main category or sub category -->
         <script>
             function untimelyAddCategory(title,id) {
-                alert(id);
-                //return false;
+
                 swal({
                         title:   " آیا در نظر دارید برای دسته " +"(( "+ title +" ))"+  " زیر دسته انتخاب نمایید؟ ",
                         text: "",
@@ -178,11 +177,12 @@
                                     {
                                         console.log(result);
                                         var option = '';
+
                                         $.each(result,function (key,value) {
                                             $('#existed').empty();
                                             $('#existed').append
                                             (
-                                                "<option>زیر دسته های دستهء منتخب</option>"
+                                                "<option style='font-size : 150%;'>زیر دسته های دستهء موجود</option>"
                                             )
                                             $('#existed').append
                                             (
@@ -201,11 +201,16 @@
 
                             $('#change').append
                             (
-                                '<div id="main" class="col-md-5 col-md-offset-4">'+
-                                '<input value="'+title+'" class="form-control col-md-6" disabled  style="text-align: center; font-size: 120%;">'+
-                                '<b>'
-                                +'<lable style="margin-right:-60%;" class="control-label" for="name">عنوان دسته منتخب:</lable>'+
-                                '</b>'+
+                                '<div >'+
+                                    '<div id="existedDiv" class="col-md-4 col-sm-6 col-xs-9" >' +
+                                        '<select id="existed" class="form-control"></select>'+
+                                    '</div>'+
+                                    '<div id="main" class="col-md-5 col-sm-6 col-xs-9">'+
+                                        '<input value="'+title+'" class="form-control col-md-6" disabled  style="text-align: center; font-size: 120%;">'+
+                                         '<b>'
+                                         +'<lable style="margin-right:-60%;" class="control-label" for="name">عنوان دسته منتخب:</lable>'+
+                                          '</b>'+
+                                    '</div>'+
                                 '</div>'
 
                             );
@@ -314,7 +319,7 @@
     //
                                                 item.append
                                                 (
-                                                    "<option selected='true' disabled='disabled'>برای اضافه کردن زیر دسته ها ، دسته ای را انتخاب کنید</option>"
+                                                    "<option selected='true' disabled='disabled' style='font-size: 150%;'>برای اضافه کردن زیر دسته ها ، دسته ای را انتخاب کنید</option>"
                                                 )
 
                                             item.append
@@ -325,7 +330,7 @@
                                         });
                                         //depth == 0;
                                         $('#change').css('display','none');
-                                        //$('#change').empty();
+                                        $('#change').empty();
                                         $('#addMainCategory').css('display','block');
                                         $('#addInput').css('display','none');
                                         $('#removeInput').css('display','none');
@@ -390,7 +395,7 @@
 
                                     item.append
                                     (
-                                        "<option selected='true' disabled='disabled'>برای اضافه کردن زیر دسته ها ، دسته ای را انتخاب کنید</option>"
+                                        "<option selected='true' disabled='disabled' style='font-size: 150%;'>برای اضافه کردن زیر دسته ها ، دسته ای را انتخاب کنید</option>"
                                     )
 
 
@@ -436,7 +441,7 @@
 
                                    item.append
                                    (
-                                       "<option selected='true' disabled='disabled'>دسته های موجود</option>"
+                                       "<option selected='true' disabled='disabled' style='font-size: 150%;'>دسته های موجود</option>"
                                    )
 
 
@@ -585,7 +590,7 @@
 //                                            {
                              item.append
                              (
-                                 "<option selected='true' disabled='disabled'>لطفا زیر دسته مورد نظر را انتخاب نمایید</option>"
+                                 "<option selected='true' disabled='disabled' style='font-size: 150%;'>لطفا زیر دسته مورد نظر را انتخاب نمایید</option>"
                              )
                              //                            }
                              item.append

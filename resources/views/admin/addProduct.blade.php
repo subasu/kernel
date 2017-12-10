@@ -154,8 +154,8 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="price" class="form-control col-md-12 col-xs-12" name="price"
-                                               type="number">
+                                        <input id="price" class="form-control col-md-12 col-xs-12 pr" name="price"
+                                               >
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="price"> قیمت اصلی
                                         (تومان) :
@@ -285,7 +285,7 @@
                             <div class="container">
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="sales_price" class="form-control col-md-12 col-xs-12"
+                                        <input id="sales_price" class="form-control col-md-12 col-xs-12 pr"
                                                name="sales_price" type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="sales_price"> قیمت حراج
@@ -300,7 +300,7 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="special_price" class="form-control col-md-12 col-xs-12"
+                                        <input id="special_price" class="form-control col-md-12 col-xs-12 pr"
                                                name="special_price">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="special_price"> قیمت
@@ -315,7 +315,7 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="wholesale_price" class="form-control col-md-12 col-xs-12"
+                                        <input id="wholesale_price" class="form-control col-md-12 col-xs-12 pr"
                                                name="wholesale_price" type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="wholesale_price"> قیمت
@@ -330,7 +330,7 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="free_price" class="form-control col-md-12 col-xs-12"
+                                        <input id="free_price" class="form-control col-md-12 col-xs-12 pr"
                                                name="free_price" type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="free_price"> قیمت
@@ -345,7 +345,7 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                        <input id="discount_volume" class="form-control col-md-12 col-xs-12"
+                                        <input id="discount_volume" class="form-control col-md-12 col-xs-12 pr"
                                                name="discount_volume"
                                                type="text">
                                     </div>
@@ -767,5 +767,21 @@
         <script>
             $('#produce_date').persianDatepicker();
             $('#expire_date').persianDatepicker();
+        </script>
+        <script>
+            $(function(){
+                function formatNumber (num) {
+                    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+                }
+                $(".pr").on('keyup',function () {
+                    var price= $(this);
+                    var v0=price.val();
+                    var v1 = v0.split(',').join('');
+                    var v2=formatNumber(v1);
+                    price.val(v2)
+                })
+
+            })
+
         </script>
 @endsection

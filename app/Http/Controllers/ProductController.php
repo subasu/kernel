@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Http\SelfClasses\AddProduct;
 use App\Http\SelfClasses\CheckFiles;
 use App\Http\SelfClasses\CheckProduct;

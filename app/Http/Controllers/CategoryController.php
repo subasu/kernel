@@ -13,11 +13,6 @@ class CategoryController extends Controller
     //below function is related to add new category
     public function addNewCategory(Request $request)
     {
-        if (Category::where('title', '=', $request->title)->exists())
-        {
-            print('hast');
-            return false;
-        }
         $checkFiles = new CheckFiles();
         $result =$checkFiles->checkCategoryFiles($request);
         if(is_bool($result))
