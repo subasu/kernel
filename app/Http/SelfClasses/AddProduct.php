@@ -107,7 +107,7 @@ class AddProduct
             $catId=$product->subCategories;
         //check 'سایر' category exist or not
         $subCatId = Category::where([['parent_id', $catId], ['active', 1]])->where('title', '=', 'سایر')->value('id');
-        if ($subCatId != 0) {
+        if ($subCatId != 0 && $catId != 0) {
             addCategoryProduct($lastProductId, $subCatId);
         } else {
             $category = new Category();

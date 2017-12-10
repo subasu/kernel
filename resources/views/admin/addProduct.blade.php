@@ -450,9 +450,9 @@
                         })
                         var formData = new FormData($("#productForm")[0])
                         $.ajax({
-                            url: '{{url('addNewProduct')}}',
+                            url: '{{url('admin/addNewProduct')}}',
                             type: 'post',
-                            cashe: false,
+                            cache: false,
                             data: formData,
                             dataType: 'json',
                             contentType: false,
@@ -558,7 +558,7 @@
                             loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                         }
                         else {
-                            location.href = '{{url("addCategory")}}';
+                            location.href = '{{url("admin/addCategory")}}';
                         }
                     }
                 })
@@ -567,7 +567,7 @@
                     var id = $(this).val();
                     var depth = $(this).find("option:selected ").attr('depth');
                     if (id == 000) {
-                        location.href = '{{url("addCategory")}}';
+                        location.href = '{{url("admin/addCategory")}}';
                     }
                     else if (depth != 0) {
                         swal({
@@ -621,7 +621,7 @@
                     var id = $(this).val();
                     var depth1 = $(this).find("option:selected ").attr('depth');
                     if (id == 000) {
-                        location.href = '{{url("addCategory")}}';
+                        location.href = '{{url("admin/addCategory")}}';
                     }
                     else if (depth1 != 0) {
                         swal({
@@ -672,7 +672,7 @@
                 $('#brands').on("change", function () {
                     var id = $(this).val();
                     if (id == 000) {
-                        location.href = '{{url("addCategory")}}';
+                        location.href = '{{url("admin/addCategory")}}';
                     }
                     findTitle(id)
                 })
@@ -680,7 +680,7 @@
                 $('#unit').on("change", function () {
                     var id = $(this).val();
                     if (id == 0000) {
-                        location.href = '{{url("addUnit")}}';
+                        location.href = '{{url("admin/addUnit")}}';
                     }
                 })
                 //load MainUnitsCount if there is no category in table redirect addCategory
@@ -700,7 +700,7 @@
                             loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                         }
                         else {
-                            location.href = '{{url("addCategory")}}';
+                            location.href = '{{url("admin/addCategory")}}';
                         }
                     }
                 });

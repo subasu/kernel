@@ -80,7 +80,7 @@
                             $.ajax
                             ({
                                 cache: false,
-                                url: "{{url('editUnitCountTitle')}}",
+                                url: "{{url('admin/editUnitCountTitle')}}",
                                 data: {'title': title, 'id': id, '_token': token , 'parameter' : parameter},
                                 type: "post",
                                 dataType: "JSON",

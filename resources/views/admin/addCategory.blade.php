@@ -263,7 +263,7 @@
                 $.ajax
                 ({
                     cache       : false,
-                    url         : "{{url('addNewCategory')}}",
+                    url         : "{{url('admin/addNewCategory')}}",
                     type        : "post",
                     processData : false,
                     contentType : false,

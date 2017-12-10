@@ -30,8 +30,8 @@
                     </form>
                 </div>
                 <div class="modal-footer" >
-                    <button type="button" class="btn btn-default col-md-5 col-md-offset-1" data-dismiss="modal">بستن</button>
-                    <button type="button" content="{{$categoryInfo[0]->id}}" id="editCategoryPicture" class="btn btn-success col-md-5" >ویرایش</button>
+                    <button type="button" class="btn btn-dark col-md-5 col-md-offset-1" data-dismiss="modal">بستن</button>
+                    <button type="button" content="{{$categoryInfo[0]->id}}" id="editCategoryPicture" class="btn btn-warning col-md-5" >ویرایش</button>
                 </div>
             </div>
 
@@ -70,6 +70,7 @@
                             <th style="text-align: center;">سطح دسته</th>
                             <th style="text-align: center">عملیات مربوط به تصویر</th>
                             <th style="text-align: center">ویرایش</th>
+                            <th style="text-align: center">وضعیت</th>
                         </tr>
                         </thead>
 
@@ -80,10 +81,16 @@
                         {{--@foreach($categoryInfo as $category)--}}
                                 <tr class="unit">
                                     <td>{{++$i}}</td>
-                                    <td class="col-md-6 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$categoryInfo[0]->title}}"></td>
+                                    <td class="col-md-5 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$categoryInfo[0]->title}}"></td>
                                     <td>{{$categoryInfo[0]->depth}}</td>
-                                    <td><strong><a class="btn btn-danger" id="openModal" >مشاهده و ویرایش تصویر</a></strong></td>
-                                    <td><button id="edit" type="button" class="btn btn-success">ویرایش</button></td>
+                                    <td><strong><a class="btn btn-default" id="openModal" >مشاهده و ویرایش تصویر</a></strong></td>
+                                    <td><button id="edit" type="button" class="btn btn-warning">ویرایش</button></td>
+                                    @if($categoryInfo[0]->active == 1)
+                                        <td><a id="active" content="{{$categoryInfo[0]->active}}" type="button" class="btn btn-success" >فعال</a></td>
+                                    @endif
+                                    @if($categoryInfo[0]->active == 0)
+                                        <td><a id="active" content="{{$categoryInfo[0]->active}}" type="button" class="btn btn-success">غیر فعال</a></td>
+                                    @endif
                                     <input type="hidden" value="{{$categoryInfo[0]->id}}" id="id" name="id">
                                     <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
                                 </tr>
@@ -125,7 +132,7 @@
                             $.ajax
                             ({
                                 cache: false,
-                                url: "{{url('editCategoryTitle')}}",
+                                url: "{{url('admin/editCategoryTitle')}}",
                                 data: {'title': title, 'id': id, '_token': token},
                                 type: "post",
                                 dataType: "JSON",
@@ -193,7 +200,7 @@
                 $.ajax
                 ({
                     cache        : false,
-                    url          : "{{url('editCategoryPicture')}}",
+                    url          : "{{url('admin/editCategoryPicture')}}",
                     type         : "post",
                     data         : formData,
                     dataType     : "JSON",
@@ -238,6 +245,17 @@
                     {
                         console.log(error);
                     }
+                })
+            })
+        </script>
+
+        <!-- belwo script is to make it active or deactive -->
+        <script>
+            $(document).on('click','#active',function () {
+                var active = $(this).attr('content');
+                $.ajax
+                ({
+                    url : "{{url('active')}}"
                 })
             })
         </script>

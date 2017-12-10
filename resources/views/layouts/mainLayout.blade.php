@@ -303,11 +303,7 @@
 {{--<script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>--}}
 <script>
     $(document).ready(function () {
-        $(".mainMenu").ea
-
-
-
-        ch(function () {
+        $(".mainMenu").each(function () {
             $(this).mouseover(function () {
                 var id = $(this).attr('name');
                 var token = $(this).data("token");
