@@ -5073,7 +5073,7 @@ span.notify-right {
     border: 1px solid #c8c8c8;
     -webkit-box-shadow: inherit;
     box-shadow: inherit;
-    width: 50%;
+    /*width: 50%;*/
 }
 
 .box-authentication .button {
