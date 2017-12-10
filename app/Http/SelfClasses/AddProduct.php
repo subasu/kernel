@@ -123,14 +123,18 @@ class AddProduct
 
     function dateConvert($jalaliDate)
     {
-        if ($date = explode('/', $jalaliDate)) {
-            $year = $date[0];
-            $month = $date[1];
-            $day = $date[2];
+        if(count($jalaliDate) > 0)
+        {
+            if ($date = explode('/', $jalaliDate)) {
+                $year = $date[0];
+                $month = $date[1];
+                $day = $date[2];
+            }
+            $gDate = $this->jalaliToGregorian($year, $month, $day);
+            $gDate = $gDate[0] . '-' . $gDate[1] . '-' . $gDate[2];
+            return $gDate;
         }
-        $gDate = $this->jalaliToGregorian($year, $month, $day);
-        $gDate = $gDate[0] . '-' . $gDate[1] . '-' . $gDate[2];
-        return $gDate;
+        return;
     }
 
     public function jalaliToGregorian($year, $month, $day)
