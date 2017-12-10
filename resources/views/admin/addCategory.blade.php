@@ -141,7 +141,26 @@
         <!-- below script is to handle when we want to add main category or sub category -->
         <script>
             function untimelyAddCategory(title,id) {
-
+                //alert(id);
+                if(title == 'سایر')
+                {
+                    swal
+                    ({
+                        title: '',
+                        text: 'امکان اضافه کردن زیر دسته برای ((سایر)) وجود ندارد',
+                        type:'warning',
+                        confirmButtonText: "بستن"
+                    });
+                    $('#subCategories').css('display','none');
+                    $('#addSubCategory').css('display','none');
+                    $('#addBrands').css('display','none');
+                    $('#brands').css('display','none');
+                    $('#existedSub').css('display','none');
+                    $('#existedBrands').css('display','none');
+                    $('#subId').val('');
+                    $('#mainId').val('');
+                    return;
+                }
                 swal({
                         title:   " آیا در نظر دارید برای دسته " +"(( "+ title +" ))"+  " زیر دسته انتخاب نمایید؟ ",
                         text: "",
@@ -177,18 +196,26 @@
                                     {
                                         console.log(result);
                                         var option = '';
-
-                                        $.each(result,function (key,value) {
-                                            $('#existed').empty();
+                                        if(result != 0)
+                                        {
+                                            $.each(result,function (key,value) {
+                                                $('#existed').empty();
+                                                $('#existed').append
+                                                (
+                                                    "<option style='font-size : 150%;'>زیر دسته های دستهء موجود</option>"
+                                                )
+                                                $('#existed').append
+                                                (
+                                                    option += "<option selected='true' disabled='disabled' id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                                                );
+                                            });
+                                        }else if(result == 0)
+                                        {
                                             $('#existed').append
                                             (
-                                                "<option style='font-size : 150%;'>زیر دسته های دستهء موجود</option>"
+                                                "<option style='font-size : 150%;'>زیر دسته ای برای این دسته انتخاب نشده است</option>"
                                             )
-                                            $('#existed').append
-                                            (
-                                                option += "<option selected='true' disabled='disabled' id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
-                                            );
-                                        });
+                                        }
 
                                     }
                                 })
@@ -226,6 +253,8 @@
                             $('#brands').css('display','none');
                             $('#existedSub').css('display','none');
                             $('#existedBrands').css('display','none');
+                            $('#subId').val('');
+                            $('#mainId').val('');
                         }
                     });
             }
@@ -407,6 +436,12 @@
                             })
                         }else if(response == 0)
                             {
+                                $('#change').append
+                                (
+                                    '<div class="col-md-9"> ' +
+                                        '<input class="form-control" disabled value="شما در حال اضافه کردن دسته های اصلی هستید">'+
+                                    '</div>'
+                                );
                                 appendToChange();
                                 $('#change').css('display','block');
                             }
@@ -483,7 +518,9 @@
                          mainTitle += $(this).val();
                         id += $(this).attr('id');
                         $('#mainId').val(id);
+
                     });
+
                     if(mainTitle == '')
                     {
                         swal({
@@ -540,7 +577,11 @@
         <script>
             $(function () {
                 $(document).on('change','#categories',function () {
-
+                    $('#subCategories').css('display','none');
+                    $('#existedSub').css('display','none');
+                    $('#existedBrands').css('display','none');
+                    $('#brands').css('display','none');
+                    $('#addBrands').css('display','none');
                     $("[name = 'categories'] option:selected").each(function(){
 
                         var id = $(this).attr('id');
@@ -548,13 +589,14 @@
                         $('#mainId').val(id);
                         var title = $(this).val();
                         var depth = $(this).attr('name');
+                        $('#subId').val('');
                         //alert(depth);
                         if(depth != 0)
                         {
                             getSubCategory(id);
                         }else
                             {
-                                   untimelyAddCategory(title);
+                                   untimelyAddCategory(title,id);
                             }
                     })
                 })
@@ -658,7 +700,7 @@
                             }
                         }else
                             {
-                                untimelyAddCategory(subTitle);
+                                untimelyAddCategory(subTitle,id);
                             }
                     })
 

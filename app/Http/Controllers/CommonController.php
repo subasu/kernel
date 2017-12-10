@@ -115,14 +115,15 @@ class CommonController extends Controller
     public function findCategoryProduct($id)
     {
         //$titles = CategoryProduct::where([['category_id',$id],['active',1]])->value('product_id');
-        $category = Category::find($id);
-        $title=Array();
-        $i=0;
-        foreach ($category->products as $pr)
-        {
-            $title[$i] = Product::where([['id',$pr->pivot->product_id],['active',1]])->value('title') ;
-            $i++;
-        }
-        return response()->json($title);
+//        $category = Category::find($id);
+//        $title=Array();
+//        $i=0;
+//        foreach ($category->products as $pr)
+//        {
+//            $title[$i] = Product::where([['id',$pr->pivot->product_id],['active',1]])->value('title') ;
+//            $i++;
+//        }
+//        return response()->json($title);
+        dd($id);
     }
 }

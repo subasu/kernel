@@ -68,8 +68,8 @@
                                         <select id="subCategories" class="form-control col-md-12" name="subCategories">
                                         </select>
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته ی دسته
-                                        اصلی :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته های  دسته
+                                        فوق :
                                         <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
                                     </label>
                                 </div>
@@ -78,7 +78,7 @@
                                         <select id="brands" class="form-control col-md-12" name="brands">
                                         </select>
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته دسته ی
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته های  دسته
                                         فوق :
                                         <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
                                     </label>
@@ -604,7 +604,7 @@
                                 }
                                 else {
                                     $('#subCategoriesDiv').css('display', 'none');
-                                    findTitle(id)
+                                   // findTitle(id)
                                 }
                             });
                     }
@@ -681,7 +681,7 @@
                     var id = $(this).val();
 
                     if (id == 0) {
-                        location.href = '{{url("addUnit")}}';
+                        location.href = '{{url("admin/addUnit")}}';
                     }
                 })
                 //check option 2 selected or not, if yes redirect to add unit //view in subunit select box
@@ -701,6 +701,7 @@
                     dataType: "json",
                     type: "get",
                     success: function (response) {
+                        console.log(response);
                         if (response != 0) {
                             var responses = response;
                             var selectBoxId = '#unit';
@@ -719,7 +720,7 @@
                 $('#unit').on("change", function () {
                     var id = $(this).val();
                     if (id == 0) {
-                        location.href = '{{url("addUnit")}}';
+                        location.href = '{{url("admin/addUnit")}}';
                     }
                     else {
                         $.ajax
