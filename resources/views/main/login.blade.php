@@ -37,7 +37,6 @@
                             <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <input type="hidden" value="user" name="frmtype">
-                                <input type="hidden" value="0" name="visitprice">
                                 <div class="form-group col-md-12{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <div class="col-md-9">
                                         <input id="name" type="text" class="form-control" name="name"
@@ -130,24 +129,26 @@
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
                                         <input type="text" pattern="^\d{11}$" required=" " tabindex="6"
-                                               value="{{ old('tel') }}" maxlength="11" name="tel" id="tel"
+                                               value="{{ old('telephone') }}" maxlength="11" name="telephone" id="telephone"
                                                class="form-control">
-                                        @if ($errors->has('tel'))
+                                        @if ($errors->has('telephone'))
                                             <span class="help-block">
-                                        <strong>{{ $errors->first('tel') }}</strong>
+                                        <strong>{{ $errors->first('telephone') }}</strong>
                                     </span>
                                         @endif
                                     </div>
                                     <label for="grade" class="col-md-3 control-label">تلفن ثابت</label>
                                 </div>
+
+
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
                                         <input type="text" pattern="^\d{11}$" required=" " tabindex="7"
-                                               value="{{ old('mobile') }}" maxlength="11" name="mobile" id="mobile"
+                                               value="{{ old('cellphone') }}" maxlength="11" name="cellphone" id="cellphone"
                                                class="form-control">
-                                        @if ($errors->has('mobile'))
+                                        @if ($errors->has('cellphone'))
                                             <span class="help-block">
-                                        <strong>{{ $errors->first('mobile') }}</strong>
+                                        <strong>{{ $errors->first('cellphone') }}</strong>
                                     </span>
                                         @endif
                                     </div>
@@ -156,11 +157,11 @@
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
                                         <input type="text" pattern="^\d{11}$" required=" " tabindex="7"
-                                               value="{{ old('mobile') }}" maxlength="11" name="mobile" id="mobile"
+                                               value="{{ old('zipCode') }}" maxlength="11" name="zipCode" id="zipCode"
                                                class="form-control">
-                                        @if ($errors->has('mobile'))
+                                        @if ($errors->has('zipCode'))
                                             <span class="help-block">
-                                        <strong>{{ $errors->first('mobile') }}</strong>
+                                        <strong>{{ $errors->first('zipCode') }}</strong>
                                     </span>
                                         @endif
                                     </div>
@@ -169,11 +170,11 @@
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
                                         <input type="text"  required=" " tabindex="7"
-                                               value="{{ old('mobile') }}" maxlength="11" name="mobile" id="mobile"
+                                               value="{{ old('birth_date') }}" maxlength="11" name="birth_date" id="birth_date"
                                                class="form-control">
-                                        @if ($errors->has('mobile'))
+                                        @if ($errors->has('birth_date'))
                                             <span class="help-block">
-                                        <strong>{{ $errors->first('mobile') }}</strong>
+                                        <strong>{{ $errors->first('birth_date') }}</strong>
                                     </span>
                                         @endif
                                     </div>
@@ -182,11 +183,11 @@
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
                                         <textarea type="text" required=" " tabindex="7"
-                                               value="{{ old('address') }}" maxlength="11" name="address" id="address"
-                                                  class="form-control"></textarea>
-                                        @if ($errors->has('mobile'))
+                                               value="{{ old('address') }}" maxlength="2000" name="address" id="address"
+                                                  class="form-control address col-md-12"></textarea>
+                                        @if ($errors->has('address'))
                                             <span class="help-block">
-                                        <strong>{{ $errors->first('mobile') }}</strong>
+                                        <strong>{{ $errors->first('address') }}</strong>
                                     </span>
                                         @endif
                                     </div>
@@ -194,8 +195,9 @@
                                 </div>
                                 <div class="form-group col-md-12{{ $errors->has('captcha') ? ' has-error' : '' }}">
                                     <div class="col-md-9">
-                                        <img src="{{url('public/reload.jpg')}}" class="captcha-reload col-md-1"
-                                             height="25">
+                                        {{--<img src="{{url('reload.jpg')}}" class="captcha-reload "--}}
+                                             {{-->--}}
+                                        <i class="fa fa-refresh fa-lg captcha-reload col-md-1" height="25" width="25"></i>
                                         <img class="captcha col-md-4" alt="captcha.png"
                                              style="width: 41%;margin-right: 1%;padding-right: 0px !important;padding-left: 0px;margin-left: 1%;"/>
                                         @if ($errors->has('captcha'))
