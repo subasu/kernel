@@ -115,19 +115,20 @@ class AddProduct
             addCategoryProduct($lastProductId, $product->brands);
         }
 
-        //check 'سایر' category exist or not
+        //find 'سایر' category_id
         $subCatId = Category::where([['parent_id', $catId], ['active', 1]])->where('title', '=', 'سایر')->value('id');
         if ($subCatId != 0 && $catId !=0) {
             addCategoryProduct($lastProductId, $subCatId);
-        } else if($catId !=0) {
-            $category = new Category();
-            $category->title = 'سایر';
-            $category->parent_id = $product->categories;
-            $category->depth = 0;
-            $category->save();
-            $subCategoriesId = Category::where([['parent_id', $product->categories], ['active', 1]])->where('title', '=', 'سایر')->value('id');
-            addCategoryProduct($lastProductId, $subCategoriesId);
         }
+// else if($catId !=0) {
+//            $category = new Category();
+//            $category->title = 'سایر';
+//            $category->parent_id = $product->categories;
+//            $category->depth = 0;
+//            $category->save();
+//            $subCategoriesId = Category::where([['parent_id', $product->categories], ['active', 1]])->where('title', '=', 'سایر')->value('id');
+//            addCategoryProduct($lastProductId, $subCategoriesId);
+//        }
         return (true);
     }
 
