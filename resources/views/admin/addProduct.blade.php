@@ -598,13 +598,20 @@
                                             var valueOption2 = "000";
                                             loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                                             $('#subCategoriesDiv').css('display', 'block');
+                                            //hide brands selector parent div after change categories and empty it's selector
+                                            $('#BrandsDiv').css('display', 'none');
+                                            $('#brands').empty();
                                             findTitle(id)
                                         }
                                     });
                                 }
-                                else {
+                                else {//if user select 'خیر'
                                     $('#subCategoriesDiv').css('display', 'none');
-                                   // findTitle(id)
+                                    $('#subCategories').empty();
+                                    //hide brands selector parent div after change categories and empty it's selector
+                                    $('#BrandsDiv').css('display', 'none');
+                                    $('#brands').empty();
+                                    findTitle(id,'method2')
                                 }
                             });
                     }
@@ -613,6 +620,7 @@
                         $('#BrandsDiv').css('display', 'none');
                         $('#subCategories').empty();
                         $('#brands').empty();
+                        console.log('100');
                         findTitle(id)
                     }
                 })
@@ -656,9 +664,11 @@
                                         }
                                     });
                                 }
-                                else {
+                                else {//if user select 'خیر'
+                                    //hide brands selector parent div after change categories and empty it's selector
                                     $('#BrandsDiv').css('display', 'none');
-                                    findTitle(id)
+                                    $('#brands').empty();
+                                    findTitle(id,'method2')
                                 }
                             });
                     }
@@ -735,7 +745,6 @@
                                 var msgOpt1 = "لطفا زیر واحد شمارش مورد نظر خود را انتخاب نمایید";
                                 var msgOpt2 = "اگر زیر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
                                 var valueOption2 = 0;
-                                console.log(response);
                                 loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                             }
                         });
@@ -753,25 +762,51 @@
                     });
                 }
                 //find categori's selected product title
-                function findTitle(cid) {
-                    $.ajax
-                    ({
-                        cache: false,
-                        url: "{{url('api/v1/findCategoryProduct')}}/" + cid,
-                        dataType: "json",
-                        type: "get",
-                        success: function (response) {
-                            var item = $('#oldProduct');item.empty();
-                            if (response  != 0 ) {
-                                $.each(response, function (key, value) {
-                                    item.append("<option disabled='disabled' selected='selected'>" + value + "</option>");
-                                });
+                function findTitle(cid,method) {
+                    if(method=="method2")
+                    {
+                        $.ajax
+                        ({
+                            cache: false,
+                            url: "{{url('api/v1/findCategoryProduct')}}",
+                            dataType: "json",
+                            type: "post",
+                            data:{'id':cid,'my_method':2},
+                            success: function (response) {
+                                var item = $('#oldProduct');item.empty();
+                                if (response  != 0 ) {
+                                    $.each(response, function (key, value) {
+                                        item.append("<option disabled='disabled' selected='selected'>" + value + "</option>");
+                                    });
+                                }
+                                else {
+                                    item.append("<option  selected='selected'>تا کنون برای این دسته محصولی ثبت نشده است</option>");
+                                }
                             }
-                            else {
-                                item.append("<option  selected='selected'>تا کنون برای این دسته محصولی ثبت نشده است</option>");
+                        });
+                    }
+                    else {
+                        $.ajax
+                        ({
+                            cache: false,
+                            url: "{{url('api/v1/findCategoryProduct')}}",
+                            dataType: "json",
+                            type: "post",
+                            data:{'id':cid,'my_method':'1'},
+                            success: function (response) {
+                                var item = $('#oldProduct');item.empty();
+                                if (response  != 0 ) {
+                                    $.each(response, function (key, value) {
+                                        item.append("<option disabled='disabled' selected='selected'>" + value + "</option>");
+                                    });
+                                }
+                                else {
+                                    item.append("<option  selected='selected'>تا کنون برای این دسته محصولی ثبت نشده است</option>");
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+
                 }
             });
         </script>
