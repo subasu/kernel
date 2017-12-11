@@ -32,5 +32,6 @@ Route::group(['prefix' => '/v1'], function () {
     //color routes
     Route::get('getColors','CommonController@getColors');
 
-
+    //size routes
+    Route::get('getSizes','CommonController@getSizes');
 });

@@ -58,8 +58,15 @@ Route::group(['prefix'=>'admin'],function() {
     Route::get('colorsManagement','ColorController@colorsManagement'); //this route is related to show all colors
     Route::get('addColors','ColorController@addColors'); //this route is related to show add colors blade
     Route::post('addNewColors','ColorController@addNewColors');//this route is related to add new colors
-    Route::get('editColor/{id}','ColorController@editColor'); //this route is related to edit color
+    Route::get('editColor/{id}','ColorController@editColor'); //this route is related to return edit color view
+    Route::post('editColorTitle','ColorController@editColorTitle');//this route is related to edit color title
 
+//size routes
+    Route::get('sizesManagement','SizeController@sizesManagement');//this route is related to return view of size management
+    Route::get('addSizes','SizeController@addSizes');//this route is related to return view of add size
+    Route::post('addNewSize','SizeController@addNewSize');//this route is related to add new size in data base
+    Route::get('editSize/{id}','SizeController@editSize'); //this route is related to return edit color view
+    Route::post('editSizeTitle','SizeController@editSizeTitle');//this route is related to edit size title
 });
 //Auth::routes();
 // Authentication Routes...

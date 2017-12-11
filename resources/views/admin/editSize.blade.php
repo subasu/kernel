@@ -6,7 +6,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>ویرایش رنگ</h2>
+                    <h2>ویرایش سایز</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link" data-toggle="tooltip" title="جمع کردن"><i
                                         class="fa fa-chevron-up"></i></a>
@@ -28,7 +28,7 @@
                         <thead>
                         <tr>
                             <th style="text-align: center">ردیف</th>
-                            <th style="text-align: center">عنوان رنگ</th>
+                            <th style="text-align: center">عنوان سایز</th>
                             <th style="text-align: center">ویرایش</th>
                         </tr>
                         </thead>
@@ -79,7 +79,7 @@
                             $.ajax
                             ({
                                 cache: false,
-                                url: "{{url('admin/editColorTitle')}}",
+                                url: "{{url('admin/editSizeTitle')}}",
                                 data: {'title': title, 'id': id, '_token': token},
                                 type: "post",
                                 dataType: "JSON",
@@ -89,7 +89,7 @@
                                         $('#title').focus();
                                         swal({
                                             title: "",
-                                            text: 'پر کردن عنوان رنگ الزامی است',
+                                            text: 'پر کردن عنوان سایز الزامی است',
                                             type: "warning",
                                             confirmButtonText: "بستن"
                                         });

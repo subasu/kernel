@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Color;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ColorController extends Controller
 {
@@ -56,6 +57,26 @@ class ColorController extends Controller
         }else
             {
                 return view('errors.403');
+            }
+    }
+
+    //below function is related toi edit color title
+    public function editColorTitle(Request $request)
+    {
+        if(!$request->ajax())
+        {
+            abort(403);
+        }else
+            {
+                $update = DB::table('colors')->where('id',$request->id)->update(['title' => $request->title]);
+                if($update)
+                {
+                    return response()->json(['message' => 'ویرایش با موفقیت انجام شد' , 'code' => '1']);
+                }
+                else
+                    {
+                        return response()->json(['message' => '  خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید ']);
+                    }
             }
     }
 }
