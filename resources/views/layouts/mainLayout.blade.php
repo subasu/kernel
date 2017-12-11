@@ -15,6 +15,8 @@
     <link rel="stylesheet" type="text/css" href="{{url('public/main/assets/css/reset.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url('public/main/assets/css/style.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url('public/main/assets/css/responsive.css')}}"/>
+    <link rel="stylesheet" href="{{URL::asset('public/css/persianDatepicker-default.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('public/css/sweetalert.css')}}">
     <title>@if(!empty($pageTitle)){{$pageTitle}}@endif</title>
 </head>
 <body class="home">
@@ -301,6 +303,7 @@
         src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/js/jquery.actual.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>
+<script src="{{URL::asset('public/js/sweetalert.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $(".mainMenu").each(function () {

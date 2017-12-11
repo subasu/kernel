@@ -447,7 +447,7 @@
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                             }
-                        })
+                        });
                         var formData = new FormData($("#productForm")[0])
                         $.ajax({
                             url: '{{url('admin/addNewProduct')}}',
@@ -480,9 +480,9 @@
                                     text: xhr,
                                     type: "info",
                                 })
-                            }
-                        })
-                    });
+                            }//error
+                        })//ajax
+                    });//onclick
                 var btnCancel = $('<button></button>').text('شروع مجدد')
                     .addClass('btn btn-danger')
                     .on('click', function () {

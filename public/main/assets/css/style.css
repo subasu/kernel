@@ -6046,3 +6046,10 @@ span.notify-right {
     overflow-x: hidden;
     resize: none;
 }
+#captcha-image{
+    width: 41%;
+    margin-right: 3%;
+    padding-right: 0px !important;
+    padding-left: 0px;
+    margin-left: 1%;
+}
