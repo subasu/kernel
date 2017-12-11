@@ -6,7 +6,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2> مدیریت دسته بندی ها</h2>
+                    <h2>ویرایش واحد شمارش</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link" data-toggle="tooltip" title="جمع کردن"><i
                                         class="fa fa-chevron-up"></i></a>
@@ -39,9 +39,9 @@
                             {{csrf_field()}}
                             {{--@foreach($categoryInfo as $category)--}}
                             <tr class="unit">
-                                <td>{{++$i}}</td>
+                                <td style="font-size: 120%;">{{++$i}}</td>
                                 <td class="col-md-6 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$unitCount[0]->title}}"></td>
-                                <td><button id="edit" type="button" class="btn btn-success">ویرایش</button></td>
+                                <td><button id="edit" type="button" class="btn btn-warning col-md-9 col-md-offset-1">ویرایش</button></td>
                                 <input type="hidden" value="{{$unitCount[0]->id}}" id="id" name="id">
                                 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
                             </tr>
@@ -65,7 +65,7 @@
                     }
                 });
                 swal({
-                        title:   " آیا میخواهید ویرایش انجام دهید؟  ",
+                        title:   " آیا می خواهید ویرایش انجام دهید؟  ",
                         text: "",
                         type: "info",
                         showCancelButton: true,

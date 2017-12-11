@@ -144,6 +144,22 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li><a><i class="fa fa-paint-brush"></i>مدیریت رنگها <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('admin/colorsManagement')}}"> نمایش و مدیریت رنگها</a>
+                                    </li>
+                                    <li><a href="{{url('admin/addColors')}}">افزودن رنگها</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-cog"></i>مدیریت سایزها<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('admin/sizesManagement')}}"> نمایش و مدیریت سایزها</a>
+                                    </li>
+                                    <li><a href="{{url('admin/addSizes')}}">افزودن سایزها</a>
+                                    </li>
+                                </ul>
+                            </li>
                             {{--<li><a><i class="fa fa-comments"></i> مدیریت نظرات<span class="fa fa-chevron-down"></span></a>--}}
                                 {{--<ul class="nav child_menu" style="display: none">--}}
                                     {{--<li><a href="{{url('admin/systemManager')}}"> نمایش و مدیریت دسته بندی های پروژه</a>--}}

@@ -41,12 +41,12 @@
                             <tr class="unit">
                                 <td style="font-size: 120%;">{{++$i}}</td>
                                 <td style="font-size: 120%;">{{$datum->title}}</td>
-                                <td style="font-size: 120%;"><a class="btn btn-info"  href="{{url('admin/editUnitCount')}}/{{$datum->id}}">ویرایش</a></td>
+                                <td style="font-size: 120%;"><a class="btn btn-warning col-md-8 col-md-offset-2"  href="{{url('admin/editUnitCount')}}/{{$datum->id}}">ویرایش</a></td>
                                 @if(count($datum->subUnits) > 0)
-                                    <td style="font-size: 120%;"><a class="btn btn-dark col-md-5 col-md-offset-3" href="{{url('admin/subUnitManagement')}}/{{$datum->id}}"> مشاهده و ویرایش زیر واحدها </a></td>
+                                    <td style="font-size: 120%;"><a class="btn btn-dark col-md-8 col-md-offset-2" href="{{url('admin/subUnitManagement')}}/{{$datum->id}}"> مشاهده و ویرایش زیر واحدها </a></td>
                                 @endif
                                 @if(count($datum->subUnits) == 0)
-                                    <td style="font-size: 120%;"><a class="btn btn-danger col-md-5 col-md-offset-3">فاقد زیر واحد</a></td>
+                                    <td style="font-size: 120%;"><a class="btn btn-default col-md-8 col-md-offset-2">فاقد زیر واحد</a></td>
                                 @endif
                             </tr>
                             {{--@endif--}}

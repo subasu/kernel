@@ -6,6 +6,7 @@ use App\Http\SelfClasses\AddCategory;
 use App\Http\SelfClasses\CheckFiles;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
@@ -41,7 +42,7 @@ class CategoryController extends Controller
     public function categoriesManagement()
     {
         $pageTitle = 'مدیریت دسته ها';
-        $categories = Category::where([['active',1],['parent_id',0]])->get();
+        $categories = Category::where('parent_id',0)->get();
         return view('admin.categoriesManagement',compact('categories','pageTitle'));
     }
 
@@ -61,7 +62,7 @@ class CategoryController extends Controller
     //below function is related to edit main category
     public function showSubCategory($id)
     {
-        $categoryInfo = Category::where('parent_id',$id)->get();
+        $categoryInfo = Category::where([['parent_id',$id],['title','<>','سایر']])->get();
         return view('admin.showSubCategory',compact('categoryInfo'));
     }
 
@@ -98,6 +99,43 @@ class CategoryController extends Controller
         }else
             {
                 return response()->json(['message' => 'خطایی در عملیات ویرایش رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+            }
+    }
+
+    //below function is related to make categories enable or disable
+    public function enableOrDisableCategory(Request $request)
+    {
+        if(!$request->ajax())
+        {
+            abort(403);
+        }
+        else
+            {
+                switch ($request->active)
+                {
+                    case 1 :
+                        $update = DB::table('categories')->where('id',$request->categoryId)->update(['active' => 0 ]);
+                        if($update)
+                        {
+                            return response()->json(['message' => 'دسته مورد نظر شما غیر فعال گردید' , 'code' => '1']);
+                        }else
+                            {
+                                return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                            }
+                    break;
+
+                    case 0 :
+                        $update = DB::table('categories')->where('id',$request->categoryId)->update(['active' => 1 ]);
+                        if($update)
+                        {
+                            return response()->json(['message' => 'دسته مورد نظر شما  فعال گردید' , 'code' => '1']);
+                        }else
+                        {
+                            return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                        }
+                    break;
+
+                }
             }
     }
 }

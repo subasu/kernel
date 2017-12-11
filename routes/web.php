@@ -30,6 +30,7 @@ Route::group(['prefix'=>'admin'],function() {
     Route::get('showSubCategory/{id}', 'CategoryController@showSubCategory');//this route is related to edit sub category
     Route::post('editCategoryPicture', 'CategoryController@editCategoryPicture');//this route is related to edit category picture
     Route::post('editCategoryTitle', 'CategoryController@editCategoryTitle');//this route is related ti edit category title
+    Route::post('enableOrDisableCategory','CategoryController@enableOrDisableCategory');//this route is related to make categories enable or disable
 //units
     Route::get('addUnit', 'UnitController@addUnit');//show add unit view
     Route::get('unitCountManagement', 'UnitController@unitCountManagement');//show view of all units and subUnits
@@ -52,6 +53,13 @@ Route::group(['prefix'=>'admin'],function() {
 //deliveryMan
     Route::get('addDeliveryMan', 'DeliveryManController@addDeliveryMan');//show add DeliveryMan view
     Route::get('deliveryMansManagement', 'DeliveryManController@deliveryMansManagement');//show view of all deliveryMans's details
+
+//color routes
+    Route::get('colorsManagement','ColorController@colorsManagement'); //this route is related to show all colors
+    Route::get('addColors','ColorController@addColors'); //this route is related to show add colors blade
+    Route::post('addNewColors','ColorController@addNewColors');//this route is related to add new colors
+    Route::get('editColor/{id}','ColorController@editColor'); //this route is related to edit color
+
 });
 //Auth::routes();
 // Authentication Routes...

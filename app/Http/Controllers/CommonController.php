@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
@@ -125,5 +126,18 @@ class CommonController extends Controller
 //        }
 //        return response()->json($title);
         dd($id);
+    }
+
+    //below function is related to existed colors
+    public function getColors()
+    {
+        $colors = Color::all();
+        if(count($colors) > 0)
+        {
+            return response()->json($colors);
+        }else
+            {
+                return response()->json(0);
+            }
     }
 }

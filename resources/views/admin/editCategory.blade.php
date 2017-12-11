@@ -70,7 +70,7 @@
                             <th style="text-align: center;">سطح دسته</th>
                             <th style="text-align: center">عملیات مربوط به تصویر</th>
                             <th style="text-align: center">ویرایش</th>
-                            <th style="text-align: center">وضعیت</th>
+                            <th style="text-align: center">تغییر وضعیت</th>
                         </tr>
                         </thead>
 
@@ -80,16 +80,16 @@
                             {{csrf_field()}}
                         {{--@foreach($categoryInfo as $category)--}}
                                 <tr class="unit">
-                                    <td>{{++$i}}</td>
-                                    <td class="col-md-5 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$categoryInfo[0]->title}}"></td>
-                                    <td>{{$categoryInfo[0]->depth}}</td>
+                                    <td style="font-size: 120%">{{++$i}}</td>
+                                    <td class="col-md-4 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$categoryInfo[0]->title}}"></td>
+                                    <td style="font-size: 120%">{{$categoryInfo[0]->depth}}</td>
                                     <td><strong><a class="btn btn-default" id="openModal" >مشاهده و ویرایش تصویر</a></strong></td>
                                     <td><button id="edit" type="button" class="btn btn-warning">ویرایش</button></td>
                                     @if($categoryInfo[0]->active == 1)
-                                        <td><a id="active" content="{{$categoryInfo[0]->active}}" type="button" class="btn btn-success" >فعال</a></td>
+                                        <td><a id="active" content="{{$categoryInfo[0]->active}}" name="{{$categoryInfo[0]->id}}" type="button"  data-content="غیر فعال" class="btn btn-danger" >غیر فعال</a></td>
                                     @endif
                                     @if($categoryInfo[0]->active == 0)
-                                        <td><a id="active" content="{{$categoryInfo[0]->active}}" type="button" class="btn btn-success">غیر فعال</a></td>
+                                        <td><a id="active" content="{{$categoryInfo[0]->active}}" name="{{$categoryInfo[0]->id}}" type="button"  data-content="فعال" class="btn btn-success"> فعال</a></td>
                                     @endif
                                     <input type="hidden" value="{{$categoryInfo[0]->id}}" id="id" name="id">
                                     <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
@@ -117,7 +117,7 @@
                     }
                 });
                 swal({
-                        title:   " آیا میخواهید ویرایش انجام دهید؟  ",
+                        title:   " آیا می خواهید ویرایش انجام دهید؟  ",
                         text: "",
                         type: "info",
                         showCancelButton: true,
@@ -252,12 +252,65 @@
         <!-- belwo script is to make it active or deactive -->
         <script>
             $(document).on('click','#active',function () {
-                var active = $(this).attr('content');
-                $.ajax
-                ({
-                    url : "{{url('active')}}"
-                })
+                var active     = $(this).attr('content');
+                var token      = $("#token").val();
+                var categoryId = $(this).attr('name');
+                var title      = $(this).attr('data-content');
+                //alert(title);
+                swal({
+                        title:   " آیا در نظر دارید وضعیت دسته را " +"(( "+ title +" ))"+  "  نمایید؟ ",
+                        text: "",
+                        type: "info",
+                        showCancelButton: true,
+                        confirmButtonColor: "	#5cb85c",
+                        cancelButtonText: "خیر",
+                        confirmButtonText: "آری",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $.ajax
+                            ({
+                                cache: false,
+                                url: "{{url('admin/enableOrDisableCategory')}}",
+                                type: "post",
+                                data: {'_token': token, 'active': active, 'categoryId': categoryId},
+                                dataType: "JSON",
+                                success: function (response) {
+                                    if (response.code == 1) {
+                                        swal({
+                                            title: "",
+                                            text: response.message,
+                                            type: "success",
+                                            confirmButtonText: "بستن"
+                                        });
+                                        setTimeout(function () {
+                                            window.location.href = document.referrer;
+                                        }, 3000);
+                                    } else {
+                                        swal({
+                                            title: "",
+                                            text: response.message,
+                                            type: "warning",
+                                            confirmButtonText: "بستن"
+                                        });
+                                    }
+
+                                }, error: function (error) {
+                                    console.log(error);
+                                    swal({
+                                        title: "",
+                                        text: 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید',
+                                        type: "warning",
+                                        confirmButtonText: "بستن"
+                                    });
+                                }
+                            })
+                        }
+                    })
             })
+
         </script>
 
 
