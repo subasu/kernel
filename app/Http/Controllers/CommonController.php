@@ -28,7 +28,7 @@ class CommonController extends Controller
     //below function is to get sub categories from database
     public function getSubCategories($id)
     {
-        $subCategories = Category::where([['parent_id',$id],['active',1]])->get();
+        $subCategories = Category::where([['parent_id',$id],['active',1],['title','<>','سایر']])->get();
         if(count($subCategories) > 0 )
         {
             return response()->json($subCategories);
@@ -102,7 +102,7 @@ class CommonController extends Controller
     }
     public function getExistedCategories($id)
     {
-        $existedCategories = DB::table('categories')->where([['parent_id',$id],['active',1]])->get();
+        $existedCategories = DB::table('categories')->where([['parent_id',$id],['active',1],['title','<>','سایر']])->get();
         if(count($existedCategories) > 0 )
         {
             return response()->json($existedCategories);
