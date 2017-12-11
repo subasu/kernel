@@ -61,12 +61,12 @@ Route::post('logout', 'Auth\LoginController@logout');//rayat 20-9-96
 Route::get('logout', 'Auth\LoginController@logout');//rayat 20-9-96
 
 // Registration Routes...
-Route::get('register', 'Auth\RegisterController@showRegistrationForm');//rayat 20-9-96
-Route::post('register', 'Auth\RegisterController@register');//rayat 20-9-96
+Route::get('register', 'IndexController@showRegistrationForm');//rayat 20-9-96
+Route::post('register', 'IndexController@register');//rayat 20-9-96
 // Password Reset Routes...
 Route::get('reset', 'Auth\ForgotPasswordController@showLinkRequestForm');//rayat 20-9-96
 Route::post('email', 'Auth\ForgotPasswordController@sendResetLinkEmail');//rayat 20-9-96
 Route::get('reset/{token}', 'Auth\ResetPasswordController@showResetForm');//rayat 20-9-96
 Route::post('reset', 'Auth\ResetPasswordController@reset');//rayat 20-9-96
 
-Route::get('/home', 'Auth\RegisterController@register')->name('home');
+//Route::get('/home', 'Auth\RegisterController@register')->name('home');
