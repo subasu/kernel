@@ -120,8 +120,7 @@
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
                                         <select tabindex="" class="form-control align-right selectpicker required"
-                                                name="town" id="town"
-                                                data-style="g-select" data-width="100%">
+                                                name="town" id="town" data-style="g-select" data-width="100%">
                                         </select>
                                     </div>
                                     <label for="town" class="col-md-3 control-label">شهــر</label>
@@ -305,7 +304,7 @@
                 });
                 var formData = new FormData($("#registerForm")[0])
                 $.ajax({
-                    url: '{{url('register')}}',
+                    url: '{{url('/register')}}',
                     type: 'post',
                     cache: false,
                     data: formData,
@@ -337,14 +336,14 @@
                             swal({
                                 title: '',
                                 text: y,
-                                type: "info",
+                                type: "warning",
                             })
                         }
                         else if (response.status === 421) {
                             swal({
                                 title: "",
                                 text: "اطلاعات شما با مؤفقیت ثبت شد، پس از تأیید شدن توسط مدیر سایت برای شما ایمیل فعال سازی ارسال خواهد شد.منتظر پیامک اطلاعیه از طرف سایت باشید.",
-                                type: "info",
+                                type: "warning",
                                 confirmButtonText: "بستن"
                             });
                         }
@@ -353,7 +352,7 @@
                                 title: "",
                                 text: 'خطایی رخ داده است، لطفا با پشتیبانی تماس حاصل فرمائید',
                                 //                                text: "اطلاعات شما با مؤفقیت ثبت شد، پس از تأیید شدن توسط مدیر سایت برای شما ایمیل فعال سازی ارسال خواهد شد.منتظر پیامک اطلاعیه از طرف سایت باشید.",
-                                type: "info",
+                                type: "warning",
                                 confirmButtonText: "بستن"
                             });
                         }

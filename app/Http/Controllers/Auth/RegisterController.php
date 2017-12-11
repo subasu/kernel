@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/index';
+//    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -56,16 +56,16 @@ class RegisterController extends Controller
 
         if ($data['frmtype'] == "user") {
             return Validator::make($data, [
-                    'name' => 'required|max:255',
+                    'name' => 'sometimes|nullable|max:255',
                     'family' => 'sometimes|nullable|max:255',
                     'email' => 'sometimes|nullable|max:255|unique:users',
                     'password' => 'sometimes|nullable|min:6|confirmed',
                     'address' => 'sometimes|nullable|max:1000',
                     'telephone' => 'sometimes|nullable|numeric|size:11',
-                    'cellphone' => 'required|numeric|size:11',
+                    'cellphone' => 'required|numeric|min:11',
                     'birth_date' => 'sometimes|nullable|min:8|max:10',
-                    'capital_city_id' => 'sometimes|nullable|numeric',
-                    'town_city_id' => 'sometimes|nullable|numeric',
+                    'capital' => 'required',
+                    'town' => 'required',
                     'zipCode' => 'sometimes|nullable|numeric|min:10',
                     'captcha' => 'required|in:' . session()->get('captcha')
                 ]
@@ -80,8 +80,8 @@ class RegisterController extends Controller
                     'password.required' => ' فیلد رمز عبور الزامی است ',
                     'password.min' => ' رمز عبور حداقل باید 6 کاراکتر باشد ',
                     'password.confirmed' => ' رمز عبور و تکرار آن با هم مطابقت ندارند ',
-                    'captcha.required' => ' فیلد کد امنیتی الزامی است. ',
-                    'captcha.in' => ' کد امنیتی وارد شده صحیح نیست. ',
+                    'captcha.required' => ' فیلد کد امنیتی الزامی است ',
+                    'captcha.in' => ' کد امنیتی وارد شده صحیح نیست ',
                     'cellphone.required' => ' فیلد تلفن همراه الزامی است ',
                     'cellphone.numeric' => 'فیلد موبایل باید عددی باشد',
                     'telephone.required' => ' فیلد تلفن الزامی است ',
@@ -89,6 +89,8 @@ class RegisterController extends Controller
                     'zipCode.numeric' => ' فیلد کدپستی عددی است',
                     'telephone.size' => ' فیلد تلفن باید 11 رقمی باشد',
                     'cellphone.size' => ' فیلد موبایل باید 11 رقمی باشد',
+                    'town.required' => ' فیلد شهرستان ضروری است',
+                    'capital.required' => ' فیلد استان ضروری است',
                 ]);
         }//end of if
 
@@ -100,12 +102,12 @@ class RegisterController extends Controller
      * @param  array $data
      * @return User
      */
-    protected function create(array $data)
+    public function create(array $data)
     {
-//        if ($data['frmtype'] == "user")
-//        {
-//            $role_id=1;
-//        }
+        if ($data['frmtype'] == "user")
+        {
+            $role_id=1;
+        }
         $capital=City::where('id','=',$data['capital'])->value('title');
         return User::create([
             'name' => $data['name'],
@@ -122,5 +124,6 @@ class RegisterController extends Controller
             'zipCode' => $data['zipCode'],
 //            'register_date' => date_create(),
         ]);
+        return response()->json(['success' => true]);
     }
 }
