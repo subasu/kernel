@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\City;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/index';
 
     /**
      * Create a new controller instance.
@@ -55,19 +56,17 @@ class RegisterController extends Controller
 
         if ($data['frmtype'] == "user") {
             return Validator::make($data, [
-                    'name' => 'sometimes|nullable|max:255',
+                    'name' => 'required|max:255',
                     'family' => 'sometimes|nullable|max:255',
                     'email' => 'sometimes|nullable|max:255|unique:users',
                     'password' => 'sometimes|nullable|min:6|confirmed',
                     'address' => 'sometimes|nullable|max:1000',
                     'telephone' => 'sometimes|nullable|numeric|size:11',
-                    'cellphone' => 'sometimes|nullable|numeric|size:11',
-                    'birth_date' => 'sometimes|nullable|numeric|min:8|max:10',
-                    'register_date' => 'sometimes|nullable|numeric|min:8|max:10',
-                    'birth_date' => 'sometimes|nullable|numeric|min:8|max:10',
+                    'cellphone' => 'required|numeric|size:11',
+                    'birth_date' => 'sometimes|nullable|min:8|max:10',
                     'capital_city_id' => 'sometimes|nullable|numeric',
                     'town_city_id' => 'sometimes|nullable|numeric',
-                    'cellphone' => 'required|numeric|max:11|min:11',
+                    'zipCode' => 'sometimes|nullable|numeric|min:10',
                     'captcha' => 'required|in:' . session()->get('captcha')
                 ]
                 ,
@@ -87,10 +86,11 @@ class RegisterController extends Controller
                     'cellphone.numeric' => 'فیلد موبایل باید عددی باشد',
                     'telephone.required' => ' فیلد تلفن الزامی است ',
                     'telephone.numeric' => ' فیلد تلفن عددی است',
+                    'zipCode.numeric' => ' فیلد کدپستی عددی است',
                     'telephone.size' => ' فیلد تلفن باید 11 رقمی باشد',
                     'cellphone.size' => ' فیلد موبایل باید 11 رقمی باشد',
-                ]);;
-        }
+                ]);
+        }//end of if
 
     }
 
@@ -102,6 +102,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+//        if ($data['frmtype'] == "user")
+//        {
+//            $role_id=1;
+//        }
+        $capital=City::where('id','=',$data['capital'])->value('title');
         return User::create([
             'name' => $data['name'],
             'family' => $data['family'],
@@ -109,12 +114,13 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'cellphone' => $data['cellphone'],
             'birth_date' => $data['birth_date'],
-            'register_date' => $data['register_date'],
             'address' => $data['address'],
-            'capital_city_id' => $data['capital_city_id'],
-            'town_city_id' => $data['town_city_id'],
+            'capital_city_id' => $capital,
+            'town_city_id' => $data['town'],
             'telephone' => $data['telephone'],
-            'role_id' => $data['role_id'],
+            'role_id' => $role_id,
+            'zipCode' => $data['zipCode'],
+//            'register_date' => date_create(),
         ]);
     }
 }

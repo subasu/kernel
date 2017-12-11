@@ -34,7 +34,8 @@
                             {{--<input id="cellphone" type="text" class="form-control">--}}
                             {{--<button class="button"><i class="fa fa-user"></i> ثبت نام </button>--}}
 
-                            <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                            <form class="form-horizontal" id="registerForm" role="form"
+                                  enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <input type="hidden" value="user" name="frmtype">
                                 <div class="form-group col-md-12{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -81,8 +82,7 @@
                                 <div class="form-group col-md-12{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <div class="col-md-9">
                                         <input id="password" type="password" class="form-control" name="password"
-                                               required
-                                               maxlength="20">
+                                               required maxlength="20">
                                         @if ($errors->has('password'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
-                                        <input type="text" pattern="^\d{11}$" required=" " tabindex="6"
+                                        <input type="text" pattern="^\d{11}$" required="" tabindex="6" autofocus
                                                value="{{ old('telephone') }}" maxlength="11" name="telephone" id="telephone"
                                                class="form-control">
                                         @if ($errors->has('telephone'))
@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
-                                        <input type="text" pattern="^\d{11}$" required=" " tabindex="7"
+                                        <input type="text" pattern="^\d{10}$" required=" " tabindex="8"
                                                value="{{ old('zipCode') }}" maxlength="11" name="zipCode" id="zipCode"
                                                class="form-control">
                                         @if ($errors->has('zipCode'))
@@ -169,7 +169,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
-                                        <input type="text"  required=" " tabindex="7"
+                                        <input type="text" required="" tabindex="9"
                                                value="{{ old('birth_date') }}" maxlength="11" name="birth_date" id="birth_date"
                                                class="form-control">
                                         @if ($errors->has('birth_date'))
@@ -182,8 +182,8 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
-                                        <textarea type="text" required=" " tabindex="7"
-                                               value="{{ old('address') }}" maxlength="2000" name="address" id="address"
+                                        <textarea type="text" required=" " tabindex="10"
+                                                  value="{{ old('address') }}" maxlength="2000" name="address" id="address"
                                                   class="form-control address col-md-12"></textarea>
                                         @if ($errors->has('address'))
                                             <span class="help-block">
@@ -198,15 +198,14 @@
                                         {{--<img src="{{url('reload.jpg')}}" class="captcha-reload "--}}
                                              {{-->--}}
                                         <i class="fa fa-refresh fa-lg captcha-reload col-md-1" height="25" width="25"></i>
-                                        <img class="captcha col-md-4" alt="captcha.png"
-                                             style="width: 41%;margin-right: 1%;padding-right: 0px !important;padding-left: 0px;margin-left: 1%;"/>
+                                        <img class="captcha col-md-4" alt="captcha.png" id="captcha-image"/>
                                         @if ($errors->has('captcha'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('captcha') }}</strong>
                                     </span>
                                         @endif
                                         <input id="captcha" class="form-control col-md-4" type="text"
-                                               name="captcha" value="" required autofocus>
+                                               name="captcha" value="" required tabindex="11">
                                     </div>
                                     <label for="captcha" class="col-md-3 control-label"> کد امنیتی</label>
                                 </div>
@@ -214,7 +213,9 @@
                                     <div class="col-md-12">
                                         {{--<button type="submit" class="btn btn-primary col-md-4"><i--}}
                                         {{--class="fa fa-user-plus"></i></button>--}}
-                                        <button class="button"><i class="fa fa-user"></i> ثبت نام</button>
+                                        <button id="registerUser" class="button" tabindex="12"><i
+                                                    class="fa fa-user"></i> ثبت نام
+                                        </button>
 
                                     </div>
                                 </div>
@@ -293,7 +294,79 @@
             $(".captcha-reload").click(function () {
                 captcha();
             });
-        })
+            $("#registerUser").on('click', function () {
+                $("#registerForm").submit(function (e) {
+                    e.preventDefault();
+                });
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                var formData = new FormData($("#registerForm")[0])
+                $.ajax({
+                    url: '{{url('register')}}',
+                    type: 'post',
+                    cache: false,
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        var x = '';
+                        $.each(data, function (key, val) {
+                            x += val[0] + '\n'
+                        });
+                        console.log(data.responseText)
+                        swal({
+                            title: '',
+                            text: x,
+                            type: "info",
+                            confirmButtonText: "بستن"
+                        })
+                        console.log(data);
 
+                    },
+                    error: function (response) {
+                        if (response.status == 422) {
+                            var x = response.responseJSON;
+                            var y = '';
+                            $.each(x, function (key, val) {
+                                y += val[0] + '\n';//showing only the first error.
+                            });
+                            swal({
+                                title: '',
+                                text: y,
+                                type: "info",
+                            })
+                        }
+                        else if (response.status === 421) {
+                            swal({
+                                title: "",
+                                text: "اطلاعات شما با مؤفقیت ثبت شد، پس از تأیید شدن توسط مدیر سایت برای شما ایمیل فعال سازی ارسال خواهد شد.منتظر پیامک اطلاعیه از طرف سایت باشید.",
+                                type: "info",
+                                confirmButtonText: "بستن"
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "",
+                                text: 'خطایی رخ داده است، لطفا با پشتیبانی تماس حاصل فرمائید',
+                                //                                text: "اطلاعات شما با مؤفقیت ثبت شد، پس از تأیید شدن توسط مدیر سایت برای شما ایمیل فعال سازی ارسال خواهد شد.منتظر پیامک اطلاعیه از طرف سایت باشید.",
+                                type: "info",
+                                confirmButtonText: "بستن"
+                            });
+                        }
+                    }//error
+
+                })//ajax
+            });//onclick
+        })//document.ready
+
+    </script>
+    <script src="{{ URL::asset('public/js/persianDatepicker.js')}}"></script>
+    {{--persianDatepicker--}}
+    <script>
+        $('#birth_date').persianDatepicker();
     </script>
 @endsection
