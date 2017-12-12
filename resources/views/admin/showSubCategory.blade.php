@@ -55,6 +55,7 @@
                             <th style="text-align: center">عنوان دسته</th>
                             <th style="text-align: center">سطح دسته</th>
                             <th style="text-align: center">تصویر</th>
+                            <th style="text-align: center">وضعیت</th>
                             <th  style="text-align: center;border-right: 1px solid #d6d6c2;">عملیات</th>
                             <th  style="text-align: center;border-right: 1px solid #d6d6c2;">مشاهده زیر دسته</th>
                         </tr>
@@ -75,12 +76,18 @@
                                     @if($category->image_src != null)
                                         <td><button class="btn btn-basic" id="showPicture">مشاهده تصویر</button></td>
                                     @endif
-                                    <td><a  href="{{url('admin/editCategory/'.$category->id)}}" class="btn btn-info">ویرایش</a></td>
+                                    @if($category->active == 1)
+                                        <td><button class="btn btn-success col-lg-8 col-md-offset-2" >فعال</button></td>
+                                    @endif
+                                    @if($category->active == 0)
+                                        <td><button class="btn btn-danger col-lg-8 col-md-offset-2" >غیر فعال</button></td>
+                                    @endif
+                                    <td><a  href="{{url('admin/editCategory/'.$category->id)}}" class="btn btn-warning col-md-8 col-md-offset-1">ویرایش</a></td>
                                     @if($category->depth > 0)
-                                        <td><a  class="btn btn-dark" style="width : 82%; text-align: center;" href="{{url('admin/showSubCategory/'.$category->id)}}">مشاهده زیر دسته</a></td>
+                                        <td><a  class="btn btn-dark col-md-10 col-md-offset-1"  href="{{url('admin/showSubCategory/'.$category->id)}}">مشاهده زیر دسته</a></td>
                                     @endif
                                     @if($category->depth == 0)
-                                        <td><a  class="btn btn-warning " style="width : 82%;"  >فاقد زیر دسته</a></td>
+                                        <td><a  class="btn btn-default col-md-10 col-md-offset-1"  >فاقد زیر دسته</a></td>
                                     @endif
                                 </tr>
                             </form>

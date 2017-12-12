@@ -17,16 +17,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::group(['prefix' => '/v1'], function () {
+    //categories routes
     Route::get('getMainCategories','CommonController@getMainCategories');
-
     Route::get('getSubCategories/{id}','CommonController@getSubCategories');
     Route::get('getSubmenu/{id}','CommonController@getSubmenu');
     Route::get('getBrands/{id}','CommonController@getBrands');
-
     Route::get('getExistedCategories/{id}','CommonController@getExistedCategories'); //get existed categories to show to shop manager not to be confused
     Route::post('findCategoryProduct','CommonController@findCategoryProduct');
 
+    //unit counts routes
     Route::get('getSubunits/{id}','CommonController@getSubunits');
     Route::get('getMainUnits','CommonController@getMainUnits');
 
+    //color routes
+    Route::get('getColors','CommonController@getColors');
+
+    //size routes
+    Route::get('getSizes','CommonController@getSizes');
 });

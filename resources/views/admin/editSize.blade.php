@@ -6,7 +6,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>ویرایش واحد شمارش</h2>
+                    <h2>ویرایش سایز</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link" data-toggle="tooltip" title="جمع کردن"><i
                                         class="fa fa-chevron-up"></i></a>
@@ -28,7 +28,7 @@
                         <thead>
                         <tr>
                             <th style="text-align: center">ردیف</th>
-                            <th style="text-align: center">عنوان واحد شمارش</th>
+                            <th style="text-align: center">عنوان سایز</th>
                             <th style="text-align: center">ویرایش</th>
                         </tr>
                         </thead>
@@ -40,9 +40,9 @@
                             {{--@foreach($categoryInfo as $category)--}}
                             <tr class="unit">
                                 <td style="font-size: 120%;">{{++$i}}</td>
-                                <td class="col-md-6 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$unitCount[0]->title}}"></td>
+                                <td class="col-md-6 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$data[0]->title}}"></td>
                                 <td><button id="edit" type="button" class="btn btn-warning col-md-9 col-md-offset-1">ویرایش</button></td>
-                                <input type="hidden" value="{{$unitCount[0]->id}}" id="id" name="id">
+                                <input type="hidden" value="{{$data[0]->id}}" id="id" name="id">
                                 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
                             </tr>
                             {{--@endforeach--}}
@@ -58,7 +58,6 @@
                 var title = $('#title').val();
                 var id   = $('#id').val();
                 var token = $('#token').val();
-                var parameter = 'unitCount';
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -80,8 +79,8 @@
                             $.ajax
                             ({
                                 cache: false,
-                                url: "{{url('admin/editUnitCountTitle')}}",
-                                data: {'title': title, 'id': id, '_token': token , 'parameter' : parameter},
+                                url: "{{url('admin/editSizeTitle')}}",
+                                data: {'title': title, 'id': id, '_token': token},
                                 type: "post",
                                 dataType: "JSON",
                                 beforeSend: function () {
@@ -90,7 +89,7 @@
                                         $('#title').focus();
                                         swal({
                                             title: "",
-                                            text: 'پر کردن عنوان زیر واحد الزامی است',
+                                            text: 'پر کردن عنوان سایز الزامی است',
                                             type: "warning",
                                             confirmButtonText: "بستن"
                                         });
@@ -108,7 +107,8 @@
                                         setTimeout(function () {
                                             window.location.href = document.referrer;
                                         },3000);
-                                    } else {
+                                    }
+                                    else {
                                         swal({
                                             title: "",
                                             text: response.message,

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class NewCategoryProductsMigration extends Migration
+class AddProductSizeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class NewCategoryProductsMigration extends Migration
      */
     public function up()
     {
-        Schema::create('category_product', function (Blueprint $table) {
+        Schema::create('product_size', function (Blueprint $table) {
             $table->increments('id');
-//            $table->integer('shop_id')->unsigned()->index();
-//            $table->foreign('shop_id')->references('id')->on('shops');
             $table->integer('product_id')->unsigned()->index();
             $table->foreign('product_id')->references('id')->on('products');
-            $table->integer('category_id')->unsigned()->index();
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->tinyInteger('active')->default('1');
+            $table->integer('size_id')->unsigned()->index();
+            $table->foreign('size_id')->references('id')->on('sizes');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class NewCategoryProductsMigration extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_categories');
+        Schema::dropIfExists('product_size');
     }
 }

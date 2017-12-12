@@ -5,6 +5,7 @@ use App\Http\SelfClasses\AddProduct;
 use App\Http\SelfClasses\CheckFiles;
 use App\Http\SelfClasses\CheckJalaliDate;
 use App\Http\SelfClasses\CheckProduct;
+use App\Models\Color;
 use App\Models\Product;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ class ProductController extends Controller
     public function addProduct()
     {
         $pageTitle='درج محصول';
-        return view('admin.addProduct',compact('pageTitle'));
+        $colors=Color::all();
+        return view('admin.addProduct',compact('pageTitle','colors'));
     }
     public function productsManagement()
     {

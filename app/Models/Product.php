@@ -71,4 +71,16 @@ class Product extends Model
         return $this->hasMany('App\Models\ProductScore','product_id');
     }
 
+    //relation of product and colors
+    public function colors()
+    {
+        return $this->belongsToMany('App\Models\Color');
+    }
+
+    //relation of product and size
+    public function sizes()
+    {
+        return $this->belongsToMany('App\Models\Size');
+    }
+
 }

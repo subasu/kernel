@@ -6,7 +6,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2> مدیریت واحدهای شمارش و زیر واحد ها</h2>
+                    <h2> مدیریت و نمایش سایزها</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link" data-toggle="tooltip" title="جمع کردن"><i
                                         class="fa fa-chevron-up"></i></a>
@@ -18,8 +18,8 @@
                 </div>
 
 
-                <a href="{{url('admin/addUnit')}}" id="user-send" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style="font-weight: bold;">
-                                        افزودن واحد شمارش جدید                </a>
+                <a href="{{url('admin/addSizes')}}" id="" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style="font-weight: bold;">
+                    افزودن سایز جدید                </a>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
                     <table style="direction:rtl;text-align: center" id="example"
@@ -28,8 +28,7 @@
                         <thead>
                         <tr>
                             <th style="text-align: center">ردیف</th>
-                            <th style="text-align: center"> عنوان واحد شمارش</th>
-                            <th style="text-align: center">مشاهده زیر واحد</th>
+                            <th style="text-align: center"> عنوان سایز</th>
                             <th style="text-align: center;border-right: 1px solid #d6d6c2">ویرایش</th>
                         </tr>
                         </thead>
@@ -41,13 +40,7 @@
                             <tr class="unit">
                                 <td style="font-size: 120%;">{{++$i}}</td>
                                 <td style="font-size: 120%;">{{$datum->title}}</td>
-                                <td style="font-size: 120%;"><a class="btn btn-warning col-md-8 col-md-offset-2"  href="{{url('admin/editUnitCount')}}/{{$datum->id}}">ویرایش</a></td>
-                                @if(count($datum->subUnits) > 0)
-                                    <td style="font-size: 120%;"><a class="btn btn-dark col-md-8 col-md-offset-2" href="{{url('admin/subUnitManagement')}}/{{$datum->id}}"> مشاهده و ویرایش زیر واحدها </a></td>
-                                @endif
-                                @if(count($datum->subUnits) == 0)
-                                    <td style="font-size: 120%;"><a class="btn btn-default col-md-8 col-md-offset-2">فاقد زیر واحد</a></td>
-                                @endif
+                                <td style="font-size: 120%;"><a class="btn btn-warning col-md-8 col-md-offset-2"  href="{{url('admin/editSize')}}/{{$datum->id}}">ویرایش</a></td>
                             </tr>
                             {{--@endif--}}
                         @endforeach
@@ -59,4 +52,4 @@
 
 
 
-        @endsection
+@endsection

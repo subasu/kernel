@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\CategoryProduct;
+use App\Models\Color;
 use App\Models\Product;
+use App\Models\Size;
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
 use Illuminate\Support\Facades\DB;
@@ -144,4 +146,33 @@ class CommonController extends Controller
             return response()->json($title);
         }
     }
+
+    //below function is related to existed colors
+    public function getColors()
+    {
+        $colors = Color::all();
+        if(count($colors) > 0)
+        {
+            return response()->json($colors);
+        }else
+            {
+                return response()->json(0);
+            }
+    }
+
+    //below function is related to existed sizes
+    public function getSizes()
+    {
+        $sizes = Size::all();
+        if(count($sizes) > 0)
+        {
+            return response()->json($sizes);
+        }else
+        {
+            return response()->json(0);
+        }
+    }
+
+    //below function is related to add new size in data base
+
 }

@@ -424,6 +424,21 @@
                                         <span class="required star"></span>
                                     </label>
                                 </div>
+                                <div id="addColor">
+                                    <div class="col-md-12 margin-1">
+                                        <div class="col-md-1 col-sm-1 col-xs-1 col-md-offset-2">
+                                            <a id="addInput" class="glyphicon glyphicon-plus btn btn-success"
+                                               title="انتخاب رنگ"></a>
+                                        </div>
+                                        <div class="col-md-5 col-sm-6 col-xs-9 ">
+                                            <input class="form-control col-md-12 col-xs-12"
+                                                   type="checkbox" name="color[]" id="color"/>
+                                        </div>
+                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="file">انتخاب رنگ های محصول :
+                                            <span class="required star"></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
