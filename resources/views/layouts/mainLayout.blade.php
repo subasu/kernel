@@ -343,7 +343,7 @@
                                         '<a href="#">سایر محصولات</a>' +
                                         '</li>';
                                         temp += '<li class="link_container" id="' + value.id + '">' +
-                                            '<a href="#">مشاهده ی سایر محصولات</a>' +
+                                            '<a href="{{url('showProducts')}}'+"/"+value.id+'">مشاهده ی سایر محصولات</a>' +
                                             '</li>';
                                     temp += '</ul>' + '</li>'
                                     item.append(temp)
@@ -356,7 +356,7 @@
                                         '</li>';
                                     $.each(value.brands, function (key, value) {
                                         temp += '<li class="link_container" id="' + value.id + '">' +
-                                            '<a href="#">' + value.title + '</a>' +
+                                            '<a href="{{url('showProducts')}}'+"/"+value.id+' ">' + value.title + '</a>' +
                                             '</li>';
                                     });
                                     temp += '</ul>' + '</li>'

@@ -18,6 +18,7 @@ Route::get('town/{cid}','IndexController@town');
 Route::get('products','IndexController@products');
 Route::get('captcha', 'IndexController@create_image');
 Route::get('getSubmenu/{id}','CommonController@getSubmenu');
+Route::get('showProducts/{id}','IndexController@showProducts');
 
 
 Route::group(['prefix'=>'admin'],function() {

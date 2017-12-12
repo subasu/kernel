@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\CategoryProduct;
 use App\Models\City;
 use App\User;
 use Illuminate\Http\Request;
@@ -165,5 +166,16 @@ class IndexController extends Controller
         else
             return response()->json(['data'=>0]);
 
+    }
+
+
+    //below function is to return show product blade
+    public function showProducts($id)
+    {
+        $menu = Category::where('depth', '=', '2')->get();
+        $pageTitle = 'لیست محصولات';
+        $categories  = CategoryProduct::where('category_id',$id)->get();
+        dd($categories);
+        return view('main.showProducts',compact('menu','pageTitle','categories'));
     }
 }
