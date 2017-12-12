@@ -60,12 +60,12 @@ class CommonController extends Controller
     //below function is to get brands from database
     public function getSubmenu($id)
     {
-        $submenu = Category::where([['parent_id',$id],['active',1]])->get();
+        $submenu = Category::where([['parent_id',$id],['active',1]])->orderBy('title')->get();
         $catImg=Category::find($id)->value('image_src');
         foreach ($submenu as $sm)
         {
             $sm->catImg=$catImg;
-            $sm->brands=Category::where([['parent_id',$sm->id],['active',1]])->get();
+            $sm->brands = Category::where([['parent_id',$sm->id],['active',1]])->get();
         }
         if(count($submenu) > 0 )
         {
