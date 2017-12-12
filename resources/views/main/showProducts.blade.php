@@ -598,7 +598,7 @@
                         <!-- PRODUCT LIST -->
                         <ul class="row product-list style2 grid">
                             <li class="col-sx-12 col-sm-4">
-                                @foreach($categories as $category)
+                                @foreach($categories->products as $product)
                                 <div class="product-container">
                                     <div class="left-block">
                                         <a href="#">
@@ -611,7 +611,7 @@
                                         </div>
                                     </div>
                                     <div class="right-block text-right">
-                                        <h5 class="product-name"><a href="#">{{$category->products->title}}</a></h5>
+                                        <h5 class="product-name"><a href="#">{{$product->title}}</a></h5>
                                         <div class="product-star">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>

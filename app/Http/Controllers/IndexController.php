@@ -174,8 +174,8 @@ class IndexController extends Controller
     {
         $menu = Category::where('depth', '=', '2')->get();
         $pageTitle = 'لیست محصولات';
-        $categories  = CategoryProduct::where('category_id',$id)->get();
-        dd($categories);
+        $categories  = Category::find($id);
+        //dd($categories);
         return view('main.showProducts',compact('menu','pageTitle','categories'));
     }
 }
