@@ -12,8 +12,10 @@ namespace App\Http\SelfClasses;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\Product;
+use App\Models\ProductColor;
 use App\Models\ProductFlag;
 use App\Models\ProductImage;
+use App\Models\ProductSize;
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
 use Hekmatinasser\Verta\Verta;
@@ -41,7 +43,7 @@ class AddProduct
             $prices->price = str_replace(',', '', $price);
             $prices->save();
         }
-
+        //upload product's video
         $videoSrc = '';
         if (!empty($product->video_src)) {
             $file = $product->video_src;
@@ -69,11 +71,38 @@ class AddProduct
         $pr->barcode = $product->barcode;
         $pr->save();
 
+        //below line find product_id that now saved for use in pivot table
         $lastProductId = Product::orderBy('created_at', 'desc')->offset(0)->limit(1)->value('id');
+        //this block code save color array of product in color_product table
+        $countColor = count($product->color);
+        if ($countColor) {
+            for ($i = 0; $i < $countColor; $i++) {
+                $productColor = new ProductColor();
+                $productColor->product_id = $lastProductId;
+                $productColor->color_id=$product->color[$i];
+                $productColor->active = 1;
+                $productColor->save();
 
-        $count = count($product->file);
-        if ($count) {
-            for ($i = 0; $i < $count; $i++) {
+            }
+
+        }
+        //this block code save size array of product in product_size table
+        $countSize = count($product->size);
+        if ($countSize) {
+            for ($i = 0; $i < $countSize; $i++) {
+                $productColor = new ProductSize();
+                $productColor->product_id = $lastProductId;
+                $productColor->size_id=$product->size[$i];
+                $productColor->active = 1;
+                $productColor->save();
+
+            }
+
+        }
+        //this block code save and upload picture array of product in product_Images table
+        $countPic = count($product->file);
+        if ($countPic) {
+            for ($i = 0; $i < $countPic; $i++) {
                 $productPicture = new ProductImage();
                 $productPicture->product_id = $lastProductId;
                 $imageName = $product->file[$i]->getClientOriginalName();
@@ -85,6 +114,9 @@ class AddProduct
             }
 
         }
+        /**this block code save flags and prices of product in product_flags table
+         * by calling addProductFlag(title of flag, price of flag, product_id) **/
+
         addProductFlag('price', $product->price, $lastProductId);
 
         if (!empty($product->special_price)) {
@@ -101,8 +133,7 @@ class AddProduct
             addProductFlag('free_price', $product->free_price, $lastProductId);
         }
         /**this section check user select which level of categories
-         * if didn't select lastest level make a subcategiries with 'سایر' title in category table
-         *and then insert row to category_product table with this product_id and category_id
+         *and insert row to category_product table with latest product_id and category_id
          **/
         $catId = 0;
         if (empty($product->subCategories)) {
@@ -114,26 +145,15 @@ class AddProduct
         {
             addCategoryProduct($lastProductId, $product->brands);
         }
-
         //find 'سایر' category_id
         $subCatId = Category::where([['parent_id', $catId], ['active', 1]])->where('title', '=', 'سایر')->value('id');
         if ($subCatId != 0 && $catId !=0) {
             addCategoryProduct($lastProductId, $subCatId);
         }
-// else if($catId !=0) {
-//            $category = new Category();
-//            $category->title = 'سایر';
-//            $category->parent_id = $product->categories;
-//            $category->depth = 0;
-//            $category->save();
-//            $subCategoriesId = Category::where([['parent_id', $product->categories], ['active', 1]])->where('title', '=', 'سایر')->value('id');
-//            addCategoryProduct($lastProductId, $subCategoriesId);
-//        }
         return (true);
     }
 
-
-    //below function is related to convert jalali date
+    //below function is related to convert jalali date to Miladi date
     function dateConvert($jalaliDate)
     {
         if (count($jalaliDate) > 0) {
