@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="box-authentication register-form">
-                            <h3>ثبت نام</h3>
+                            <h3 class="col-md-6" >ثبت نام</h3><br>
                             {{--<p>لطفا تلفن خود را برای ثبت نام وارد نمائید</p>--}}
                             {{--<label for="cellphone">نام</label>--}}
                             {{--<input id="cellphone" type="text" class="form-control">--}}
@@ -224,13 +224,53 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="box-authentication">
-                            <h3>ورود</h3>
-                            <label for="emmail_login">شماره تلفن</label>
-                            <input id="emmail_login" type="text" class="form-control">
-                            <label for="password_login">رمز عبور</label>
-                            <input id="password_login" type="password" class="form-control">
-                            <p class="forgot-pass"><a href="#">آیا رمز عبور خود را فراموش کرده اید؟</a></p>
-                            <button class="button"><i class="fa fa-lock"></i> ورود</button>
+                            <h3 class="col-md-6">ورود</h3><br>
+                            <form id="loginForm">
+                                {{csrf_field()}}
+                                <div class="form-group col-md-12">
+                                    <div class="col-md-9">
+                                        <input type="text" pattern="^\d{11}$" required=" " tabindex="7"
+                                               value="{{ old('cellphone') }}" maxlength="11" name="cellphone" id="cellphone"
+                                               class="form-control">
+                                        @if ($errors->has('cellphone'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('cellphone') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <label for="grade" class="col-md-3 control-label">تلفن همراه</label>
+                                </div>
+                                <div class="form-group col-md-12{{ $errors->has('password') ? ' has-error' : '' }}">
+                                    <div class="col-md-9">
+                                        <input id="password" type="password" class="form-control" name="password"
+                                               required maxlength="20">
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                    <label for="password" class="col-md-3 control-label">پسورد</label>
+                                </div>
+                                <div class="form-group col-md-12{{ $errors->has('captcha') ? ' has-error' : '' }}">
+                                    <div class="col-md-9">
+                                        {{--<img src="{{url('reload.jpg')}}" class="captcha-reload "--}}
+                                        {{-->--}}
+                                        <i class="fa fa-refresh fa-lg captcha-reload col-md-1" height="25" width="25"></i>
+                                        <img class="captcha col-md-4" alt="captcha.png" id="captcha-image"/>
+                                        @if ($errors->has('captcha'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('captcha') }}</strong>
+                                    </span>
+                                        @endif
+                                        <input id="captcha" class="form-control col-md-4" type="text"
+                                               name="captcha" value="" required tabindex="11">
+                                    </div>
+                                    <label for="captcha" class="col-md-3 control-label"> کد امنیتی</label>
+                                </div>
+                                <p class="forgot-pass"><a href="#">آیا رمز عبور خود را فراموش کرده اید؟</a></p>
+                                <button class="button" id="loginUser"><i class="fa fa-lock"></i> ورود</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -241,6 +281,7 @@
 
     <script>
         $(document).ready(function () {
+            //load cities of capital in selectbox
             var capital = $("#capital");
             $("#capital").on("change", function () {
                 var cid = $(this).val();
@@ -311,6 +352,83 @@
                     dataType: 'json',
                     contentType: false,
                     processData: false,
+                    success: function (response) {
+                        var y = '';
+                        if(response.data=='1')
+                        {
+                            y='شما با مؤفقیت ثبت نام نمودید، از بخش ورود برای استفاده از پنل خود اقدام نمائید.';
+                        }
+                        else if(response.data=='0')
+                        {
+                            y='متأسفانه شما ثبت نام نشدید،با بخش پشتیبانی تماس حاصل فرمائید.';
+                        }
+                        else{
+                        $.each(response, function (key, val) {
+                            y += val[0] + '\n'
+                        });
+                        }
+                        swal({
+                            title: '',
+                            text: y,
+                            type: "info",
+                            confirmButtonText: "بستن"
+                        })
+
+                    },
+                    error: function (response) {
+                        if (response.status == 422) {
+                            var x = response.responseJSON;
+                            var y = '';
+                            $.each(x, function (key, val) {
+                                y += val[0] + '\n';//showing only the first error.
+                            });
+                            swal({
+                                title: '',
+                                text: y,
+                                type: "warning",
+                            })
+                        }
+                        else if (response.status === 421) {
+                            swal({
+                                title: "",
+                                text: "اطلاعات شما با مؤفقیت ثبت شد، پس از تأیید شدن توسط مدیر سایت برای شما ایمیل فعال سازی ارسال خواهد شد.منتظر پیامک اطلاعیه از طرف سایت باشید.",
+                                type: "warning",
+                                confirmButtonText: "بستن"
+                            });
+                        }
+                        else {
+                            swal({
+                                title: "",
+//                                text: 'خطایی رخ داده است، لطفا با پشتیبانی تماس حاصل فرمائید',
+                                text: "اطلاعات شما با مؤفقیت ثبت شد، پس از تأیید شدن توسط مدیر سایت برای شما ایمیل فعال سازی ارسال خواهد شد.منتظر پیامک اطلاعیه از طرف سایت باشید.",
+                                type: "warning",
+                                confirmButtonText: "بستن"
+                            });
+                        }
+                    }//error
+
+                })//ajax
+            });//onclick
+
+            //send login form
+            $("#loginUser").on('click', function () {
+                $("#loginForm").submit(function (e) {
+                    e.preventDefault();
+                });
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                var formData = new FormData($("#loginForm")[0])
+                $.ajax({
+                    url: '{{url('/login')}}',
+                    type: 'post',
+                    cache: false,
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
                     success: function (data) {
                         var x = '';
                         $.each(data, function (key, val) {
@@ -348,18 +466,20 @@
                             });
                         }
                         else {
-                            swal({
-                                title: "",
-                                text: 'خطایی رخ داده است، لطفا با پشتیبانی تماس حاصل فرمائید',
-                                //                                text: "اطلاعات شما با مؤفقیت ثبت شد، پس از تأیید شدن توسط مدیر سایت برای شما ایمیل فعال سازی ارسال خواهد شد.منتظر پیامک اطلاعیه از طرف سایت باشید.",
-                                type: "warning",
-                                confirmButtonText: "بستن"
-                            });
+//                            swal({
+//                                title: "",
+////                                text: 'خطایی رخ داده است، لطفا با پشتیبانی تماس حاصل فرمائید',
+////                                  text: "اطلاعات شما با مؤفقیت ثبت شد، پس از تأیید شدن توسط مدیر سایت برای شما ایمیل فعال سازی ارسال خواهد شد.منتظر پیامک اطلاعیه از طرف سایت باشید.",
+//                                type: "warning",
+//                                confirmButtonText: "بستن"
+//                            });
+                            location.href='{{url('admin/addProduct')}}'
                         }
                     }//error
 
                 })//ajax
             });//onclick
+
         })//document.ready
 
     </script>

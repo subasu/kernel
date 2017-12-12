@@ -70,7 +70,7 @@ Route::group(['prefix'=>'admin'],function() {
 });
 //Auth::routes();
 // Authentication Routes...
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');//rayat 20-9-96
+Route::get('login', 'IndexController@login')->name('login');//rayat 20-9-96
 Route::post('login', 'Auth\LoginController@login');//rayat 20-9-96
 Route::post('logout', 'Auth\LoginController@logout');//rayat 20-9-96
 Route::get('logout', 'Auth\LoginController@logout');//rayat 20-9-96

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\CategoryProduct;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use PhpParser\Node\Expr\Array_;
 
 class CommonController extends Controller
@@ -114,19 +116,35 @@ class CommonController extends Controller
             return response()->json(0);
         }
     }
-    public function findCategoryProduct($id)
+    public function findCategoryProduct(Request $request)
     {
-        //$titles = CategoryProduct::where([['category_id',$id],['active',1]])->value('product_id');
-//        $category = Category::find($id);
-//        $title=Array();
-//        $i=0;
-//        foreach ($category->products as $pr)
-//        {
-//            $title[$i] = Product::where([['id',$pr->pivot->product_id],['active',1]])->value('title') ;
-//            $i++;
-//        }
-//        return response()->json($title);
-        dd($id);
+        $id=$request->id;
+        $method=$request->my_method;
+        if($method==2)
+        {
+            $categoryId= Category::where([['parent_id','=',$id],['active','=',1],['title','=','سایر']])->value('id');
+            $category= Category::find($categoryId);
+            $title=Array();
+            $i=0;
+            foreach ($category->products as $pr)
+            {
+                $title[$i] = Product::where([['id',$pr->pivot->product_id],['active',1]])->value('title') ;
+                $i++;
+            }
+            return response()->json($title);
+        }
+        else
+        {
+            $category = Category::find($id);
+            $title=Array();
+            $i=0;
+            foreach ($category->products as $pr)
+            {
+                $title[$i] = Product::where([['id',$pr->pivot->product_id],['active',1]])->value('title') ;
+                $i++;
+            }
+            return response()->json($title);
+        }
     }
 
     //below function is related to existed colors

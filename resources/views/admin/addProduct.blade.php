@@ -7,17 +7,48 @@
             padding-right: 4px;
             padding-left: 4px;
         }
+
         input, label {
             font-size: 15px;
         }
+
         .margin-1 {
             margin-top: 1%;
         }
+        .margin-2 {
+            margin-top: 2%;
+        }
+
         .margin-bot-1 {
             margin-bottom: 1%;
         }
+
         .overflow-x {
             overflow-x: hidden;
+        }
+        .myColor{
+            width: 13px;
+            height: 13px;
+            padding: 0 !important;
+            margin:0 !important;
+            vertical-align: bottom;
+            position: relative;
+            top: 6px;
+            float: right;
+            left: 21px;
+            *overflow: hidden;
+        }
+        .myLabel {
+            display: block;
+            padding-left: 15px;
+            text-indent: -15px;
+            float:right;
+        }
+        .float-right{
+            float:right;
+        }
+        .padding-right-2{
+            padding-right: 2%;
         }
     </style>
     <!-- Include SmartWizard CSS -->
@@ -68,7 +99,8 @@
                                         <select id="subCategories" class="form-control col-md-12" name="subCategories">
                                         </select>
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته های  دسته
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته های
+                                        دسته
                                         فوق :
                                         <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
                                     </label>
@@ -78,7 +110,8 @@
                                         <select id="brands" class="form-control col-md-12" name="brands">
                                         </select>
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته های  دسته
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته های
+                                        دسته
                                         فوق :
                                         <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
                                     </label>
@@ -155,7 +188,7 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="price" class="form-control col-md-12 col-xs-12 pr" name="price"
-                                               >
+                                        >
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="price"> قیمت اصلی
                                         (تومان) :
@@ -405,7 +438,8 @@
                                             <input class="form-control col-md-12 col-xs-12"
                                                    type="file" name="file[]" id="pic"/>
                                         </div>
-                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="file"> تصویر محصول :
+                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="file"> تصویر محصول
+                                            :
                                             <span class="required star"></span>
                                         </label>
                                     </div>
@@ -413,7 +447,7 @@
                                 <div class="col-md-10 ">
                                     <hr>
                                 </div>
-                                <div class="col-md-12 margin-bot-1">
+                                <div class="col-md-12">
                                     <div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3">
                                         <input class="form-control col-md-12 col-xs-12"
                                                type="file" name="video_src" id="video_src"/>
@@ -423,6 +457,22 @@
                                         محصول :
                                         <span class="required star"></span>
                                     </label>
+                                </div>
+                                <div>
+                                    <div class="col-md-12 margin-2 ">
+                                        <div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3 margin-1 padding-right-2" id="color">
+                                        </div>
+                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="color">انتخاب رنگ های محصول :
+                                        </label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-md-12 margin-2 margin-bot-1">
+                                        <div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3 margin-1 padding-right-2" id="size">
+                                        </div>
+                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="size">انتخاب اندازه های محصول :
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -462,7 +512,8 @@
                                 var x = '';
                                 $.each(data, function (key, val) {
                                     x += val + '\n'
-                                });console.log(data.responseText)
+                                });
+                                console.log(data.responseText)
                                 swal({
                                     title: '',
                                     text: x,
@@ -598,13 +649,20 @@
                                             var valueOption2 = "000";
                                             loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                                             $('#subCategoriesDiv').css('display', 'block');
+                                            //hide brands selector parent div after change categories and empty it's selector
+                                            $('#BrandsDiv').css('display', 'none');
+                                            $('#brands').empty();
                                             findTitle(id)
                                         }
                                     });
                                 }
-                                else {
+                                else {//if user select 'خیر'
                                     $('#subCategoriesDiv').css('display', 'none');
-                                   // findTitle(id)
+                                    $('#subCategories').empty();
+                                    //hide brands selector parent div after change categories and empty it's selector
+                                    $('#BrandsDiv').css('display', 'none');
+                                    $('#brands').empty();
+                                    findTitle(id, 'method2')
                                 }
                             });
                     }
@@ -613,6 +671,7 @@
                         $('#BrandsDiv').css('display', 'none');
                         $('#subCategories').empty();
                         $('#brands').empty();
+                        console.log('100');
                         findTitle(id)
                     }
                 })
@@ -656,9 +715,11 @@
                                         }
                                     });
                                 }
-                                else {
+                                else {//if user select 'خیر'
+                                    //hide brands selector parent div after change categories and empty it's selector
                                     $('#BrandsDiv').css('display', 'none');
-                                    findTitle(id)
+                                    $('#brands').empty();
+                                    findTitle(id, 'method2')
                                 }
                             });
                     }
@@ -694,8 +755,7 @@
                     }
                 })
                 //load MainUnitsCount if there is no category in table redirect addCategory
-                $.ajax
-                ({
+                $.ajax({
                     cache: false,
                     url: "{{Url('api/v1/getMainUnits')}}",
                     dataType: "json",
@@ -735,16 +795,15 @@
                                 var msgOpt1 = "لطفا زیر واحد شمارش مورد نظر خود را انتخاب نمایید";
                                 var msgOpt2 = "اگر زیر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
                                 var valueOption2 = 0;
-                                console.log(response);
                                 loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                             }
                         });
                     }
                 });
                 //load item in select box
-                function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2)
-                {
-                    var item = $(selectBoxId);item.empty();
+                function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2) {
+                    var item = $(selectBoxId);
+                    item.empty();
                     item.append("<option selected='true' disabled='disabled'>" + msgOption1 + "</option>")
                     item.append("<option value='" + valueOption2 + "'>" + msgOption2 + "</option>")
                     $.each(responses, function (key, value) {
@@ -752,27 +811,77 @@
                         ("<option value='" + value.id + "' depth='" + value.depth + "'>" + value.title + "</option>");
                     });
                 }
+
                 //find categori's selected product title
-                function findTitle(cid) {
-                    $.ajax
-                    ({
-                        cache: false,
-                        url: "{{url('api/v1/findCategoryProduct')}}/" + cid,
+                function findTitle(cid, method) {
+                    if (method == "method2") {
+                        $.ajax
+                        ({
+                            cache: false,
+                            url: "{{url('api/v1/findCategoryProduct')}}",
+                            dataType: "json",
+                            type: "post",
+                            data: {'id': cid, 'my_method': 2},
+                            success: function (response) {
+                                var item = $('#oldProduct');
+                                item.empty();
+                                if (response != 0) {
+                                    $.each(response, function (key, value) {
+                                        item.append("<option disabled='disabled' selected='selected'>" + value + "</option>");
+                                    });
+                                }
+                                else {
+                                    item.append("<option  selected='selected'>تا کنون برای این دسته محصولی ثبت نشده است</option>");
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        $.ajax
+                        ({
+                            cache: false,
+                            url: "{{url('api/v1/findCategoryProduct')}}",
+                            dataType: "json",
+                            type: "post",
+                            data: {'id': cid, 'my_method': '1'},
+                            success: function (response) {
+                                var item = $('#oldProduct');
+                                item.empty();
+                                if (response != 0) {
+                                    $.each(response, function (key, value) {
+                                        item.append("<option disabled='disabled' selected='selected'>" + value + "</option>");
+                                    });
+                                }
+                                else {
+                                    item.append("<option  selected='selected'>تا کنون برای این دسته محصولی ثبت نشده است</option>");
+                                }
+                            }
+                        });
+                    }
+
+                }//end find title of selected categories->we show title's product of this category to user that admin registered before
+                function appendItem(divId,inputName,myUrl) {
+                    $.ajax({
+                        url: myUrl,
                         dataType: "json",
+                        cache: false,
                         type: "get",
                         success: function (response) {
-                            var item = $('#oldProduct');item.empty();
-                            if (response  != 0 ) {
-                                $.each(response, function (key, value) {
-                                    item.append("<option disabled='disabled' selected='selected'>" + value + "</option>");
-                                });
-                            }
-                            else {
-                                item.append("<option  selected='selected'>تا کنون برای این دسته محصولی ثبت نشده است</option>");
-                            }
+                            var item = $(divId);
+                            item.empty();
+                            $.each(response, function (key, value) {
+
+                                item.append(
+                                    '<div class="col-md-3 col-sm-6 col-xs-3 float-right">' +
+                                    '<label class="myLabel">'+
+                                    '<input class="form-control myColor" type="checkbox" name="'+inputName+'[]" value="' + value.id + '"/>'
+                                    +value.title+'</label></div>')
+                            });
                         }
-                    });
+                    })
                 }
+                appendItem("#color","color","{{url('api/v1/getColors')}}");
+                appendItem("#size","size","{{url('api/v1/getSizes')}}");
             });
         </script>
         <script src="{{ URL::asset('public/js/persianDatepicker.js')}}"></script>
@@ -782,16 +891,16 @@
             $('#expire_date').persianDatepicker();
         </script>
         <script>
-            $(function(){
-                function formatNumber (num) {
+            $(function () {
+                function formatNumber(num) {
                     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
                 }
 
-                $(".pr").on('keyup',function () {
-                    var price= $(this);
-                    var v0=price.val();
+                $(".pr").on('keyup', function () {
+                    var price = $(this);
+                    var v0 = price.val();
                     var v1 = v0.split(',').join('');
-                    var v2=formatNumber(v1);
+                    var v2 = formatNumber(v1);
                     price.val(v2)
                 })
 

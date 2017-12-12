@@ -152,7 +152,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-cog"></i>مدیریت سایزها<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-expand"></i>مدیریت سایزها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/sizesManagement')}}"> نمایش و مدیریت سایزها</a>
                                     </li>
