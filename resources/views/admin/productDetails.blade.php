@@ -38,41 +38,42 @@
                 </div>
                 <div id="change">
                 </div>
-                <div class="col-md-10 col-md-offset-1 margin-1">
-                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                        <select id="categories" class="form-control col-md-12"
+                <div class="col-md-12 margin-1 margin-bot-1">
+                    <div class="col-md-9 col-sm-6 col-xs-9 margin-1">
+                        <select id="categories" class="form-control col-md-12 margin-1"
                                 name="categories">
                         </select>
                     </div>
-                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> دسته ی اصلی :
-                        <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
+                    <label class="control-label col-md-3 col-sm-4 col-xs-3 margin-1" for="title"> دسته ی اصلی :
+                        <span class="required star" title=" فیلد دسته بندی الزامی است"></span>
                     </label>
                 </div>
-                <div class="col-md-10 col-md-offset-1 margin-1" id="subCategoriesDiv"
+                <div class="col-md-12 margin-1" id="subCategoriesDiv"
                      style="display: none;">
-                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                        <select id="subCategories" class="form-control col-md-12" name="subCategories">
+                    <div class="col-md-9 col-sm-6 col-xs-9">
+                        <select id="subCategories" class="form-control col-md-12 margin-1" name="subCategories">
                         </select>
                     </div>
-                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته های
+                    <label class="control-label col-md-3 col-sm-4 col-xs-3 margin-1" for="title"> زیردسته های
                         دسته
                         فوق :
-                        <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
+                        <span class="required star" title=" فیلد دسته بندی الزامی است"></span>
                     </label>
                 </div>
-                <div class="col-md-10 col-md-offset-1 margin-1" id="BrandsDiv" style="display: none;">
-                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                        <select id="brands" class="form-control col-md-12" name="brands">
+                <div class="col-md-12 margin-1" id="BrandsDiv" style="display: none;">
+                    <div class="col-md-9 col-sm-6 col-xs-9">
+                        <select id="brands" class="form-control col-md-12 margin-1" name="brands">
                         </select>
                     </div>
-                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته های
+                    <label class="control-label col-md-3 col-sm-4 col-xs-3 margin-1" for="title"> زیردسته های
                         دسته
                         فوق :
-                        <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
+                        <span class="required star" title=" فیلد دسته بندی الزامی است"></span>
                     </label>
                 </div>
-                <div class="modal-footer" >
-                    <button type="button" class="btn btn-dark col-md-6 col-md-offset-3" data-dismiss="modal">بستن</button>
+                <div class="modal-footer margin-1">
+                    <button type="button" class="btn btn-dark col-md-6 col-md-offset-3" data-dismiss="modal">بستن
+                    </button>
                 </div>
             </div>
 
@@ -115,14 +116,15 @@
                                         <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                             <div class="col-md-2">
                                                 <a type="button" name="editCategory" id="editCategory"
-                                                   content = "{{$products[0]->categories[0]->id}}"
+                                                   content="{{$products[0]->categories[0]->id}}"
                                                    class="glyphicon glyphicon-edit btn btn-success"
                                                    products-toggle=""
                                                    title="ویرایش "></a>
                                             </div>
                                             <div class="col-md-10">
-                                            <input disabled id="lastCategory" class="form-control col-md-12"
-                                                   name="lastCategory" value="{{$products[0]->categories[0]->title}}">
+                                                <input disabled id="lastCategory" class="form-control col-md-12"
+                                                       name="lastCategory"
+                                                       value="{{$products[0]->categories[0]->title}}">
                                             </div>
                                         </div>
                                         <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> آخرین دسته
@@ -140,9 +142,10 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                <input disabled id="editable"
-                                                       class="form-control col-md-10 col-xs-12 editable" name="title"
-                                                       type="text" value="{{$products[0]->title}}">
+                                                    <input disabled id="editable"
+                                                           class="form-control col-md-10 col-xs-12 editable"
+                                                           name="title"
+                                                           type="text" value="{{$products[0]->title}}">
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> عنوان
@@ -150,11 +153,6 @@
 
                                             </label>
                                         </div>
-                                        @if ($errors->has('title'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1">
                                         <div id="grandparent">
@@ -184,11 +182,6 @@
                                                 محصول :
                                             </label>
                                         </div>
-                                        @if ($errors->has('description'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('description') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1">
                                         <div id="grandparent">
@@ -196,32 +189,25 @@
                                                 <div class="col-md-2">
                                                     <a type="button" name="edit" id="edit"
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->unit_count != null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id" value="{{$products[0]->unit_count}}">
-                                                @endif
-                                                @if($products[0]->unit_count == null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->unit_count != null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id"
+                                                               value="{{$products[0]->unit_count}}">
+                                                    @endif
+                                                    @if($products[0]->unit_count == null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id">
+                                                    @endif
                                                 </div>
                                             </div>
-                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="unit"> واحد
-                                                شمارش :
-
+                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="unit"> واحد شمارش :
                                             </label>
                                         </div>
-                                        @if ($errors->has('unit'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('unit') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1 ">
                                         <div id="grandparent">
@@ -233,30 +219,22 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->sub_unit_count != null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id"
-                                                           value="{{$products[0]->sub_unit_count}}">
-                                                @endif
-                                                @if($products[0]->sub_unit_count == null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->sub_unit_count != null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id"
+                                                               value="{{$products[0]->sub_unit_count}}">
+                                                    @endif
+                                                    @if($products[0]->sub_unit_count == null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id">
+                                                    @endif
                                                 </div>
                                             </div>
-                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="subunit"> زیر
-                                                واحد
-                                                شمارش
-
+                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="subunit"> زیر واحد شمارش :
                                             </label>
                                         </div>
-                                        @if ($errors->has('subunit'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('subunit') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                         <div id="grandparent">
@@ -268,30 +246,24 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->productFlags[0]->title  == 'price')
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable pr"
-                                                           name="unit_count_id"
-                                                           value="{{number_format($products[0]->productFlags[0]->price)}}">
-                                                @endif
-                                                @if($products[0]->productFlags[0]->title != 'price')
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable pr"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->productFlags[0]->title  == 'price')
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable pr"
+                                                               name="unit_count_id"
+                                                               value="{{number_format($products[0]->productFlags[0]->price)}}">
+                                                    @endif
+                                                    @if($products[0]->productFlags[0]->title != 'price')
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable pr"
+                                                               name="unit_count_id">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3" for="price"> قیمت
                                                 اصلی
                                                 (تومان) :
-
                                             </label>
                                         </div>
-                                        @if ($errors->has('price'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('price') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -306,16 +278,17 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->produceDate != null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="produce_date" value="{{$products[0]->produceDate}}">
-                                                @endif
-                                                @if($products[0]->produceDate == null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="produce_date">
-                                                @endif
+                                                    @if($products[0]->produceDate != null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="produce_date"
+                                                               value="{{$products[0]->produceDate}}">
+                                                    @endif
+                                                    @if($products[0]->produceDate == null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="produce_date">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3" for=""> تاریخ
@@ -323,11 +296,6 @@
 
                                             </label>
                                         </div>
-                                        @if ($errors->has('produce_date'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('produce_date') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1">
                                         <div id="grandparent">
@@ -339,16 +307,16 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->expireDate != null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="expire_date" value="{{$products[0]->expireDate}}">
-                                                @endif
-                                                @if($products[0]->expireDate == null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="expire_date">
-                                                @endif
+                                                    @if($products[0]->expireDate != null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="expire_date" value="{{$products[0]->expireDate}}">
+                                                    @endif
+                                                    @if($products[0]->expireDate == null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="expire_date">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3" for="expire_date">
@@ -357,11 +325,6 @@
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
-                                        @if ($errors->has('expire_date'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('expire_date') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1">
                                         <div id="grandparent">
@@ -373,30 +336,25 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->produce_place != null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id" value="{{$products[0]->produce_place}}">
-                                                @endif
-                                                @if($products[0]->produce_place == null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->produce_place != null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id"
+                                                               value="{{$products[0]->produce_place}}">
+                                                    @endif
+                                                    @if($products[0]->produce_place == null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id">
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3" for="produce_place">
                                                 محل
                                                 تولید :
-
                                             </label>
                                         </div>
-                                        @if ($errors->has('produce_place'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('produce_place') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1">
                                         <div id="grandparent">
@@ -408,17 +366,17 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->warehouse_count != null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id"
-                                                           value="{{$products[0]->warehouse_count}}">
-                                                @endif
-                                                @if($products[0]->warehouse_count == null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->warehouse_count != null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id"
+                                                               value="{{$products[0]->warehouse_count}}">
+                                                    @endif
+                                                    @if($products[0]->warehouse_count == null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3"
@@ -428,11 +386,6 @@
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
-                                        @if ($errors->has('warehouse_count'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('warehouse_count') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1 ">
                                         <div id="grandparent">
@@ -444,17 +397,17 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->warehouse_place != null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id"
-                                                           value="{{$products[0]->warehouse_place}}">
-                                                @endif
-                                                @if($products[0]->warehouse_place == null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->warehouse_place != null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id"
+                                                               value="{{$products[0]->warehouse_place}}">
+                                                    @endif
+                                                    @if($products[0]->warehouse_place == null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3"
@@ -464,11 +417,6 @@
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
-                                        @if ($errors->has('warehouse_place'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('warehouse_place') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1">
                                         <div id="grandparent">
@@ -480,16 +428,17 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->ready_time != null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id" value="{{$products[0]->ready_time}}">
-                                                @endif
-                                                @if($products[0]->ready_time == null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->ready_time != null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id"
+                                                               value="{{$products[0]->ready_time}}">
+                                                    @endif
+                                                    @if($products[0]->ready_time == null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3" for="ready_time">
@@ -498,11 +447,6 @@
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
-                                        @if ($errors->has('ready_time'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('ready_time') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                         <div id="grandparent">
@@ -514,16 +458,16 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->barcode != null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id" value="{{$products[0]->barcode}}">
-                                                @endif
-                                                @if($products[0]->barcode == null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->barcode != null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id" value="{{$products[0]->barcode}}">
+                                                    @endif
+                                                    @if($products[0]->barcode == null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3" for="barcode"> بارکد
@@ -531,11 +475,6 @@
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
-                                        @if ($errors->has('barcode'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('barcode') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -551,17 +490,15 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->productFlags[0]->title == 'sales_price')
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable pr"
-                                                           name="unit_count_id"
-                                                           value="{{number_format($products[0]->productFlags[0]->price)}}">
-                                                @endif
-                                                @if($products[0]->productFlags[0]->title != 'sales_price')
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable pr"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->productFlags[3]->title == 'sales_price')
+                                                        <input disabled id="editable" class="form-control col-md-7 col-xs-12 editable pr"
+                                                               name="sales_price"
+                                                               value="{{number_format($products[0]->productFlags[3]->price)}}">
+                                                    @endif
+                                                    @if($products[0]->productFlags[3]->title != 'sales_price')
+                                                        <input disabled id="editable" class="form-control col-md-7 col-xs-12 editable pr"
+                                                               name="sales_price">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3" for="sales_price">
@@ -570,11 +507,6 @@
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
-                                        @if ($errors->has('sales_price'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('sales_price') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1">
                                         <div id="grandparent">
@@ -586,17 +518,17 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->productFlags[0]->title == 'special_price')
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable pr"
-                                                           name="unit_count_id"
-                                                           value="{{number_format($products[0]->productFlags[0]->price)}}">
-                                                @endif
-                                                @if($products[0]->productFlags[0]->title != 'special_price')
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable pr"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->productFlags[1]->title == 'special_price')
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable pr"
+                                                               name="unit_count_id"
+                                                               value="{{number_format($products[0]->productFlags[1]->price)}}">
+                                                    @endif
+                                                    @if($products[0]->productFlags[1]->title != 'special_price')
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable pr"
+                                                               name="unit_count_id">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3" for="special_price">
@@ -605,11 +537,6 @@
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
-                                        @if ($errors->has('special_price'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('special_price') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1">
                                         <div id="grandparent">
@@ -621,17 +548,17 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->productFlags[0]->title == 'wholesale_price')
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable pr"
-                                                           name="unit_count_id"
-                                                           value="{{number_format($products[0]->productFlags[0]->price)}}">
-                                                @endif
-                                                @if($products[0]->productFlags[0]->title != 'wholesale_price')
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable pr"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->productFlags[2]->title == 'wholesale_price')
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable pr"
+                                                               name="wholesale_price"
+                                                               value="{{number_format($products[0]->productFlags[2]->price)}}">
+                                                    @endif
+                                                    @if($products[0]->productFlags[2]->title != 'wholesale_price')
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable pr"
+                                                               name="wholesale_price">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3"
@@ -640,11 +567,6 @@
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
-                                        @if ($errors->has('wholesale_price'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('wholesale_price') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                         <div id="grandparent">
@@ -656,17 +578,17 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->discount_volume != null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id"
-                                                           value="{{$products[0]->discount_volume}}">
-                                                @endif
-                                                @if($products[0]->discount_volume == null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->discount_volume != null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id"
+                                                               value="{{$products[0]->discount_volume}}">
+                                                    @endif
+                                                    @if($products[0]->discount_volume == null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3"
@@ -676,11 +598,6 @@
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
-                                        @if ($errors->has('discount_volume'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('discount_volume') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                         <div id="grandparent">
@@ -692,16 +609,16 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->discount != null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id" value="{{$products[0]->discount}}">
-                                                @endif
-                                                @if($products[0]->discount == null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-12 editable"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->discount != null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id" value="{{$products[0]->discount}}">
+                                                    @endif
+                                                    @if($products[0]->discount == null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="unit_count_id">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount"> درصد
@@ -709,11 +626,6 @@
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
-                                        @if ($errors->has('discount'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('discount') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                         <div id="grandparent">
@@ -725,17 +637,17 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                @if($products[0]->delivery_volume != null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-10 editable"
-                                                           name="unit_count_id"
-                                                           value="{{$products[0]->delivery_volume}}">
-                                                @endif
-                                                @if($products[0]->delivery_volume == null)
-                                                    <input disabled id="editable"
-                                                           class="form-control col-md-7 col-xs-10 editable"
-                                                           name="unit_count_id">
-                                                @endif
+                                                    @if($products[0]->delivery_volume != null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-10 editable"
+                                                               name="unit_count_id"
+                                                               value="{{$products[0]->delivery_volume}}">
+                                                    @endif
+                                                    @if($products[0]->delivery_volume == null)
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-10 editable"
+                                                               name="unit_count_id">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3"
@@ -745,11 +657,6 @@
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
-                                        @if ($errors->has('delivery_volume'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('delivery_volume') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -930,6 +837,7 @@
                     else {
                     }
                 })
+            });
         </script>
         <!-- below script is to zoom in/out picture  -->
         <script>
@@ -978,10 +886,10 @@
 
         <!-- below script is to handle category management -->
         <script>
-            $(document).on('click','#editCategory',function(){
-                    var categoryId = $(this).attr('content');
-                    //alert(categoryId);
-                    $('#myModal').modal('show');
+            $(document).on('click', '#editCategory', function () {
+                var categoryId = $(this).attr('content');
+                //alert(categoryId);
+                $('#myModal').modal('show');
             })
         </script>
 
@@ -990,7 +898,7 @@
         {{--persianDatepicker--}}
         <script>
             $(function () {
-                $("[name = 'produce_date']").each(function(){
+                $("[name = 'produce_date']").each(function () {
                     $(this).persianDatepicker();
                 })
 
@@ -1000,169 +908,169 @@
             })
         </script>
         <script>
-            $(function(){
-                function formatNumber (num) {
+            $(function () {
+                function formatNumber(num) {
                     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
                 }
 
-                $(".pr").on('keyup',function () {
-                    var price= $(this);
-                    var v0=price.val();
+                $(".pr").on('keyup', function () {
+                    var price = $(this);
+                    var v0 = price.val();
                     var v1 = v0.split(',').join('');
-                    var v2=formatNumber(v1);
+                    var v2 = formatNumber(v1);
                     price.val(v2)
                 })
 
             })
 
         </script>
-    <script>
-        //load item in select box
-        function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2) {
-            var item = $(selectBoxId);
-            item.empty();
-            item.append("<option selected='true' disabled='disabled'>" + msgOption1 + "</option>")
-            item.append("<option value='" + valueOption2 + "'>" + msgOption2 + "</option>")
-            $.each(responses, function (key, value) {
-                item.append
-                ("<option value='" + value.id + "' depth='" + value.depth + "'>" + value.title + "</option>");
-            });
-        }
-        //load all main category in select box in addProductForm
-        $.ajax({
-            cache: false,
-            url: "{{url('api/v1/getMainCategories')}}",
-            type: 'get',
-            dataType: "json",
-            success: function (response) {
-                if (response != 0) {
-                    var responses = response;
-                    var selectBoxId = "#categories";
-                    var msgOpt1 = "لطفا دسته مورد نظر خود را انتخاب نمایید";
-                    var msgOpt2 = "اگر دسته مورد نظر در این لیست وجود ندارد این گزینه را انتخاب نمایید";
-                    var valueOption2 = "000";
-                    loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
+        <script>
+            //load item in select box
+            function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2) {
+                var item = $(selectBoxId);
+                item.empty();
+                item.append("<option selected='true' disabled='disabled'>" + msgOption1 + "</option>")
+                item.append("<option value='" + valueOption2 + "'>" + msgOption2 + "</option>")
+                $.each(responses, function (key, value) {
+                    item.append
+                    ("<option value='" + value.id + "' depth='" + value.depth + "'>" + value.title + "</option>");
+                });
+            }
+            //load all main category in select box in addProductForm
+            $.ajax({
+                cache: false,
+                url: "{{url('api/v1/getMainCategories')}}",
+                type: 'get',
+                dataType: "json",
+                success: function (response) {
+                    if (response != 0) {
+                        var responses = response;
+                        var selectBoxId = "#categories";
+                        var msgOpt1 = "لطفا دسته مورد نظر خود را انتخاب نمایید";
+                        var msgOpt2 = "اگر دسته مورد نظر در این لیست وجود ندارد این گزینه را انتخاب نمایید";
+                        var valueOption2 = "000";
+                        loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
+                    }
+                    else {
+                        location.href = '{{url("admin/addCategory")}}';
+                    }
                 }
-                else {
+            })
+            //load subCategories after ask do you want load it's sub Categories or no then load product title related selected category
+            $('#categories').on("change", function () {
+                var id = $(this).val();
+                var depth = $(this).find("option:selected ").attr('depth');
+                if (id == 000) {
                     location.href = '{{url("admin/addCategory")}}';
                 }
-            }
-        })
-        //load subCategories after ask do you want load it's sub Categories or no then load product title related selected category
-        $('#categories').on("change", function () {
-            var id = $(this).val();
-            var depth = $(this).find("option:selected ").attr('depth');
-            if (id == 000) {
-                location.href = '{{url("admin/addCategory")}}';
-            }
-            else if (depth != 0) {
-                swal({
-                        title: '',
-                        text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از زیر دسته ها ذخیره کنید؟',
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "  #5cb85c",
-                        cancelButtonText: "خیر",
-                        confirmButtonText: "آری",
-                        closeOnConfirm: true,
-                        closeOnCancel: true
-                    },
-                    function (isConfirm) {
-                        if (isConfirm) {
-                            //load all subCategory in select box in addProductForm
-                            $.ajax
-                            ({
-                                cache: false,
-                                url: "{{Url('api/v1/getSubCategories')}}/" + id,
-                                dataType: "json",
-                                type: "get",
-                                success: function (response) {
-                                    var responses = response;
-                                    var selectBoxId = '#subCategories';
-                                    var msgOpt1 = "لطفا زیر دسته مورد نظر را انتخاب نمایید";
-                                    var msgOpt2 = "اگر زیر دسته مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
-                                    var valueOption2 = "000";
-                                    loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
-                                    $('#subCategoriesDiv').css('display', 'block');
-                                    //hide brands selector parent div after change categories and empty it's selector
-                                    $('#BrandsDiv').css('display', 'none');
-                                    $('#brands').empty();
-                                }
-                            });
-                        }
-                        else {//if user select 'خیر'
-                            $('#subCategoriesDiv').css('display', 'none');
-                            $('#subCategories').empty();
-                            //hide brands selector parent div after change categories and empty it's selector
-                            $('#BrandsDiv').css('display', 'none');
-                            $('#brands').empty();
-                        }
-                    });
-            }
-            else {
-                $('#subCategoriesDiv').css('display', 'none');
-                $('#BrandsDiv').css('display', 'none');
-                $('#subCategories').empty();
-                $('#brands').empty();
-            }
-        })
-        //load brands after ask do you want load it's brands or no then load product title related selected subCategory
-        $('#subCategories').on("change", function () {
-            var id = $(this).val();
-            var depth1 = $(this).find("option:selected ").attr('depth');
-            if (id == 000) {
-                location.href = '{{url("admin/addCategory")}}';
-            }
-            else if (depth1 != 0) {
-                swal({
-                        title: '',
-                        text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از برندها ذخیره کنید؟',
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "  #5cb85c",
-                        cancelButtonText: "خیر",
-                        confirmButtonText: "آری",
-                        closeOnConfirm: true,
-                        closeOnCancel: true
-                    },
-                    function (isConfirm) {
-                        if (isConfirm) {
-                            //load all subCategory in select box in addProductForm
-                            $.ajax
-                            ({
-                                cache: false,
-                                url: "{{Url('api/v1/getBrands')}}/" + id,
-                                dataType: "json",
-                                type: "get",
-                                success: function (response) {
-                                    var responses = response;
-                                    var selectBoxId = '#brands';
-                                    var msgOpt1 = "لطفا زیر دسته مورد نظر را انتخاب نمایید";
-                                    var msgOpt2 = "اگر زیر دسته مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
-                                    var valueOption2 = "000";
-                                    loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
-                                    $('#BrandsDiv').css('display', 'block');
-                                }
-                            });
-                        }
-                        else {//if user select 'خیر'
-                            //hide brands selector parent div after change categories and empty it's selector
-                            $('#BrandsDiv').css('display', 'none');
-                            $('#brands').empty();
-                        }
-                    });
-            }
-            else {
-                $('#BrandsDiv').css('display', 'none');
-                $('#brands').empty();
-            }
-        })
-        //check option 2 selected or not, if yes redirect to addCategory view
-        $('#brands').on("change", function () {
-            var id = $(this).val();
-            if (id == 000) {
-                location.href = '{{url("admin/addCategory")}}';
-            }
-        })
-    </script>
+                else if (depth != 0) {
+                    swal({
+                            title: '',
+                            text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از زیر دسته ها ذخیره کنید؟',
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "  #5cb85c",
+                            cancelButtonText: "خیر",
+                            confirmButtonText: "آری",
+                            closeOnConfirm: true,
+                            closeOnCancel: true
+                        },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                //load all subCategory in select box in addProductForm
+                                $.ajax
+                                ({
+                                    cache: false,
+                                    url: "{{Url('api/v1/getSubCategories')}}/" + id,
+                                    dataType: "json",
+                                    type: "get",
+                                    success: function (response) {
+                                        var responses = response;
+                                        var selectBoxId = '#subCategories';
+                                        var msgOpt1 = "لطفا زیر دسته مورد نظر را انتخاب نمایید";
+                                        var msgOpt2 = "اگر زیر دسته مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
+                                        var valueOption2 = "000";
+                                        loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
+                                        $('#subCategoriesDiv').css('display', 'block');
+                                        //hide brands selector parent div after change categories and empty it's selector
+                                        $('#BrandsDiv').css('display', 'none');
+                                        $('#brands').empty();
+                                    }
+                                });
+                            }
+                            else {//if user select 'خیر'
+                                $('#subCategoriesDiv').css('display', 'none');
+                                $('#subCategories').empty();
+                                //hide brands selector parent div after change categories and empty it's selector
+                                $('#BrandsDiv').css('display', 'none');
+                                $('#brands').empty();
+                            }
+                        });
+                }
+                else {
+                    $('#subCategoriesDiv').css('display', 'none');
+                    $('#BrandsDiv').css('display', 'none');
+                    $('#subCategories').empty();
+                    $('#brands').empty();
+                }
+            })
+            //load brands after ask do you want load it's brands or no then load product title related selected subCategory
+            $('#subCategories').on("change", function () {
+                var id = $(this).val();
+                var depth1 = $(this).find("option:selected ").attr('depth');
+                if (id == 000) {
+                    location.href = '{{url("admin/addCategory")}}';
+                }
+                else if (depth1 != 0) {
+                    swal({
+                            title: '',
+                            text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از برندها ذخیره کنید؟',
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "  #5cb85c",
+                            cancelButtonText: "خیر",
+                            confirmButtonText: "آری",
+                            closeOnConfirm: true,
+                            closeOnCancel: true
+                        },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                //load all subCategory in select box in addProductForm
+                                $.ajax
+                                ({
+                                    cache: false,
+                                    url: "{{Url('api/v1/getBrands')}}/" + id,
+                                    dataType: "json",
+                                    type: "get",
+                                    success: function (response) {
+                                        var responses = response;
+                                        var selectBoxId = '#brands';
+                                        var msgOpt1 = "لطفا زیر دسته مورد نظر را انتخاب نمایید";
+                                        var msgOpt2 = "اگر زیر دسته مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
+                                        var valueOption2 = "000";
+                                        loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
+                                        $('#BrandsDiv').css('display', 'block');
+                                    }
+                                });
+                            }
+                            else {//if user select 'خیر'
+                                //hide brands selector parent div after change categories and empty it's selector
+                                $('#BrandsDiv').css('display', 'none');
+                                $('#brands').empty();
+                            }
+                        });
+                }
+                else {
+                    $('#BrandsDiv').css('display', 'none');
+                    $('#brands').empty();
+                }
+            })
+            //check option 2 selected or not, if yes redirect to addCategory view
+            $('#brands').on("change", function () {
+                var id = $(this).val();
+                if (id == 000) {
+                    location.href = '{{url("admin/addCategory")}}';
+                }
+            })
+        </script>
 @endsection

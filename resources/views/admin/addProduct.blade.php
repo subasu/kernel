@@ -132,11 +132,6 @@
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> نام محصول :
                                         <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
                                     </label>
-                                    @if ($errors->has('title'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     {{--<div class="col-md-1" style="margin-left: 6.333333%;margin-right: 2%;"></div>--}}
@@ -148,11 +143,6 @@
                                         محصول :
                                         <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
                                     </label>
-                                    @if ($errors->has('description'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('description') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -160,14 +150,8 @@
                                         </select>
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="unit"> واحد شمارش :
-                                        <span
-                                                class="required star" title="پر کردن این فیلد الزامی است">*</span>
+                                        <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
                                     </label>
-                                    @if ($errors->has('unit'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('unit') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 ">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -176,14 +160,7 @@
                                         </select>
 
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="subunit"> زیر واحد
-                                        شمارش:
-                                    </label>
-                                    @if ($errors->has('subunit'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('subunit') }}</strong>
-                                    </span>
-                                    @endif
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="subunit"> زیر واحد شمارش:</label>
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -194,11 +171,6 @@
                                         (تومان) :
                                         <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
                                     </label>
-                                    @if ($errors->has('price'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('price') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -213,11 +185,6 @@
                                         تولید :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('produce_date'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('produce_date') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -228,11 +195,6 @@
                                         انقضا :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('expire_date'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('expire_date') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -243,11 +205,6 @@
                                         تولید :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('produce_place'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('produce_place') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -259,11 +216,6 @@
                                         انبار :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('warehouse_count'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('warehouse_count') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 ">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -276,11 +228,6 @@
                                         انبار :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('warehouse_place'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('warehouse_place') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -292,11 +239,6 @@
                                         شدن بر حسب ساعت :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('ready_time'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('ready_time') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -306,11 +248,6 @@
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="barcode"> بارکد :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('barcode'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('barcode') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -325,11 +262,6 @@
                                         (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('sales_price'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('sales_price') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -340,11 +272,6 @@
                                         ویژه (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('special_price'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('special_price') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -355,11 +282,6 @@
                                         عمده (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('wholesale_price'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('wholesale_price') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -370,11 +292,6 @@
                                         عمده (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('free_price'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('free_price') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -387,11 +304,6 @@
                                         تخفیف :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('discount_volume'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('discount_volume') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -401,11 +313,6 @@
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount"> درصد تخفیف :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('discount'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('discount') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -417,11 +324,6 @@
                                         پیک رایگان :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    @if ($errors->has('delivery_volume'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('delivery_volume') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                             </div>
                         </div>
