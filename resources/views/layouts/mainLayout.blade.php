@@ -335,19 +335,34 @@
                             x = 0;
                             var len = value.brands.length;
                             if (len != 0 || value.title == 'سایر') {
-                                var temp = '<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">' +
-                                    '<ul class="block">' +
-                                    '<li class="link_container group_header">' +
-                                    '<a href="#">' + value.title + '</a>' +
-                                    '</li>';
-                                $.each(value.brands, function (key, value) {
-                                    temp += '<li class="link_container" id="' + value.id + '">' +
+                                if (value.title == 'سایر')
+                                {
+                                    var temp = '<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">' +
+                                        '<ul class="block">' +
+                                        '<li class="link_container group_header">' +
+                                        '<a href="#">سایر محصولات</a>' +
+                                        '</li>';
+                                        temp += '<li class="link_container" id="' + value.id + '">' +
+                                            '<a href="#">مشاهده ی سایر محصولات</a>' +
+                                            '</li>';
+                                    temp += '</ul>' + '</li>'
+                                    item.append(temp)
+                                }
+                                else {
+                                    var temp = '<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">' +
+                                        '<ul class="block">' +
+                                        '<li class="link_container group_header">' +
                                         '<a href="#">' + value.title + '</a>' +
                                         '</li>';
+                                    $.each(value.brands, function (key, value) {
+                                        temp += '<li class="link_container" id="' + value.id + '">' +
+                                            '<a href="#">' + value.title + '</a>' +
+                                            '</li>';
+                                    });
+                                    temp += '</ul>' + '</li>'
+                                    item.append(temp)
+                                }
 
-                                });
-                                temp += '</ul>' + '</li>'
-                                item.append(temp)
                             }
                         });
                     }
