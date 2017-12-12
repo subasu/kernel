@@ -271,7 +271,6 @@
                                                 <div class="col-md-2">
                                                     <a type="button" name="edit" id="edit"
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
