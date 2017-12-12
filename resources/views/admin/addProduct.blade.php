@@ -74,7 +74,7 @@
                         <li><a href="#step-3">قیمت / تخفیف / پیک<br/>
                                 <small></small>
                             </a></li>
-                        <li><a href="#step-4">تصاویر / ویدئوی محصول<br/>
+                        <li><a href="#step-4"> تصاویر / ویدئو / سایز / رنگها<br/>
                                 <small></small>
                             </a></li>
                     </ul>
@@ -801,7 +801,7 @@
                     }
                 });
                 //load item in select box
-                function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2) {
+                 function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2) {
                     var item = $(selectBoxId);
                     item.empty();
                     item.append("<option selected='true' disabled='disabled'>" + msgOption1 + "</option>")

@@ -19,7 +19,7 @@ class AddColorProductTable extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->integer('color_id')->unsigned()->index();
             $table->foreign('color_id')->references('id')->on('colors');
-            $table->integer('active')->default('1');;
+            $table->integer('active')->default('1');
             $table->timestamps();
         });
     }

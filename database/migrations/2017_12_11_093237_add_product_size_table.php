@@ -19,6 +19,7 @@ class AddProductSizeTable extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->integer('size_id')->unsigned()->index();
             $table->foreign('size_id')->references('id')->on('sizes');
+            $table->integer('active')->default('1');
             $table->timestamps();
         });
     }

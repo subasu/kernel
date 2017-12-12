@@ -37,7 +37,39 @@
                     <h2 class="modal-title">ویرایش دسته بندی محصول</h2>
                 </div>
                 <div id="change">
-
+                </div>
+                <div class="col-md-10 col-md-offset-1 margin-1">
+                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                        <select id="categories" class="form-control col-md-12"
+                                name="categories">
+                        </select>
+                    </div>
+                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> دسته ی اصلی :
+                        <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
+                    </label>
+                </div>
+                <div class="col-md-10 col-md-offset-1 margin-1" id="subCategoriesDiv"
+                     style="display: none;">
+                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                        <select id="subCategories" class="form-control col-md-12" name="subCategories">
+                        </select>
+                    </div>
+                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته های
+                        دسته
+                        فوق :
+                        <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
+                    </label>
+                </div>
+                <div class="col-md-10 col-md-offset-1 margin-1" id="BrandsDiv" style="display: none;">
+                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                        <select id="brands" class="form-control col-md-12" name="brands">
+                        </select>
+                    </div>
+                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> زیردسته های
+                        دسته
+                        فوق :
+                        <span class="required star" title=" فیلد دسته بندی الزامی است">*</span>
+                    </label>
                 </div>
                 <div class="modal-footer" >
                     <button type="button" class="btn btn-dark col-md-6 col-md-offset-3" data-dismiss="modal">بستن</button>
@@ -984,4 +1016,153 @@
             })
 
         </script>
+    <script>
+        //load item in select box
+        function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2) {
+            var item = $(selectBoxId);
+            item.empty();
+            item.append("<option selected='true' disabled='disabled'>" + msgOption1 + "</option>")
+            item.append("<option value='" + valueOption2 + "'>" + msgOption2 + "</option>")
+            $.each(responses, function (key, value) {
+                item.append
+                ("<option value='" + value.id + "' depth='" + value.depth + "'>" + value.title + "</option>");
+            });
+        }
+        //load all main category in select box in addProductForm
+        $.ajax({
+            cache: false,
+            url: "{{url('api/v1/getMainCategories')}}",
+            type: 'get',
+            dataType: "json",
+            success: function (response) {
+                if (response != 0) {
+                    var responses = response;
+                    var selectBoxId = "#categories";
+                    var msgOpt1 = "لطفا دسته مورد نظر خود را انتخاب نمایید";
+                    var msgOpt2 = "اگر دسته مورد نظر در این لیست وجود ندارد این گزینه را انتخاب نمایید";
+                    var valueOption2 = "000";
+                    loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
+                }
+                else {
+                    location.href = '{{url("admin/addCategory")}}';
+                }
+            }
+        })
+        //load subCategories after ask do you want load it's sub Categories or no then load product title related selected category
+        $('#categories').on("change", function () {
+            var id = $(this).val();
+            var depth = $(this).find("option:selected ").attr('depth');
+            if (id == 000) {
+                location.href = '{{url("admin/addCategory")}}';
+            }
+            else if (depth != 0) {
+                swal({
+                        title: '',
+                        text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از زیر دسته ها ذخیره کنید؟',
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "  #5cb85c",
+                        cancelButtonText: "خیر",
+                        confirmButtonText: "آری",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            //load all subCategory in select box in addProductForm
+                            $.ajax
+                            ({
+                                cache: false,
+                                url: "{{Url('api/v1/getSubCategories')}}/" + id,
+                                dataType: "json",
+                                type: "get",
+                                success: function (response) {
+                                    var responses = response;
+                                    var selectBoxId = '#subCategories';
+                                    var msgOpt1 = "لطفا زیر دسته مورد نظر را انتخاب نمایید";
+                                    var msgOpt2 = "اگر زیر دسته مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
+                                    var valueOption2 = "000";
+                                    loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
+                                    $('#subCategoriesDiv').css('display', 'block');
+                                    //hide brands selector parent div after change categories and empty it's selector
+                                    $('#BrandsDiv').css('display', 'none');
+                                    $('#brands').empty();
+                                }
+                            });
+                        }
+                        else {//if user select 'خیر'
+                            $('#subCategoriesDiv').css('display', 'none');
+                            $('#subCategories').empty();
+                            //hide brands selector parent div after change categories and empty it's selector
+                            $('#BrandsDiv').css('display', 'none');
+                            $('#brands').empty();
+                        }
+                    });
+            }
+            else {
+                $('#subCategoriesDiv').css('display', 'none');
+                $('#BrandsDiv').css('display', 'none');
+                $('#subCategories').empty();
+                $('#brands').empty();
+            }
+        })
+        //load brands after ask do you want load it's brands or no then load product title related selected subCategory
+        $('#subCategories').on("change", function () {
+            var id = $(this).val();
+            var depth1 = $(this).find("option:selected ").attr('depth');
+            if (id == 000) {
+                location.href = '{{url("admin/addCategory")}}';
+            }
+            else if (depth1 != 0) {
+                swal({
+                        title: '',
+                        text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از برندها ذخیره کنید؟',
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "  #5cb85c",
+                        cancelButtonText: "خیر",
+                        confirmButtonText: "آری",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            //load all subCategory in select box in addProductForm
+                            $.ajax
+                            ({
+                                cache: false,
+                                url: "{{Url('api/v1/getBrands')}}/" + id,
+                                dataType: "json",
+                                type: "get",
+                                success: function (response) {
+                                    var responses = response;
+                                    var selectBoxId = '#brands';
+                                    var msgOpt1 = "لطفا زیر دسته مورد نظر را انتخاب نمایید";
+                                    var msgOpt2 = "اگر زیر دسته مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
+                                    var valueOption2 = "000";
+                                    loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
+                                    $('#BrandsDiv').css('display', 'block');
+                                }
+                            });
+                        }
+                        else {//if user select 'خیر'
+                            //hide brands selector parent div after change categories and empty it's selector
+                            $('#BrandsDiv').css('display', 'none');
+                            $('#brands').empty();
+                        }
+                    });
+            }
+            else {
+                $('#BrandsDiv').css('display', 'none');
+                $('#brands').empty();
+            }
+        })
+        //check option 2 selected or not, if yes redirect to addCategory view
+        $('#brands').on("change", function () {
+            var id = $(this).val();
+            if (id == 000) {
+                location.href = '{{url("admin/addCategory")}}';
+            }
+        })
+    </script>
 @endsection
