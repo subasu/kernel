@@ -307,7 +307,7 @@
 <script>
     $(document).ready(function () {
         $(".mainMenu").each(function () {
-            $(this).mouseover(function () {
+            $(this).hover(function () {
                 var id = $(this).attr('name');
                 var token = $(this).data("token");
                 $.ajax({
@@ -320,30 +320,36 @@
                         "_token": token
                     },
                     success: function (response) {
-                            var item = $(".submenu");
-                            item.empty();var x=1;
-                            $.each(response, function (key, value) {
-                                if(value.catImg !=null && x==1){
-                                    item.append('<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">'+
-                                        '<ul class="block">' +
-                                        '<li class="img_container">' +
-                                        '<img src="public/main/assets/data/banner-topmenu.jpg" alt="' + response.catImg + '" title="' + response.catImg + '" >' +
-                                        '</li>' +
-                                        '</ul></li>')}
-                                x=0;
-                                var temp ='<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">' +
+                        var item = $(".submenu");
+                        item.empty();
+                        var x = 1;
+                        $.each(response, function (key, value) {
+                            if (value.catImg != null && x == 1) {
+                                item.append('<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">' +
+                                    '<ul class="block">' +
+                                    '<li class="img_container">' +
+                                    '<img src="public/main/assets/data/banner-topmenu.jpg" alt="' + response.catImg + '" title="' + response.catImg + '" >' +
+                                    '</li>' +
+                                    '</ul></li>')
+                            }
+                            x = 0;
+                            var len = value.brands.length;
+                            if (len != 0 || value.title == 'سایر') {
+                                var temp = '<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">' +
                                     '<ul class="block">' +
                                     '<li class="link_container group_header">' +
-                                    '<a href="#">'+value.title+'</a>' +
+                                    '<a href="#">' + value.title + '</a>' +
                                     '</li>';
                                 $.each(value.brands, function (key, value) {
-                                    temp+='<li class="link_container" id="' + value.id + '">' +
+                                    temp += '<li class="link_container" id="' + value.id + '">' +
                                         '<a href="#">' + value.title + '</a>' +
                                         '</li>';
+
                                 });
-                                temp+='</ul>' + '</li>'
+                                temp += '</ul>' + '</li>'
                                 item.append(temp)
-                            });
+                            }
+                        });
                     }
                 })
                 //$(".submenu").show(100);

@@ -872,7 +872,7 @@
                             $.each(response, function (key, value) {
 
                                 item.append(
-                                    '<div class="col-md-3 col-sm-6 col-xs-3 float-right">' +
+                                    '<div class="col-md-4 col-sm-6 col-xs-3 float-right">' +
                                     '<label class="myLabel">'+
                                     '<input class="form-control myColor" type="checkbox" name="'+inputName+'[]" value="' + value.id + '"/>'
                                     +value.title+'</label></div>')
