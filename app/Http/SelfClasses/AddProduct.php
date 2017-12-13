@@ -119,18 +119,36 @@ class AddProduct
 
         addProductFlag('price', $product->price, $lastProductId);
 
-        if (!empty($product->special_price)) {
+        if (!empty($product->special_price))
+        {
             addProductFlag('special_price', $product->special_price, $lastProductId);
         }
-        if (!empty($product->wholesale_price)) {
-            addProductFlag('wholesale_price', $product->wholesale_price, $lastProductId);
-
+        else
+        {
+            addProductFlag('special_price', 0, $lastProductId);
         }
-        if (!empty($product->sales_price)) {
+        if (!empty($product->wholesale_price))
+        {
+            addProductFlag('wholesale_price', $product->wholesale_price, $lastProductId);
+        }
+        else{
+            addProductFlag('wholesale_price', 0, $lastProductId);
+        }
+        if (!empty($product->sales_price))
+        {
             addProductFlag('sales_price', $product->sales_price, $lastProductId);
         }
-        if (!empty($product->free_price)) {
+        else
+        {
+            addProductFlag('sales_price', 0, $lastProductId);
+        }
+        if (!empty($product->free_price))
+        {
             addProductFlag('free_price', $product->free_price, $lastProductId);
+        }
+        else
+        {
+            addProductFlag('free_price', 0, $lastProductId);
         }
         /**this section check user select which level of categories
          *and insert row to category_product table with latest product_id and category_id
