@@ -527,764 +527,147 @@
 
                     <!-- category short-description -->
                     <div class="cat-short-desc">
-                        <div class="desc-text text-left">
-                            <p>
-                                Mauris accumsan nulla vel diam. Sed in lacus ut enim adipiscing aliquet. Nulla venenatis. In pede mi, aliquet sit amet, euismod in, auctor ut, ligula. Aliquam dapibus tincidunt metus. Praesent justo dolor, lobortis quis, lobortis dignissim, pulvinar ac, lorem. Vestibulum sed ante. Donec sagittis euismod purus. Sed ut perspiciatis sit voluptatem accusantim doloremque laudantim.
-                            </p>
+                        <div class="desc-text text-right">
+                            <h4>
+                                . فروشگاه ما سعی دارد در خدمت رسانی به شما مشتریان گرامی مسیری نو در جهت خدمت رسانی ارائه دهد
+                            </h4>
                         </div>
-                        <div class="cat-short-desc-products">
-                            <ul class="row">
-                                <li class="col-sm-3">
-                                        <div class="product-container">
-                                            <div class="product-thumb">
-                                                <a href="#"><img src="public/main/assets/data/sub-cat1.jpg" alt="Product"></a>
-                                            </div>
-                                            <h5 class="product-name">
-                                                <a href="#">Sub category 1</a>
-                                                <span>(90)</span>
-                                            </h5>
-                                        </div>
-                                </li>
-                                <li class="col-sm-3">
-                                    <div class="product-container">
-                                        <div class="product-thumb">
-                                            <a href="#"><img src="public/main/assets/data/sub-cat2.jpg" alt="Product"></a>
-                                        </div>
-                                        <h5 class="product-name">
-                                            <a href="#">Sub category 2</a>
-                                            <span>(55)</span>
-                                        </h5>
-                                    </div>
-                                </li>
-                                <li class="col-sm-3">
-                                    <div class="product-container">
-                                        <div class="product-thumb">
-                                            <a href="#"><img src="public/main/assets/data/sub-cat3.jpg" alt="Product"></a>
-                                        </div>
-                                        <h5 class="product-name">
-                                            <a href="#">Sub category 3</a>
-                                            <span>(100)</span>
-                                        </h5>
-                                    </div>
-                                </li>
-                                <li class="col-sm-3">
-                                    <div class="product-container">
-                                        <div class="product-thumb">
-                                            <a href="#"><img src="public/main/assets/data/sub-cat4.jpg" alt="Product"></a>
-                                        </div>
-                                        <h5 class="product-name">
-                                            <a href="#">Sub category 4</a>
-                                            <span>(70)</span>
-                                        </h5>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                        {{--<div class="cat-short-desc-products">--}}
+                        {{--<ul class="row">--}}
+                        {{--<li class="col-sm-3">--}}
+                        {{--<div class="product-container">--}}
+                        {{--<div class="product-thumb">--}}
+                        {{--<a href="#"><img src="public/main/assets/data/sub-cat1.jpg" alt="Product"></a>--}}
+                        {{--</div>--}}
+                        {{--<h5 class="product-name">--}}
+                        {{--<a href="#">Sub category 1</a>--}}
+                        {{--<span>(90)</span>--}}
+                        {{--</h5>--}}
+                        {{--</div>--}}
+                        {{--</li>--}}
+                        {{--<li class="col-sm-3">--}}
+                        {{--<div class="product-container">--}}
+                        {{--<div class="product-thumb">--}}
+                        {{--<a href="#"><img src="public/main/assets/data/sub-cat2.jpg" alt="Product"></a>--}}
+                        {{--</div>--}}
+                        {{--<h5 class="product-name">--}}
+                        {{--<a href="#">Sub category 2</a>--}}
+                        {{--<span>(55)</span>--}}
+                        {{--</h5>--}}
+                        {{--</div>--}}
+                        {{--</li>--}}
+                        {{--<li class="col-sm-3">--}}
+                        {{--<div class="product-container">--}}
+                        {{--<div class="product-thumb">--}}
+                        {{--<a href="#"><img src="public/main/assets/data/sub-cat3.jpg" alt="Product"></a>--}}
+                        {{--</div>--}}
+                        {{--<h5 class="product-name">--}}
+                        {{--<a href="#">Sub category 3</a>--}}
+                        {{--<span>(100)</span>--}}
+                        {{--</h5>--}}
+                        {{--</div>--}}
+                        {{--</li>--}}
+                        {{--<li class="col-sm-3">--}}
+                        {{--<div class="product-container">--}}
+                        {{--<div class="product-thumb">--}}
+                        {{--<a href="#"><img src="public/main/assets/data/sub-cat4.jpg" alt="Product"></a>--}}
+                        {{--</div>--}}
+                        {{--<h5 class="product-name">--}}
+                        {{--<a href="#">Sub category 4</a>--}}
+                        {{--<span>(70)</span>--}}
+                        {{--</h5>--}}
+                        {{--</div>--}}
+                        {{--</li>--}}
+                        {{--</ul>--}}
+                        {{--</div>--}}
                     </div>
                     <!-- ./category short-description -->
                     <!-- view-product-list-->
                     <div id="view-product-list" class="view-product-list">
                         <h2 class="page-heading">
-                            <span class="page-heading-title">نام دسته</span>
+                            <span class="page-heading-title">محصولات دسته   :   {{$categories->title}}</span>
                         </h2>
                         <ul class="display-product-option">
-                            <li class="view-as-grid selected">
-                                <span>grid</span>
-                            </li>
-                            <li class="view-as-list">
-                                <span>list</span>
-                            </li>
+                            {{--<li class="view-as-grid selected">--}}
+                            {{--<span>grid</span>--}}
+                            {{--</li>--}}
+                            {{--<li class="view-as-list">--}}
+                            {{--<span>list</span>--}}
+                            {{--</li>--}}
                         </ul>
                         <!-- PRODUCT LIST -->
-                        <ul class="row product-list style2 grid">
-                            <li class="col-sx-12 col-sm-4">
-                                @foreach($categories->products as $product)
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p40.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="افزودن به علاقه مندی ها" class="heart" href="#"></a>
-                                            <a title="مقایسه" class="compare" href="#"></a>
-                                            <a title="نمایش چزئیات" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block text-right">
-                                        <h5 class="product-name"><a href="#">{{$product->title}}</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price text-right">
-                                            <span class="price product-price"> 38,95 تومان </span>
-                                            <span class="price old-price">52,00  تومان</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">موجود: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add"><span></span>افزودن به سبدخرید</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p35.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p41.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p37.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p38.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p39.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/product-300x366.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p36.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p42.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p34.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p89.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p90.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p91.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p92.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p93.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p94.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p95.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sx-12 col-sm-4">
-                                <div class="product-container">
-                                    <div class="left-block">
-                                        <a href="#">
-                                            <img class="img-responsive" alt="product" src="public/main/assets/data/p96.jpg" />
-                                        </a>
-                                        <div class="quick-view">
-                                            <a title="Add to my wishlist" class="heart" href="#"></a>
-                                            <a title="Add to compare" class="compare" href="#"></a>
-                                            <a title="Quick view" class="search" href="#"></a>
-                                        </div>
-                                    </div>
-                                    <div class="right-block">
-                                        <h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>
-                                        <div class="product-star">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                        <div class="content_price">
-                                            <span class="price product-price">$38,95</span>
-                                            <span class="price old-price">$52,00</span>
-                                        </div>
-                                        <div class="info-orther">
-                                            <p>Item Code: #453217907</p>
-                                            <p class="availability">Availability: <span>In stock</span></p>
-                                            <div class="product-desc">
-                                                Vestibulum eu odio. Suspendisse potenti. Morbi mollis tellus ac sapien. Praesent egestas tristique nibh. Nullam dictum felis eu pede mollis pretium. Fusce egestas elit eget lorem. In auctor lobortis lacus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor.
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a title="Add to Cart" href="#add">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
 
+                        <ul class="row product-list style2 grid">
+                            @foreach($categories->products as $product)
+                                <li class="col-sx-12 col-sm-4">
+                                    <div class="product-container">
+                                        <div align="center" >
+                                            <a>
+                                                <img  alt=" عنوان محصول"  style="text-decoration: underline;"/>
+                                            </a>
+                                            <div class="quick-view">
+                                                {{--<a title="افزودن به علاقه مندی ها" class="heart" ></a>--}}
+                                                {{--<a title="مقایسه" class="compare" ></a>--}}
+                                                {{--<a title="نمایش چزئیات" class="search" ></a>--}}
+                                            </div>
+                                        </div>
+
+                                        <div class="right-block ">
+
+
+                                            <h5 class="product-name">
+                                                @if(strlen($product->title) != mb_strlen($product->title, 'utf-8'))
+                                                    <a  class="text-right">{{$product->title}}</a>
+                                                @endif
+                                                @if(strlen($product->title) == mb_strlen($product->title, 'utf-8'))
+                                                    <a  class="text-left">{{$product->title}}</a>
+                                                @endif
+                                            </h5>
+
+                                            <div class="content_price text-right">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-5">
+                                                        <a class="price price" data-toggle="" title="تومان">{{number_format($product->productFlags[0]->price)}} </a>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <span class="price product-price"> : قیمت اصلی </span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="">
+                                            <div class="content_price text-right">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6">
+                                                    <span class="product-star">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-half-o"></i>
+                                                    </span>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <span class="price product-price">  :امتیاز  </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="right-block">
+                                            <div class="add-to-cart" >
+                                                <button class="btn btn-success"  id="addToBasket" name="{{$product->id}}"><span></span>افزودن به سبدخرید</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </li>
+                            @endforeach
                         </ul>
+
                         <!-- ./PRODUCT LIST -->
                     </div>
                     <!-- ./view-product-list-->
@@ -1329,5 +712,6 @@
             <!-- ./row-->
         </div>
     </div>
+
 
 @endsection

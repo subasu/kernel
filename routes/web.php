@@ -20,6 +20,7 @@ Route::get('captcha', 'IndexController@create_image');
 Route::get('getSubmenu/{id}','CommonController@getSubmenu');
 Route::get('showProducts/{id}','IndexController@showProducts');
 
+//admin routes
 
 Route::group(['prefix'=>'admin'],function() {
 
@@ -69,6 +70,13 @@ Route::group(['prefix'=>'admin'],function() {
     Route::get('editSize/{id}','SizeController@editSize'); //this route is related to return edit color view
     Route::post('editSizeTitle','SizeController@editSizeTitle');//this route is related to edit size title
 });
+
+//user routes
+
+Route::group(['prefix'=>'user'],function() {
+    Route::post('addToBasket','UserController@addToBasket');
+});
+
 //Auth::routes();
 // Authentication Routes...
 Route::get('login', 'IndexController@login')->name('login');//rayat 20-9-96

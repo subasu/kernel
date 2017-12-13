@@ -293,6 +293,7 @@
 </footer>
 {{csrf_field()}}
 <a href="#" class="scroll_top" title="Scroll to Top" style="display: inline;">Scroll</a>
+<input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
 <!-- Script-->
 <script type="text/javascript" src="{{url('public/main/assets/lib/jquery/jquery-1.11.2.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
@@ -377,5 +378,36 @@
         })
     })
 </script>
+
+
+<!-- below script is related to add to basket -->
+<script>
+    $(document).on('click','#addToBasket',function () {
+        var  productId = $(this).attr('name');
+        var token      = $('#token').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax
+        ({
+            url      : "{{url('user/addToBasket')}}",
+            type     : "post",
+            data     : {'productId' : productId , '_token' : token},
+            dataType : "json",
+            success  : function(response)
+            {
+                //alert(response);
+                console.log(response);
+            },error  : function(error)
+            {
+                console.log(error);
+                alert('خطایی رخ داده است')
+            }
+        })
+    })
+</script>
+
 </body>
 </html>
