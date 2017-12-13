@@ -24,8 +24,6 @@
             overflow-x: hidden;
         }
     </style>
-
-
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog" dir="rtl">
         <div class="modal-dialog">
@@ -193,15 +191,15 @@
                                                 </div>
                                                 <div class="col-md-10">
                                                     @if($products[0]->unit_count != null)
-                                                        <input disabled id="editable"
-                                                               class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id"
-                                                               value="{{$products[0]->unit_count}}">
+                                                        <select disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable" name="unit_count_id" value="{{$products[0]->unit_count}}">
+                                                            <option value="{{$products[0]->unit_count}}">{{$products[0]->unit_count}}</option>
+                                                        </select>
                                                     @endif
                                                     @if($products[0]->unit_count == null)
-                                                        <input disabled id="editable"
+                                                        <select disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id">
+                                                                name="unit_count_id"></select>
                                                     @endif
                                                 </div>
                                             </div>
@@ -221,15 +219,16 @@
                                                 </div>
                                                 <div class="col-md-10">
                                                     @if($products[0]->sub_unit_count != null)
-                                                        <input disabled id="editable"
+                                                        <select disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id"
-                                                               value="{{$products[0]->sub_unit_count}}">
+                                                               name="sub_unit_count"
+                                                                value="{{$products[0]->sub_unit_count}}">
+                                                        </select>
                                                     @endif
                                                     @if($products[0]->sub_unit_count == null)
-                                                        <input disabled id="editable"
+                                                        <select disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id">
+                                                                name="sub_unit_count"></select>
                                                     @endif
                                                 </div>
                                             </div>
@@ -251,13 +250,13 @@
                                                     @if($products[0]->productFlags[0]->title  == 'price')
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable pr"
-                                                               name="unit_count_id"
+                                                               name="price"
                                                                value="{{number_format($products[0]->productFlags[0]->price)}}">
                                                     @endif
                                                     @if($products[0]->productFlags[0]->title != 'price')
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable pr"
-                                                               name="unit_count_id">
+                                                               name="price">
                                                     @endif
                                                 </div>
                                             </div>
@@ -334,20 +333,19 @@
                                                 <div class="col-md-2">
                                                     <a type="button" name="edit" id="edit"
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
                                                     @if($products[0]->produce_place != null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id"
+                                                               name="produce_place"
                                                                value="{{$products[0]->produce_place}}">
                                                     @endif
                                                     @if($products[0]->produce_place == null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id">
+                                                               name="produce_place">
                                                     @endif
                                                 </div>
                                             </div>
@@ -364,20 +362,19 @@
                                                 <div class="col-md-2">
                                                     <a type="button" name="edit" id="edit"
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
                                                     @if($products[0]->warehouse_count != null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id"
+                                                               name="warehouse_count"
                                                                value="{{$products[0]->warehouse_count}}">
                                                     @endif
                                                     @if($products[0]->warehouse_count == null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id">
+                                                               name="warehouse_count">
                                                     @endif
                                                 </div>
                                             </div>
@@ -395,20 +392,19 @@
                                                 <div class="col-md-2">
                                                     <a type="button" name="edit" id="edit"
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
                                                     @if($products[0]->warehouse_place != null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id"
+                                                               name="warehouse_place"
                                                                value="{{$products[0]->warehouse_place}}">
                                                     @endif
                                                     @if($products[0]->warehouse_place == null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id">
+                                                               name="warehouse_place">
                                                     @endif
                                                 </div>
                                             </div>
@@ -426,26 +422,23 @@
                                                 <div class="col-md-2">
                                                     <a type="button" name="edit" id="edit"
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
                                                     @if($products[0]->ready_time != null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id"
+                                                               name="ready_time"
                                                                value="{{$products[0]->ready_time}}">
                                                     @endif
                                                     @if($products[0]->ready_time == null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id">
+                                                               name="ready_time">
                                                     @endif
                                                 </div>
                                             </div>
-                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="ready_time">
-                                                زمان آماده
-                                                شدن بر حسب ساعت :
+                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="ready_time"> : زمان آماده شدن بر حسب ساعت
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
@@ -456,19 +449,18 @@
                                                 <div class="col-md-2">
                                                     <a type="button" name="edit" id="edit"
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
                                                     @if($products[0]->barcode != null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id" value="{{$products[0]->barcode}}">
+                                                               name="barcode" value="{{$products[0]->barcode}}">
                                                     @endif
                                                     @if($products[0]->barcode == null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id">
+                                                               name="barcode">
                                                     @endif
                                                 </div>
                                             </div>
@@ -482,121 +474,66 @@
                             </div>
                             <div id="step-3" class="">
                                 <div class="container">
-                                    <div class="col-md-10 col-md-offset-1 margin-1">
-                                        <div id="grandparent">
-                                            <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                                <div class="col-md-2">
-                                                    <a type="button" name="edit" id="edit"
-                                                       class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       title="ویرایش "></a>
-                                                </div>
-
-                                                <div class="col-md-10">
-                                                    @if(!empty($products[0]->productFlags[3]))
-                                                        @if($products[0]->productFlags[3]->title == 'sales_price')
-                                                            <input disabled id="editable"
-                                                                   class="form-control col-md-7 col-xs-12 editable pr"
-                                                                   name="sales_price"
-                                                                   value="{{number_format($products[0]->productFlags[3]->price)}}">
+                                    @php $count = 4;//count($products[0]->productFlags); @endphp
+                                    @for($i = 0 ; $i < $count ; $i++)
+                                        @if($products[0]->productFlags[$i]->title != 'price')
+                                            <div class="col-md-10 col-md-offset-1 margin-1">
+                                                <div id="grandparent">
+                                                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                                                        <div class="col-md-2">
+                                                            <a type="button" name="edit" id="edit"
+                                                               class="glyphicon glyphicon-edit btn btn-success edit"
+                                                               title="ویرایش "></a>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            @if(!empty($products[0]->productFlags[$i]))
+                                                                <input disabled id="editable"
+                                                                       class="form-control col-md-7 col-xs-12 editable pr"
+                                                                       name="{{$products[0]->productFlags[$i]->title}}"
+                                                                       value="{{$products[0]->productFlags[$i]->price}}">
+                                                            @else
+                                                                <input disabled id="editable"
+                                                                       class="form-control col-md-7 col-xs-12 editable pr"
+                                                                       name="{{$products[0]->productFlags[$i]->title}}">
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <label class="control-label col-md-2 col-sm-4 col-xs-3"
+                                                           for="{{$products[0]->productFlags[$i]->title}}">
+                                                        @if($products[0]->productFlags[$i]->title == 'special_price')
+                                                            {{'قیمت ویژه (تومان):'}}
                                                         @endif
-                                                    @else
-                                                        <input disabled id="editable"
-                                                               class="form-control col-md-7 col-xs-12 editable pr"
-                                                               name="sales_price">
-                                                    @endif
+                                                        @if($products[0]->productFlags[$i]->title =='sales_price')
+                                                            {{ 'قیمت حراج (تومان):'}}
+                                                        @endif
+                                                        @if($products[0]->productFlags[$i]->title == 'wholesale_price')
+                                                            {{ 'قیمت عمده (تومان):'}}
+                                                        @endif
+                                                    </label>
+                                                    {{--@endif--}}
                                                 </div>
                                             </div>
-                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="sales_price">
-                                                قیمت حراج
-                                                (تومان):
-                                                <span class="required star" title="پر کردن این فیلد الزامی است"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10 col-md-offset-1 margin-1">
-                                        <div id="grandparent">
-                                            <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                                <div class="col-md-2 ">
-                                                    <a type="button" name="edit" id="edit"
-                                                       class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
-                                                       title="ویرایش "></a>
-                                                </div>
-                                                <div class="col-md-10">
-                                                    @if(!empty($products[0]->productFlags[1]))
-                                                        @if($products[0]->productFlags[1]->title == 'special_price')
-                                                            <input disabled id="editable"
-                                                                   class="form-control col-md-7 col-xs-12 editable pr"
-                                                                   name="unit_count_id"
-                                                                   value="{{number_format($products[0]->productFlags[1]->price)}}">
-                                                        @endif
-                                                    @else
-                                                        <input disabled id="editable"
-                                                               class="form-control col-md-7 col-xs-12 editable pr"
-                                                               name="unit_count_id">
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="special_price">
-                                                قیمت
-                                                ویژه (تومان):
-                                                <span class="required star" title="پر کردن این فیلد الزامی است"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10 col-md-offset-1 margin-1">
-                                        <div id="grandparent">
-                                            <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
-                                                <div class="col-md-2">
-                                                    <a type="button" name="edit" id="edit"
-                                                       class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
-                                                       title="ویرایش "></a>
-                                                </div>
-
-                                                <div class="col-md-10">
-                                                    @if(!empty($products[0]->productFlags[2]))
-                                                        @if($products[0]->productFlags[2]->title == 'wholesale_price')
-                                                            <input disabled id="editable"
-                                                                   class="form-control col-md-7 col-xs-12 editable pr"
-                                                                   name="wholesale_price"
-                                                                   value="{{number_format($products[0]->productFlags[2]->price)}}">
-                                                        @endif
-                                                    @else
-                                                        <input disabled id="editable"
-                                                               class="form-control col-md-7 col-xs-12 editable pr"
-                                                               name="wholesale_price">
-                                                    @endif
-                                                </div>
-
-                                            </div>
-                                            <label class="control-label col-md-2 col-sm-4 col-xs-3"
-                                                   for="wholesale_price"> قیمت
-                                                عمده (تومان):
-                                                <span class="required star" title="پر کردن این فیلد الزامی است"></span>
-                                            </label>
-                                        </div>
-                                    </div>
+                                        @endif
+                                    @endfor
                                     <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                         <div id="grandparent">
                                             <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                                 <div class="col-md-2">
                                                     <a type="button" name="edit" id="edit"
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
                                                     @if($products[0]->discount_volume != null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id"
+                                                               name="discount_volume"
                                                                value="{{$products[0]->discount_volume}}">
                                                     @endif
                                                     @if($products[0]->discount_volume == null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id">
+                                                               name="discount_volume">
                                                     @endif
                                                 </div>
                                             </div>
@@ -621,12 +558,12 @@
                                                     @if($products[0]->discount != null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id" value="{{$products[0]->discount}}">
+                                                               name="discount" value="{{$products[0]->discount}}">
                                                     @endif
                                                     @if($products[0]->discount == null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                               name="unit_count_id">
+                                                               name="discount">
                                                     @endif
                                                 </div>
                                             </div>
@@ -649,13 +586,13 @@
                                                     @if($products[0]->delivery_volume != null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-10 editable"
-                                                               name="unit_count_id"
+                                                               name="delivery_volume"
                                                                value="{{$products[0]->delivery_volume}}">
                                                     @endif
                                                     @if($products[0]->delivery_volume == null)
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-10 editable"
-                                                               name="unit_count_id">
+                                                               name="delivery_volume">
                                                     @endif
                                                 </div>
                                             </div>
@@ -672,35 +609,56 @@
                             <div id="step-4" class="">
                                 <div class="container">
                                     <div id="addPic" class="grandparent">
+                                        @php $picCount = count($products[0]->productImages); @endphp
+                                        @if($picCount)
+                                            @foreach($products[0]->productImages as $image)
+                                                <div class="parent" name="parent">
+                                                    <div class="col-md-10 margin-1">
 
-                                        @foreach($products[0]->productImages as $image)
-                                            <div class="parent" name="parent">
+                                                        <div class="col-md-2 col-md-offset-3">
+                                                            <a class="glyphicon glyphicon-edit btn btn-success editPic"
+                                                               products-toggle=""
+                                                               title="ویرایش "></a>
+                                                        </div>
+                                                        <div class="col-md-5 col-sm-6 col-xs-9 newFile" id="newFile"
+                                                             style="display: none;">
+                                                            <input class="form-control col-md-7 col-xs-12 editable"
+                                                                   id="editable" name="file[]" type="file">
+                                                        </div>
+                                                        <div class="col-md-5 col-sm-6 col-xs-9 showPic" id="showPic"
+                                                             style="display: block;">
+                                                            <img class="image" id="editable"
+                                                                 style="height: 100px; width: 100px; margin-left: 80%;"
+                                                                 src="{{url('public/dashboard/productFiles/picture')}}/{{$image->image_src}}">
+                                                        </div>
+
+                                                        <label class="control-label col-md-2 col-sm-4 col-xs-3"
+                                                               for="pic">
+                                                            تصویر محصول :
+                                                            <span class="required star"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            @endif
+                                        @if($picCount<4)
+                                            <div id="addPicture" counter="{{$picCount}}">
                                                 <div class="col-md-10 margin-1">
-
-                                                    <div class="col-md-2 col-md-offset-3">
-                                                        <a class="glyphicon glyphicon-edit btn btn-success editPic"
-                                                           products-toggle=""
-                                                           title="ویرایش "></a>
+                                                    <div class="col-md-2 col-sm-1 col-xs-1 col-md-offset-3">
+                                                        <a id="addInput" class="glyphicon glyphicon-plus btn btn-success"
+                                                           data-toggle=""
+                                                           title="افزودن تصویر"></a>
                                                     </div>
-                                                    <div class="col-md-5 col-sm-6 col-xs-9 newFile" id="newFile"
-                                                         style="display: none;">
-                                                        <input class="form-control col-md-7 col-xs-12 editable"
-                                                               id="editable" name="unit_count_id" type="file">
+                                                    <div class="col-md-5 col-sm-6 col-xs-9 ">
+                                                        <input class="form-control col-md-12 col-xs-12"
+                                                               type="file" name="file[]" id="pic"/>
                                                     </div>
-                                                    <div class="col-md-5 col-sm-6 col-xs-9 showPic" id="showPic"
-                                                         style="display: block;">
-                                                        <img class="image" id="editable"
-                                                             style="height: 100px; width: 100px; margin-left: 80%;"
-                                                             src="{{url('public/dashboard/productFiles/picture')}}/{{$image->image_src}}">
-                                                    </div>
-
-                                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic">
-                                                        تصویر محصول :
+                                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="file"> تصویر محصول :
                                                         <span class="required star"></span>
                                                     </label>
                                                 </div>
                                             </div>
-                                        @endforeach
+                                        @endif
                                     </div>
                                     <div class="col-md-10 ">
                                         <hr>
@@ -717,14 +675,14 @@
                                                 @if($products[0]->video_src != null)
                                                     <video disabled="disabled"
                                                            class="form-control col-md-7 col-xs-12 editable"
-                                                           id="editable" name="unit_count_id">
+                                                           id="editable" name="video_src">
                                                         <source src="{{url('public/dashboard/productFiles/video')}}/{{$products[0]->video_src}}">
                                                     </video>
                                                 @endif
                                                 @if($products[0]->video_src == null)
                                                     <input disabled="disabled"
                                                            class="form-control col-md-7 col-xs-12 editable"
-                                                           id="editable" name="unit_count_id" type="file">
+                                                           id="editable" name="video_src" type="file">
                                                 @endif
                                             </div>
 
@@ -828,14 +786,16 @@
         <script>
             $(document).ready(function () {
                 //add input type file for add pic for product
-                var counter = 0
+                var counter = 0;
+                var c=$("#addPicture").attr('counter');
+                counter += c;
                 $('#addInput').on('click', function () {
                     if (counter < 3) {
-                        $('#addPic').append
+                        $('#addPicture').append
                         (
-                            '<div class="col-md-12 margin-1">' +
-                            '<div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3">' +
-                            '<input class="form-control col-md-12 col-xs-12" type="file" name="pic[]" id="pic"/>' +
+                            '<div class="col-md-10 margin-1">' +
+                            '<div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-5">' +
+                            '<input class="form-control col-md-12 col-xs-12" type="file" name="file[]" id="file"/>' +
                             '</div>' +
                             '<label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic"> تصویر محصول :' +
                             '<span class="required star"></span>' +
@@ -1080,6 +1040,50 @@
                 if (id == 000) {
                     location.href = '{{url("admin/addCategory")}}';
                 }
-            })
+            });
+            //load MainUnitsCount if there is no category in table redirect addCategory
+            $.ajax({
+                cache: false,
+                url: "{{Url('api/v1/getMainUnits')}}",
+                dataType: "json",
+                type: "get",
+                success: function (response) {
+                    console.log(response);
+                    if (response != 0) {
+                        var responses = response;
+                        var selectBoxId = "[name='unit_count_id']";
+                        var msgOpt1 = "لطفا واحد شمارش مورد نظر خود را انتخاب نمایید";
+                        var msgOpt2 = "اگر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
+                        var valueOption2 = 0000;
+                        loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
+                    }
+                    else {
+                        location.href = '{{url("admin/addCategory")}}';
+                    }
+                }
+            });
+            $("[name='unit_count_id']").on("click", function () {
+                var id = $(this).val();
+                if (id == 0) {
+                    location.href = '{{url("admin/addUnit")}}';
+                }
+                else {
+                    $.ajax
+                    ({
+                        cache: false,
+                        url: "{{Url('api/v1/getSubunits')}}/" + id,
+                        dataType: "json",
+                        type: "get",
+                        success: function (response) {
+                            var responses = response;
+                            var selectBoxId = '#subunit';
+                            var msgOpt1 = "لطفا زیر واحد شمارش مورد نظر خود را انتخاب نمایید";
+                            var msgOpt2 = "اگر زیر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
+                            var valueOption2 = 0;
+                            loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
+                        }
+                    });
+                }
+            });
         </script>
 @endsection
