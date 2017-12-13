@@ -205,7 +205,8 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="unit"> واحد شمارش :
+                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="unit"> واحد
+                                                شمارش :
                                             </label>
                                         </div>
                                     </div>
@@ -232,7 +233,8 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="subunit"> زیر واحد شمارش :
+                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="subunit"> زیر
+                                                واحد شمارش :
                                             </label>
                                         </div>
                                     </div>
@@ -486,17 +488,20 @@
                                                 <div class="col-md-2">
                                                     <a type="button" name="edit" id="edit"
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
+
                                                 <div class="col-md-10">
-                                                    @if($products[0]->productFlags[3]->title == 'sales_price')
-                                                        <input disabled id="editable" class="form-control col-md-7 col-xs-12 editable pr"
-                                                               name="sales_price"
-                                                               value="{{number_format($products[0]->productFlags[3]->price)}}">
-                                                    @endif
-                                                    @if($products[0]->productFlags[3]->title != 'sales_price')
-                                                        <input disabled id="editable" class="form-control col-md-7 col-xs-12 editable pr"
+                                                    @if(!empty($products[0]->productFlags[3]))
+                                                        @if($products[0]->productFlags[3]->title == 'sales_price')
+                                                            <input disabled id="editable"
+                                                                   class="form-control col-md-7 col-xs-12 editable pr"
+                                                                   name="sales_price"
+                                                                   value="{{number_format($products[0]->productFlags[3]->price)}}">
+                                                        @endif
+                                                    @else
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable pr"
                                                                name="sales_price">
                                                     @endif
                                                 </div>
@@ -518,13 +523,14 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                    @if($products[0]->productFlags[1]->title == 'special_price')
-                                                        <input disabled id="editable"
-                                                               class="form-control col-md-7 col-xs-12 editable pr"
-                                                               name="unit_count_id"
-                                                               value="{{number_format($products[0]->productFlags[1]->price)}}">
-                                                    @endif
-                                                    @if($products[0]->productFlags[1]->title != 'special_price')
+                                                    @if(!empty($products[0]->productFlags[1]))
+                                                        @if($products[0]->productFlags[1]->title == 'special_price')
+                                                            <input disabled id="editable"
+                                                                   class="form-control col-md-7 col-xs-12 editable pr"
+                                                                   name="unit_count_id"
+                                                                   value="{{number_format($products[0]->productFlags[1]->price)}}">
+                                                        @endif
+                                                    @else
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable pr"
                                                                name="unit_count_id">
@@ -547,19 +553,22 @@
                                                        products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
+
                                                 <div class="col-md-10">
-                                                    @if($products[0]->productFlags[2]->title == 'wholesale_price')
-                                                        <input disabled id="editable"
-                                                               class="form-control col-md-7 col-xs-12 editable pr"
-                                                               name="wholesale_price"
-                                                               value="{{number_format($products[0]->productFlags[2]->price)}}">
-                                                    @endif
-                                                    @if($products[0]->productFlags[2]->title != 'wholesale_price')
+                                                    @if(!empty($products[0]->productFlags[2]))
+                                                        @if($products[0]->productFlags[2]->title == 'wholesale_price')
+                                                            <input disabled id="editable"
+                                                                   class="form-control col-md-7 col-xs-12 editable pr"
+                                                                   name="wholesale_price"
+                                                                   value="{{number_format($products[0]->productFlags[2]->price)}}">
+                                                        @endif
+                                                    @else
                                                         <input disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable pr"
                                                                name="wholesale_price">
                                                     @endif
                                                 </div>
+
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3"
                                                    for="wholesale_price"> قیمت

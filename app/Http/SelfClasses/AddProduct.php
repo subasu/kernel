@@ -71,7 +71,7 @@ class AddProduct
         $pr->barcode = $product->barcode;
         $pr->save();
         $lastProductId=$pr->id;
-        //below line find product_id that now saved for use in pivot table
+        //above line find product_id that now saved for use in pivot table
        // $lastProductId = Product::orderBy('created_at', 'desc')->offset(0)->limit(1)->value('id');
         //this block code save color array of product in color_product table
         $countColor = count($product->color);
