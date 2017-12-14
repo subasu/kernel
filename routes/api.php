@@ -28,6 +28,7 @@ Route::group(['prefix' => '/v1'], function () {
     //unit counts routes
     Route::get('getSubunits/{id}','CommonController@getSubunits');
     Route::get('getMainUnits','CommonController@getMainUnits');
+    Route::post('getSubunitsBySubUnitTitle','CommonController@getSubunitsBySubUnitTitle');
 
     //color routes
     Route::get('getColors','CommonController@getColors');
