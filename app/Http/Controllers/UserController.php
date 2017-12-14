@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Basket;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -20,25 +22,73 @@ class UserController extends Controller
     //below function is related to add products into basket with cookie
     public function addToBasket(Request $request)
     {
-            $cookie = setcookie('addToBasket', microtime(), time() + (86400 * 30), "/");
+            $now = Carbon::now(new \DateTimeZone('Asia/Tehran'));
             if(isset($_COOKIE['addToBasket']))
             {
-                $basket = new Basket();
-                $basket->product_id = $request->productId;
-                $basket->cookie     = $cookie;
-                $basket->save();
-                if($basket)
+                $dataBaseOldProductId = DB::table('baskets')->where([['cookie',$_COOKIE['addToBasket']],['product_id',$request->productId]])->count();
+                if($dataBaseOldProductId > 0)
                 {
-                    return response()->json(['message' => 'محصول مورد نظر شما به سبد خرید اضافه گردید' , 'code' => 1]);
+                    $update = DB::table('baskets')->where([['cookie',$_COOKIE['addToBasket']],['product_id',$request->productId]])->increment('count');
+                    if($update)
+                    {
+                        return response()->json(['message' => 'محصول مورد نظر شما به سبد خرید اضافه گردید' , 'code' => 1]);
+                    }
                 }else
                     {
-                        return response()->json(['message' => 'خطایی رخ داده است']);
+                        $basket = new Basket();
+                        $basket->product_id     = $request->productId;
+                        $basket->cookie         = $_COOKIE['addToBasket'];
+                        $basket->product_price  = $request->productFlag;
+                        $basket->time           = $now->toTimeString();
+                        $basket->date           = $now->toDateString();
+                        $basket->count          = 1;
+                        $basket->save();
+                        if($basket)
+                        {
+                            return response()->json(['message' => 'محصول مورد نظر شما به سبد خرید اضافه گردید' , 'code' => 1 ]);
+                        }
+
                     }
             }
+            else
+                {
+                    $cookieValue = mt_rand(1,1000).microtime();
+                    $cookie = setcookie('addToBasket', $cookieValue , time() + (86400 * 30), "/");
+                    if($cookie)
+                    {
+                        $basket = new Basket();
+                        $basket->product_id     = $request->productId;
+                        $basket->cookie         = $cookieValue;
+                        $basket->product_price  = $request->productFlag;
+                        $basket->time           = $now->toTimeString();
+                        $basket->date           = $now->toDateString();
+                        $basket->count          = 1;
+                        $basket->save();
+                        if($basket)
+                        {
+                            return response()->json(['message' => 'محصول مورد نظر شما به سبد خرید اضافه گردید' , 'code' => 1]);
+                        }else
+                        {
+                            return response()->json(['message' => 'خطایی رخ داده است']);
+                        }
+                    }
+                }
+
     }
 
 
-
+    //below function is related to get basket count
+    public function getBasketCountNotify()
+    {
+        $baskets  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->get();
+        $count    = count($baskets);
+//        foreach ($baskets as $basket)
+//        {
+//            $baskets->product_price += $basket->product_price;
+//        }
+        dd($baskets);
+        return response()->json($count);
+    }
 
 }
 

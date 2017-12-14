@@ -383,6 +383,8 @@
 <!-- below script is related to add to basket -->
 <script>
     $(document).on('click','#addToBasket',function () {
+
+        var productFlag = $('#productFlag').val();
         var  productId = $(this).attr('name');
         var token      = $('#token').val();
         $.ajaxSetup({
@@ -394,17 +396,28 @@
         ({
             url      : "{{url('user/addToBasket')}}",
             type     : "post",
-            data     : {'productId' : productId , '_token' : token},
+            data     : {'productId' : productId , '_token' : token , 'productFlag' : productFlag},
             dataType : "json",
             success  : function(response)
             {
                 console.log(response);
                 if(response.code == 1)
                 {
-                    alert(response.message);
+                    swal({
+                        title: "",
+                        text: response.message,
+                        type: "success",
+                        confirmButtonText: "بستن"
+                    });
+                    basketCountNotify();
                 }else
                     {
-                        alert(response.message);
+                        swal({
+                            title: "",
+                            text: response.message,
+                            type: "warning",
+                            confirmButtonText: "بستن"
+                        });
                     }
 
             },error  : function(error)
@@ -416,5 +429,33 @@
     })
 </script>
 
+<script>
+    $(document).ready(function () {
+        basketCountNotify();
+    })
+</script>
+<script>
+    function basketCountNotify()
+    {
+        var token = $('#token').val();
+        $.ajax
+        ({
+            url         : "{{url('user/getBasketCountNotify')}}",
+            type        : "get",
+            dataType    : "json",
+            data        : {'_token' : token},
+            success     : function(response)
+
+            {
+                console.log(response);
+                $('#basketCountNotify').text(response);
+            },
+            error       : function (error) {
+                console.log(error);
+            }
+
+        });
+    }
+</script>
 </body>
 </html>

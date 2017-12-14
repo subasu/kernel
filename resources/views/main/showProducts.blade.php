@@ -627,7 +627,12 @@
                                             <div class="content_price text-right">
                                                 <div class="col-md-12">
                                                     <div class="col-md-5">
-                                                        <a class="price price" data-toggle="" title="تومان">{{number_format($product->productFlags[0]->price)}} </a>
+                                                        @foreach($product->productFlags as $flag)
+                                                            @if($flag->active == 1)
+                                                                <a class="price price" data-toggle="" title="تومان">{{number_format($flag->price)}} </a>
+                                                                <input type="hidden" id="productFlag" value="{{$flag->price}}" >
+                                                            @endif
+                                                        @endforeach
                                                     </div>
                                                     <div class="col-md-7">
                                                         <span class="price product-price"> : قیمت اصلی </span>
@@ -659,7 +664,7 @@
                                         </div>
                                         <div class="right-block">
                                             <div class="add-to-cart" >
-                                                <button class="btn btn-success"  id="addToBasket" name="{{$product->id}}"><span></span>افزودن به سبدخرید</button>
+                                                <button class="btn btn-success"  id="addToBasket"  name="{{$product->id}}"><span></span>افزودن به سبدخرید</button>
                                             </div>
                                         </div>
                                     </div>
