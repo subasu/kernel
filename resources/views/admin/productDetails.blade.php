@@ -7,19 +7,15 @@
             padding-right: 4px;
             padding-left: 4px;
         }
-
         input, label {
             font-size: 15px;
         }
-
         .margin-1 {
             margin-top: 1%;
         }
-
         .margin-bot-1 {
             margin-bottom: 1%;
         }
-
         .overflow-x {
             overflow-x: hidden;
         }
@@ -70,7 +66,7 @@
                     </label>
                 </div>
                 <div class="modal-footer margin-1">
-                    <button type="button" class="btn btn-dark col-md-6 col-md-offset-3" data-dismiss="modal">بستن
+                    <button type="button" id="submitCategory" class="btn btn-dark col-md-6 col-md-offset-3" data-dismiss="modal">بستن
                     </button>
                 </div>
             </div>
@@ -105,6 +101,7 @@
                             </a></li>
                     </ul>
                     @if(!empty($products))
+                        <input type="hidden" value="{{$products[0]->id}}" name="id"/>
                         <div>
                             <div id="step-1" class="">
                                 <br>
@@ -116,13 +113,12 @@
                                                 <a type="button" name="editCategory" id="editCategory"
                                                    content="{{$products[0]->categories[0]->id}}"
                                                    class="glyphicon glyphicon-edit btn btn-success"
-                                                   products-toggle=""
                                                    title="ویرایش "></a>
                                             </div>
                                             <div class="col-md-10">
-                                                <input disabled id="lastCategory" class="form-control col-md-12"
-                                                       name="lastCategory"
+                                                <input disabled id="lastCategoryName" class="form-control col-md-12"
                                                        value="{{$products[0]->categories[0]->title}}">
+                                                <input type="hidden" id="lastCategory" name="lastCategory" value="">
                                             </div>
                                         </div>
                                         <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> آخرین دسته
@@ -148,7 +144,6 @@
                                             </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> عنوان
                                                 محصول :
-
                                             </label>
                                         </div>
                                     </div>
@@ -192,11 +187,12 @@
                                                 <div class="col-md-10" id="unit_count_parent">
                                                     @if($products[0]->unit_count != null)
                                                         <input disabled id="editable"
-                                                               class="form-control col-md-7 col-xs-12 editable" name="unit_count" value="{{$products[0]->unit_count}}"/>
+                                                               class="form-control col-md-7 col-xs-12 editable my_units"
+                                                               name="unit_count" value="{{$products[0]->unit_count}}"/>
                                                     @endif
                                                     @if($products[0]->unit_count == null)
                                                         <select disabled id="editable"
-                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                                class="form-control col-md-7 col-xs-12 editable my_units"
                                                                 name="unit_count"></select>
                                                     @endif
                                                 </div>
@@ -206,24 +202,25 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-md-10 col-md-offset-1 margin-1" >
+                                    <div class="col-md-10 col-md-offset-1 margin-1">
                                         <div id="grandparent">
                                             <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                                 <div class="col-md-2">
                                                     <a type="button" name="edit" id="edit"
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10" id="sub_unit_count_parent">
                                                     @if($products[0]->sub_unit_count != null)
                                                         <input disabled id="editable"
-                                                               class="form-control col-md-7 col-xs-12 editable" name="sub_unit_count" value="{{$products[0]->sub_unit_count}}"/>
+                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                               name="sub_unit_count"
+                                                               value="{{$products[0]->sub_unit_count}}"/>
 
                                                     @endif
                                                     @if($products[0]->sub_unit_count == null)
                                                         <select disabled id="editable"
-                                                               class="form-control col-md-7 col-xs-12 editable"
+                                                                class="form-control col-md-7 col-xs-12 editable"
                                                                 name="sub_unit_count"></select>
                                                     @endif
                                                 </div>
@@ -434,7 +431,8 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="ready_time"> : زمان آماده شدن بر حسب ساعت
+                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="ready_time"> :
+                                                زمان آماده شدن بر حسب ساعت
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
@@ -617,9 +615,9 @@
                                                                title="ویرایش "></a>
                                                         </div>
                                                         <div class="col-md-5 col-sm-6 col-xs-9 newFile" id="newFile"
-                                                             style="display: none;">
+                                                             style="display: none;" >
                                                             <input class="form-control col-md-7 col-xs-12 editable"
-                                                                   id="editable" name="file[]" type="file">
+                                                                   id="editable" name="file[]" type="file" disabled>
                                                         </div>
                                                         <div class="col-md-5 col-sm-6 col-xs-9 showPic" id="showPic"
                                                              style="display: block;">
@@ -636,12 +634,13 @@
                                                     </div>
                                                 </div>
                                             @endforeach
-                                            @endif
+                                        @endif
                                         @if($picCount<4)
                                             <div id="addPicture" counter="{{$picCount}}">
                                                 <div class="col-md-10 margin-1">
                                                     <div class="col-md-2 col-sm-1 col-xs-1 col-md-offset-3">
-                                                        <a id="addInput" class="glyphicon glyphicon-plus btn btn-success"
+                                                        <a id="addInput"
+                                                           class="glyphicon glyphicon-plus btn btn-success"
                                                            data-toggle=""
                                                            title="افزودن تصویر"></a>
                                                     </div>
@@ -649,7 +648,8 @@
                                                         <input class="form-control col-md-12 col-xs-12"
                                                                type="file" name="file[]" id="pic"/>
                                                     </div>
-                                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="file"> تصویر محصول :
+                                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="file">
+                                                        تصویر محصول :
                                                         <span class="required star"></span>
                                                     </label>
                                                 </div>
@@ -702,12 +702,14 @@
                 src="{{url('public/dashboard/stepWizard/js/jquery.smartWizard.min.js')}}"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-
+                $("#productForm").submit(function (e) {
+                    e.preventDefault();
+                });
                 // Toolbar extra buttons
                 var btnFinish = $('<button></button>').text('ویرایش')
                     .addClass('btn btn-info')
                     .on('click', function () {
-                        var formproducts = new FormData($("#productForm")[0])
+                        var formData = new FormData($("#productForm")[0])
                         $.ajax({
                             url: '{{url('api/v1/addNewProduct')}}',
                             type: 'post',
@@ -742,9 +744,7 @@
                     .on('click', function () {
                         $('#smartwizard').smartWizard("reset");
                         $('#productForm')[0].reset();
-
                     });
-
                 $('#smartwizard').smartWizard({
                     selected: 0,
                     theme: 'arrows',
@@ -761,13 +761,11 @@
                     $('#smartwizard').smartWizard("reset");
                     return true;
                 });
-
                 $("#prev-btn").on("click", function () {
                     // Navigate previous
                     $('#smartwizard').smartWizard("قبلی");
                     return true;
                 });
-
                 $("#next-btn").on("click", function () {
                     // Navigate next
                     $('#smartwizard').smartWizard("بعدی");
@@ -783,7 +781,7 @@
             $(document).ready(function () {
                 //add input type file for add pic for product
                 var counter = 0;
-                var c=$("#addPicture").attr('counter');
+                var c = $("#addPicture").attr('counter');
                 counter += c;
                 $('#addInput').on('click', function () {
                     if (counter < 3) {
@@ -825,29 +823,40 @@
                         var DOM = $(this).parentsUntil('#grandparent');
                         var editable = $(DOM).find('#editable');
                         $(editable).prop('disabled', false);
-                        if(editable.attr('name') == 'unit_count')
-                        {
+                        if (editable.attr('name') == 'unit_count') {
                             $("#unit_count_parent").empty();
                             $("#unit_count_parent").append(
-                            '<select id="editable"'+
-                            'class="form-control col-md-7 col-xs-12 editable" name="unit_count" value="{{$products[0]->unit_count}}">'+
-                            '<option value="{{$products[0]->unit_count}}">{{$products[0]->unit_count}}</option></select>');
+                                '<select id="editable"' +
+                                'class="form-control col-md-7 col-xs-12 editable my_units" name="unit_count" value="{{$products[0]->unit_count}}">' +
+                                '<option value="{{$products[0]->unit_count}}">{{$products[0]->unit_count}}</option></select>');
                             loadUnits();
                         }
-                        else if(editable.attr('name') == 'sub_unit_count')
-                        {
+                        else if (editable.attr('name') == 'sub_unit_count') {
                             $("#sub_unit_count_parent").empty();
                             $("#sub_unit_count_parent").append(
-                                '<select id="editable"'+
-                                'class="form-control col-md-7 col-xs-12 editable" name="sub_unit_count" value="{{$products[0]->sub_unit_count}}">'+
+                                '<select id="editable"' +
+                                'class="form-control col-md-7 col-xs-12 editable" name="sub_unit_count" value="{{$products[0]->sub_unit_count}}">' +
                                 '<option selected value="{{$products[0]->sub_unit_count}}">{{$products[0]->sub_unit_count}}</option></select>');
+                            $.ajax
+                            ({
+                                cache: false,
+                                url: "{{Url('api/v1/getSubunitsBySubUnitTitle')}}",
+                                dataType: "json",
+                                type: "post",
+                                data:{'title': "{{$products[0]->sub_unit_count}}"},
+                                success: function (response) {
+                                    var responses = response;
+                                    var selectBoxId = "[name='sub_unit_count']";
+                                    var msgOpt1 = "لطفا زیر واحد شمارش مورد نظر خود را انتخاب نمایید";
+                                    var msgOpt2 = "اگر زیر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
+                                    var valueOption2 = 0;
+                                    loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
+                                }
+                            });
                         }
-
                     })
                 })
-
             })
-
         </script>
         <!-- below script is to make picture hidden and display7 an another input type file -->
         <script>
@@ -858,17 +867,17 @@
                         var showPic = $(DOM).find('.showPic');
                         $(showPic).css('display', 'none');
                         var newFile = $(DOM).find('.newFile');
+                        $(newFile).find('input').attr('disabled', false);
                         $(newFile).css('display', 'block');
                     })
                 })
-
             })
         </script>
 
         <!-- below script is to handle category management -->
         <script>
             $(document).on('click', '#editCategory', function () {
-                var categoryId = $(this).attr('content');
+                //var categoryId = $(this).attr('content');
                 //alert(categoryId);
                 $('#myModal').modal('show');
             })
@@ -882,7 +891,6 @@
                 $("[name = 'produce_date']").each(function () {
                     $(this).persianDatepicker();
                 })
-
                 $("[name = 'expire_date']").each(function () {
                     $(this).persianDatepicker();
                 })
@@ -893,7 +901,6 @@
                 function formatNumber(num) {
                     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
                 }
-
                 $(".pr").on('keyup', function () {
                     var price = $(this);
                     var v0 = price.val();
@@ -901,9 +908,7 @@
                     var v2 = formatNumber(v1);
                     price.val(v2)
                 })
-
             })
-
         </script>
         <script>
             //load item in select box
@@ -994,6 +999,7 @@
                     $('#subCategories').empty();
                     $('#brands').empty();
                 }
+                $("#lastCategory").val(id);
             })
             //load brands after ask do you want load it's brands or no then load product title related selected subCategory
             $('#subCategories').on("change", function () {
@@ -1045,6 +1051,7 @@
                     $('#BrandsDiv').css('display', 'none');
                     $('#brands').empty();
                 }
+                $("#lastCategory").val(id);
             })
             //check option 2 selected or not, if yes redirect to addCategory view
             $('#brands').on("change", function () {
@@ -1052,31 +1059,10 @@
                 if (id == 000) {
                     location.href = '{{url("admin/addCategory")}}';
                 }
+                $("#lastCategory").val(id);
             });
-            function loadUnits(){
-            //load MainUnitsCount if there is no category in table redirect addCategory
-            $.ajax({
-                cache: false,
-                url: "{{Url('api/v1/getMainUnits')}}",
-                dataType: "json",
-                type: "get",
-                success: function (response) {
-                    if (response != 0) {
-                        var responses = response;
-                        var selectBoxId = "[name='unit_count']";
-                        var msgOpt1 = "لطفا واحد شمارش مورد نظر خود را انتخاب نمایید";
-                        var msgOpt2 = "اگر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
-                        var valueOption2 = 0000;
-                        loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
-                    }
-                    else {
-                        location.href = '{{url("admin/addCategory")}}';
-                    }
-                }
-            });}
-            loadUnits();
-            $("[name='unit_count']").on("change", function () {console.log("1");
-                var id = $(this).val();
+            $("#unit_count_parent").on("change", function () {
+                var id = ($(this).find("select").val());
                 if (id == 0) {
                     location.href = '{{url("admin/addUnit")}}';
                 }
@@ -1098,5 +1084,28 @@
                     });
                 }
             });
+            function loadUnits() {
+                //load MainUnitsCount if there is no category in table redirect addCategory
+                $.ajax({
+                    cache: false,
+                    url: "{{Url('api/v1/getMainUnits')}}",
+                    dataType: "json",
+                    type: "get",
+                    success: function (response) {
+                        if (response != 0) {
+                            var responses = response;
+                            var selectBoxId = "[name='unit_count']";
+                            var msgOpt1 = "لطفا واحد شمارش مورد نظر خود را انتخاب نمایید";
+                            var msgOpt2 = "اگر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
+                            var valueOption2 = 0000;
+                            loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
+                        }
+                        else {
+                            location.href = '{{url("admin/addCategory")}}';
+                        }
+                    }
+                });//end ajax
+            }
+            loadUnits();
         </script>
 @endsection

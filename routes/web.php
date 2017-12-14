@@ -45,6 +45,7 @@ Route::group(['prefix'=>'admin'],function() {
     Route::get('addProduct', 'ProductController@addProduct');//show add product view
     Route::get('productsManagement', 'ProductController@productsManagement');//show view of all product's details
     Route::post('addNewProduct', 'ProductController@addNewProduct');// add new product in database
+    Route::post('updateProduct', 'ProductController@updateProduct');// update Product in database
     Route::get('productDetails/{id}', 'ProductController@productDetailsGet');
 //users
     Route::get('usersManagement', 'UserController@usersManagement');//show view of all customer's details

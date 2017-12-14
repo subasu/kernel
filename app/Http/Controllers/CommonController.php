@@ -104,6 +104,22 @@ class CommonController extends Controller
         }
 
     }
+    //below function is to get sub units from sub_unit table by sub unit's title
+    public function getSubunitsBySubUnitTitle(Request $request)
+    {
+        $title= $request->title;
+        $unitId = SubUnitCount::where([['title',$title],['active',1]])->value('id');
+        $subUnits = SubUnitCount::where([['unit_count_id',$unitId],['active',1]])->get();
+        if(count($subUnits) > 0 )
+        {
+            return response()->json($subUnits);
+        }
+        else
+        {
+            return response()->json(0);
+        }
+
+    }
     public function getExistedCategories($id)
     {
         $existedCategories = DB::table('categories')->where([['parent_id',$id],['active',1],['title','<>','سایر']])->get();
