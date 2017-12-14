@@ -189,17 +189,15 @@
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
                                                        title="ویرایش "></a>
                                                 </div>
-                                                <div class="col-md-10">
+                                                <div class="col-md-10" id="unit_count_parent">
                                                     @if($products[0]->unit_count != null)
-                                                        <select disabled id="editable"
-                                                               class="form-control col-md-7 col-xs-12 editable" name="unit_count_id" value="{{$products[0]->unit_count}}">
-                                                            <option value="{{$products[0]->unit_count}}">{{$products[0]->unit_count}}</option>
-                                                        </select>
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable" name="unit_count" value="{{$products[0]->unit_count}}"/>
                                                     @endif
                                                     @if($products[0]->unit_count == null)
                                                         <select disabled id="editable"
                                                                class="form-control col-md-7 col-xs-12 editable"
-                                                                name="unit_count_id"></select>
+                                                                name="unit_count"></select>
                                                     @endif
                                                 </div>
                                             </div>
@@ -208,7 +206,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-md-10 col-md-offset-1 margin-1 ">
+                                    <div class="col-md-10 col-md-offset-1 margin-1" >
                                         <div id="grandparent">
                                             <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                                 <div class="col-md-2">
@@ -217,13 +215,11 @@
                                                        products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
-                                                <div class="col-md-10">
+                                                <div class="col-md-10" id="sub_unit_count_parent">
                                                     @if($products[0]->sub_unit_count != null)
-                                                        <select disabled id="editable"
-                                                               class="form-control col-md-7 col-xs-12 editable"
-                                                               name="sub_unit_count"
-                                                                value="{{$products[0]->sub_unit_count}}">
-                                                        </select>
+                                                        <input disabled id="editable"
+                                                               class="form-control col-md-7 col-xs-12 editable" name="sub_unit_count" value="{{$products[0]->sub_unit_count}}"/>
+
                                                     @endif
                                                     @if($products[0]->sub_unit_count == null)
                                                         <select disabled id="editable"
@@ -828,9 +824,25 @@
                     $(this).click(function () {
                         var DOM = $(this).parentsUntil('#grandparent');
                         var editable = $(DOM).find('#editable');
-                        // console.log(DOM);
-                        // console.log(editable);
                         $(editable).prop('disabled', false);
+                        if(editable.attr('name') == 'unit_count')
+                        {
+                            $("#unit_count_parent").empty();
+                            $("#unit_count_parent").append(
+                            '<select id="editable"'+
+                            'class="form-control col-md-7 col-xs-12 editable" name="unit_count" value="{{$products[0]->unit_count}}">'+
+                            '<option value="{{$products[0]->unit_count}}">{{$products[0]->unit_count}}</option></select>');
+                            loadUnits();
+                        }
+                        else if(editable.attr('name') == 'sub_unit_count')
+                        {
+                            $("#sub_unit_count_parent").empty();
+                            $("#sub_unit_count_parent").append(
+                                '<select id="editable"'+
+                                'class="form-control col-md-7 col-xs-12 editable" name="sub_unit_count" value="{{$products[0]->sub_unit_count}}">'+
+                                '<option selected value="{{$products[0]->sub_unit_count}}">{{$products[0]->sub_unit_count}}</option></select>');
+                        }
+
                     })
                 })
 
@@ -1041,6 +1053,7 @@
                     location.href = '{{url("admin/addCategory")}}';
                 }
             });
+            function loadUnits(){
             //load MainUnitsCount if there is no category in table redirect addCategory
             $.ajax({
                 cache: false,
@@ -1048,10 +1061,9 @@
                 dataType: "json",
                 type: "get",
                 success: function (response) {
-                    console.log(response);
                     if (response != 0) {
                         var responses = response;
-                        var selectBoxId = "[name='unit_count_id']";
+                        var selectBoxId = "[name='unit_count']";
                         var msgOpt1 = "لطفا واحد شمارش مورد نظر خود را انتخاب نمایید";
                         var msgOpt2 = "اگر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
                         var valueOption2 = 0000;
@@ -1061,8 +1073,9 @@
                         location.href = '{{url("admin/addCategory")}}';
                     }
                 }
-            });
-            $("[name='unit_count_id']").on("click", function () {
+            });}
+            loadUnits();
+            $("[name='unit_count']").on("change", function () {console.log("1");
                 var id = $(this).val();
                 if (id == 0) {
                     location.href = '{{url("admin/addUnit")}}';
@@ -1076,7 +1089,7 @@
                         type: "get",
                         success: function (response) {
                             var responses = response;
-                            var selectBoxId = '#subunit';
+                            var selectBoxId = "[name='sub_unit_count']";
                             var msgOpt1 = "لطفا زیر واحد شمارش مورد نظر خود را انتخاب نمایید";
                             var msgOpt2 = "اگر زیر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
                             var valueOption2 = 0;
