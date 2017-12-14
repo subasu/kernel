@@ -67,9 +67,9 @@
         </div>
         <div id="cart-block" class="col-xs-5 col-sm-2 shopping-cart-box">
             <a class="cart-link" href="order.html">
-                <span class="title">سبدخرید شما<span class="">(2)</span></span>
-                <span class="total">12000 تومان</span>
-                <span class="notify notify-left">2</span>
+                {{--<span class="title" id="basketCount">سبدخرید شما<span class="">0</span></span>--}}
+                <span id="totalPrice" class="total">12000 تومان</span>
+                <span id="basketCountNotify" class="notify notify-left">0</span>
             </a>
             <div class="cart-block">
                 <div class="cart-block-content">

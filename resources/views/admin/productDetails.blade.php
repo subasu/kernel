@@ -7,19 +7,15 @@
             padding-right: 4px;
             padding-left: 4px;
         }
-
         input, label {
             font-size: 15px;
         }
-
         .margin-1 {
             margin-top: 1%;
         }
-
         .margin-bot-1 {
             margin-bottom: 1%;
         }
-
         .overflow-x {
             overflow-x: hidden;
         }
@@ -748,9 +744,7 @@
                     .on('click', function () {
                         $('#smartwizard').smartWizard("reset");
                         $('#productForm')[0].reset();
-
                     });
-
                 $('#smartwizard').smartWizard({
                     selected: 0,
                     theme: 'arrows',
@@ -767,13 +761,11 @@
                     $('#smartwizard').smartWizard("reset");
                     return true;
                 });
-
                 $("#prev-btn").on("click", function () {
                     // Navigate previous
                     $('#smartwizard').smartWizard("قبلی");
                     return true;
                 });
-
                 $("#next-btn").on("click", function () {
                     // Navigate next
                     $('#smartwizard').smartWizard("بعدی");
@@ -862,12 +854,9 @@
                                 }
                             });
                         }
-
                     })
                 })
-
             })
-
         </script>
         <!-- below script is to make picture hidden and display7 an another input type file -->
         <script>
@@ -882,7 +871,6 @@
                         $(newFile).css('display', 'block');
                     })
                 })
-
             })
         </script>
 
@@ -903,7 +891,6 @@
                 $("[name = 'produce_date']").each(function () {
                     $(this).persianDatepicker();
                 })
-
                 $("[name = 'expire_date']").each(function () {
                     $(this).persianDatepicker();
                 })
@@ -914,7 +901,6 @@
                 function formatNumber(num) {
                     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
                 }
-
                 $(".pr").on('keyup', function () {
                     var price = $(this);
                     var v0 = price.val();
@@ -922,9 +908,7 @@
                     var v2 = formatNumber(v1);
                     price.val(v2)
                 })
-
             })
-
         </script>
         <script>
             //load item in select box

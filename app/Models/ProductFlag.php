@@ -12,4 +12,5 @@ class ProductFlag extends Model
     {
         return $this->belongsTo('App\Models\Product');
     }
+
 }
