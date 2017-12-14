@@ -398,8 +398,15 @@
             dataType : "json",
             success  : function(response)
             {
-                //alert(response);
                 console.log(response);
+                if(response.code == 1)
+                {
+                    alert(response.message);
+                }else
+                    {
+                        alert(response.message);
+                    }
+
             },error  : function(error)
             {
                 console.log(error);

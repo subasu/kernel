@@ -27,6 +27,13 @@ class UserController extends Controller
                 $basket->product_id = $request->productId;
                 $basket->cookie     = $cookie;
                 $basket->save();
+                if($basket)
+                {
+                    return response()->json(['message' => 'محصول مورد نظر شما به سبد خرید اضافه گردید' , 'code' => 1]);
+                }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است']);
+                    }
             }
     }
 
