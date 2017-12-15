@@ -77,6 +77,8 @@ Route::group(['prefix'=>'admin'],function() {
 Route::group(['prefix'=>'user'],function() {
     Route::post('addToBasket','UserController@addToBasket');
     Route::get('getBasketCountNotify','UserController@getBasketCountNotify');
+    Route::get('getBasketTotalPrice','UserController@getBasketTotalPrice');
+    Route::get('getBasketContent','UserController@getBasketContent');
 });
 
 //Auth::routes();

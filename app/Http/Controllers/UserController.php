@@ -80,15 +80,29 @@ class UserController extends Controller
     //below function is related to get basket count
     public function getBasketCountNotify()
     {
-        $baskets  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->get();
-        $count    = count($baskets);
-//        foreach ($baskets as $basket)
-//        {
-//            $baskets->product_price += $basket->product_price;
-//        }
-        dd($baskets);
-        return response()->json($count);
+        $baskets  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->count();
+        return response()->json($baskets);
     }
+
+    //below function is related to get basket total price
+    public function getBasketTotalPrice()
+    {
+        $baskets  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->get();
+        $totalPrice = '';
+        foreach ($baskets as $basket)
+        {
+            $totalPrice  += $basket->count * $basket->product_price;
+        }
+        return response()->json($totalPrice);
+    }
+
+    //below function is related to get basket content
+    public function getBasketContent()
+    {
+        $baskets  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->get();
+        return response()->json($baskets);
+    }
+
 
 }
 

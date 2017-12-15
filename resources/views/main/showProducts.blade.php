@@ -629,8 +629,8 @@
                                                     <div class="col-md-5">
                                                         @foreach($product->productFlags as $flag)
                                                             @if($flag->active == 1)
-                                                                <a class="price price" data-toggle="" title="تومان">{{number_format($flag->price)}} </a>
-                                                                <input type="hidden" id="productFlag" value="{{$flag->price}}" >
+                                                                <a class="price price" id="productFlag" data-toggle="" name="{{$flag->price}}" title="تومان">{{number_format($flag->price)}} </a>
+
                                                             @endif
                                                         @endforeach
                                                     </div>
@@ -664,7 +664,15 @@
                                         </div>
                                         <div class="right-block">
                                             <div class="add-to-cart" >
-                                                <button class="btn btn-success"  id="addToBasket"  name="{{$product->id}}"><span></span>افزودن به سبدخرید</button>
+                                                <button class="btn btn-success"
+                                                @foreach($product->productFlags as $flag)
+                                                    @if($flag->active == 1)
+                                                        content = "{{$flag->price}}"
+                                                    @endif
+                                                @endforeach
+                                                        id="addToBasket"  name="{{$product->id}}">
+                                                        <span></span>افزودن به سبدخرید
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -718,5 +726,165 @@
         </div>
     </div>
 
+
+    <script type="text/javascript" src="{{url('public/main/assets/lib/jquery/jquery-1.11.2.min.js')}}"></script>
+
+
+    <script>
+    $(document).ready(function () {
+            basketCountNotify();
+            basketTotalPrice();
+            basketContent();
+    })
+    </script>
+
+
+    <!-- below script is related to add to basket -->
+    <script>
+        $(document).on('click','#addToBasket',function () {
+
+            var productFlag = $(this).attr('content');
+            var  productId = $(this).attr('name');
+            var token      = $('#token').val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax
+            ({
+                url      : "{{url('user/addToBasket')}}",
+                type     : "post",
+                data     : {'productId' : productId , '_token' : token , 'productFlag' : productFlag},
+                dataType : "json",
+                success  : function(response)
+                {
+                    console.log(response);
+                    if(response.code == 1)
+                    {
+                        swal({
+                            title: "",
+                            text: response.message,
+                            type: "success",
+                            confirmButtonText: "بستن"
+                        });
+                        basketCountNotify();
+                        basketTotalPrice();
+                        basketContent();
+                    }else
+                    {
+                        swal({
+                            title: "",
+                            text: response.message,
+                            type: "warning",
+                            confirmButtonText: "بستن"
+                        });
+                    }
+
+                },error  : function(error)
+                {
+                    console.log(error);
+                    alert('خطایی رخ داده است')
+                }
+            })
+        })
+    </script>
+
+
+    <script>
+            //below function is related to get basket count
+            function basketCountNotify()
+            {
+                var token = $('#token').val();
+                $.ajax
+                ({
+                    url         : "{{url('user/getBasketCountNotify')}}",
+                    type        : "get",
+                    dataType    : "json",
+                    data        : {'_token' : token},
+                    success     : function(response)
+
+                    {
+                        console.log(response);
+                        $('#basketCountNotify').text(response);
+                    },
+                    error       : function (error) {
+                        console.log(error);
+                    }
+
+                });
+            }
+
+            //below function is related to get total price
+            function basketTotalPrice()
+            {
+                var token = $('#token').val();
+                $.ajax
+                ({
+                    url         : "{{url('user/getBasketTotalPrice')}}",
+                    type        : "get",
+                    dataType    : "json",
+                    data        : {'_token' : token},
+                    success     : function(response)
+
+                    {
+                        console.log(response);
+                        $('#totalPrice').text(formatNumber(response) + ' ' + 'تومان'  );
+                    },
+                    error       : function (error) {
+                        console.log(error);
+                    }
+
+                });
+            }
+
+            //below function is related to get basket content
+            function basketContent()
+            {
+                var token = $('#token').val();
+                $.ajax
+                ({
+                    url         : "{{url('user/getBasketContent')}}",
+                    type        : "get",
+                    dataType    : "json",
+                    data        : {'_token' : token},
+                    success     : function(response)
+
+                    {
+                        $('#cartBlockList').empty();
+                        $.each(response,function (key,value) {
+                            $('#cartBlockList').append
+                            (
+                                '<ul>'+
+                                    '<li class="product-info">'+
+                                        '<div class="p-left">'+
+                                            '<a href="#" class="remove_link"></a>'+
+                                            '<a href="#">'+
+                                                '<img class="img-responsive"  src="public/main/assets/data/product-100x122.jpg" alt="p10">'+
+                                            '</a>'+
+                                        '</div>'+
+                                        '<div class="p-right">'+
+                                            '<p class="p-name">'+value.title+'</p>'+
+                                            '<p class="p-rice">'+formatNumber(value.product_price)+'</p>'+
+                                            '<p>'+value.count+'</p>'+
+                                        '</div>'+
+                                    '</li>'+
+                                '</ul>'
+                            )
+                        })
+
+                    },
+                    error       : function (error) {
+                        console.log(error);
+                    }
+
+                });
+            }
+    </script>
+    <script>
+        function formatNumber(num) {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        }
+    </script>
 
 @endsection

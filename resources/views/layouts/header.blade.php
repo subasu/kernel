@@ -68,41 +68,14 @@
         <div id="cart-block" class="col-xs-5 col-sm-2 shopping-cart-box">
             <a class="cart-link" href="order.html">
                 {{--<span class="title" id="basketCount">سبدخرید شما<span class="">0</span></span>--}}
-                <span id="totalPrice" class="total">12000 تومان</span>
+                <span id="totalPrice" class="total">0</span>
                 <span id="basketCountNotify" class="notify notify-left">0</span>
             </a>
             <div class="cart-block">
                 <div class="cart-block-content">
                     <h5 class="cart-title" dir="rtl">2 مورد در کارت شما وجود دارد</h5>
-                    <div class="cart-block-list">
-                        <ul>
-                            <li class="product-info">
-                                <div class="p-left">
-                                    <a href="#" class="remove_link"></a>
-                                    <a href="#">
-                                        <img class="img-responsive"  src="public/main/assets/data/product-100x122.jpg" alt="p10">
-                                    </a>
-                                </div>
-                                <div class="p-right">
-                                    <p class="p-name">Donec Ac Tempus</p>
-                                    <p class="p-rice">61,19 €</p>
-                                    <p>Qty: 1</p>
-                                </div>
-                            </li>
-                            <li class="product-info">
-                                <div class="p-left">
-                                    <a href="#" class="remove_link"></a>
-                                    <a href="#">
-                                        <img class="img-responsive"  src="public/main/assets/data/product-s5-100x122.jpg" alt="p10">
-                                    </a>
-                                </div>
-                                <div class="p-right">
-                                    <p class="p-name">عنوان محصول</p>
-                                    <p class="p-rice">61,19 تومان</p>
-                                    <p>تعداد: 1</p>
-                                </div>
-                            </li>
-                        </ul>
+                    <div id="cartBlockList" class="cart-block-list">
+
                     </div>
                     <div class="toal-cart" style="text-align: right;direction: rtl" >
                         <span class="pull-right">جمع کل</span>

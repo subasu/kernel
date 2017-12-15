@@ -305,6 +305,10 @@
 <script type="text/javascript" src="{{url('public/main/assets/js/jquery.actual.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>
 <script src="{{URL::asset('public/js/sweetalert.min.js')}}"></script>
+
+
+
+
 <script>
     $(document).ready(function () {
         $(".mainMenu").each(function () {
@@ -380,82 +384,6 @@
 </script>
 
 
-<!-- below script is related to add to basket -->
-<script>
-    $(document).on('click','#addToBasket',function () {
 
-        var productFlag = $('#productFlag').val();
-        var  productId = $(this).attr('name');
-        var token      = $('#token').val();
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax
-        ({
-            url      : "{{url('user/addToBasket')}}",
-            type     : "post",
-            data     : {'productId' : productId , '_token' : token , 'productFlag' : productFlag},
-            dataType : "json",
-            success  : function(response)
-            {
-                console.log(response);
-                if(response.code == 1)
-                {
-                    swal({
-                        title: "",
-                        text: response.message,
-                        type: "success",
-                        confirmButtonText: "بستن"
-                    });
-                    basketCountNotify();
-                }else
-                    {
-                        swal({
-                            title: "",
-                            text: response.message,
-                            type: "warning",
-                            confirmButtonText: "بستن"
-                        });
-                    }
-
-            },error  : function(error)
-            {
-                console.log(error);
-                alert('خطایی رخ داده است')
-            }
-        })
-    })
-</script>
-
-<script>
-    $(document).ready(function () {
-        basketCountNotify();
-    })
-</script>
-<script>
-    function basketCountNotify()
-    {
-        var token = $('#token').val();
-        $.ajax
-        ({
-            url         : "{{url('user/getBasketCountNotify')}}",
-            type        : "get",
-            dataType    : "json",
-            data        : {'_token' : token},
-            success     : function(response)
-
-            {
-                console.log(response);
-                $('#basketCountNotify').text(response);
-            },
-            error       : function (error) {
-                console.log(error);
-            }
-
-        });
-    }
-</script>
 </body>
 </html>
