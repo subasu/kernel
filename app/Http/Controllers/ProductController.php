@@ -6,6 +6,8 @@ use App\Http\SelfClasses\AddProduct;
 use App\Http\SelfClasses\CheckFiles;
 use App\Http\SelfClasses\CheckJalaliDate;
 use App\Http\SelfClasses\CheckProduct;
+use App\Http\SelfClasses\CheckUpdateProduct;
+use App\Http\SelfClasses\UpdateProduct;
 use App\Models\Product;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
@@ -63,14 +65,14 @@ class ProductController extends Controller
         $checkJalaliDate = new CheckJalaliDate();
         $dateResult = $checkJalaliDate->checkDate($request);
         if ($dateResult == "true") {
-            $checkProduct = new CheckProduct();
+            $checkProduct = new CheckUpdateProduct();
             $result = $checkProduct->ProductValidate($request);
             if ($result == "true") {
                 $checkFiles = new CheckFiles();
                 $result = $checkFiles->checkCategoryFiles($request);
                 if (is_bool($result)) {
-                    $addNewProduct = new AddProduct();
-                    $ans = $addNewProduct->addProduct($request);
+                    $UpdateProduct = new UpdateProduct();
+                    $ans = $UpdateProduct->UpdateProduct($request);
                     if ($ans == "true")
                         return response()->json(['data' => 'ویرایش محصول شما با مؤفقیت انجام شد']);
                     else
