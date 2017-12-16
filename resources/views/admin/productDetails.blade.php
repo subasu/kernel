@@ -82,9 +82,10 @@
     <div class="clearfix"></div>
     <div class="row">
         <div class="container">
-            <form class="form-horizontal form-label-left" id="productForm" method="POST" enctype="multipart/form-data"
+            <form class="form-horizontal form-label-left" id="productForm" enctype="multipart/form-data"
                   style="direction: rtl !important;">
-                <!-- SmartWizard 1 html -->
+            {{csrf_field()}}
+            <!-- SmartWizard 1 html -->
                 <div id="smartwizard">
                     <ul>
                         <li><a href="#step-1">اطلاعات اصلی محصول<br/>
@@ -118,7 +119,7 @@
                                             <div class="col-md-10">
                                                 <input disabled id="lastCategoryName" class="form-control col-md-12"
                                                        value="{{$products[0]->categories[0]->title}}">
-                                                <input type="hidden" id="lastCategory" name="lastCategory" value="">
+                                                <input type="hidden" disabled id="lastCategory" name="lastCategory" value="">
                                             </div>
                                         </div>
                                         <label class="control-label col-md-2 col-sm-4 col-xs-3" for="title"> آخرین دسته
@@ -705,13 +706,19 @@
                 $("#productForm").submit(function (e) {
                     e.preventDefault();
                 });
+
                 // Toolbar extra buttons
                 var btnFinish = $('<button></button>').text('ویرایش')
                     .addClass('btn btn-info')
                     .on('click', function () {
-                        var formData = new FormData($("#productForm")[0])
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            }
+                        });
+                        var formData = new FormData($("#productForm")[0]);
                         $.ajax({
-                            url: '{{url('api/v1/addNewProduct')}}',
+                            url: '{{url('admin/updateProduct')}}',
                             type: 'post',
                             cashe: false,
                             data: formData,
@@ -1000,6 +1007,7 @@
                     $('#brands').empty();
                 }
                 $("#lastCategory").val(id);
+                $("#lastCategory").attr('disabled', false);
             })
             //load brands after ask do you want load it's brands or no then load product title related selected subCategory
             $('#subCategories').on("change", function () {
@@ -1052,6 +1060,7 @@
                     $('#brands').empty();
                 }
                 $("#lastCategory").val(id);
+                $("#lastCategory").attr('disabled', false);
             })
             //check option 2 selected or not, if yes redirect to addCategory view
             $('#brands').on("change", function () {
@@ -1060,6 +1069,8 @@
                     location.href = '{{url("admin/addCategory")}}';
                 }
                 $("#lastCategory").val(id);
+                $("#lastCategory").attr('disabled', false);
+
             });
             $("#unit_count_parent").on("change", function () {
                 var id = ($(this).find("select").val());
