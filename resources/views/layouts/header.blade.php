@@ -66,23 +66,24 @@
             </form>
         </div>
         <div id="cart-block" class="col-xs-5 col-sm-2 shopping-cart-box">
-            <a class="cart-link" href="order.html">
+            <a class="cart-link" >
                 {{--<span class="title" id="basketCount">سبدخرید شما<span class="">0</span></span>--}}
                 <span id="totalPrice" class="total">0</span>
                 <span id="basketCountNotify" class="notify notify-left">0</span>
             </a>
             <div class="cart-block">
                 <div class="cart-block-content">
-                    <h5 class="cart-title" dir="rtl">2 مورد در کارت شما وجود دارد</h5>
+                    <h2  align="center" dir="rtl">محتویات سبد خرید</h2>
+                    <br/>
                     <div id="cartBlockList" class="cart-block-list">
 
                     </div>
                     <div class="toal-cart" style="text-align: right;direction: rtl" >
                         <span class="pull-right">جمع کل</span>
-                        <span class="toal-price pull-left">122.38 تومان</span>
+                        <span class="total"></span>
                     </div>
                     <div class="cart-buttons">
-                        <a href="order.html" class="btn-check-out">پرداخت</a>
+                        <a href="{{url('order')}}" class="btn-check-out">پرداخت</a>
                     </div>
                 </div>
             </div>

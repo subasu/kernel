@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Basket;
+use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -25,29 +26,38 @@ class UserController extends Controller
             $now = Carbon::now(new \DateTimeZone('Asia/Tehran'));
             if(isset($_COOKIE['addToBasket']))
             {
-                $dataBaseOldProductId = DB::table('baskets')->where([['cookie',$_COOKIE['addToBasket']],['product_id',$request->productId]])->count();
-                if($dataBaseOldProductId > 0)
+                $basketId = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->value('id');
+                $count    = DB::table('basket_product')->where([['basket_id',$basketId],['product_id',$request->productId]])->count();
+
+                if($count > 0)
                 {
-                    $update = DB::table('baskets')->where([['cookie',$_COOKIE['addToBasket']],['product_id',$request->productId]])->increment('count');
+                    $update = DB::table('basket_product')->where([['basket_id',$basketId],['product_id',$request->productId]])->increment('count');
                     if($update)
                     {
                         return response()->json(['message' => 'محصول مورد نظر شما به سبد خرید اضافه گردید' , 'code' => 1]);
-                    }
-                }else
-                    {
-                        $basket = new Basket();
-                        $basket->product_id     = $request->productId;
-                        $basket->cookie         = $_COOKIE['addToBasket'];
-                        $basket->product_price  = $request->productFlag;
-                        $basket->time           = $now->toTimeString();
-                        $basket->date           = $now->toDateString();
-                        $basket->count          = 1;
-                        $basket->save();
-                        if($basket)
+                    }else
                         {
-                            return response()->json(['message' => 'محصول مورد نظر شما به سبد خرید اضافه گردید' , 'code' => 1 ]);
+                            return response()->json(['message' => 'خطایی رخ داده است']);
                         }
 
+                }else
+                    {
+                            $pivotInsert = DB::table('basket_product')->insert
+                            ([
+                                'basket_id'      => $basketId,
+                                'product_id'     => $request->productId,
+                                'product_price'  => $request->productFlag,
+                                'time'           => $now->toTimeString(),
+                                'date'           => $now->toDateString(),
+                                'count'          => 1
+                            ]);
+                            if($pivotInsert)
+                            {
+                                return response()->json(['message' => 'محصول مورد نظر شما به سبد خرید اضافه گردید' , 'code' => 1]);
+                            }else
+                            {
+                                return response()->json(['message' => 'خطایی رخ داده است']);
+                            }
                     }
             }
             else
@@ -57,16 +67,27 @@ class UserController extends Controller
                     if($cookie)
                     {
                         $basket = new Basket();
-                        $basket->product_id     = $request->productId;
                         $basket->cookie         = $cookieValue;
-                        $basket->product_price  = $request->productFlag;
-                        $basket->time           = $now->toTimeString();
-                        $basket->date           = $now->toDateString();
-                        $basket->count          = 1;
                         $basket->save();
                         if($basket)
                         {
-                            return response()->json(['message' => 'محصول مورد نظر شما به سبد خرید اضافه گردید' , 'code' => 1]);
+                            $pivotInsert = DB::table('basket_product')->insert
+                            ([
+                                'basket_id'      => $basket->id,
+                                'product_id'     => $request->productId,
+                                'product_price'  => $request->productFlag,
+                                'time'           => $now->toTimeString(),
+                                'date'           => $now->toDateString(),
+                                'count'          => 1
+                            ]);
+                            if($pivotInsert)
+                            {
+                                return response()->json(['message' => 'محصول مورد نظر شما به سبد خرید اضافه گردید' , 'code' => 1]);
+                            }else
+                            {
+                                return response()->json(['message' => 'خطایی رخ داده است']);
+                            }
+
                         }else
                         {
                             return response()->json(['message' => 'خطایی رخ داده است']);
@@ -76,18 +97,19 @@ class UserController extends Controller
 
     }
 
-
     //below function is related to get basket count
     public function getBasketCountNotify()
     {
-        $baskets  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->count();
-        return response()->json($baskets);
+        $basketId  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->value('id');
+        $count    = DB::table('basket_product')->where('basket_id',$basketId)->count();
+        return response()->json($count);
     }
 
     //below function is related to get basket total price
     public function getBasketTotalPrice()
     {
-        $baskets  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->get();
+        $basketId  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->value('id');
+        $baskets   = DB::table('basket_product')->where('basket_id',$basketId)->get();
         $totalPrice = '';
         foreach ($baskets as $basket)
         {
@@ -99,8 +121,34 @@ class UserController extends Controller
     //below function is related to get basket content
     public function getBasketContent()
     {
-        $baskets  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->get();
+        $basketId  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->value('id');
+        $baskets  = Basket::find($basketId);
+        foreach ($baskets->products as $product)
+        {
+            $product->count       = $product->pivot->count;
+            $product->price       = $product->pivot->product_price;
+            $product->basket_id   = $product->pivot->basket_id;
+            $product->product_id  = $product->pivot->product_id;
+
+        }
         return response()->json($baskets);
+    }
+
+    //below function is related to remove item from basket
+    public function removeItemFromBasket(Request $request)
+    {
+        if(!$request->ajax())
+        {
+            abort(403);
+        }
+        $delete = DB::table('basket_product')->where([['basket_id',$request->basketId],['product_id',$request->productId]])->delete();
+        if($delete)
+        {
+            return response()->json(['message' => 'محصول مورد نظر از سبد خرید حذف گردید' , 'code' => 1]);
+        }else
+            {
+                return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+            }
     }
 
 

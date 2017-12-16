@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Basket;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\City;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class IndexController extends Controller
@@ -178,4 +180,33 @@ class IndexController extends Controller
         //dd($categories);
         return view('main.showProducts',compact('menu','pageTitle','categories'));
     }
+
+    //below function is related to return order view
+    public function order()
+    {
+        $menu = Category::where('depth', '=', '2')->get();
+        $pageTitle = 'لیست سفارشات';
+        //$categories  = Category::find($id);
+        if(isset($_COOKIE['addToBasket']))
+        {
+            $basketId  = Basket::where('cookie',$_COOKIE['addToBasket'])->value('id');
+            $baskets   = Basket::find($basketId);
+//            foreach ($baskets as $basket)
+//            {
+//                $basket->count       = $basket->pivot->count;
+//                $basket->price       = $basket->pivot->product_price;
+//                $basket->basket_id   = $basket->pivot->basket_id;
+//                $basket->product_id  = $basket->pivot->product_id;
+//                $basket->date        = $basket->pivot->date;
+//                $basket->time        = $basket->pivot->time;
+//            }
+            //dd($baskets->products);
+            return view('main.order',compact('menu','pageTitle','baskets'));
+        }else
+            {
+                return Redirect::back();
+            }
+
+    }
+
 }

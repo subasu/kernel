@@ -21,7 +21,7 @@ class Product extends Model
     //relation of products and baskets
     public function baskets()
     {
-        return $this->hasMany('App\Models\Basket','product_id');
+        return $this->belongsToMany('App\Models\Basket')->withPivot('count','product_price','date','time');
     }
 
     //relation of warehouse and product
