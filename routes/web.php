@@ -19,7 +19,7 @@ Route::get('products','IndexController@products');
 Route::get('captcha', 'IndexController@create_image');
 Route::get('getSubmenu/{id}','CommonController@getSubmenu');
 Route::get('showProducts/{id}','IndexController@showProducts');
-Route::get('order','IndexController@order');
+Route::get('order/{parameter}','IndexController@order');
 
 //admin routes
 
@@ -81,6 +81,7 @@ Route::group(['prefix'=>'user'],function() {
     Route::get('getBasketTotalPrice','UserController@getBasketTotalPrice');
     Route::get('getBasketContent','UserController@getBasketContent');
     Route::post('removeItemFromBasket','UserController@removeItemFromBasket');
+    Route::post('orderFixed','UserController@orderFixed');
 
 });
 

@@ -725,10 +725,153 @@
             <!-- ./row-->
         </div>
     </div>
-
-
     <script type="text/javascript" src="{{url('public/main/assets/lib/jquery/jquery-1.11.2.min.js')}}"></script>
+    {{--<script type="text/javascript" src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>--}}
 
+    <script>
+        $(document).ready(function () {
+            basketCountNotify();
+            basketTotalPrice();
+            basketContent();
+        })
+    </script>
+    <script>
+        //below function is related to get basket count
+        function basketCountNotify()
+        {
+            var token = $('#token').val();
+            $.ajax
+            ({
+                url         : "{{url('user/getBasketCountNotify')}}",
+                type        : "get",
+                dataType    : "json",
+                data        : {'_token' : token},
+                success     : function(response)
+
+                {
+                    console.log(response);
+                    $('#basketCountNotify').text(response);
+                },
+                error       : function (error) {
+                    console.log(error);
+                }
+
+            });
+        }
+
+        //below function is related to get total price
+        function basketTotalPrice()
+        {
+            var token = $('#token').val();
+            $.ajax
+            ({
+                url         : "{{url('user/getBasketTotalPrice')}}",
+                type        : "get",
+                dataType    : "json",
+                data        : {'_token' : token},
+                success     : function(response)
+
+                {
+                    console.log(response);
+                    $('.total').text(formatNumber(response) + ' ' + 'تومان'  );
+                },
+                error       : function (error) {
+                    console.log(error);
+                }
+
+            });
+        }
+
+        //below function is related to get basket content
+        function basketContent()
+        {
+            var token = $('#token').val();
+            $.ajax
+            ({
+                url         : "{{url('user/getBasketContent')}}",
+                type        : "get",
+                dataType    : "json",
+                data        : {'_token' : token},
+                success     : function(response)
+
+                {
+                    console.log(response.products.length);
+                    $('#cartBlockList').empty();
+                    var len = response.products.length;
+                    var i   = 0;
+                    while(i < len )
+                    {
+                        $('#cartBlockList').append
+                        (
+                            '<ul>'+
+                            '<li class="product-info">'+
+                            '<div class="p-left">'+
+                            '<a href="#" name="'+response.products[i].product_id+'" content="'+response.products[i].basket_id+'" id="removeFromBasket" class="remove_link"></a>'+
+                            '</div>'+
+                            '<div class="p-right">'+
+                            '<p class="p-name">'+response.products[i].title+'</p>'+
+                            '<p class="p-rice">'+formatNumber(response.products[i].price)+'</p>'+
+                            '<p>'+response.products[i].count+'</p>'+
+                            '</div>'+
+                            '</li>'+
+                            '</ul>'
+                        )
+                        i++;
+                    }
+
+                },
+                error       : function (error) {
+                    console.log(error);
+                }
+
+            });
+        }
+    </script>
+    <script>
+        function formatNumber(num) {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        }
+    </script>
+
+    <!-- below script is related to remove item from basket -->
+    <script>
+        $(document).on('click','#removeFromBasket',function(){
+            var productId = $(this).attr('name');
+            var basketId  = $(this).attr('content');
+            var token     = $('#token').val();
+            $.ajax
+            ({
+                url      : "{{url('user/removeItemFromBasket')}}",
+                type     : "post",
+                data     : {'productId' : productId , 'basketId' : basketId , '_token' : token},
+                dataType : "json",
+                success   : function(response)
+                {
+                    if(response.code == 1)
+                    {
+                        swal({
+                            title: "",
+                            text: response.message,
+                            type: "success",
+                            confirmButtonText: "بستن"
+                        });
+                        basketCountNotify();
+                        basketTotalPrice();
+                        basketContent();
+                    }else
+                    {
+                        swal({
+                            title: "",
+                            text: response.message,
+                            type: "warning",
+                            confirmButtonText: "بستن"
+                        });
+                    }
+                }
+
+            })
+        })
+    </script>
 
 
 @endsection

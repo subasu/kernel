@@ -182,26 +182,35 @@ class IndexController extends Controller
     }
 
     //below function is related to return order view
-    public function order()
+    public function order($parameter)
     {
         $menu = Category::where('depth', '=', '2')->get();
         $pageTitle = 'لیست سفارشات';
         //$categories  = Category::find($id);
         if(isset($_COOKIE['addToBasket']))
         {
-            $basketId  = Basket::where('cookie',$_COOKIE['addToBasket'])->value('id');
+            $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
             $baskets   = Basket::find($basketId);
-//            foreach ($baskets as $basket)
-//            {
-//                $basket->count       = $basket->pivot->count;
-//                $basket->price       = $basket->pivot->product_price;
-//                $basket->basket_id   = $basket->pivot->basket_id;
-//                $basket->product_id  = $basket->pivot->product_id;
-//                $basket->date        = $basket->pivot->date;
-//                $basket->time        = $basket->pivot->time;
-//            }
-            //dd($baskets->products);
-            return view('main.order',compact('menu','pageTitle','baskets'));
+            $total  = 0;
+            $count  = count($baskets->products);
+            foreach ($baskets->products as $basket)
+            {
+                $basket->count       = $basket->pivot->count;
+                $basket->price       = $basket->pivot->product_price;
+                $basket->sum         = $basket->pivot->count * $basket->pivot->product_price;
+                $total              += $basket->sum;
+                $basket->basket_id   = $basket->pivot->basket_id;
+            }
+            switch ($parameter)
+            {
+                case 'payment':
+                    return view('main.order',compact('menu','pageTitle','baskets','total','count'));
+                break;
+                case 'factor':
+                    return view('main.factor',compact('menu','pageTitle','baskets','total','count'));
+                break;
+            }
+
         }else
             {
                 return Redirect::back();

@@ -300,11 +300,10 @@
 <script type="text/javascript" src="{{url('public/main/assets/lib/select2/js/select2.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/jquery.bxslider/jquery.bxslider.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/owl.carousel/owl.carousel.min.js')}}"></script>
-<script type="text/javascript"
-        src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>
+<script type="text/javascript" src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/js/jquery.actual.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>
-<script src="{{URL::asset('public/js/sweetalert.min.js')}}"></script>
+<script src="{{url('public/js/sweetalert.min.js')}}"></script>
 
 
 
@@ -582,5 +581,78 @@
     })
 </script>
 
+<!-- below script is related to remove basket items inj order page -->
+<script>
+    $(document).on('click','#removeItem',function(){
+       var price      = $(this).attr('data-target');
+       var orderTotal = $('#orderTotal').attr('content');
+       var productId  = $(this).attr('name');
+       var basketId   = $(this).attr('content');
+        var token     = $('#token').val();
+        var DOM       = $('#orderTable');
+        var td        = $(this);
+        $.ajax
+        ({
+            url       : "{{url('user/removeItemFromBasket')}}",
+            type      : "post",
+            data      : {'productId' : productId , 'basketId' : basketId , '_token' : token},
+            dataType  : "json",
+            context   : {'DOM' : DOM  ,'td' : td},
+            success   : function(response)
+            {
+                if(response.code == 1)
+                {
+                    swal({
+                        title: "",
+                        text: response.message,
+                        type: "success",
+                        confirmButtonText: "بستن"
+                    });
+                    $('#orderTotal').text(formatNumber(orderTotal - price) +  'تومان'  );
+                    $(td).parentsUntil(DOM,'tr').remove();
+                    basketCountNotify();
+                    basketTotalPrice();
+                    basketContent();
+                    if(response.count == 0)
+                        window.history.back();
+
+                }else
+                {
+                    swal({
+                        title: "",
+                        text: response.message,
+                        type: "warning",
+                        confirmButtonText: "بستن"
+                    });
+                }
+            }
+
+        })
+    });
+</script>
+
+<!-- below script is related to fix or register order -->
+<script>
+    $(document).on('click','#orderFixed',function(){
+       var token = $('#token').val();
+       $.ajax
+       ({
+            url      : "{{url('user/orderFixed')}}",
+            type     : "post",
+            data     :  {'_token' : token},
+            dataType : "json",
+            success  : function(response)
+            {
+                if(response.code == 1)
+                {
+                    window.location.href = 'factor';
+                }
+            },error  : function(error)
+            {
+               console.log(error);
+            }
+       });
+    });
+</script>
 </body>
 </html>

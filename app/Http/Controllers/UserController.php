@@ -26,7 +26,7 @@ class UserController extends Controller
             $now = Carbon::now(new \DateTimeZone('Asia/Tehran'));
             if(isset($_COOKIE['addToBasket']))
             {
-                $basketId = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->value('id');
+                $basketId = DB::table('baskets')->where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
                 $count    = DB::table('basket_product')->where([['basket_id',$basketId],['product_id',$request->productId]])->count();
 
                 if($count > 0)
@@ -100,7 +100,7 @@ class UserController extends Controller
     //below function is related to get basket count
     public function getBasketCountNotify()
     {
-        $basketId  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->value('id');
+        $basketId  = DB::table('baskets')->where([['cookie',$_COOKIE['addToBasket']],['payment' , 0]])->value('id');
         $count    = DB::table('basket_product')->where('basket_id',$basketId)->count();
         return response()->json($count);
     }
@@ -108,7 +108,7 @@ class UserController extends Controller
     //below function is related to get basket total price
     public function getBasketTotalPrice()
     {
-        $basketId  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->value('id');
+        $basketId  = DB::table('baskets')->where([['cookie',$_COOKIE['addToBasket']],['payment' , 0]])->value('id');
         $baskets   = DB::table('basket_product')->where('basket_id',$basketId)->get();
         $totalPrice = '';
         foreach ($baskets as $basket)
@@ -121,7 +121,7 @@ class UserController extends Controller
     //below function is related to get basket content
     public function getBasketContent()
     {
-        $basketId  = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->value('id');
+        $basketId  = DB::table('baskets')->where([['cookie',$_COOKIE['addToBasket']],['payment' , 0]])->value('id');
         $baskets  = Basket::find($basketId);
         foreach ($baskets->products as $product)
         {
@@ -142,15 +142,27 @@ class UserController extends Controller
             abort(403);
         }
         $delete = DB::table('basket_product')->where([['basket_id',$request->basketId],['product_id',$request->productId]])->delete();
+        $count  = DB::table('basket_product')->where('basket_id',$request->basketId)->count();
         if($delete)
         {
-            return response()->json(['message' => 'محصول مورد نظر از سبد خرید حذف گردید' , 'code' => 1]);
+            return response()->json(['message' => 'محصول مورد نظر از سبد خرید حذف گردید' , 'code' => 1 , 'count' => $count]);
         }else
             {
                 return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
             }
     }
 
-
+    //below function is related to update basket payment field
+    public function orderFixed()
+    {
+        if(isset($_COOKIE['addToBasket']))
+        {
+            $update = DB::table('baskets')->where('cookie',$_COOKIE['addToBasket'])->update(['payment' => 1]);
+            if($update)
+            {
+                return response()->json(['message' => '' , 'code' => 1]);
+            }
+        }
+    }
 }
 
