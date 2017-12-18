@@ -189,25 +189,36 @@ class IndexController extends Controller
         //$categories  = Category::find($id);
         if(isset($_COOKIE['addToBasket']))
         {
-            $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
-            $baskets   = Basket::find($basketId);
-            $total  = 0;
-            $count  = count($baskets->products);
-            foreach ($baskets->products as $basket)
-            {
-                $basket->count       = $basket->pivot->count;
-                $basket->price       = $basket->pivot->product_price;
-                $basket->sum         = $basket->pivot->count * $basket->pivot->product_price;
-                $total              += $basket->sum;
-                $basket->basket_id   = $basket->pivot->basket_id;
-            }
+
             switch ($parameter)
             {
                 case 'payment':
-                    return view('main.order',compact('menu','pageTitle','baskets','total','count'));
+                    $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
+                    $baskets   = Basket::find($basketId);
+                    $total     = 0;
+                    foreach ($baskets->products as $basket)
+                    {
+                        $basket->count       = $basket->pivot->count;
+                        $basket->price       = $basket->pivot->product_price;
+                        $basket->sum         = $basket->pivot->count * $basket->pivot->product_price;
+                        $total              += $basket->sum;
+                        $basket->basket_id   = $basket->pivot->basket_id;
+                    }
+                    return view('main.order',compact('menu','pageTitle','baskets','total'));
                 break;
                 case 'factor':
-                    return view('main.factor',compact('menu','pageTitle','baskets','total','count'));
+                    $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',1]])->value('id');
+                    $baskets   = Basket::find($basketId);
+                    $total     = 0;
+                    foreach ($baskets->products as $basket)
+                    {
+                        $basket->count       = $basket->pivot->count;
+                        $basket->price       = $basket->pivot->product_price;
+                        $basket->sum         = $basket->pivot->count * $basket->pivot->product_price;
+                        $total              += $basket->sum;
+                        $basket->basket_id   = $basket->pivot->basket_id;
+                    }
+                    return view('main.factor',compact('menu','pageTitle','baskets','total'));
                 break;
             }
 

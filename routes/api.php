@@ -36,3 +36,10 @@ Route::group(['prefix' => '/v1'], function () {
     //size routes
     Route::get('getSizes','CommonController@getSizes');
 });
+
+Route::group(['prefix' => '/v1/user'],function (){
+
+    Route::post('addToBasket','webService\UserController@addToBasket');
+
+});
+
