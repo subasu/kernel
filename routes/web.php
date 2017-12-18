@@ -20,6 +20,9 @@ Route::get('captcha', 'IndexController@create_image');
 Route::get('getSubmenu/{id}','CommonController@getSubmenu');
 Route::get('showProducts/{id}','IndexController@showProducts');
 Route::get('order/{parameter}','IndexController@order');
+Route::get('factor',function (){
+    return view('main.factor');
+});
 
 //admin routes
 
