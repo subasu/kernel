@@ -29,8 +29,9 @@ class UserController extends Controller
                 $basketId = DB::table('baskets')->where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
                 $count    = DB::table('basket_product')->where([['basket_id',$basketId],['product_id',$request->productId]])->count();
 
-                if($count > 0)
+                if($oldBasket = DB::table('baskets')->where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->count() > 0 && $count > 0)
                 {
+
                     $update = DB::table('basket_product')->where([['basket_id',$basketId],['product_id',$request->productId]])->increment('count');
                     if($update)
                     {
@@ -40,7 +41,11 @@ class UserController extends Controller
                             return response()->json(['message' => 'خطایی رخ داده است']);
                         }
 
-                }else
+                }else if($oldBasket = DB::table('baskets')->where([['cookie',$_COOKIE['addToBasket']],['payment',1]])->count() > 0)
+                {
+                    return $this->newCookie($now,$request);
+                }
+                else
                     {
                             $pivotInsert = DB::table('basket_product')->insert
                             ([
@@ -62,39 +67,45 @@ class UserController extends Controller
             }
             else
                 {
-                    $cookieValue = mt_rand(1,1000).microtime();
-                    $cookie = setcookie('addToBasket', $cookieValue , time() + (86400 * 30), "/");
-                    if($cookie)
-                    {
-                        $basket = new Basket();
-                        $basket->cookie         = $cookieValue;
-                        $basket->save();
-                        if($basket)
-                        {
-                            $pivotInsert = DB::table('basket_product')->insert
-                            ([
-                                'basket_id'      => $basket->id,
-                                'product_id'     => $request->productId,
-                                'product_price'  => $request->productFlag,
-                                'time'           => $now->toTimeString(),
-                                'date'           => $now->toDateString(),
-                                'count'          => 1
-                            ]);
-                            if($pivotInsert)
-                            {
-                                return response()->json(['message' => 'محصول مورد نظر شما به سبد خرید اضافه گردید' , 'code' => 1]);
-                            }else
-                            {
-                                return response()->json(['message' => 'خطایی رخ داده است']);
-                            }
-
-                        }else
-                        {
-                            return response()->json(['message' => 'خطایی رخ داده است']);
-                        }
-                    }
+                       return $this->newCookie($now,$request);
                 }
 
+    }
+
+    //below function is related to make new cookie
+    public function newCookie($now,$request)
+    {
+        $cookieValue = mt_rand(1,1000).microtime();
+        $cookie = setcookie('addToBasket', $cookieValue , time() + (86400 * 30), "/");
+        if($cookie)
+        {
+            $basket = new Basket();
+            $basket->cookie         = $cookieValue;
+            $basket->save();
+            if($basket)
+            {
+                $pivotInsert = DB::table('basket_product')->insert
+                ([
+                    'basket_id'      => $basket->id,
+                    'product_id'     => $request->productId,
+                    'product_price'  => $request->productFlag,
+                    'time'           => $now->toTimeString(),
+                    'date'           => $now->toDateString(),
+                    'count'          => 1
+                ]);
+                if($pivotInsert)
+                {
+                    return response()->json(['message' => 'محصول مورد نظر شما به سبد خرید اضافه گردید' , 'code' => 1]);
+                }else
+                {
+                    return response()->json(['message' => 'خطایی رخ داده است']);
+                }
+
+            }else
+            {
+                return response()->json(['message' => 'خطایی رخ داده است']);
+            }
+        }
     }
 
     //below function is related to get basket count

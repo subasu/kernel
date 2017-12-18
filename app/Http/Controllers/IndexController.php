@@ -21,14 +21,14 @@ class IndexController extends Controller
 
     public function home()
     {
-        $menu = Category::where('depth', '=', '2')->get();
+        $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
         $pageTitle = 'صفحه ی اصلی';
         return view('main.index', compact('pageTitle', 'menu'));
     }
 
     public function login()
     {
-        $menu = Category::where('depth', '=', '2')->get();
+        $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
         $capital = City::where('parent_id', '=', '1')->get();
         $pageTitle = 'ورود/عضویت';
         return view('main.login', compact('pageTitle', 'menu', 'capital'));
@@ -37,7 +37,7 @@ class IndexController extends Controller
     //show product page in main site
     public function products()
     {
-        $menu = Category::where('depth', '=', '2')->get();
+        $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
         $pageTitle = 'لیست محصولات';
         return view('main.products', compact('pageTitle', 'menu'));
     }
@@ -174,7 +174,7 @@ class IndexController extends Controller
     //below function is to return show product blade
     public function showProducts($id)
     {
-        $menu = Category::where('depth', '=', '2')->get();
+        $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
         $pageTitle = 'لیست محصولات';
         $categories  = Category::find($id);
         //dd($categories);
@@ -184,7 +184,7 @@ class IndexController extends Controller
     //below function is related to return order view
     public function order($parameter)
     {
-        $menu = Category::where('depth', '=', '2')->get();
+        $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
         $pageTitle = 'لیست سفارشات';
         //$categories  = Category::find($id);
         if(isset($_COOKIE['addToBasket']))

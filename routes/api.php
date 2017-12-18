@@ -37,9 +37,25 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('getSizes','CommonController@getSizes');
 });
 
+//below routes are related to some special operation in index page such as add to basket or ...
 Route::group(['prefix' => '/v1/user'],function (){
 
     Route::post('addToBasket','webService\UserController@addToBasket');
+    Route::post('getBasketCountNotify','webService\UserController@getBasketCountNotify');
+    Route::post('getBasketTotalPrice','webService\UserController@getBasketTotalPrice');
+    Route::post('getBasketContent','webService\UserController@getBasketContent');
+    Route::get('showProducts/{id}','webService\UserController@showProducts');
 
 });
+
+//below routes are related to some general routes in index routes such menu and ...
+
+Route::group(['prefix' => '/v1/general'],function(){
+
+    Route::get('getMainMenu','webService\GeneralController@getMainMenu');
+    Route::get('getSubMenu/{id}','webService\GeneralController@getSubMenu');
+    Route::get('getBrands/{id}','webService\GeneralController@getBrands');
+});
+
+
 

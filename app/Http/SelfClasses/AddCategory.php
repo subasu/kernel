@@ -30,7 +30,7 @@ class AddCategory
                             $file->move('public/dashboard/image/', $src);
                             $categories->image_src = $src;
                         }
-                        $categories->parent_id = 0;
+                       // $categories->parent_id = 0;
                         $categories->save();
                         $i++;
                     }
