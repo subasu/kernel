@@ -10,6 +10,8 @@
 |
 */
 //main site
+use App\Models\Category;
+
 Route::get('/','IndexController@index');
 Route::get('index','IndexController@home');
 Route::get('productFiles','IndexController@productFiles');
@@ -22,6 +24,11 @@ Route::get('showProducts/{id}','IndexController@showProducts');
 Route::get('order/{parameter}','IndexController@order');
 Route::get('factor',function (){
     return view('main.factor');
+});
+Route::get('checkout',function (){
+    $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
+    $pageTitle = 'پرداخت نهایی';
+    return view('main.checkout', compact('pageTitle', 'menu'));
 });
 
 //admin routes
