@@ -241,7 +241,7 @@ class IndexController extends Controller
 
                     }
                     $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
-                    return view('main.orderDetail',compact('pageTitle1','baskets','total','totalPostPrice','finalPrice'));
+                    return view('main.orderDetail',compact('menu','pageTitle1','baskets','total','totalPostPrice','finalPrice'));
                 break;
             }
 

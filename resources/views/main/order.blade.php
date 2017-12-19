@@ -59,13 +59,13 @@
                             <td class="cart_description">
                                 <textarea class="form-control" disabled="">{{$basket->description}}</textarea>
                             </td>
-                            <td class="price">{{number_format($basket->price)}} تومان</td>
+                            <td id="unitPrice" content="{{$basket->price}}" class="price">{{number_format($basket->price)}} تومان</td>
                             <td class="qty">
-                                <input class="form-control input-sm" id="count" type="text" value="{{$basket->count}}">
-                                <a id="addToCount" content="{{$basket->id}}" name="{{$basket->basket_id}}"><i class="fa fa-caret-up"></i></a>
-                                <a id="subFromCount" content="{{$basket->id}}" name="{{$basket->basket_id}}"><i class="fa fa-caret-down"></i></a>
+                                <input class="form-control input-sm" id="count" name="count" type="text" value="{{$basket->count}}">
+                                <a class="addToCount" content="{{$basket->id}}" name="{{$basket->basket_id}}"><i class="fa fa-caret-up"></i></a>
+                                <a class="subFromCount" content="{{$basket->id}}" name="{{$basket->basket_id}}"><i class="fa fa-caret-down"></i></a>
                             </td>
-                            <td class="price">
+                            <td id="oldSum" content="{{$basket->sum}}" class="price">
                                 {{number_format($basket->sum)}} تومان
                             </td>
                             <td class="col-md-2">
@@ -85,7 +85,7 @@
                 @endif
                 <div class="cart_navigation">
                     <a class="prev-btn"  onclick="window.history.back();">ادامه خرید</a>
-                    <a class="next-btn" href="{{url('order/orderDetail')}}">جزئیات سفارش</a>
+                    <a class="next-btn" href="{{url('order/orderDetail')}}">مشاهده جزئیات سفارش</a>
                 </div>
             </div>
         </div>

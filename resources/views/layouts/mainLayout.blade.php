@@ -494,6 +494,7 @@
             {
                 console.log(response);
                 $('.total').text(formatNumber(response) + ' ' + 'تومان'  );
+                $('#orderTotal').text(formatNumber(response) + ' ' + 'تومان'  );
             },
             error       : function (error) {
                 console.log(error);
@@ -670,54 +671,87 @@
 
 <!-- below script is related to handle addToCount  -->
 <script>
-    $(document).on('click','#addToCount',function () {
-        var productId = $(this).attr('content');
-        var basketId  = $(this).attr('name');
-        var token     = $('#token').val();
-        $.ajax
-        ({
-            url      : "{{url('user/addOrSubCount')}}",
-            type     : "post",
-            data     :  {'_token' : token , 'productId' : productId , 'basketId' : basketId , 'parameter' : 'addToCount'},
-           // dataType : "json",
-            success  : function(response)
-            {
-                if(response.code == 1)
+    $('.addToCount').each(function(){
+        $(this).click(function(){
+            var productId  = $(this).attr('content');
+            var basketId   = $(this).attr('name');
+            var token      = $('#token').val();
+            var count      = $(this).closest('td').find('input.input-sm').val();
+            var unitPrice  = $(this).closest('td').prev('td').attr('content');
+            var td         = $(this);
+            $.ajax
+            ({
+                url      : "{{url('user/addOrSubCount')}}",
+                type     : "post",
+                data     :  {'_token' : token , 'productId' : productId , 'basketId' : basketId , 'parameter' : 'addToCount'},
+                dataType : "json",
+                context  :  td ,
+                success  : function(response)
                 {
-                    $('#count').val($('#count').val()+1);
+                    if(response.code == 1)
+                    {
+                        $(td).closest('td').find('input.input-sm').val(++count);
+                        var newCount = $(td).closest('td').find('input.input-sm').val();
+                        var sum = unitPrice * newCount ;
+                        $(td).closest('td').next('td').text(formatNumber(sum) + 'تومان');
+                        basketTotalPrice();
+                    }
+                },error  : function(error)
+                {
+                    console.log(error);
                 }
-            },error  : function(error)
-            {
-                console.log(error);
-            }
-        });
+            });
+        })
     })
 </script>
 <!-- below script is related to handle subFromCount  -->
 <script>
-    $(document).on('click','#subFromCount',function () {
-        var productId = $(this).attr('content');
-        var basketId  = $(this).attr('name');
-        var token     = $('#token').val();
-        $.ajax
-        ({
-            url      : "{{url('user/addOrSubCount')}}",
-            type     : "post",
-            data     :  {'_token' : token , 'productId' : productId , 'basketId' : basketId , 'parameter' : 'subFromCount'},
-          //  dataType : "json",
-            success  : function(response)
+    $('.subFromCount').each(function(){
+        $(this).click(function(){
+            var productId  = $(this).attr('content');
+            var basketId   = $(this).attr('name');
+            var token      = $('#token').val();
+            var count      = $(this).closest('td').find('input.input-sm').val();
+            var unitPrice  = $(this).closest('td').prev('td').attr('content');
+            var td         = $(this);
+            if(count == 1)
             {
+                swal({
+                    title: "",
+                    text: 'در صورتی که می خواهید کالایی را از سبد خرید حذف کنید می بایست دکمه حذف را بزنید',
+                    type: "warning",
+                    confirmButtonText: "بستن"
+                });
+                return false;
+            }else
+            {
+                $.ajax
+                ({
+                    url      : "{{url('user/addOrSubCount')}}",
+                    type     : "post",
+                    data     :  {'_token' : token , 'productId' : productId , 'basketId' : basketId , 'parameter' : 'subFromCount'},
+                    context  : td,
+                    dataType : "json",
+                    success  : function(response)
+                    {
 
-                if(response.code == 1)
-                {
-                    $('#count').val($('#count').val()-1);
-                }
-            },error  : function(error)
-            {
-                console.log(error);
+                        if(response.code == 1)
+                        {
+                            $(td).closest('td').find('input.input-sm').val(--count);
+                            var newCount = $(td).closest('td').find('input.input-sm').val();
+                            var sum = unitPrice * newCount;
+                            $(td).closest('td').next('td').text(formatNumber(sum) + 'تومان');
+                            basketTotalPrice();
+                        }
+                    },error  : function(error)
+                    {
+                        console.log(error);
+                    }
+                });
             }
-        });
+        })
     })
+
 </script>
 </body>
 </html>

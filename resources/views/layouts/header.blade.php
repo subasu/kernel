@@ -83,7 +83,7 @@
                         <span class="total"></span>
                     </div>
                     <div class="cart-buttons">
-                        <a href="{{url('order/payment')}}" id="pay" class="btn-check-out">پرداخت</a>
+                        <a href="{{url('order/payment')}}" id="pay" class="btn-check-out" style="width: 100%; font-size: 120%;">مشاهده جزئیات سبد خرید</a>
                     </div>
                 </div>
             </div>
