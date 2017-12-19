@@ -39,6 +39,7 @@
                 {{--<h2>سبد خرید شما حاوی  {{$count}} نوع محصول است </h2>--}}
             {{--</div>--}}
             <div class="order-detail-content rtl" align="center">
+                @if(!empty($baskets))
                 <table id="orderTable" class="table table-bordered table-responsive cart_summary rtl">
                     <thead>
                     <tr>
@@ -51,6 +52,7 @@
                     </tr>
                     </thead>
                     <tbody>
+
                     @foreach($baskets->products as $basket)
                         <tr>
                             <td class="cart_product">{{$basket->title}}</td>
@@ -59,9 +61,9 @@
                             </td>
                             <td class="price">{{number_format($basket->price)}} تومان</td>
                             <td class="qty">
-                                <input class="form-control input-sm" type="text" value="{{$basket->count}}">
-                                <a href="#"><i class="fa fa-caret-up"></i></a>
-                                <a href="#"><i class="fa fa-caret-down"></i></a>
+                                <input class="form-control input-sm" id="count" type="text" value="{{$basket->count}}">
+                                <a id="addToCount" content="{{$basket->id}}" name="{{$basket->basket_id}}"><i class="fa fa-caret-up"></i></a>
+                                <a id="subFromCount" content="{{$basket->id}}" name="{{$basket->basket_id}}"><i class="fa fa-caret-down"></i></a>
                             </td>
                             <td class="price">
                                 {{number_format($basket->sum)}} تومان
@@ -80,9 +82,10 @@
                     </tr>
                     </tfoot>
                 </table>
+                @endif
                 <div class="cart_navigation">
                     <a class="prev-btn"  onclick="window.history.back();">ادامه خرید</a>
-                    <a class="next-btn" id="orderFixed">ثبت سفارش</a>
+                    <a class="next-btn" href="{{url('order/orderDetail')}}">جزئیات سفارش</a>
                 </div>
             </div>
         </div>

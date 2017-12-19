@@ -83,7 +83,7 @@
                         <span class="total"></span>
                     </div>
                     <div class="cart-buttons">
-                        <a href="{{url('order/payment')}}" class="btn-check-out">پرداخت</a>
+                        <a href="{{url('order/payment')}}" id="pay" class="btn-check-out">پرداخت</a>
                     </div>
                 </div>
             </div>

@@ -175,5 +175,33 @@ class UserController extends Controller
             }
         }
     }
+
+    //below function is related to add or sub count of basket
+    public function addOrSubCount(Request $request)
+    {
+        switch ($request->parameter)
+        {
+            case 'addToCount' :
+                $update = DB::table('basket_product')->where([['basket_id',$request->basketId],['product_id',$request->productId]])->increment('count');
+                if($update)
+                {
+                    return response()->json(['code' => 1]);
+                }else
+                    {
+                        return response()->json(['code' => 0]);
+                    }
+            break;
+            case 'subFromCount' :
+                $update = DB::table('basket_product')->where([['basket_id',$request->basketId],['product_id',$request->productId]])->decrement('count');
+                if($update)
+                {
+                    return response()->json(['code' => 1]);
+                }else
+                {
+                    return response()->json(['code' => 0]);
+                }
+            break;
+        }
+    }
 }
 

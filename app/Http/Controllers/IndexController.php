@@ -185,7 +185,8 @@ class IndexController extends Controller
     public function order($parameter)
     {
         $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
-        $pageTitle = 'لیست سفارشات';
+        $pageTitle  = 'لیست سفارشات';
+        $pageTitle1 = 'فاکتور';
         //$categories  = Category::find($id);
         if(isset($_COOKIE['addToBasket']))
         {
@@ -194,31 +195,53 @@ class IndexController extends Controller
             {
                 case 'payment':
                     $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
-                    $baskets   = Basket::find($basketId);
-                    $total     = 0;
-                    foreach ($baskets->products as $basket)
+                    if($basketId)
                     {
-                        $basket->count       = $basket->pivot->count;
-                        $basket->price       = $basket->pivot->product_price;
-                        $basket->sum         = $basket->pivot->count * $basket->pivot->product_price;
-                        $total              += $basket->sum;
-                        $basket->basket_id   = $basket->pivot->basket_id;
-                    }
-                    return view('main.order',compact('menu','pageTitle','baskets','total'));
+                        $baskets   = Basket::find($basketId);
+                        $total     = 0;
+                        foreach ($baskets->products as $basket)
+                        {
+                            $basket->count       = $basket->pivot->count;
+                            $basket->price       = $basket->pivot->product_price;
+                            $basket->sum         = $basket->pivot->count * $basket->pivot->product_price;
+                            $total              += $basket->sum;
+                            $basket->basket_id   = $basket->pivot->basket_id;
+                        }
+                        return view('main.order',compact('menu','pageTitle','baskets','total'));
+                    }else
+                        {
+                            return Redirect::back();
+                        }
+
                 break;
-                case 'factor':
-                    $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',1]])->value('id');
+
+                case 'orderDetail':
+                    $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
                     $baskets   = Basket::find($basketId);
-                    $total     = 0;
+                    $total          = 0;
+                    $totalDiscount  = 0 ;
+                    $totalPostPrice = 0;
+                    $finalPrice     = 0;
                     foreach ($baskets->products as $basket)
                     {
-                        $basket->count       = $basket->pivot->count;
-                        $basket->price       = $basket->pivot->product_price;
-                        $basket->sum         = $basket->pivot->count * $basket->pivot->product_price;
-                        $total              += $basket->sum;
-                        $basket->basket_id   = $basket->pivot->basket_id;
+                        $basket->count         = $basket->pivot->count;
+                        $basket->price         = $basket->pivot->product_price;
+                        $basket->sum           = $basket->pivot->count * $basket->pivot->product_price;
+                        $total                += $basket->sum;
+                        $basket->basket_id     = $basket->pivot->basket_id;
+                        $totalPostPrice       += $basket->post_price;
+                        if($basket->discount_volume != null )
+                        {
+                            $totalDiscount        += $basket->discount_volume;
+                            if($totalDiscount > 0)
+                            {
+                                $basket->sumOfDiscount = ($total * $totalDiscount ) / 100 ;
+                            }
+                        }
+
                     }
-                    return view('main.factor',compact('menu','pageTitle','baskets','total'));
+                    $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
+                    return view('main.orderDetail',compact('pageTitle1','baskets','total','totalPostPrice','finalPrice'));
                 break;
             }
 

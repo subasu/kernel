@@ -387,6 +387,7 @@
         basketCountNotify();
         basketTotalPrice();
         basketContent();
+        handlePayButton();
     })
 </script>
 
@@ -444,6 +445,16 @@
 
 
 <script>
+    //below function is related to make pay button shown or not shown
+    function handlePayButton(response)
+    {
+        if(response == 0)
+        {
+            $('#pay').css('display','none');
+        }
+    }
+
+
     //below function is related to get basket count
     function basketCountNotify()
     {
@@ -459,6 +470,7 @@
             {
                 console.log(response);
                 $('#basketCountNotify').text(response);
+                handlePayButton(response);
             },
             error       : function (error) {
                 console.log(error);
@@ -653,6 +665,59 @@
             }
        });
     });
+</script>
+
+
+<!-- below script is related to handle addToCount  -->
+<script>
+    $(document).on('click','#addToCount',function () {
+        var productId = $(this).attr('content');
+        var basketId  = $(this).attr('name');
+        var token     = $('#token').val();
+        $.ajax
+        ({
+            url      : "{{url('user/addOrSubCount')}}",
+            type     : "post",
+            data     :  {'_token' : token , 'productId' : productId , 'basketId' : basketId , 'parameter' : 'addToCount'},
+           // dataType : "json",
+            success  : function(response)
+            {
+                if(response.code == 1)
+                {
+                    $('#count').val($('#count').val()+1);
+                }
+            },error  : function(error)
+            {
+                console.log(error);
+            }
+        });
+    })
+</script>
+<!-- below script is related to handle subFromCount  -->
+<script>
+    $(document).on('click','#subFromCount',function () {
+        var productId = $(this).attr('content');
+        var basketId  = $(this).attr('name');
+        var token     = $('#token').val();
+        $.ajax
+        ({
+            url      : "{{url('user/addOrSubCount')}}",
+            type     : "post",
+            data     :  {'_token' : token , 'productId' : productId , 'basketId' : basketId , 'parameter' : 'subFromCount'},
+          //  dataType : "json",
+            success  : function(response)
+            {
+
+                if(response.code == 1)
+                {
+                    $('#count').val($('#count').val()-1);
+                }
+            },error  : function(error)
+            {
+                console.log(error);
+            }
+        });
+    })
 </script>
 </body>
 </html>

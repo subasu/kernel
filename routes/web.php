@@ -54,6 +54,7 @@ Route::group(['prefix'=>'admin'],function() {
 //users
     Route::get('usersManagement', 'UserController@usersManagement');//show view of all customer's details
 
+
 //orders
     Route::get('ordersManagement', 'OrderController@ordersManagement');//show view of all orders
 
@@ -85,6 +86,7 @@ Route::group(['prefix'=>'user'],function() {
     Route::get('getBasketContent','UserController@getBasketContent');
     Route::post('removeItemFromBasket','UserController@removeItemFromBasket');
     Route::post('orderFixed','UserController@orderFixed');
+    Route::post('addOrSubCount','UserController@addOrSubCount');
 
 });
 
