@@ -82,6 +82,13 @@ Route::group(['prefix'=>'admin'],function() {
     Route::post('addNewSize','SizeController@addNewSize');//this route is related to add new size in data base
     Route::get('editSize/{id}','SizeController@editSize'); //this route is related to return edit color view
     Route::post('editSizeTitle','SizeController@editSizeTitle');//this route is related to edit size title
+
+//payment type routes
+    Route::get('addPaymentType','PaymentTypeController@addPaymentType');//this route is related to return add payment type blade
+    Route::post('addNewPaymentTypes','PaymentTypeController@addNewPaymentTypes');
+    Route::get('paymentTypesManagement','PaymentTypeController@paymentTypesManagement');
+    Route::get('editPaymentType/{id}','PaymentTypeController@editPaymentType');
+    Route::post('editPaymentTypeTitle','PaymentTypeController@editPaymentTypeTitle');
 });
 
 //user routes

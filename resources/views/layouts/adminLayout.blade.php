@@ -160,6 +160,14 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li><a><i class="fa fa-handshake-o"></i>مدیریت وضعیتهای تحویل<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('admin/paymentTypesManagement')}}"> نمایش و مدیریت وضعیتهای تحویل</a>
+                                    </li>
+                                    <li><a href="{{url('admin/addPaymentType')}}">افزودن وضعیت تحویل</a>
+                                    </li>
+                                </ul>
+                            </li>
                             {{--<li><a><i class="fa fa-comments"></i> مدیریت نظرات<span class="fa fa-chevron-down"></span></a>--}}
                                 {{--<ul class="nav child_menu" style="display: none">--}}
                                     {{--<li><a href="{{url('admin/systemManager')}}"> نمایش و مدیریت دسته بندی های پروژه</a>--}}

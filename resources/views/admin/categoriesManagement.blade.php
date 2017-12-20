@@ -5,20 +5,24 @@
         <div class="modal-dialog">
 
             <!-- Modal content-->
+            @if(!empty($categories[0]))
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2 class="modal-title">نمایش تصویر دسته</h2>
                 </div>
                 <div class="modal-body">
+
                             <img class="image" id="editable"
                                  style=" height: 350px; width: 350px; margin-left: 80%;"
                                  src="{{url('public/dashboard/image')}}/{{$categories[0]->image_src}}">
+
                 </div>
                 <div class="modal-footer" >
                     <button type="button" class="btn btn-dark col-md-6 col-md-offset-3" data-dismiss="modal">بستن</button>
                 </div>
             </div>
+            @endif
 
         </div>
     </div>
@@ -64,32 +68,34 @@
 
                         <tbody>
                         <?php $i = 0 ?>
-                        @foreach($categories as $category)
-                            <tr class="unit">
-                                <td style="font-size: 120%">{{++$i}}</td>
-                                <td style="font-size: 120%">{{$category->title}}</td>
-                                <td style="font-size: 120%">{{$category->depth}}</td>
-                                @if($category->image_src == null)
-                                    <td style="font-size: 120%">تصویر ندارد</td>
-                                @endif
-                                @if($category->image_src != null)
-                                    <td><button class="btn btn-basic" id="showPicture">مشاهده تصویر</button></td>
-                                @endif
-                                @if($category->active == 1)
-                                    <td><button class="btn btn-success col-lg-8 col-md-offset-2" >فعال</button></td>
-                                @endif
-                                @if($category->active == 0)
-                                    <td><button class="btn btn-danger col-lg-8 col-md-offset-2" >غیر فعال</button></td>
-                                @endif
-                                <td><strong><a class="btn btn-warning col-md-8 col-md-offset-2"   href="{{url('admin/editCategory/'.$category->id)}}">ویرایش</a></strong> </td>
-                                @if($category->depth > 0)
-                                    <td><a  class="btn btn-dark col-md-10 col-md-offset-1" href="{{url('admin/showSubCategory/'.$category->id)}}">مشاهده زیر دسته</a></td>
-                                @endif
-                                @if($category->depth == 0)
-                                    <td><a  class="btn btn-default col-md-10 col-md-offset-1" >فاقد زیر دسته</a></td>
-                                @endif
-                            </tr>
-                        @endforeach
+                        @if(!empty($categories))
+                            @foreach($categories as $category)
+                                <tr class="unit">
+                                    <td style="font-size: 120%">{{++$i}}</td>
+                                    <td style="font-size: 120%">{{$category->title}}</td>
+                                    <td style="font-size: 120%">{{$category->depth}}</td>
+                                    @if($category->image_src == null)
+                                        <td style="font-size: 120%">تصویر ندارد</td>
+                                    @endif
+                                    @if($category->image_src != null)
+                                        <td><button class="btn btn-basic" id="showPicture">مشاهده تصویر</button></td>
+                                    @endif
+                                    @if($category->active == 1)
+                                        <td><button class="btn btn-success col-lg-8 col-md-offset-2" >فعال</button></td>
+                                    @endif
+                                    @if($category->active == 0)
+                                        <td><button class="btn btn-danger col-lg-8 col-md-offset-2" >غیر فعال</button></td>
+                                    @endif
+                                    <td><strong><a class="btn btn-warning col-md-8 col-md-offset-2"   href="{{url('admin/editCategory/'.$category->id)}}">ویرایش</a></strong> </td>
+                                    @if($category->depth > 0)
+                                        <td><a  class="btn btn-dark col-md-10 col-md-offset-1" href="{{url('admin/showSubCategory/'.$category->id)}}">مشاهده زیر دسته</a></td>
+                                    @endif
+                                    @if($category->depth == 0)
+                                        <td><a  class="btn btn-default col-md-10 col-md-offset-1" >فاقد زیر دسته</a></td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>

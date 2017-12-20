@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\Color;
+use App\Models\PaymentType;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\SubUnitCount;
@@ -18,7 +19,7 @@ class CommonController extends Controller
     //below function is to get main categories from database
     public function getMainCategories()
     {
-        $mainCategories = Category::where([['parent_id',0],['active',1]])->get();
+        $mainCategories = Category::where([['parent_id',null],['active',1]])->get();
         if(count($mainCategories) > 0 )
         {
             return response()->json($mainCategories);
@@ -189,6 +190,16 @@ class CommonController extends Controller
         }
     }
 
-    //below function is related to add new size in data base
-
+    //below function is related to existed payment types
+    public function getPaymentTypes()
+    {
+        $paymentTypes = PaymentType::all();
+        if(count($paymentTypes) > 0)
+        {
+            return response()->json($paymentTypes);
+        }else
+        {
+            return response()->json(0);
+        }
+    }
 }

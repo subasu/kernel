@@ -35,6 +35,9 @@ Route::group(['prefix' => '/v1'], function () {
 
     //size routes
     Route::get('getSizes','CommonController@getSizes');
+
+    //payment type routes
+    Route::get('getPaymentTypes','CommonController@getPaymentTypes');
 });
 
 //below routes are related to some special operation in index page such as add to basket or ...

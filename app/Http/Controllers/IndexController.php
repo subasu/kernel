@@ -185,8 +185,8 @@ class IndexController extends Controller
     public function order($parameter)
     {
         $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
-        $pageTitle  = 'لیست سفارشات';
-        $pageTitle1 = 'فاکتور';
+
+
         //$categories  = Category::find($id);
         if(isset($_COOKIE['addToBasket']))
         {
@@ -194,6 +194,7 @@ class IndexController extends Controller
             switch ($parameter)
             {
                 case 'payment':
+                    $pageTitle  = 'لیست سفارشات';
                     $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
                     if($basketId)
                     {
@@ -216,6 +217,7 @@ class IndexController extends Controller
                 break;
 
                 case 'orderDetail':
+                    $pageTitle = 'جزئیات سفارش';
                     $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
                     $baskets   = Basket::find($basketId);
                     $total          = 0;
@@ -241,7 +243,7 @@ class IndexController extends Controller
 
                     }
                     $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
-                    return view('main.orderDetail',compact('menu','pageTitle1','baskets','total','totalPostPrice','finalPrice'));
+                    return view('main.orderDetail',compact('menu','pageTitle','baskets','total','totalPostPrice','finalPrice'));
                 break;
             }
 

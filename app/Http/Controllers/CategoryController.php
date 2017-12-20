@@ -42,7 +42,7 @@ class CategoryController extends Controller
     public function categoriesManagement()
     {
         $pageTitle = 'مدیریت دسته ها';
-        $categories = Category::where('parent_id',0)->get();
+        $categories = Category::where('parent_id',null)->get();
         return view('admin.categoriesManagement',compact('categories','pageTitle'));
     }
 

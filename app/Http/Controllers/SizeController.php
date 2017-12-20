@@ -75,7 +75,7 @@ class SizeController extends Controller
             }
             else
             {
-                return response()->json(['message' => '  خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید ']);
+                return response()->json(['message' => 'با توجه به اینکه هیچ تغییری اعمال نکردید ، ویرایش انجام نشد']);
             }
         }
     }
