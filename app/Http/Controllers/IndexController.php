@@ -19,16 +19,22 @@ class IndexController extends Controller
         return view('layouts.adminLayout');
     }
 
-    public function home()
+    public function loadMenu()
     {
         $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
+        return $menu;
+
+    }
+    public function home()
+    {
+        $menu=$this->loadMenu();
         $pageTitle = 'صفحه ی اصلی';
         return view('main.index', compact('pageTitle', 'menu'));
     }
 
     public function login()
     {
-        $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
+        $menu=$this->loadMenu();
         $capital = City::where('parent_id', '=', '1')->get();
         $pageTitle = 'ورود/عضویت';
         return view('main.login', compact('pageTitle', 'menu', 'capital'));
@@ -37,7 +43,7 @@ class IndexController extends Controller
     //show product page in main site
     public function products()
     {
-        $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
+        $menu = $menu=$this->loadMenu();
         $pageTitle = 'لیست محصولات';
         return view('main.products', compact('pageTitle', 'menu'));
     }
@@ -174,7 +180,7 @@ class IndexController extends Controller
     //below function is to return show product blade
     public function showProducts($id)
     {
-        $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
+        $menu = $menu=$this->loadMenu();
         $pageTitle = 'لیست محصولات';
         $categories  = Category::find($id);
         //dd($categories);
@@ -184,7 +190,7 @@ class IndexController extends Controller
     //below function is related to return order view
     public function order($parameter)
     {
-        $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
+        $menu = $menu=$this->loadMenu();
 
 
         //$categories  = Category::find($id);

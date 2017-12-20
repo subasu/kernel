@@ -289,7 +289,20 @@
                                                name="free_price" type="text">
                                     </div>
                                     <label class="control-label col-md-2 col-sm-4 col-xs-3" for="free_price"> قیمت
-                                        عمده (تومان):
+                                        زاپاس (تومان):
+                                        <span class="required star" title="پر کردن این فیلد الزامی است"></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 margin-1">
+                                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                                        <strong class="pull-right text-danger">
+                                             وارد نکردن هزینه ی پست به منزله رایگان بودن هزینه ی پست این محصول تلقی خواهد شد.
+                                        </strong>
+                                        <input id="post_price" class="form-control col-md-12 col-xs-12 pr"
+                                               name="post_price" type="text">
+                                    </div>
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3 margin-2" for="post_price"> هزینه ی
+                                        پست (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
                                 </div>

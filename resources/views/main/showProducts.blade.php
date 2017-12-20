@@ -603,7 +603,13 @@
                                     <div class="product-container">
                                         <div align="center" >
                                             <a>
-                                                <img  alt=" عنوان محصول"  style="text-decoration: underline;"/>
+                                                {{--@foreach($product->productFlags as $flag)--}}
+                                                    {{--@if($flag->active == 1)--}}
+                                                        {{--<a class="price price" id="productFlag" data-toggle="" name="{{$flag->price}}" title="تومان">{{number_format($flag->price)}} </a>--}}
+                                                    {{--@endif--}}
+                                                {{--@endforeach--}}
+                                                <img src="{{$product->productImages[0]->image_src}}"  alt=" عنوان محصول"  style="text-decoration: underline;"/>
+                                                {{--<img src="public/main/assets/data/ld2.jpg"  alt=" عنوان محصول"  style="text-decoration: underline;"/>--}}
                                             </a>
                                             <div class="quick-view">
                                                 {{--<a title="افزودن به علاقه مندی ها" class="heart" ></a>--}}
@@ -613,8 +619,6 @@
                                         </div>
 
                                         <div class="right-block ">
-
-
                                             <h5 class="product-name">
                                                 @if(strlen($product->title) != mb_strlen($product->title, 'utf-8'))
                                                     <a  class="text-right">{{$product->title}}</a>
@@ -623,7 +627,6 @@
                                                     <a  class="text-left">{{$product->title}}</a>
                                                 @endif
                                             </h5>
-
                                             <div class="content_price text-right">
                                                 <div class="col-md-12">
                                                     <div class="col-md-5">
@@ -665,13 +668,13 @@
                                         <div class="right-block">
                                             <div class="add-to-cart" >
                                                 <button class="btn btn-success"
-                                                @foreach($product->productFlags as $flag)
-                                                    @if($flag->active == 1)
+                                                        @foreach($product->productFlags as $flag)
+                                                        @if($flag->active == 1)
                                                         content = "{{$flag->price}}"
-                                                    @endif
-                                                @endforeach
+                                                        @endif
+                                                        @endforeach
                                                         id="addToBasket"  name="{{$product->id}}">
-                                                        <span></span>افزودن به سبدخرید
+                                                    <span></span>افزودن به سبدخرید
                                                 </button>
                                             </div>
                                         </div>
