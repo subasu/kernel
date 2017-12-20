@@ -245,7 +245,7 @@ class UserController extends Controller
             }
         }else
             {
-              //  return redirect()->route('index');
+                return response()->json(['message' => 'این سفارش قبلا ثبت گردیده است ، لطفات تقاضای مجدد نفرمائید']);
             }
     }
 }

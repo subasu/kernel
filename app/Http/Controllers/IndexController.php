@@ -232,26 +232,33 @@ class IndexController extends Controller
                     $totalDiscount  = 0 ;
                     $totalPostPrice = 0;
                     $finalPrice     = 0;
-                    foreach ($baskets->products as $basket)
+                    if(!empty($baskets))
                     {
-                        $basket->count         = $basket->pivot->count;
-                        $basket->price         = $basket->pivot->product_price;
-                        $basket->sum           = $basket->pivot->count * $basket->pivot->product_price;
-                        $total                += $basket->sum;
-                        $basket->basket_id     = $basket->pivot->basket_id;
-                        $totalPostPrice       += $basket->post_price;
-                        if($basket->discount_volume != null )
+                        foreach ($baskets->products as $basket)
                         {
-                            $totalDiscount        += $basket->discount_volume;
-                            if($totalDiscount > 0)
+                            $basket->count         = $basket->pivot->count;
+                            $basket->price         = $basket->pivot->product_price;
+                            $basket->sum           = $basket->pivot->count * $basket->pivot->product_price;
+                            $total                += $basket->sum;
+                            $basket->basket_id     = $basket->pivot->basket_id;
+                            $totalPostPrice       += $basket->post_price;
+                            if($basket->discount_volume != null )
                             {
-                                $basket->sumOfDiscount = ($total * $totalDiscount ) / 100 ;
+                                $totalDiscount        += $basket->discount_volume;
+                                if($totalDiscount > 0)
+                                {
+                                    $basket->sumOfDiscount = ($total * $totalDiscount ) / 100 ;
+                                }
                             }
+
+                        }
+                        $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
+                        return view('main.orderDetail',compact('menu','pageTitle','baskets','total','totalPostPrice','finalPrice','paymentTypes'));
+                    }else
+                        {
+                            return view('errors.403');
                         }
 
-                    }
-                    $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
-                    return view('main.orderDetail',compact('menu','pageTitle','baskets','total','totalPostPrice','finalPrice','paymentTypes'));
                 break;
             }
 

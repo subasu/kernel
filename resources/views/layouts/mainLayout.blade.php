@@ -387,7 +387,7 @@
         basketCountNotify();
         basketTotalPrice();
         basketContent();
-        handlePayButton();
+       // handlePayButton();
     })
 </script>
 
@@ -446,13 +446,13 @@
 
 <script>
     //below function is related to make pay button shown or not shown
-    function handlePayButton(response)
-    {
-        if(response == 0)
-        {
-            $('#pay').css('display','none');
-        }
-    }
+//    function handlePayButton(response)
+//    {
+//        if(response == 0)
+//        {
+//            $('#pay').css('display','none');
+//        }
+//    }
 
 
     //below function is related to get basket count
