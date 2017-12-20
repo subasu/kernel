@@ -101,6 +101,7 @@ Route::group(['prefix'=>'user'],function() {
     Route::post('removeItemFromBasket','UserController@removeItemFromBasket');
     Route::post('orderFixed','UserController@orderFixed');
     Route::post('addOrSubCount','UserController@addOrSubCount');
+    Route::post('orderRegistration','UserController@orderRegistration');
 
 });
 

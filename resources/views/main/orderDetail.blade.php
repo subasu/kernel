@@ -18,15 +18,16 @@
             </h2>
             <!-- ../page heading-->
             <form id="orderDetailForm">
+                {{csrf_field()}}
             <div class="page-content checkout-page">
                 <h3 class="checkout-sep">اطلاعات مشتری</h3>
                 <div class="box-border" style="border-color: #0a0a0a;">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-6" >
                             <label>شماره تلفن</label>
-                            <input type="text" class="form-control input" style="border-color: #0a0a0a;">
+                            <input type="text" maxlength="11" name="userCellphone" id="userCellphone" class="form-control input" style="border-color: #0a0a0a;">
                             <label>آدرس تحویل محصول</label>
-                            <textarea class="form-control input overflow_hidden_x" style="border-color: #0a0a0a;"></textarea>
+                            <textarea name="userCoordination" id="userCoordination" class="form-control input overflow_hidden_x" style="border-color: #0a0a0a;"></textarea>
                         </div>
                     </div>
                 </div>
@@ -48,17 +49,17 @@
                 <h3 class="checkout-sep">نوع پرداخت</h3>
                 <div class="box-border" style="border-color: #0a0a0a;">
                     <ul>
-                        <li>
-                            <label for="radio_button_5"><input type="radio" checked name="radio_4" id="radio_button_5"> Check / Money order</label>
-                        </li>
+                        @if(!empty($paymentTypes))
+                            @foreach($paymentTypes as $paymentType)
+                                <li>
+                                    <label for="radio_button_5"><input type="radio" checked value="{{$paymentType->title}}" name="paymentType" id="radio">{{$paymentType->title}}</label>
+                                </li>
+                            @endforeach
+                        @endif
 
-                        <li>
-
-                            <label for="radio_button_6"><input type="radio" name="radio_4" id="radio_button_6"> Credit card (saved)</label>
-                        </li>
 
                     </ul>
-                    <button class="button">Continue</button>
+                    {{--<button class="button">Continue</button>--}}
                 </div>
                 <h3 class="checkout-sep">بررسی جزئیات سفارشات</h3>
                 <div class="box-border" style="border-color: #0a0a0a;">
@@ -91,29 +92,34 @@
                                     <td id="oldSum" content="{{$basket->sum}}" class="price">{{number_format($basket->sum)}}</td>
                                     <td class="col-md-2">@if($basket->discount_volume != null){{$basket->discount_volume}}@endif @if($basket->discount_volume == null) تخفیف ندارد @endif</td>
                                     <td class="col-md-2">{{number_format($basket->post_price)}}</td>
+                                    <input type="hidden" name="basketId" value="{{$basket->basket_id}}">
                                 </tr>
                             @endforeach
                             </tbody>
                             <tr>
                                 <td colspan="5"> جمع کل قیمت ها (تومان)</td>
-                                <td colspan="5" id="orderTotal" content="{{$total}}">{{number_format($total)}}</td>
+                                <td colspan="5" >{{number_format($total)}}</td>
+                                <input type="hidden" name="totalPrice" value="{{$total}}">
                             </tr>
                             <tr>
                                 <td colspan="5">مجموع تخفیف ها (تومان)</td>
-                                <td colspan="5" id="orderTotal" content="{{number_format($basket->sumOfDiscount)}}">{{number_format($basket->sumOfDiscount)}}</td>
+                                <td colspan="5" >{{number_format($basket->sumOfDiscount)}}</td>
+                                <input type="hidden" name="discountPrice" value="{{$basket->sumOfDiscount}}">
                             </tr>
                             <tr>
                                 <td colspan="5">مجموع هزینه های پست (تومان)</td>
-                                <td colspan="5" id="orderTotal" content="{{number_format($totalPostPrice)}}">{{number_format($totalPostPrice)}}</td>
+                                <td colspan="5" >{{number_format($totalPostPrice)}}</td>
+                                <input type="hidden" name="postPrice" value="{{$totalPostPrice}}">
                             </tr>
                             <tr>
                                 <td colspan="5">قیمت نهایی (تومان)</td>
-                                <td colspan="5" id="orderTotal" content="{{number_format($finalPrice)}}">{{number_format($finalPrice)}}</td>
+                                <td colspan="5" >{{number_format($finalPrice)}}</td>
+                                <input type="hidden" name="factorPrice" value="{{$finalPrice}}">
                             </tr>
 
                         </table>
                     @endif
-                    <button class="button pull-right">Place Order</button>
+                    <button type="button" class="col-md-6 button pull-right" style="margin-right: 25%;" id="orderRegistration">ثبت سفارش</button>
                 </div>
             </div>
             </form>

@@ -68,14 +68,16 @@ class ColorController extends Controller
             abort(403);
         }else
             {
-                $update = DB::table('colors')->where('id',$request->id)->update(['title' => $request->title]);
+                $update = Color::find($request->id);
+                $update->title = trim($request->title);
+                $update->save;
                 if($update)
                 {
                     return response()->json(['message' => 'ویرایش با موفقیت انجام شد' , 'code' => '1']);
                 }
                 else
                     {
-                        return response()->json(['message' => 'با توجه به اینکه هیچ تغییری اعمال نکردید ، ویرایش انجام نشد']);
+                        return response()->json(['message' => '  خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید ']);
                     }
             }
     }

@@ -6,6 +6,7 @@ use App\Models\Basket;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\City;
+use App\Models\PaymentType;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -218,6 +219,7 @@ class IndexController extends Controller
 
                 case 'orderDetail':
                     $pageTitle = 'جزئیات سفارش';
+                    $paymentTypes = PaymentType::where('active',1)->get();
                     $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
                     $baskets   = Basket::find($basketId);
                     $total          = 0;
@@ -243,7 +245,7 @@ class IndexController extends Controller
 
                     }
                     $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
-                    return view('main.orderDetail',compact('menu','pageTitle','baskets','total','totalPostPrice','finalPrice'));
+                    return view('main.orderDetail',compact('menu','pageTitle','baskets','total','totalPostPrice','finalPrice','paymentTypes'));
                 break;
             }
 

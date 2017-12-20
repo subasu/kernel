@@ -11,7 +11,7 @@ class PaymentTypeController extends Controller
     //below function is related to return add payment view
     public function addPaymentType()
     {
-        $pageTitle = 'افزودن وضعیت تحویل';
+        $pageTitle = 'افزودن وضعیت پرداخت';
         return view('admin.addPaymentType',compact('pageTitle'));
     }
 
@@ -42,7 +42,7 @@ class PaymentTypeController extends Controller
     //
     public function paymentTypesManagement()
     {
-        $pageTitle = 'مدیریت و نمایش وضعیتهای تحویل';
+        $pageTitle = 'مدیریت و نمایش وضعیتهای پرداخت';
         $data = PaymentType::all();
         return view('admin.paymentTypesManagement',compact('data','pageTitle'));
     }
@@ -50,7 +50,7 @@ class PaymentTypeController extends Controller
     //
     public function editPaymentType($id)
     {
-        $pageTitle = 'ویرایش وضعیت تحویل';
+        $pageTitle = 'ویرایش وضعیت پرداخت';
         $data = PaymentType::where('id',$id)->get();
         if(count($data) > 0)
         {
@@ -69,14 +69,16 @@ class PaymentTypeController extends Controller
             abort(403);
         }else
         {
-            $update = DB::table('payment_types')->where('id',$request->id)->update(['title' => $request->title]);
+            $update = PaymentType::find($request->id);
+            $update->title = trim($request->title);
+            $update->save;
             if($update)
             {
                 return response()->json(['message' => 'ویرایش با موفقیت انجام شد' , 'code' => '1']);
             }
             else
             {
-                return response()->json(['message' => 'با توجه به اینکه هیچ تغییری اعمال نکردید ، ویرایش انجام نشد']);
+                return response()->json(['message' => '  خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید ']);
             }
         }
     }

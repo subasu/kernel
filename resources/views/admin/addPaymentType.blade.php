@@ -20,7 +20,7 @@
         <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2> فرم ایجاد وضعیت تحویل</h2>
+                    <h2> فرم ایجاد وضعیت پردخت</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -61,7 +61,7 @@
 
 
                                     </div>
-                                    <label class="control-label col-md-3 col-sm-4 col-xs-3" for="title">وضعیتهای  موجود : <span
+                                    <label class="control-label col-md-3 col-sm-4 col-xs-3" for="title">وضعیتهای پرداخت  موجود : <span
                                                 class="star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
 
@@ -115,7 +115,7 @@
                                 item.empty();
                                 item.append
                                 (
-                                    "<option selected='true' disabled='disabled'>وضعیتهای موجود</option>"
+                                    "<option selected='true' disabled='disabled'>وضعیتهای پرداخت موجود</option>"
                                 )
                                 item.append
                                 (
@@ -153,7 +153,7 @@
                     "<div class='col-md-9 col-sm-9 col-xs-9'>"+
                     "<input id='unit' class='form-control col-md-12 col-xs-12 required' name='paymentTypes[]' placeholder='' required='required' type='text'>"+
                     "</div>"+
-                    "<label class='control-label col-md-3 col-sm-4 col-xs-3' for='name'>عنوان وضعیت تحویل  :"+
+                    "<label class='control-label col-md-3 col-sm-4 col-xs-3' for='name'>عنوان وضعیت پرداخت  :"+
                     "<span class='star' title='پر کردن این فیلد الزامی است'>*</span>"+
                     "</label>"+
                     "</div>"
@@ -254,7 +254,7 @@
                                         //
                                         item.append
                                         (
-                                            "<option selected='true' disabled='disabled'>وضعیتهای موجود</option>"
+                                            "<option selected='true' disabled='disabled'>وضعیتهای پرداخت موجود</option>"
                                         )
 
                                         item.append

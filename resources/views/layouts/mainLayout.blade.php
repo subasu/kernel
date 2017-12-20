@@ -753,5 +753,95 @@
     })
 
 </script>
+
+<!-- below script is related to add order in data base -->
+<script>
+    $(document).on('click','#orderRegistration',function () {
+        var formData = $('#orderDetailForm').serialize();
+        var userCellphone    = $('#userCellphone').val();
+        var userCoordination = $('#userCoordination').val();
+        $.ajax
+        ({
+            url         : "{{url('user/orderRegistration')}}",
+            type        : "post",
+            data        : formData,
+            dataType    : 'JSON',
+            beforeSend  : function()
+            {
+                if(userCellphone == '' || userCellphone == null)
+                {
+                    $('#userCellphone').focus();
+                    $('#userCellphone').css('border-color','red');
+                    return false;
+                }
+                if(userCoordination == '' || userCoordination == null)
+                {
+                    $('#userCoordination').focus();
+                    $('#userCoordination').css('border-color','red');
+                    return false;
+                }
+
+            },
+            success : function(response)
+            {
+                console.log(response);
+                if(response.code == 1)
+                {
+                    swal
+                    ({
+                        title: "",
+                        text: response.message,
+                        type: "success",
+                        confirmButtonText: "بستن"
+                    });
+                    setTimeout(function(){
+                        window.location.href = '../index';
+                    },3000);
+                }else
+                    {
+                        swal
+                        ({
+                            title: "",
+                            text: response.message,
+                            type: "warning",
+                            confirmButtonText: "بستن"
+                        });
+                    }
+            },
+            error   : function(error)
+            {
+                if(error.status === 500)
+                {
+                    console.log(error);
+                    swal
+                    ({
+                        title: "",
+                        text: "خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید",
+                        type: "warning",
+                        confirmButtonText: "بستن"
+                    });
+                }
+                if (error.status === 422) {
+
+                    var errors = error.responseJSON; //this will get the errors response data.
+
+                    var errorsHtml = '';
+
+                    $.each(errors, function (key, value) {
+                        errorsHtml += value[0] + '\n'; //showing only the first error.
+                    });
+                    //errorsHtml += errorsHtml;
+
+                    swal({
+                        title: "",
+                        text: errorsHtml,
+                        type: "warning",
+                        confirmButtonText: "بستن"
+                    });
+                }
+            }
+        })
+    })
+</script>
 </body>
 </html>

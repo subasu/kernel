@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderRegistrationValidation;
+use App\Http\SelfClasses\CheckUserCellphone;
 use App\Models\Basket;
+use App\Models\Order;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -202,6 +206,47 @@ class UserController extends Controller
                 }
             break;
         }
+    }
+
+
+    //below function is related to add order registration
+    public function orderRegistration(OrderRegistrationValidation $request)
+    {
+        if($basket = Basket::where([['id',$request->basketId],['payment',0]])->count() > 0 ) {
+            $now = Carbon::now(new\DateTimeZone('Asia/Tehran'));
+            $checkUserCellphone = new CheckUserCellphone();
+            $result = $checkUserCellphone->checkUserCellphone($request);
+            if (is_numeric($result)) {
+                $order = new Order();
+                $order->user_id = $result;
+                $order->user_coordination = trim($request->userCoordination);
+                $order->date = $now->toDateString();
+                $order->time = $now->toTimeString();
+                $order->total_price = $request->totalPrice;
+                $order->discount_price = $request->discountPrice;
+                $order->factor_price = $request->factorPrice;
+                $order->user_cellphone = $request->userCellphone;
+                $order->basket_id = $request->basketId;
+                $order->payment_type = $request->paymentType;
+                $order->save();
+                if ($order) {
+                    $update = Basket::find($request->basketId);
+                    $update->payment = 1;
+                    $update->save();
+                    if ($update) {
+                        return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید', 'code' => 1]);
+                    } else {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+
+                }
+            } else {
+                return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+            }
+        }else
+            {
+              //  return redirect()->route('index');
+            }
     }
 }
 

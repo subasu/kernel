@@ -6,7 +6,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2> مدیریت و نمایش وضعیت های تحویل</h2>
+                    <h2> مدیریت و نمایش وضعیت های پرداخت</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link" data-toggle="tooltip" title="جمع کردن"><i
                                         class="fa fa-chevron-up"></i></a>
@@ -19,7 +19,7 @@
 
 
                 <a href="{{url('admin/addPaymentType')}}" id="" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style="font-weight: bold;">
-                    افزودن وضعیت تحویل جدید                </a>
+                    افزودن وضعیت پرداخت جدید                </a>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
                     <table style="direction:rtl;text-align: center" id="example"
@@ -28,7 +28,7 @@
                         <thead>
                         <tr>
                             <th style="text-align: center">ردیف</th>
-                            <th style="text-align: center"> عنوان وضعیت تحویل</th>
+                            <th style="text-align: center"> عنوان وضعیت پرداخت</th>
                             <th style="text-align: center;border-right: 1px solid #d6d6c2">ویرایش</th>
                         </tr>
                         </thead>
