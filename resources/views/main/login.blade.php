@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="box-authentication register-form">
-                            <h3 class="col-md-6" >ثبت نام</h3><br>
+                            <h3 class="col-md-6">ثبت نام</h3><br>
                             {{--<p>لطفا تلفن خود را برای ثبت نام وارد نمائید</p>--}}
                             {{--<label for="cellphone">نام</label>--}}
                             {{--<input id="cellphone" type="text" class="form-control">--}}
@@ -42,11 +42,6 @@
                                     <div class="col-md-9">
                                         <input id="name" type="text" class="form-control" name="name"
                                                value="{{ old('name') }}" required autofocus>
-                                        @if ($errors->has('name'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <label for="name" class="col-md-3 control-label">نام</label>
                                 </div>
@@ -55,39 +50,22 @@
                                     <div class="col-md-9">
                                         <input id="family" type="text" class="form-control" name="family"
                                                value="{{ old('family') }}" required autofocus>
-
-                                        @if ($errors->has('family'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('family') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <label for="family" class="col-md-3 control-label"> نام خانوادگی</label>
                                 </div>
-
-                                <div class="form-group col-md-12{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <div class="form-group col-md-12">
                                     <div class="col-md-9">
-                                        <input id="email" class="form-control" name="email" value="{{ old('email') }}"
-                                               required>
-
-                                        @if ($errors->has('email'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                        @endif
+                                        <input type="text" pattern="^\d{11}$" required=" " tabindex="7"
+                                               value="{{ old('cellphone') }}" maxlength="11" name="cellphone"
+                                               id="cellphone"
+                                               class="form-control">
                                     </div>
-                                    <label for="email" class="col-md-3 control-label">نام کاربری یا ایمیل</label>
+                                    <label for="grade" class="col-md-3 control-label">تلفن همراه</label>
                                 </div>
-
                                 <div class="form-group col-md-12{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <div class="col-md-9">
-                                        <input id="password" type="password" class="form-control" name="password"
+                                        <input type="password" class="form-control" name="password"
                                                required maxlength="20">
-                                        @if ($errors->has('password'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <label for="password" class="col-md-3 control-label">پسورد</label>
                                 </div>
@@ -128,83 +106,54 @@
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
                                         <input type="text" pattern="^\d{11}$" required="" tabindex="6" autofocus
-                                               value="{{ old('telephone') }}" maxlength="11" name="telephone" id="telephone"
+                                               value="{{ old('telephone') }}" maxlength="11" name="telephone"
+                                               id="telephone"
                                                class="form-control">
-                                        @if ($errors->has('telephone'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('telephone') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <label for="grade" class="col-md-3 control-label">تلفن ثابت</label>
                                 </div>
-
-
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-12{{ $errors->has('email') ? ' has-error' : '' }}">
                                     <div class="col-md-9">
-                                        <input type="text" pattern="^\d{11}$" required=" " tabindex="7"
-                                               value="{{ old('cellphone') }}" maxlength="11" name="cellphone" id="cellphone"
-                                               class="form-control">
-                                        @if ($errors->has('cellphone'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('cellphone') }}</strong>
-                                    </span>
-                                        @endif
+                                        <input id="email" class="form-control" name="email" value="{{ old('email') }}"
+                                               required>
                                     </div>
-                                    <label for="grade" class="col-md-3 control-label">تلفن همراه</label>
+                                    <label for="email" class="col-md-3 control-label">ایمیل</label>
                                 </div>
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
                                         <input type="text" pattern="^\d{10}$" required=" " tabindex="8"
                                                value="{{ old('zipCode') }}" maxlength="11" name="zipCode" id="zipCode"
                                                class="form-control">
-                                        @if ($errors->has('zipCode'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('zipCode') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <label for="grade" class="col-md-3 control-label">کد پستی</label>
                                 </div>
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
                                         <input type="text" required="" tabindex="9"
-                                               value="{{ old('birth_date') }}" maxlength="11" name="birth_date" id="birth_date"
+                                               value="{{ old('birth_date') }}" maxlength="11" name="birth_date"
+                                               id="birth_date"
                                                class="form-control">
-                                        @if ($errors->has('birth_date'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('birth_date') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <label for="grade" class="col-md-3 control-label">تاریخ تولد</label>
                                 </div>
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
                                         <textarea type="text" required=" " tabindex="10"
-                                                  value="{{ old('address') }}" maxlength="2000" name="address" id="address"
+                                                  value="{{ old('address') }}" maxlength="2000" name="address"
+                                                  id="address"
                                                   class="form-control address col-md-12"></textarea>
-                                        @if ($errors->has('address'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('address') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <label for="grade" class="col-md-3 control-label">آدرس</label>
                                 </div>
                                 <div class="form-group col-md-12{{ $errors->has('captcha') ? ' has-error' : '' }}">
                                     <div class="col-md-9">
                                         {{--<img src="{{url('reload.jpg')}}" class="captcha-reload "--}}
-                                             {{-->--}}
-                                        <i class="fa fa-refresh fa-lg captcha-reload col-md-1" height="25" width="25"></i>
+                                        {{-->--}}
+                                        <i class="fa fa-refresh fa-lg captcha-reload col-md-1" height="25"
+                                           width="25"></i>
                                         <img class="captcha col-md-4" alt="captcha.png" id="captcha-image"/>
-                                        @if ($errors->has('captcha'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('captcha') }}</strong>
-                                    </span>
-                                        @endif
-                                        <input id="captcha" class="form-control col-md-4" type="text"
-                                               name="captcha" value="" required tabindex="11">
+                                        <input id="captcha" class="form-control col-md-4"
+                                               name="captcha" required tabindex="11">
                                     </div>
                                     <label for="captcha" class="col-md-3 control-label"> کد امنیتی</label>
                                 </div>
@@ -230,13 +179,8 @@
                                 <div class="form-group col-md-12">
                                     <div class="col-md-9">
                                         <input type="text" pattern="^\d{11}$" required=" " tabindex="7"
-                                               value="{{ old('cellphone') }}" maxlength="11" name="cellphone" id="cellphone"
+                                               value="{{ old('cellphone') }}" maxlength="11" name="cellphone"
                                                class="form-control">
-                                        @if ($errors->has('cellphone'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('cellphone') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <label for="grade" class="col-md-3 control-label">تلفن همراه</label>
                                 </div>
@@ -244,11 +188,6 @@
                                     <div class="col-md-9">
                                         <input id="password" type="password" class="form-control" name="password"
                                                required maxlength="20">
-                                        @if ($errors->has('password'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                        @endif
                                     </div>
                                     <label for="password" class="col-md-3 control-label">پسورد</label>
                                 </div>
@@ -256,13 +195,9 @@
                                     <div class="col-md-9">
                                         {{--<img src="{{url('reload.jpg')}}" class="captcha-reload "--}}
                                         {{-->--}}
-                                        <i class="fa fa-refresh fa-lg captcha-reload col-md-1" height="25" width="25"></i>
+                                        <i class="fa fa-refresh fa-lg captcha-reload col-md-1" height="25"
+                                           width="25"></i>
                                         <img class="captcha col-md-4" alt="captcha.png" id="captcha-image"/>
-                                        @if ($errors->has('captcha'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('captcha') }}</strong>
-                                    </span>
-                                        @endif
                                         <input id="captcha" class="form-control col-md-4" type="text"
                                                name="captcha" value="" required tabindex="11">
                                     </div>
@@ -354,18 +289,16 @@
                     processData: false,
                     success: function (response) {
                         var y = '';
-                        if(response.data=='1')
-                        {
-                            y='شما با مؤفقیت ثبت نام نمودید، از بخش ورود برای استفاده از پنل خود اقدام نمائید.';
+                        if (response.data == '1') {
+                            y = 'شما با مؤفقیت ثبت نام نمودید، از بخش ورود برای استفاده از پنل خود اقدام نمائید.';
                         }
-                        else if(response.data=='0')
-                        {
-                            y='متأسفانه شما ثبت نام نشدید،با بخش پشتیبانی تماس حاصل فرمائید.';
+                        else if (response.data == '0') {
+                            y = 'متأسفانه شما ثبت نام نشدید،با بخش پشتیبانی تماس حاصل فرمائید.';
                         }
-                        else{
-                        $.each(response, function (key, val) {
-                            y += val[0] + '\n'
-                        });
+                        else {
+                            $.each(response, function (key, val) {
+                                y += val[0] + '\n'
+                            });
                         }
                         swal({
                             title: '',
@@ -451,11 +384,21 @@
                             $.each(x, function (key, val) {
                                 y += val[0] + '\n';//showing only the first error.
                             });
-                            swal({
-                                title: '',
-                                text: y,
-                                type: "warning",
-                            })
+                            console.log(x)
+                            if (x.cellphone == "اطلاعات ورودی با اطلاعات ذخیره شده مطابقت ندارد") {
+                                swal({
+                                    title: '',
+                                    text: x.cellphone,
+                                    type: "warning",
+                                });
+                            }
+                            else {
+                                swal({
+                                    title: '',
+                                    text: y,
+                                    type: "warning",
+                                });
+                            }
                         }
                         else if (response.status === 421) {
                             swal({
@@ -473,7 +416,7 @@
 //                                type: "warning",
 //                                confirmButtonText: "بستن"
 //                            });
-                            location.href='{{url('admin/addProduct')}}'
+                            location.href = '{{url('admin/addProduct')}}'
                         }
                     }//error
 
