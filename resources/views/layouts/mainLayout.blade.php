@@ -296,18 +296,7 @@
 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
 <!-- Script-->
 <script type="text/javascript" src="{{url('public/main/assets/lib/jquery/jquery-1.11.2.min.js')}}"></script>
-<script type="text/javascript" src="{{url('public/main/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{url('public/main/assets/lib/select2/js/select2.min.js')}}"></script>
-<script type="text/javascript" src="{{url('public/main/assets/lib/jquery.bxslider/jquery.bxslider.min.js')}}"></script>
-<script type="text/javascript" src="{{url('public/main/assets/lib/owl.carousel/owl.carousel.min.js')}}"></script>
-<script type="text/javascript" src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>
-<script type="text/javascript" src="{{url('public/main/assets/js/jquery.actual.min.js')}}"></script>
-<script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>
-<script src="{{url('public/js/sweetalert.min.js')}}"></script>
-
-
-
-
+<!-- below script get and load sub menu -->
 <script>
     $(document).ready(function () {
         $(".mainMenu").each(function () {
@@ -346,9 +335,9 @@
                                         '<li class="link_container group_header">' +
                                         '<a href="#">سایر محصولات</a>' +
                                         '</li>';
-                                        temp += '<li class="link_container" id="' + value.id + '">' +
-                                            '<a href="{{url('showProducts')}}'+"/"+value.id+'">مشاهده ی سایر محصولات</a>' +
-                                            '</li>';
+                                    temp += '<li class="link_container" id="' + value.id + '">' +
+                                        '<a href="{{url('showProducts')}}'+"/"+value.id+'">مشاهده ی سایر محصولات</a>' +
+                                        '</li>';
                                     temp += '</ul>' + '</li>'
                                     item.append(temp)
                                 }
@@ -381,6 +370,15 @@
         })
     })
 </script>
+<script type="text/javascript" src="{{url('public/main/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{url('public/main/assets/lib/select2/js/select2.min.js')}}"></script>
+<script type="text/javascript" src="{{url('public/main/assets/lib/jquery.bxslider/jquery.bxslider.min.js')}}"></script>
+<script type="text/javascript" src="{{url('public/main/assets/lib/owl.carousel/owl.carousel.min.js')}}"></script>
+<script type="text/javascript" src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>
+<script type="text/javascript" src="{{url('public/main/assets/js/jquery.actual.min.js')}}"></script>
+<script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>
+<script src="{{url('public/js/sweetalert.min.js')}}"></script>
+
 
 <script>
     $(document).ready(function () {
