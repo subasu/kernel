@@ -48,6 +48,8 @@ Route::group(['prefix' => '/v1/user'],function (){
     Route::post('getBasketTotalPrice','webService\UserController@getBasketTotalPrice');
     Route::post('getBasketContent','webService\UserController@getBasketContent');
     Route::get('showProducts/{id}','webService\UserController@showProducts');
+    Route::post('removeItemFromBasket','webService\UserController@removeItemFromBasket');
+    Route::post('addOrSubCount','webService\UserController@addOrSubCount');
 
 });
 

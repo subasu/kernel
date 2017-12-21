@@ -157,6 +157,49 @@ class UserController extends Controller
             $product->product_id  = $product->pivot->product_id;
 
         }
-        return response()->json($baskets);
+        return response()->json(['basketContent' => $baskets]);
+    }
+
+    //below function is related to remove item from basket
+    public function removeItemFromBasket(Request $request)
+    {
+        $delete = DB::table('basket_product')->where([['basket_id',$request->basketId],['product_id',$request->productId]])->delete();
+        $count  = DB::table('basket_product')->where('basket_id',$request->basketId)->count();
+        if($delete)
+        {
+            return response()->json(['message' => 'محصول مورد نظر از سبد خرید حذف گردید' , 'code' => 1 , 'count' => $count]);
+        }else
+        {
+            return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+        }
+    }
+
+
+    //below function is related to add or sub count of basket
+    public function addOrSubCount(Request $request)
+    {
+        switch ($request->parameter)
+        {
+            case 'addToCount' :
+                $update = DB::table('basket_product')->where([['basket_id',$request->basketId],['product_id',$request->productId]])->increment('count');
+                if($update)
+                {
+                    return response()->json(['code' => 1]);
+                }else
+                {
+                    return response()->json(['code' => 0]);
+                }
+                break;
+            case 'subFromCount' :
+                $update = DB::table('basket_product')->where([['basket_id',$request->basketId],['product_id',$request->productId]])->decrement('count');
+                if($update)
+                {
+                    return response()->json(['code' => 1]);
+                }else
+                {
+                    return response()->json(['code' => 0]);
+                }
+                break;
+        }
     }
 }
