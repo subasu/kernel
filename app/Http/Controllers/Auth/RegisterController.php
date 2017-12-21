@@ -75,7 +75,6 @@ class RegisterController extends Controller
                     'name.max' => 'حداکثر 255 کاراکتر مجاز است',
                     'family.required' => ' فیلد نام خانوادگی الزامی است ',
                     'family.max' => 'حداکثر 255 کاراکتر مجاز است',
-                    'email.required' => ' فیلد ایمیل الزامی است',
                     'email.email' => ' فرمت ایمیل نادرست است ',
                     'password.required' => ' فیلد رمز عبور الزامی است ',
                     'password.min' => ' رمز عبور حداقل باید 6 کاراکتر باشد ',
