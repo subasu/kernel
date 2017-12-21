@@ -596,7 +596,6 @@
                             {{--</li>--}}
                         </ul>
                         <!-- PRODUCT LIST -->
-
                         <ul class="row product-list style2 grid">
                             @foreach($categories->products as $product)
                                 <li class="col-sx-12 col-sm-4">
@@ -608,18 +607,18 @@
                                                         {{--<a class="price price" id="productFlag" data-toggle="" name="{{$flag->price}}" title="تومان">{{number_format($flag->price)}} </a>--}}
                                                     {{--@endif--}}
                                                 {{--@endforeach--}}
-                                                <img src="{{$product->productImages[0]->image_src}}"  alt=" عنوان محصول"  style="text-decoration: underline;"/>
+                                                <img src="{{url('public/dashboard/productFiles/picture/'.$product->productImages[0]->image_src)}}"  alt="عنوان محصول" width="200" height="250"  style="text-decoration: underline;"/>
                                                 {{--<img src="public/main/assets/data/ld2.jpg"  alt=" عنوان محصول"  style="text-decoration: underline;"/>--}}
                                             </a>
                                             <div class="quick-view">
-                                                {{--<a title="افزودن به علاقه مندی ها" class="heart" ></a>--}}
-                                                {{--<a title="مقایسه" class="compare" ></a>--}}
-                                                {{--<a title="نمایش چزئیات" class="search" ></a>--}}
+                                                <a title="افزودن به علاقه مندی ها" class="heart" ></a>
+                                                <a title="مقایسه" class="compare" ></a>
+                                                <a title="نمایش جزئیات" class="search" ></a>
                                             </div>
                                         </div>
 
-                                        <div class="right-block ">
-                                            <h5 class="product-name">
+                                        <div class="right-block">
+                                            <h5 class="product-name text-right col-md-12">
                                                 @if(strlen($product->title) != mb_strlen($product->title, 'utf-8'))
                                                     <a  class="text-right">{{$product->title}}</a>
                                                 @endif
@@ -627,19 +626,18 @@
                                                     <a  class="text-left">{{$product->title}}</a>
                                                 @endif
                                             </h5>
-                                            <div class="content_price text-right">
-                                                <div class="col-md-12">
-                                                    <div class="col-md-5">
-                                                        @foreach($product->productFlags as $flag)
+                                            <div class="content_price text-right col-md-12">
+                                                <div class="">
+                                                    <div class="">
+                                                    @foreach($product->productFlags as $flag)
                                                             @if($flag->active == 1)
                                                                 <a class="price price" id="productFlag" data-toggle="" name="{{$flag->price}}" title="تومان">{{number_format($flag->price)}} </a>
-
                                                             @endif
                                                         @endforeach
                                                     </div>
-                                                    <div class="col-md-7">
-                                                        <span class="price product-price"> : قیمت اصلی </span>
-                                                    </div>
+                                                    {{--<div class="text-right">--}}
+                                                        {{--<span class="price product-price pull-right"> : قیمت اصلی </span>--}}
+                                                    {{--</div>--}}
                                                 </div>
 
                                             </div>
@@ -683,9 +681,320 @@
                                 </li>
                             @endforeach
                         </ul>
-
                         <!-- ./PRODUCT LIST -->
                     </div>
+                    {{--<div class="tab-container">--}}
+                        {{--<div id="tab-1" class="tab-panel active">--}}
+                            {{--<ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true"--}}
+                                {{--data-margin="30" data-autoplayTimeout="1000" data-autoplayHoverPause="true"--}}
+                                {{--data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":3}}'>--}}
+                                {{--@foreach($categories->products as $product)--}}
+                                {{--<li>--}}
+                                    {{--<div class="left-block">--}}
+                                        {{--<a href="#">--}}
+                                            {{--<img class="img-responsive" alt="product"--}}
+                                                 {{--src="{{url('public/main/assets/data/bs2.jpg')}}"/>--}}
+                                        {{--</a>--}}
+                                        {{--<div class="quick-view">--}}
+                                            {{--<a title="افزودن به علاقه مندی ها" class="heart" href="#"></a>--}}
+                                            {{--<a title="مقایسه" class="compare" href="#"></a>--}}
+                                            {{--<a title="نمایش چزئیات" class="search" href="#"></a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="add-to-cart">--}}
+                                            {{--<a title="Add to Cart" href="#">افزودن به سبد خرید</a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="group-price">--}}
+                                            {{--<span class="product-new">جدید</span>--}}
+                                            {{--<span class="product-sale">حراج</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="right-block text-right">--}}
+                                        {{--<h5 class="product-name"><a href="#">عنوان محصول</a></h5>--}}
+                                        {{--<div class="content_price" dir="">--}}
+                                            {{--<span class="price product-price">38,95</span>--}}
+                                            {{--<span class="price old-price">52,00</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="product-star text-left">--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star-half-o"></i>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<div class="left-block">--}}
+                                        {{--<a href="#"><img class="img-responsive" alt="product"--}}
+                                                         {{--src="{{url('public/main/assets/data/bs2.jpg')}}"/></a>--}}
+                                        {{--<div class="quick-view">--}}
+                                            {{--<a title="Add to my wishlist" class="heart" href="#"></a>--}}
+                                            {{--<a title="Add to compare" class="compare" href="#"></a>--}}
+                                            {{--<a title="Quick view" class="search" href="#"></a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="add-to-cart">--}}
+                                            {{--<a title="Add to Cart" href="#">Add to Cart</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="right-block">--}}
+                                        {{--<h5 class="product-name"><a href="#">Perfect Dress</a></h5>--}}
+                                        {{--<div class="content_price">--}}
+                                            {{--<span class="price product-price">$38,95</span>--}}
+                                            {{--<span class="price old-price">$52,00</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="product-star">--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star-half-o"></i>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+
+                                {{--@endforeach--}}
+                            {{--</ul>--}}
+                        {{--</div>--}}
+                        {{--<div id="tab-2" class="tab-panel">--}}
+                            {{--<ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true"--}}
+                                {{--data-margin="30" data-autoplayTimeout="1000" data-autoplayHoverPause="true"--}}
+                                {{--data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":3}}'>--}}
+                                {{--<li>--}}
+                                    {{--<div class="left-block">--}}
+                                        {{--<a href="#">--}}
+                                            {{--<img class="img-responsive" alt="product"--}}
+                                                 {{--src="public/main/assets/data/p48.jpg"/></a>--}}
+                                        {{--<div class="quick-view">--}}
+                                            {{--<a title="Add to my wishlist" class="heart" href="#"></a>--}}
+                                            {{--<a title="Add to compare" class="compare" href="#"></a>--}}
+                                            {{--<a title="Quick view" class="search" href="#"></a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="add-to-cart">--}}
+                                            {{--<a title="Add to Cart" href="#">Add to Cart</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="right-block">--}}
+                                        {{--<h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>--}}
+                                        {{--<div class="content_price">--}}
+                                            {{--<span class="price product-price">$38,95</span>--}}
+                                            {{--<span class="price old-price">$52,00</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="product-star">--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star-half-o"></i>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<div class="left-block">--}}
+                                        {{--<a href="#">--}}
+                                            {{--<img class="img-responsive" alt="product"--}}
+                                                 {{--src="public/main/assets/data/p49.jpg"/></a>--}}
+                                        {{--<div class="quick-view">--}}
+                                            {{--<a title="Add to my wishlist" class="heart" href="#"></a>--}}
+                                            {{--<a title="Add to compare" class="compare" href="#"></a>--}}
+                                            {{--<a title="Quick view" class="search" href="#"></a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="add-to-cart">--}}
+                                            {{--<a title="Add to Cart" href="#">Add to Cart</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="right-block">--}}
+                                        {{--<h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>--}}
+                                        {{--<div class="content_price">--}}
+                                            {{--<span class="price product-price">$38,95</span>--}}
+                                            {{--<span class="price old-price">$52,00</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="product-star">--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star-half-o"></i>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<div class="left-block">--}}
+                                        {{--<a href="#"><img class="img-responsive" alt="product"--}}
+                                                         {{--src="public/main/assets/data/p50.jpg"/></a>--}}
+                                        {{--<div class="quick-view">--}}
+                                            {{--<a title="Add to my wishlist" class="heart" href="#"></a>--}}
+                                            {{--<a title="Add to compare" class="compare" href="#"></a>--}}
+                                            {{--<a title="Quick view" class="search" href="#"></a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="add-to-cart">--}}
+                                            {{--<a title="Add to Cart" href="#">Add to Cart</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="right-block">--}}
+                                        {{--<h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>--}}
+                                        {{--<div class="content_price">--}}
+                                            {{--<span class="price product-price">$38,95</span>--}}
+                                            {{--<span class="price old-price">$52,00</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="product-star">--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star-half-o"></i>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<div class="left-block">--}}
+                                        {{--<a href="#"><img class="img-responsive" alt="product"--}}
+                                                         {{--src="public/main/assets/data/p51.jpg"/></a>--}}
+                                        {{--<div class="quick-view">--}}
+                                            {{--<a title="Add to my wishlist" class="heart" href="#"></a>--}}
+                                            {{--<a title="Add to compare" class="compare" href="#"></a>--}}
+                                            {{--<a title="Quick view" class="search" href="#"></a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="add-to-cart">--}}
+                                            {{--<a title="Add to Cart" href="#">Add to Cart</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="right-block">--}}
+                                        {{--<h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>--}}
+                                        {{--<div class="content_price">--}}
+                                            {{--<span class="price product-price">$38,95</span>--}}
+                                            {{--<span class="price old-price">$52,00</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="product-star">--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star-half-o"></i>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                            {{--</ul>--}}
+                        {{--</div>--}}
+                        {{--<div id="tab-3" class="tab-panel">--}}
+                            {{--<ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true"--}}
+                                {{--data-margin="30" data-autoplayTimeout="1000" data-autoplayHoverPause="true"--}}
+                                {{--data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":3}}'>--}}
+                                {{--<li>--}}
+                                    {{--<div class="left-block">--}}
+                                        {{--<a href="#"><img class="img-responsive" alt="product"--}}
+                                                         {{--src="public/main/assets/data/p60.jpg"/></a>--}}
+                                        {{--<div class="quick-view">--}}
+                                            {{--<a title="Add to my wishlist" class="heart" href="#"></a>--}}
+                                            {{--<a title="Add to compare" class="compare" href="#"></a>--}}
+                                            {{--<a title="Quick view" class="search" href="#"></a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="add-to-cart">--}}
+                                            {{--<a title="Add to Cart" href="#">Add to Cart</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="right-block">--}}
+                                        {{--<h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>--}}
+                                        {{--<div class="content_price">--}}
+                                            {{--<span class="price product-price">$38,95</span>--}}
+                                            {{--<span class="price old-price">$52,00</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="product-star">--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star-half-o"></i>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<div class="left-block">--}}
+                                        {{--<a href="#"><img class="img-responsive" alt="product"--}}
+                                                         {{--src="public/main/assets/data/p61.jpg"/></a>--}}
+                                        {{--<div class="quick-view">--}}
+                                            {{--<a title="Add to my wishlist" class="heart" href="#"></a>--}}
+                                            {{--<a title="Add to compare" class="compare" href="#"></a>--}}
+                                            {{--<a title="Quick view" class="search" href="#"></a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="add-to-cart">--}}
+                                            {{--<a title="Add to Cart" href="#">Add to Cart</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="right-block">--}}
+                                        {{--<h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>--}}
+                                        {{--<div class="content_price">--}}
+                                            {{--<span class="price product-price">$38,95</span>--}}
+                                            {{--<span class="price old-price">$52,00</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="product-star">--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star-half-o"></i>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<div class="left-block">--}}
+                                        {{--<a href="#"><img class="img-responsive" alt="product"--}}
+                                                         {{--src="public/main/assets/data/p62.jpg"/></a>--}}
+                                        {{--<div class="quick-view">--}}
+                                            {{--<a title="Add to my wishlist" class="heart" href="#"></a>--}}
+                                            {{--<a title="Add to compare" class="compare" href="#"></a>--}}
+                                            {{--<a title="Quick view" class="search" href="#"></a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="add-to-cart">--}}
+                                            {{--<a title="Add to Cart" href="#">Add to Cart</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="right-block">--}}
+                                        {{--<h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>--}}
+                                        {{--<div class="content_price">--}}
+                                            {{--<span class="price product-price">$38,95</span>--}}
+                                            {{--<span class="price old-price">$52,00</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="product-star">--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star-half-o"></i>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                                {{--<li>--}}
+                                    {{--<div class="left-block">--}}
+                                        {{--<a href="#"><img class="img-responsive" alt="product"--}}
+                                                         {{--src="public/main/assets/data/p63.jpg"/></a>--}}
+                                        {{--<div class="quick-view">--}}
+                                            {{--<a title="Add to my wishlist" class="heart" href="#"></a>--}}
+                                            {{--<a title="Add to compare" class="compare" href="#"></a>--}}
+                                            {{--<a title="Quick view" class="search" href="#"></a>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="add-to-cart">--}}
+                                            {{--<a title="Add to Cart" href="#">Add to Cart</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="right-block">--}}
+                                        {{--<h5 class="product-name"><a href="#">Maecenas consequat mauris</a></h5>--}}
+                                        {{--<div class="content_price">--}}
+                                            {{--<span class="price product-price">$38,95</span>--}}
+                                            {{--<span class="price old-price">$52,00</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="product-star">--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star"></i>--}}
+                                            {{--<i class="fa fa-star-half-o"></i>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                            {{--</ul>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+
                     <!-- ./view-product-list-->
                     <div class="sortPagiBar">
                         <div class="bottom-pagination">
