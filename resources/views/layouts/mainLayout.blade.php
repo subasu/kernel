@@ -574,9 +574,10 @@
                         type: "success",
                         confirmButtonText: "بستن"
                     });
-                    basketCountNotify();
-                    basketTotalPrice();
-                    basketContent();
+                    setTimeout(function(){
+                        window.location.reload(true);
+                    },5000);
+
                 }else
                 {
                     swal({
