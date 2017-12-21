@@ -216,9 +216,9 @@ class UserController extends Controller
             $now = Carbon::now(new\DateTimeZone('Asia/Tehran'));
             $checkUserCellphone = new CheckUserCellphone();
             $result = $checkUserCellphone->checkUserCellphone($request);
-            if (is_numeric($result)) {
+            if ($result) {
                 $order = new Order();
-                $order->user_id = $result;
+                $order->user_id = $result->id;
                 $order->user_coordination = trim($request->userCoordination);
                 $order->date = $now->toDateString();
                 $order->time = $now->toTimeString();
@@ -234,7 +234,7 @@ class UserController extends Controller
                     $update->payment = 1;
                     $update->save();
                     if ($update) {
-                        return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید', 'code' => 1]);
+                        return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید ، لطفا در جهت پیگیری سفارش خود با رمز عبور زیر وارد پنل شوید', 'code' => 1 , 'userPassword' => decrypt($result->password)]);
                     } else {
                         return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
                     }

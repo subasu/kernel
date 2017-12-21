@@ -790,13 +790,13 @@
                     swal
                     ({
                         title: "",
-                        text: response.message,
+                        text: response.message +'\n' + response.userPassword,
                         type: "success",
                         confirmButtonText: "بستن"
                     });
                     setTimeout(function(){
-                        window.location.href = '../index';
-                    },3000);
+                        window.location.href = '../login';
+                    },15000);
                 }else
                     {
                         swal
