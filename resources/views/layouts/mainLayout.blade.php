@@ -678,6 +678,7 @@
             var count      = $(this).closest('td').find('input.input-sm').val();
             var unitPrice  = $(this).closest('td').prev('td').attr('content');
             var td         = $(this);
+            $(td).css('pointer-events','none');
             $.ajax
             ({
                 url      : "{{url('user/addOrSubCount')}}",
@@ -687,6 +688,7 @@
                 context  :  td ,
                 success  : function(response)
                 {
+                    console.log(response);
                     if(response.code == 1)
                     {
                         $(td).closest('td').find('input.input-sm').val(++count);
@@ -694,6 +696,9 @@
                         var sum = unitPrice * newCount ;
                         $(td).closest('td').next('td').text(formatNumber(sum) + 'تومان');
                         basketTotalPrice();
+                        setTimeout(function () {
+                            $(td).css('pointer-events','');
+                        },5000);
                     }
                 },error  : function(error)
                 {
@@ -707,12 +712,14 @@
 <script>
     $('.subFromCount').each(function(){
         $(this).click(function(){
+
             var productId  = $(this).attr('content');
             var basketId   = $(this).attr('name');
             var token      = $('#token').val();
             var count      = $(this).closest('td').find('input.input-sm').val();
             var unitPrice  = $(this).closest('td').prev('td').attr('content');
             var td         = $(this);
+            $(td).css('pointer-events','none');
             if(count == 1)
             {
                 swal({
@@ -721,6 +728,9 @@
                     type: "warning",
                     confirmButtonText: "بستن"
                 });
+                setTimeout(function () {
+                    $(td).css('pointer-events','');
+                },5000);
                 return false;
             }else
             {
@@ -736,11 +746,16 @@
 
                         if(response.code == 1)
                         {
+
                             $(td).closest('td').find('input.input-sm').val(--count);
                             var newCount = $(td).closest('td').find('input.input-sm').val();
                             var sum = unitPrice * newCount;
                             $(td).closest('td').next('td').text(formatNumber(sum) + 'تومان');
                             basketTotalPrice();
+                            setTimeout(function () {
+                                $(td).css('pointer-events','');
+                            },5000);
+
                         }
                     },error  : function(error)
                     {

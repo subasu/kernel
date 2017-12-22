@@ -7,11 +7,13 @@ use App\Http\SelfClasses\CheckUserCellphone;
 use App\Models\Basket;
 use App\Models\Order;
 use App\Models\Product;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
@@ -212,40 +214,67 @@ class UserController extends Controller
     //below function is related to add order registration
     public function orderRegistration(OrderRegistrationValidation $request)
     {
-        if($basket = Basket::where([['id',$request->basketId],['payment',0]])->count() > 0 ) {
-            $now = Carbon::now(new\DateTimeZone('Asia/Tehran'));
-            $checkUserCellphone = new CheckUserCellphone();
-            $result = $checkUserCellphone->checkUserCellphone($request);
-            if ($result) {
-                $order = new Order();
-                $order->user_id = $result->id;
-                $order->user_coordination = trim($request->userCoordination);
-                $order->date = $now->toDateString();
-                $order->time = $now->toTimeString();
-                $order->total_price = $request->totalPrice;
-                $order->discount_price = $request->discountPrice;
-                $order->factor_price = $request->factorPrice;
-                $order->user_cellphone = $request->userCellphone;
-                $order->basket_id = $request->basketId;
-                $order->payment_type = $request->paymentType;
-                $order->save();
-                if ($order) {
-                    $update = Basket::find($request->basketId);
-                    $update->payment = 1;
-                    $update->save();
-                    if ($update) {
-                        return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید ، لطفا در جهت پیگیری سفارش خود با رمز عبور زیر وارد پنل شوید', 'code' => 1 , 'userPassword' => decrypt($result->password)]);
-                    } else {
-                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
-                    }
 
+        if($basket = Basket::where([['id',$request->basketId],['payment',0]])->count() > 0 ) {
+
+
+            $user = User::where('cellphone',$request->userCellphone)->get();
+            if(count($user) > 0)
+            {
+                $newPassword = '';
+                return $this->addToOrder($request,$user[0],$newPassword);
+            }else
+            {
+                $newPassword =  str_random(8);
+                $user = new User();
+                $user->cellphone = $request->userCellphone;
+                $user->password  = Hash::make($newPassword);
+                $user->save();
+                if($user)
+                {
+                      return $this->addToOrder($request,$user,$newPassword);
                 }
-            } else {
-                return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
             }
         }else
             {
                 return response()->json(['message' => 'این سفارش قبلا ثبت گردیده است ، لطفات تقاضای مجدد نفرمائید']);
+            }
+    }
+
+    //below function is related to add items in orders table
+    public function addToOrder($request,$user,$newPassword)
+    {
+        $now = Carbon::now(new\DateTimeZone('Asia/Tehran'));
+            $order = new Order();
+            $order->user_id = $user->id;
+            $order->user_coordination = trim($request->userCoordination);
+            $order->date = $now->toDateString();
+            $order->time = $now->toTimeString();
+            $order->total_price = $request->totalPrice;
+            $order->discount_price = $request->discountPrice;
+            $order->factor_price = $request->factorPrice;
+            $order->user_cellphone = $request->userCellphone;
+            $order->basket_id = $request->basketId;
+            $order->payment_type = $request->paymentType;
+            $order->save();
+            if ($order) {
+                $update = Basket::find($request->basketId);
+                $update->payment = 1;
+                $update->save();
+                if ($update)
+                {
+                    if($newPassword == '')
+                    {
+                        return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید ، لطفا در جهت پیگیری سفارش خود وارد پنل شوید', 'code' => 1 , 'userPassword' => $newPassword]);
+                    }else
+                        {
+                            return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید ، لطفا در جهت پیگیری سفارش خود با رمز عبور زیر وارد پنل شوید', 'code' => 1 , 'userPassword' => $newPassword]);
+                        }
+
+                } else {
+                    return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                }
+
             }
     }
 }
