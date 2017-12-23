@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\City;
 use App\Models\PaymentType;
+use App\Models\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -187,6 +188,16 @@ class IndexController extends Controller
         //dd($categories);
         return view('main.showProducts',compact('menu','pageTitle','categories'));
     }
+    //below function is to return show product blade
+    public function productDetail($id)
+    {
+        $menu = $menu=$this->loadMenu();
+        $product  = Product::find($id);
+        $pageTitle = Product::where('id','=',$id)->value('title');
+        //dd($categories);
+        return view('main.productDetail',compact('menu','pageTitle','product'));
+    }
+
 
     //below function is related to return order view
     public function order($parameter)
