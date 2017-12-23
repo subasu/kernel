@@ -52,6 +52,7 @@ class CheckProduct
                 'price.required'=>'فیلد قیمت الزامی است',
                 'video_src.mimetypes'=>'فرمت ویدئوی انتخاب شده اشتباه است ',
                 'pic[].image'=>'فرمت تصویر یا تصاویر انتخاب شده اشتباه است ',
+                'warehouse_count.numeric' => 'مقدار وارد شده انبار باید مقدار عددی باشد'
             ]);
         $errors = $validation->errors();
         if(!$errors->isEmpty())

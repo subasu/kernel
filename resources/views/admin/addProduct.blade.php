@@ -434,7 +434,9 @@
                                     text: x,
                                     type: "info",
                                     confirmButtonText: "بستن"
-                                })
+                                });
+                                setTimeout(function(){window.location.reload(true);},3000);
+
                             },
                             error: function (xhr) {
                                 var x;
@@ -524,7 +526,7 @@
                             loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                         }
                         else {
-                            location.href = '{{url("admin/addCategory")}}';
+                              location.href = '{{url("admin/addCategory")}}';
                         }
                     }
                 })
@@ -590,6 +592,7 @@
                         findTitle(id)
                     }
                 })
+
                 //load brands after ask do you want load it's brands or no then load product title related selected subCategory
                 $('#subCategories').on("change", function () {
                     var id = $(this).val();
@@ -686,7 +689,7 @@
                             loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                         }
                         else {
-                            location.href = '{{url("admin/addCategory")}}';
+                            location.href = '{{url("admin/addUnit")}}';
                         }
                     }
                 });

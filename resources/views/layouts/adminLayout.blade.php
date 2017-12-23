@@ -91,11 +91,10 @@
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section" style="margin-bottom:10px;">
-                        <h3 style="font-size: 16px;"><a href="" onclick="alert('این هم چیز واسه تست! ادد باید همینو بزنین :)')"
-                                                        style="color:white">پروفایل</a></h3>
+                        <h3 style="font-size: 16px;"><aolor:white">پروفایل</a></h3>
                         <ul class="nav side-menu">
                             {{--//system manager menu--}}
-                            <li><a><i class="fa f a-home"></i> مدیر سیستم<span></span></a>
+                            <li><a><i class="fa f a-home"></i>پنل مدیریت<span></span></a>
                             </li>
                             <li><a><i class="fa fa-users"></i> مدیریت محصولات<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
@@ -168,6 +167,16 @@
                                     </li>
                                 </ul>
                             </li>
+                            {{--@if(Auth::user()->roll_id == 3)--}}
+                            <li><a><i class="fa fa-first-order"></i>بررسی سفارشات و فاکتورها<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('user/userOrders')}}">نمایش لیست سفارشات</a>
+                                    </li>
+                                    {{--<li><a href="{{url('admin/addPaymentType')}}">افزودن وضعیت پرداخت</a>--}}
+                                    </li>
+                                </ul>
+                            </li>
+                            {{--@endif--}}
                             {{--<li><a><i class="fa fa-handshake-o"></i>مدیریت وضعیتهای تحویل<span class="fa fa-chevron-down"></span></a>--}}
                                 {{--<ul class="nav child_menu" style="display: none">--}}
                                     {{--<li><a href="{{url('admin/paymentTypesManagement')}}">  نمایش و مدیریت وضعیتهای تحویل</a>--}}
@@ -192,7 +201,9 @@
                                         {{--</li>--}}
                                     {{--</ul>--}}
                                 {{--</li>--}}
+
                             <li><a href="{{url('/index')}}"><i class="fa fa-laptop"></i>صفحه ی اصلی سایت</a>
+
                             </li>
 
                             {{--//End User menu--}}

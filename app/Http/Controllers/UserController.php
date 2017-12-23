@@ -9,8 +9,10 @@ use App\Models\Order;
 use App\Models\Product;
 use App\User;
 use Carbon\Carbon;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -273,6 +275,93 @@ class UserController extends Controller
                 }
 
             }
+    }
+
+    //below function is related to show user orders
+    public function userOrders()
+    {
+        $pageTitle = 'مشاهده و بررسی سفارشات';
+        $data = Order::where([['user_id',Auth::user()->id],['pay' , '<>' , null],['transaction_code','<>',null]])->get();
+        foreach ($data as $datum)
+        {
+            $datum->orderDate = $this->toPersian($datum->created_at->toDateString());
+        }
+        return view('user.ordersList',compact('data','pageTitle'));
+    }
+
+    //
+    public function toPersian($date)
+    {
+        if (count($date) > 0) {
+            $gDate = $date;
+            if ($date = explode('-', $gDate)) {
+                $year = $date[0];
+                $month = $date[1];
+                $day = $date[2];
+            }
+            $date = Verta::getJalali($year, $month, $day);
+            $myDate = $date[0] . '/' . $date[1] . '/' . $date[2];
+            return $myDate;
+        }
+        return;
+    }
+
+    //below function is related to show order detail
+    public function orderDetails($id)
+    {
+
+        $baskets = Basket::find($id);
+        if(count($baskets) > 0)
+        {
+            $pageTitle = 'جزئیات سفارش';
+            foreach ($baskets->products as $basket)
+            {
+                $basket->product_price = $basket->pivot->product_price;
+                $basket->basket_id     = $basket->pivot->basket_id;
+            }
+
+            return view('user.orderDetails',compact('baskets','pageTitle'));
+        }else
+            {
+                return view('errors.403');
+            }
+    }
+
+    //below function is related to get information of factor
+    public function userFactor($id)
+    {
+        $pageTitle = 'فاکتور سفارش';
+        $baskets   = Basket::find($id);
+        $total          = 0;
+        $totalDiscount  = 0 ;
+        $totalPostPrice = 0;
+        $finalPrice     = 0;
+        if(!empty($baskets))
+        {
+            foreach ($baskets->products as $basket)
+            {
+                $basket->count         = $basket->pivot->count;
+                $basket->price         = $basket->pivot->product_price;
+                $basket->sum           = $basket->pivot->count * $basket->pivot->product_price;
+                $total                += $basket->sum;
+                $basket->basket_id     = $basket->pivot->basket_id;
+                $totalPostPrice       += $basket->post_price;
+                if($basket->discount_volume != null )
+                {
+                    $totalDiscount        += $basket->discount_volume;
+                    if($totalDiscount > 0)
+                    {
+                        $basket->sumOfDiscount = ($total * $totalDiscount ) / 100 ;
+                    }
+                }
+
+            }
+            $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
+            return view('common.factor',compact('pageTitle','baskets','total','totalPostPrice','finalPrice','paymentTypes'));
+        }else
+        {
+            return view('errors.403');
+        }
     }
 }
 

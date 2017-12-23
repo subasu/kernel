@@ -102,6 +102,9 @@ Route::group(['prefix'=>'user'],function() {
     Route::post('orderFixed','UserController@orderFixed');
     Route::post('addOrSubCount','UserController@addOrSubCount');
     Route::post('orderRegistration','UserController@orderRegistration');
+    Route::get('userOrders','UserController@userOrders');
+    Route::get('orderDetails/{id}','UserController@orderDetails');
+    Route::get('userFactor/{id}','UserController@userFactor');
 
 });
 
