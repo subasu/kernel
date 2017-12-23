@@ -30,7 +30,7 @@ Route::get('checkout',function (){
     $pageTitle = 'پرداخت نهایی';
     return view('main.checkout', compact('pageTitle', 'menu'));
 });
-
+Route::get('productDetail/{id}','IndexController@productDetail');
 //admin routes
 
 Route::group(['prefix'=>'admin'],function() {

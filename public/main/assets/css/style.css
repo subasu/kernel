@@ -6053,3 +6053,10 @@ span.notify-right {
     padding-left: 0px;
     margin-left: 1%;
 }
+.margin-top-20
+{
+    margin-top: 20% !important;
+}
+.display-inline{
+    display: inline !important;
+}

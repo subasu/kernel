@@ -617,35 +617,33 @@
                                             </div>
                                         </div>
 
-                                        <div class="right-block">
-                                            <h5 class="product-name text-right col-md-12">
+                                        <div class="right-block margin-top-20">
+                                            <h3 class="product-name text-right col-md-12">
                                                 @if(strlen($product->title) != mb_strlen($product->title, 'utf-8'))
                                                     <a  class="text-right">{{$product->title}}</a>
                                                 @endif
                                                 @if(strlen($product->title) == mb_strlen($product->title, 'utf-8'))
                                                     <a  class="text-left">{{$product->title}}</a>
                                                 @endif
-                                            </h5>
-                                            <div class="content_price text-right col-md-12">
+                                            </h3>
+                                            <div class="text-left">
                                                 <div class="">
-                                                    <div class="">
+                                                    <div class="col-md-6">
                                                         @foreach($product->productFlags as $flag)
                                                             @if($flag->active == 1)
-                                                                <a class="price price" id="productFlag" data-toggle="" name="{{$flag->price}}" title="تومان">{{number_format($flag->price)}} </a>
+                                                                <b><a class="price" id="productFlag" data-toggle="" name="{{$flag->price}}" title="تومان">{{number_format($flag->price)}} </a>
+                                                                </b><b style="float: left"> تومان </b>
                                                             @endif
                                                         @endforeach
                                                     </div>
-                                                    {{--<div class="text-right">--}}
-                                                    {{--<span class="price product-price pull-right"> : قیمت اصلی </span>--}}
-                                                    {{--</div>--}}
+                                                    <div class=" col-md-6">
+                                                    <span class="price product-price pull-right"> : قیمت اصلی </span>
+                                                    </div>
                                                 </div>
-
                                             </div>
-
-
                                         </div>
                                         <div class="">
-                                            <div class="content_price text-right">
+                                            <div class=" text-right">
                                                 <div class="col-md-12">
                                                     <div class="col-md-6">
                                                     <span class="product-star">
@@ -663,7 +661,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="right-block">
+                                        <div class="right-block display-inline">
                                             <div class="add-to-cart" >
                                                 <button class="btn btn-success"
                                                         @foreach($product->productFlags as $flag)
