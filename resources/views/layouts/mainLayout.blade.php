@@ -43,7 +43,7 @@
         <div id="introduce-box" class="row">
             <div class="col-md-3">
                 <div id="address-box">
-                    <a href="#"><img src="public/main/assets/data/introduce-logo.png" alt=""/></a>
+                    <a href="#"><img src="{{url('public/main/assets/data/introduce-logo.png')}}" alt=""/></a>
                     <div id="address-list">
                         <div class="tit-name">آدرس:</div>
                         <div class="tit-contain">Example Street 68, Mahattan, New York, USA.</div>
@@ -376,6 +376,8 @@
 <script type="text/javascript" src="{{url('public/main/assets/lib/owl.carousel/owl.carousel.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/js/jquery.actual.min.js')}}"></script>
+<script type="text/javascript" src="{{url('public/main/assets/lib/jquery-ui/jquery-ui.min.js')}}"></script>
+<script type="text/javascript" src="{{url('public/main/assets/lib/jquery.elevatezoom.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>
 <script src="{{url('public/js/sweetalert.min.js')}}"></script>
 
