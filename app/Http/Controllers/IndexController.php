@@ -200,7 +200,7 @@ class IndexController extends Controller
 
             switch ($parameter)
             {
-                case 'payment':
+                case 'basketDetail':
                     $pageTitle  = 'لیست سفارشات';
                     $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
                     if($basketId)

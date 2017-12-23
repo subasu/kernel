@@ -214,10 +214,7 @@ class UserController extends Controller
     //below function is related to add order registration
     public function orderRegistration(OrderRegistrationValidation $request)
     {
-
         if($basket = Basket::where([['id',$request->basketId],['payment',0]])->count() > 0 ) {
-
-
             $user = User::where('cellphone',$request->userCellphone)->get();
             if(count($user) > 0)
             {

@@ -50,6 +50,7 @@ Route::group(['prefix' => '/v1/user'],function (){
     Route::get('showProducts/{id}','webService\UserController@showProducts');
     Route::post('removeItemFromBasket','webService\UserController@removeItemFromBasket');
     Route::post('addOrSubCount','webService\UserController@addOrSubCount');
+    Route::post('orderRegistration','webService\UserController@orderRegistration');
 
 });
 
@@ -60,6 +61,7 @@ Route::group(['prefix' => '/v1/general'],function(){
     Route::get('getMainMenu','webService\GeneralController@getMainMenu');
     Route::get('getSubMenu/{id}','webService\GeneralController@getSubMenu');
     Route::get('getBrands/{id}','webService\GeneralController@getBrands');
+    Route::post('order','webService\GeneralController@order');
 });
 
 

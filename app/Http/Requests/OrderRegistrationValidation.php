@@ -25,7 +25,8 @@ class OrderRegistrationValidation extends FormRequest
     {
         return
             [
-                'userCellphone' => 'required|min:11|regex:/(09)[0-9]{9}/'
+                'userCellphone'    => 'required|min:11|regex:/(09)[0-9]{9}/',
+                'userCoordination' => 'required'
             ];
     }
 
@@ -33,9 +34,10 @@ class OrderRegistrationValidation extends FormRequest
     {
         return
             [
-               'userCellphone.required' => 'وارد کردن شماره موبایل الزامی است',
-               'userCellphone.regex'    => 'شماره موبایل را بطور صحیح وارد نمائید، مثلا : 09370491215',
-               'userCellphone.min'      => 'تعداد ارقام وارد شده برای تلفن همراه نباید کمتر از 11 رقم باشند'
+               'userCellphone.required'     => 'وارد کردن شماره موبایل الزامی است',
+               'userCellphone.regex'        => 'شماره موبایل را بطور صحیح وارد نمائید، مثلا : 09370491215',
+               'userCellphone.min'          => 'تعداد ارقام وارد شده برای تلفن همراه نباید کمتر از 11 رقم باشند',
+               'userCoordination.required'  => 'لطفا آدرس تحویل را وارد کنید'
             ];
     }
 }
