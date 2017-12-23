@@ -194,6 +194,11 @@ class IndexController extends Controller
         $menu = $menu=$this->loadMenu();
         $product  = Product::find($id);
         $pageTitle = Product::where('id','=',$id)->value('title');
+//        foreach ($product->sizes as $size)
+//        {
+//            dd($size->title);
+//        }
+//        dd($product->Sizes()->size_id);
         //dd($categories);
         return view('main.productDetail',compact('menu','pageTitle','product'));
     }

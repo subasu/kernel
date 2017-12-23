@@ -2,8 +2,8 @@
     <div class="top-header">
     <div class="container">
         <div class="nav-top-links">
-            <a class="first-item" href="#"><img alt="phone"  src="public/main/assets/images/phone.png" />00-62-658-658</a>
-            <a href="#"><img alt="email"  src="public/main/assets/images/email.png" />تماس با ما</a>
+            <a class="first-item" href="#"><img alt="phone"  src="{{url('public/main/assets/images/phone.png')}}" />00-62-658-658</a>
+            <a href="#"><img alt="email"  src="{{url('public/main/assets/images/email.png')}}" />تماس با ما</a>
         </div>
         <div class="currency ">
             <div class="dropdown">
@@ -17,12 +17,12 @@
         <div class="language ">
             <div class="dropdown">
                 <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
-                    <img alt="email"  src="public/main/assets/images/fr.jpg" />فارسی
+                    <img alt="email"  src="{{url('public/main/assets/images/fr.jpg')}}" />فارسی
 
                 </a>
                 <ul class="dropdown-menu text-right" role="menu">
-                    <li><a href="#"><img alt="email"  src="public/main/assets/images/en.jpg" />انگلیسی</a></li>
-                    <li><a href="#"><img alt="email"  src="public/main/assets/images/fr.jpg" />فارسی</a></li>
+                    <li><a href="#"><img alt="email"  src="{{url('public/main/assets/images/en.jpg')}}" />انگلیسی</a></li>
+                    <li><a href="#"><img alt="email"  src="{{url('public/main/assets/images/fr.jpg')}}" />فارسی</a></li>
                 </ul>
             </div>
         </div>
@@ -48,7 +48,7 @@
 <div class="container main-header">
     <div class="row">
         <div class="col-xs-12 col-sm-3 logo">
-            <a href="index.html"><img alt="Kute shop - themelot.net"  src="public/main/assets/images/logo.png" /></a>
+            <a href="index.html"><img alt="Kute shop - themelot.net"  src="{{url('public/main/assets/images/logo.png')}}" /></a>
         </div>
         <div class="col-xs-7 col-sm-7 header-search-box">
             <form class="form-inline">

@@ -613,7 +613,7 @@
                                             <div class="quick-view">
                                                 <a title="افزودن به علاقه مندی ها" class="heart" ></a>
                                                 <a title="مقایسه" class="compare" ></a>
-                                                <a title="نمایش جزئیات" class="search" ></a>
+                                                <a title="نمایش جزئیات" class="search" href="{{url('productDetail/'.$product->id)}}"></a>
                                             </div>
                                         </div>
 
