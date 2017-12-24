@@ -23,7 +23,7 @@ class IndexController extends Controller
 
     public function loadMenu()
     {
-        $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
+        $menu = Category::where([['parent_id',null],['grand_parent_id',null]])->get();
         return $menu;
 
     }
@@ -194,13 +194,11 @@ class IndexController extends Controller
         $menu = $menu=$this->loadMenu();
         $product  = Product::find($id);
         $pageTitle = Product::where('id','=',$id)->value('title');
-//        foreach ($product->sizes as $size)
-//        {
-//            dd($size->title);
-//        }
-//        dd($product->Sizes()->size_id);
-        //dd($categories);
-        return view('main.productDetail',compact('menu','pageTitle','product'));
+        $brand=$product->categories[0]->id;
+        $subcatId =  Category::where('id','=',$brand)->value('parent_id');
+        $subcat =  \App\Models\Category::where('id','=',$subcatId)->value('title');
+        $cat =  Category::where('id','=',$subcat)->value('title');
+        return view('main.productDetail',compact('menu','pageTitle','product','cat','subcat'));
     }
 
 
