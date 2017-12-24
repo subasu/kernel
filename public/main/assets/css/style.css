@@ -6066,3 +6066,7 @@ span.notify-right {
 .float-r{
     float: right;
 }
+.product-image-size{
+    min-width: 300px;
+    min-height: 350px
+}

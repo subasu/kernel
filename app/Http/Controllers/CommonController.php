@@ -167,7 +167,7 @@ class CommonController extends Controller
     //below function is related to existed colors
     public function getColors()
     {
-        $colors = Color::all();
+        $colors = Color::where('active','=','1')->get();
         if(count($colors) > 0)
         {
             return response()->json($colors);
@@ -180,7 +180,7 @@ class CommonController extends Controller
     //below function is related to existed sizes
     public function getSizes()
     {
-        $sizes = Size::all();
+        $sizes = Size::where('active','=','1')->get();
         if(count($sizes) > 0)
         {
             return response()->json($sizes);

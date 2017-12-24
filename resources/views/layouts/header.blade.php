@@ -55,8 +55,6 @@
                 <div class="form-group form-category">
                     <select class="select-category">
                         <option value="2">همه ی دسته بندی ها</option>
-                        <option value="1">مردانه</option>
-                        <option value="2">زنانه</option>
                     </select>
                 </div>
                 <div class="form-group input-serach ">
