@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\SelfClasses\AddCategory;
 use App\Http\SelfClasses\CheckFiles;
+use App\Http\SelfClasses\NotToBeRepeated;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,20 +15,31 @@ class CategoryController extends Controller
     //below function is related to add new category
     public function addNewCategory(Request $request)
     {
-        $checkFiles = new CheckFiles();
-        $result =$checkFiles->checkCategoryFiles($request);
-        if(is_bool($result))
+        $notToBeRepeated = new NotToBeRepeated();
+        $titleCheck      = $notToBeRepeated->notToBeRepeated($request,'category');
+        if(is_bool($titleCheck))
         {
-            $addNewCategory = new AddCategory();
-            $result1 = $addNewCategory->addNewCategory($request->category,$request);
-            if($result1)
+
+            $checkFiles = new CheckFiles();
+            $result =$checkFiles->checkCategoryFiles($request);
+            if(is_bool($result))
             {
-                return response()->json(['message' => $result1]);
+                $addNewCategory = new AddCategory();
+                $result1 = $addNewCategory->addNewCategory($request->category,$request);
+                if($result1)
+                {
+                    return response()->json(['message' => $result1 , 'code' => 1]);
+                }
+            }else
+            {
+                return response()->json(['message' => $result , 'code' => 0]);
             }
-        }else
-        {
-            return response()->json(['message' => $result , 'code' => '1']);
         }
+        else
+        {
+            return response()->json(['message' => $titleCheck , 'code' => 0]);
+        }
+
     }
 
     //below function returns addCategory blade....

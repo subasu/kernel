@@ -15,7 +15,7 @@ class CheckFiles
         if(count($request->file) > 0)
         {
             $allowedExtensions = array('png','jpg');
-            $allowedSize       = 200000;
+            $allowedSize       = 10000000;
             $count             = count($request->file);
             $sentExtensions    = '';
             $sentSizes         = '';
@@ -50,7 +50,7 @@ class CheckFiles
                     }
                     else
                     {
-                        return('سایز فایل یا فایل های انتخاب شده بیش 20 کیلوبایت است');
+                        return('سایز فایل یا فایل های انتخاب شده بیش 1 مگابایت است');
                         // return false;
                     }
                 }

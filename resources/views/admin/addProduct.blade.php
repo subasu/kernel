@@ -462,9 +462,13 @@
                                     type: "info",
                                     confirmButtonText: "بستن"
                                 });
-                                setTimeout(function () {
-                                    window.location.reload(true);
-                                }, 3000);
+                                if(data.data == 'محصول شما با مؤفقیت درج شد')
+                                {
+                                    setTimeout(function () {
+                                        window.location.reload(true);
+                                    }, 3000);
+                                }
+
 
                             },
                             error: function (xhr) {

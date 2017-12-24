@@ -320,13 +320,26 @@
                     success     : function(res)
                     {
                         console.log(res);
-                        swal({
-                            title: "",
-                            text: res.message,
-                            type: "success",
-                            confirmButtonText: "بستن"
-                        });
-                        if(res.code != 1)
+                        if(res.code == 1)
+                        {
+                            swal({
+                                title: "",
+                                text: res.message,
+                                type: "success",
+                                confirmButtonText: "بستن"
+                            });
+                        }
+                         if(res.code == 0)
+                        {
+                            swal({
+                                title: "",
+                                text: res.message,
+                                type: "warning",
+                                confirmButtonText: "بستن"
+                            });
+                        }
+
+                        if(res.code == 1)
                         {
                             $.ajax({
 
