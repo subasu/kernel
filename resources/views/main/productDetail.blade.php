@@ -66,27 +66,27 @@
                                 </div>
                                 <div class="form-option">
                                     {{--<p class="form-option-title">Available Options:</p>--}}
-                                    @if(!empty($product->sizes))
+                                    @if(count($product->sizes)>0)
                                         <div class="attributes">
                                             <div class="attribute-label" dir="rtl">اندازه:</div>
 
                                             <div class="attribute-list float-r">
                                                 <select>
                                                     @foreach ($product->sizes as $size)
-                                                        <option value="3">{{$size->title}}</option>
+                                                        <option value="">{{$size->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
 
                                         </div>
                                     @endif
-                                    @if(!empty($product->colors))
+                                    @if(count($product->colors)>0)
                                         <div class="attributes">
                                             <div class="attribute-label" dir="rtl">رنگ بندی:</div>
                                             <div class="attribute-list float-r">
                                                 <select>
-                                                    @foreach ($product->colors as $size)
-                                                        <option value="3">{{$size->title}}</option>
+                                                    @foreach ($product->colors as $color)
+                                                        <option value="">{{$color->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -121,7 +121,7 @@
                             <div class="pb-left-column col-xs-12 col-sm-5">
                                 <div class="product-image">
                                     <div class="product-full product-image-size" >
-                                        <!-- product-imge-->
+                                        <!-- product-image-->
                                         <img id="product-zoom"
                                              src="{{url('public/dashboard/productFiles/picture/'.$product->productImages[0]->image_src)}}"
                                              data-zoom-image="{{url('public/dashboard/productFiles/picture/'.$product->productImages[0]->image_src)}}"/>
