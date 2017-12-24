@@ -74,7 +74,10 @@ class AddProduct
         $pr->warehouse_count = $product->warehouse_count;
         $pr->warehouse_place = $product->warehouse_place;
         $pr->barcode = $product->barcode;
-        $pr->post_price = str_replace(',', '', $product->post_price);
+        if (!empty($product->post_price))
+            $pr->post_price = str_replace(',', '', $product->post_price);
+        else
+            $pr->post_price = 0;
         $pr->save();
         $lastProductId = $pr->id;
         //above line find product_id that now saved for use in pivot table

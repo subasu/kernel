@@ -120,7 +120,7 @@
                             </div>
                             <div class="pb-left-column col-xs-12 col-sm-5">
                                 <div class="product-image">
-                                    <div class="product-full" style=" min-width: 300px;min-height: 300px">
+                                    <div class="product-full product-image-size" >
                                         <!-- product-imge-->
                                         <img id="product-zoom"
                                              src="{{url('public/dashboard/productFiles/picture/'.$product->productImages[0]->image_src)}}"

@@ -618,7 +618,7 @@
                         $('#subCategories').empty();
                         $('#brands').empty();
                         console.log('100');
-                        findTitle(id)
+                        findTitle(id,'method2')
                     }
                 })
 
@@ -673,7 +673,7 @@
                     else {
                         $('#BrandsDiv').css('display', 'none');
                         $('#brands').empty();
-                        findTitle(id)
+                        findTitle(id, 'method2')
                     }
                 })
                 //check option 2 selected or not, if yes redirect to addCategory view
@@ -791,7 +791,7 @@
                             dataType: "json",
                             type: "post",
                             data: {'id': cid, 'my_method': '1'},
-                            success: function (response) {
+                            success: function (response) {console.log(response);
                                 var item = $('#oldProduct');
                                 item.empty();
                                 if (response != 0) {
