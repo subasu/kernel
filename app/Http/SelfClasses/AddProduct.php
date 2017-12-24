@@ -34,15 +34,20 @@ class AddProduct
         }
 
         //add a flags with flag's price in product flags
-        function addProductFlag($title, $price, $lastProductId)
+        function addProductFlag($active, $title, $price, $lastProductId)
         {
             $prices = new ProductFlag();
             $prices->title = $title;
             $prices->product_id = $lastProductId;
-            $prices->active = 0;
+            //set active price for product
+            if ($active == $title)
+                $prices->active = 1;
+            else
+                $prices->active = 0;
             $prices->price = str_replace(',', '', $price);
             $prices->save();
         }
+
         //upload product's video
         $videoSrc = '';
         if (!empty($product->video_src)) {
@@ -51,8 +56,8 @@ class AddProduct
             $file->move('public/dashboard/productFiles/video/', $videoSrc);
         }
 
-        $unit_count=UnitCount::where('id','=',$product->unit_count)->value('title');
-        $sub_unit_count=SubUnitCount::where('id','=',$product->sub_unit_count)->value('title');
+        $unit_count = UnitCount::where('id', '=', $product->unit_count)->value('title');
+        $sub_unit_count = SubUnitCount::where('id', '=', $product->sub_unit_count)->value('title');
         //add a new product in product table
         $pr = new Product();
         $pr->title = $product->title;
@@ -69,18 +74,18 @@ class AddProduct
         $pr->warehouse_count = $product->warehouse_count;
         $pr->warehouse_place = $product->warehouse_place;
         $pr->barcode = $product->barcode;
-        $pr->post_price = str_replace(',', '',$product->post_price);
+        $pr->post_price = str_replace(',', '', $product->post_price);
         $pr->save();
-        $lastProductId=$pr->id;
+        $lastProductId = $pr->id;
         //above line find product_id that now saved for use in pivot table
-       // $lastProductId = Product::orderBy('created_at', 'desc')->offset(0)->limit(1)->value('id');
+        // $lastProductId = Product::orderBy('created_at', 'desc')->offset(0)->limit(1)->value('id');
         //this block code save color array of product in color_product table
         $countColor = count($product->color);
         if ($countColor) {
             for ($i = 0; $i < $countColor; $i++) {
                 $productColor = new ProductColor();
                 $productColor->product_id = $lastProductId;
-                $productColor->color_id=$product->color[$i];
+                $productColor->color_id = $product->color[$i];
                 $productColor->active = 1;
                 $productColor->save();
 
@@ -93,7 +98,7 @@ class AddProduct
             for ($i = 0; $i < $countSize; $i++) {
                 $productColor = new ProductSize();
                 $productColor->product_id = $lastProductId;
-                $productColor->size_id=$product->size[$i];
+                $productColor->size_id = $product->size[$i];
                 $productColor->active = 1;
                 $productColor->save();
 
@@ -118,38 +123,27 @@ class AddProduct
         /**this block code save flags and prices of product in product_flags table
          * by calling addProductFlag(title of flag, price of flag, product_id) **/
 
-        addProductFlag('price', $product->price, $lastProductId);
+        addProductFlag($product->activePrice, 'price', $product->price, $lastProductId);
 
-        if (!empty($product->special_price))
-        {
-            addProductFlag('special_price', $product->special_price, $lastProductId);
+        if (!empty($product->special_price)) {
+            addProductFlag($product->activePrice, 'special_price', $product->special_price, $lastProductId);
+        } else {
+            addProductFlag($product->activePrice, 'special_price', 0, $lastProductId);
         }
-        else
-        {
-            addProductFlag('special_price', 0, $lastProductId);
+        if (!empty($product->wholesale_price)) {
+            addProductFlag($product->activePrice, 'wholesale_price', $product->wholesale_price, $lastProductId);
+        } else {
+            addProductFlag($product->activePrice, 'wholesale_price', 0, $lastProductId);
         }
-        if (!empty($product->wholesale_price))
-        {
-            addProductFlag('wholesale_price', $product->wholesale_price, $lastProductId);
+        if (!empty($product->sales_price)) {
+            addProductFlag($product->activePrice, 'sales_price', $product->sales_price, $lastProductId);
+        } else {
+            addProductFlag($product->activePrice, 'sales_price', 0, $lastProductId);
         }
-        else{
-            addProductFlag('wholesale_price', 0, $lastProductId);
-        }
-        if (!empty($product->sales_price))
-        {
-            addProductFlag('sales_price', $product->sales_price, $lastProductId);
-        }
-        else
-        {
-            addProductFlag('sales_price', 0, $lastProductId);
-        }
-        if (!empty($product->free_price))
-        {
-            addProductFlag('free_price', $product->free_price, $lastProductId);
-        }
-        else
-        {
-            addProductFlag('free_price', 0, $lastProductId);
+        if (!empty($product->free_price)) {
+            addProductFlag($product->activePrice, $product, 'free_price', $product->free_price, $lastProductId);
+        } else {
+            addProductFlag($product->activePrice, 'free_price', 0, $lastProductId);
         }
         /**this section check user select which level of categories
          *and insert row to category_product table with latest product_id and category_id
@@ -159,14 +153,12 @@ class AddProduct
             $catId = $product->categories;
         } elseif (empty($product->brands)) {
             $catId = $product->subCategories;
-        }
-        else if(!empty($product->brands))
-        {
+        } else if (!empty($product->brands)) {
             addCategoryProduct($lastProductId, $product->brands);
         }
         //find 'سایر' category_id
         $subCatId = Category::where([['parent_id', $catId], ['active', 1]])->where('title', '=', 'سایر')->value('id');
-        if ($subCatId != 0 && $catId !=0) {
+        if ($subCatId != 0 && $catId != 0) {
             addCategoryProduct($lastProductId, $subCatId);
         }
         return (true);

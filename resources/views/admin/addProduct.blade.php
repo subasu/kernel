@@ -15,6 +15,7 @@
         .margin-1 {
             margin-top: 1%;
         }
+
         .margin-2 {
             margin-top: 2%;
         }
@@ -26,11 +27,12 @@
         .overflow-x {
             overflow-x: hidden;
         }
-        .myColor{
+
+        .myColor {
             width: 13px;
             height: 13px;
             padding: 0 !important;
-            margin:0 !important;
+            margin: 0 !important;
             vertical-align: bottom;
             position: relative;
             top: 6px;
@@ -38,16 +40,19 @@
             left: 21px;
             *overflow: hidden;
         }
+
         .myLabel {
             display: block;
             padding-left: 15px;
             text-indent: -15px;
-            float:right;
+            float: right;
         }
-        .float-right{
-            float:right;
+
+        .float-right {
+            float: right;
         }
-        .padding-right-2{
+
+        .padding-right-2 {
             padding-right: 2%;
         }
     </style>
@@ -160,7 +165,8 @@
                                         </select>
 
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="subunit"> زیر واحد شمارش:</label>
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="subunit"> زیر واحد
+                                        شمارش:</label>
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
@@ -295,13 +301,30 @@
                                 </div>
                                 <div class="col-md-10 col-md-offset-1 margin-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
+                                        <select id="activePrice" class="form-control col-md-12"
+                                                name="activePrice">
+                                            <option value="price">قیمت اصلی</option>
+                                            <option value="sales_price">قیمت حراج</option>
+                                            <option value="special_price">قیمت ویژه</option>
+                                            <option value="wholesale_price">قیمت عمده</option>
+                                            <option value="free_price">قیمت زاپاس</option>
+                                        </select>
+                                    </div>
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="color">انتخاب قیمت فعلی
+                                        محصول :
+                                    </label>
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 margin-1">
+                                    <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <strong class="pull-right text-danger">
-                                             وارد نکردن هزینه ی پست به منزله رایگان بودن هزینه ی پست این محصول تلقی خواهد شد.
+                                            وارد نکردن هزینه ی پست به منزله رایگان بودن هزینه ی پست این محصول تلقی خواهد
+                                            شد.
                                         </strong>
                                         <input id="post_price" class="form-control col-md-12 col-xs-12 pr"
                                                name="post_price" type="text">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3 margin-2" for="post_price"> هزینه ی
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3 margin-2" for="post_price">
+                                        هزینه ی
                                         پست (تومان):
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
@@ -375,17 +398,21 @@
                                 </div>
                                 <div>
                                     <div class="col-md-12 margin-2 ">
-                                        <div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3 margin-1 padding-right-2" id="color">
+                                        <div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3 margin-1 padding-right-2"
+                                             id="color">
                                         </div>
-                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="color">انتخاب رنگ های محصول :
+                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="color">انتخاب رنگ
+                                            های محصول :
                                         </label>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="col-md-12 margin-2 margin-bot-1">
-                                        <div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3 margin-1 padding-right-2" id="size">
+                                        <div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3 margin-1 padding-right-2"
+                                             id="size">
                                         </div>
-                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="size">انتخاب اندازه های محصول :
+                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="size">انتخاب اندازه
+                                            های محصول :
                                         </label>
                                     </div>
                                 </div>
@@ -435,7 +462,9 @@
                                     type: "info",
                                     confirmButtonText: "بستن"
                                 });
-                                setTimeout(function(){window.location.reload(true);},3000);
+                                setTimeout(function () {
+                                    window.location.reload(true);
+                                }, 3000);
 
                             },
                             error: function (xhr) {
@@ -526,7 +555,7 @@
                             loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
                         }
                         else {
-                              location.href = '{{url("admin/addCategory")}}';
+                            location.href = '{{url("admin/addCategory")}}';
                         }
                     }
                 })
@@ -719,7 +748,7 @@
                     }
                 });
                 //load item in select box
-                 function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2) {
+                function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2) {
                     var item = $(selectBoxId);
                     item.empty();
                     item.append("<option selected='true' disabled='disabled'>" + msgOption1 + "</option>")
@@ -778,7 +807,7 @@
                     }
 
                 }//end find title of selected categories->we show title's product of this category to user that admin registered before
-                function appendItem(divId,inputName,myUrl) {
+                function appendItem(divId, inputName, myUrl) {
                     $.ajax({
                         url: myUrl,
                         dataType: "json",
@@ -791,15 +820,16 @@
 
                                 item.append(
                                     '<div class="col-md-4 col-sm-6 col-xs-3 float-right">' +
-                                    '<label class="myLabel">'+
-                                    '<input class="form-control myColor" type="checkbox" name="'+inputName+'[]" value="' + value.id + '"/>'
-                                    +value.title+'</label></div>')
+                                    '<label class="myLabel">' +
+                                    '<input class="form-control myColor" type="checkbox" name="' + inputName + '[]" value="' + value.id + '"/>'
+                                    + value.title + '</label></div>')
                             });
                         }
                     })
                 }
-                appendItem("#color","color","{{url('api/v1/getColors')}}");
-                appendItem("#size","size","{{url('api/v1/getSizes')}}");
+
+                appendItem("#color", "color", "{{url('api/v1/getColors')}}");
+                appendItem("#size", "size", "{{url('api/v1/getSizes')}}");
             });
         </script>
         <script src="{{ URL::asset('public/js/persianDatepicker.js')}}"></script>
