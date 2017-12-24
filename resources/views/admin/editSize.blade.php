@@ -29,6 +29,7 @@
                         <tr>
                             <th style="text-align: center">ردیف</th>
                             <th style="text-align: center">عنوان سایز</th>
+                            <th style="text-align: center">تغییر وضعیت</th>
                             <th style="text-align: center">ویرایش</th>
                         </tr>
                         </thead>
@@ -41,6 +42,12 @@
                             <tr class="unit">
                                 <td style="font-size: 120%;">{{++$i}}</td>
                                 <td class="col-md-6 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$data[0]->title}}"></td>
+                                @if($data[0]->active == 1)
+                                    <td><a id="active" content="{{$data[0]->active}}" name="{{$data[0]->id}}" type="button"  data-content="غیر فعال" class="btn btn-danger col-md-8 col-md-offset-2" >غیر فعال</a></td>
+                                @endif
+                                @if($data[0]->active == 0)
+                                    <td><a id="active" content="{{$data[0]->active}}" name="{{$data[0]->id}}" type="button"  data-content="فعال" class="btn btn-success col-md-8 col-md-offset-2"> فعال</a></td>
+                                @endif
                                 <td><button id="edit" type="button" class="btn btn-warning col-md-9 col-md-offset-1">ویرایش</button></td>
                                 <input type="hidden" value="{{$data[0]->id}}" id="id" name="id">
                                 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
@@ -133,5 +140,69 @@
                         }
                     })
             })
+        </script>
+
+        <!-- below script is to make it active or deactive -->
+        <script>
+            $(document).on('click','#active',function () {
+                var active     = $(this).attr('content');
+                var token      = $("#token").val();
+                var sizeId = $(this).attr('name');
+                var title      = $(this).attr('data-content');
+                //alert(title);
+                swal({
+                        title:   " آیا در نظر دارید این سایز را " +"(( "+ title +" ))"+  "  نمایید؟ ",
+                        text: "",
+                        type: "info",
+                        showCancelButton: true,
+                        confirmButtonColor: "	#5cb85c",
+                        cancelButtonText: "خیر",
+                        confirmButtonText: "آری",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $.ajax
+                            ({
+                                cache: false,
+                                url: "{{url('admin/enableOrDisableSize')}}",
+                                type: "post",
+                                data: {'_token': token, 'active': active, 'sizeId': sizeId},
+                                dataType: "JSON",
+                                success: function (response) {
+                                    if (response.code == 1) {
+                                        swal({
+                                            title: "",
+                                            text: response.message,
+                                            type: "success",
+                                            confirmButtonText: "بستن"
+                                        });
+                                        setTimeout(function () {
+                                            window.location.href = document.referrer;
+                                        }, 3000);
+                                    } else {
+                                        swal({
+                                            title: "",
+                                            text: response.message,
+                                            type: "warning",
+                                            confirmButtonText: "بستن"
+                                        });
+                                    }
+
+                                }, error: function (error) {
+                                    console.log(error);
+                                    swal({
+                                        title: "",
+                                        text: 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید',
+                                        type: "warning",
+                                        confirmButtonText: "بستن"
+                                    });
+                                }
+                            })
+                        }
+                    })
+            })
+
         </script>
 @endsection
