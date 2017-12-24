@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\SelfClasses\AddProduct;
 use App\Http\SelfClasses\CheckFiles;
 use App\Http\SelfClasses\CheckJalaliDate;
@@ -11,7 +10,6 @@ use App\Http\SelfClasses\UpdateProduct;
 use App\Models\Product;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
-
 class ProductController extends Controller
 {
     public function addProduct()
@@ -19,7 +17,6 @@ class ProductController extends Controller
         $pageTitle = 'درج محصول';
         return view('admin.addProduct', compact('pageTitle'));
     }
-
     public function productsManagement()
     {
         $pageTitle = 'مدیریت محصولات';
@@ -29,7 +26,6 @@ class ProductController extends Controller
         }
         return view('admin.productManagement', compact('data', 'pageTitle'));
     }
-
     //add new product to database
     public function addNewProduct(Request $request)
     {
@@ -58,7 +54,6 @@ class ProductController extends Controller
         }
 
     }
-
     //update product to database
     public function updateProduct(Request $request)
     {
@@ -85,10 +80,7 @@ class ProductController extends Controller
         } else {
             return response()->json(['data' => 'تاریخ را بطور صحیح وارد نمائید : 1396/09/19']);
         }
-
     }
-
-    //
     public function productDetailsGet($id)
     {
         $pageTitle = 'ویرایش محصول';
@@ -101,7 +93,6 @@ class ProductController extends Controller
             return view('errors.403');
         }
     }
-
     public function toPersian($date)
     {
         if (count($date) > 0) {
