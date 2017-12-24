@@ -49,10 +49,11 @@ class CategoryController extends Controller
     //below function is related to edit main category
     public function editCategory($id)
     {
+        $pageTitle = 'ویرایش دسته';
         $categoryInfo = Category::where('id',$id)->get();
         if(count($categoryInfo) > 0)
         {
-            return view('admin.editCategory',compact('categoryInfo'));
+            return view('admin.editCategory',compact('categoryInfo','pageTitle'));
         }else
             {
                 return view('errors.403');
@@ -76,6 +77,9 @@ class CategoryController extends Controller
         if(is_bool($result))
         {
             $category = Category::find($request->categoryId);
+            $file = $request->file[0];
+            $src = $file->getClientOriginalName();
+            $file->move('public/dashboard/image/', $src);
             $category->image_src = $request->file[0]->getClientOriginalName();
             $category->save();
             if($category){

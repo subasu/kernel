@@ -30,6 +30,7 @@
                             <th style="text-align: center">ردیف</th>
                             <th style="text-align: center">عنوان واحد شمارش</th>
                             <th style="text-align: center">ویرایش</th>
+                            <th style="text-align: center">تغییر وضعیت</th>
                         </tr>
                         </thead>
 
@@ -42,6 +43,12 @@
                                 <td style="font-size: 120%;">{{++$i}}</td>
                                 <td class="col-md-6 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$unitCount[0]->title}}"></td>
                                 <td><button id="edit" type="button" class="btn btn-warning col-md-9 col-md-offset-1">ویرایش</button></td>
+                                @if($unitCount[0]->active == 1)
+                                    <td><a id="active" content="{{$unitCount[0]->active}}" name="{{$unitCount[0]->id}}" type="button"  data-content="غیر فعال" class="btn btn-danger" >غیر فعال</a></td>
+                                @endif
+                                @if($unitCount[0]->active == 0)
+                                    <td><a id="active" content="{{$unitCount[0]->active}}" name="{{$unitCount[0]->id}}" type="button"  data-content="فعال" class="btn btn-success"> فعال</a></td>
+                                @endif
                                 <input type="hidden" value="{{$unitCount[0]->id}}" id="id" name="id">
                                 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
                             </tr>
@@ -134,4 +141,69 @@
                     })
             })
         </script>
+
+        <!-- below script is to make it active or deactive -->
+        <script>
+            $(document).on('click','#active',function () {
+                var active     = $(this).attr('content');
+                var token      = $("#token").val();
+                var unitId = $(this).attr('name');
+                var title      = $(this).attr('data-content');
+                //alert(title);
+                swal({
+                        title:   " آیا در نظر دارید وضعیت دسته را " +"(( "+ title +" ))"+  "  نمایید؟ ",
+                        text: "",
+                        type: "info",
+                        showCancelButton: true,
+                        confirmButtonColor: "	#5cb85c",
+                        cancelButtonText: "خیر",
+                        confirmButtonText: "آری",
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $.ajax
+                            ({
+                                cache: false,
+                                url: "{{url('admin/enableOrDisableUnitCount')}}",
+                                type: "post",
+                                data: {'_token': token, 'active': active, 'unitId': unitId},
+                                dataType: "JSON",
+                                success: function (response) {
+                                    if (response.code == 1) {
+                                        swal({
+                                            title: "",
+                                            text: response.message,
+                                            type: "success",
+                                            confirmButtonText: "بستن"
+                                        });
+                                        setTimeout(function () {
+                                            window.location.href = document.referrer;
+                                        }, 3000);
+                                    } else {
+                                        swal({
+                                            title: "",
+                                            text: response.message,
+                                            type: "warning",
+                                            confirmButtonText: "بستن"
+                                        });
+                                    }
+
+                                }, error: function (error) {
+                                    console.log(error);
+                                    swal({
+                                        title: "",
+                                        text: 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید',
+                                        type: "warning",
+                                        confirmButtonText: "بستن"
+                                    });
+                                }
+                            })
+                        }
+                    })
+            })
+
+        </script>
+
 @endsection

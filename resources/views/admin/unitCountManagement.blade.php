@@ -30,6 +30,7 @@
                             <th style="text-align: center">ردیف</th>
                             <th style="text-align: center"> عنوان واحد شمارش</th>
                             <th style="text-align: center">مشاهده زیر واحد</th>
+                            <th style="text-align: center">وضعیت</th>
                             <th style="text-align: center;border-right: 1px solid #d6d6c2">ویرایش</th>
                         </tr>
                         </thead>
@@ -41,13 +42,19 @@
                             <tr class="unit">
                                 <td style="font-size: 120%;">{{++$i}}</td>
                                 <td style="font-size: 120%;">{{$datum->title}}</td>
-                                <td style="font-size: 120%;"><a class="btn btn-warning col-md-8 col-md-offset-2"  href="{{url('admin/editUnitCount')}}/{{$datum->id}}">ویرایش</a></td>
-                                @if(count($datum->subUnits) > 0)
-                                    <td style="font-size: 120%;"><a class="btn btn-dark col-md-8 col-md-offset-2" href="{{url('admin/subUnitManagement')}}/{{$datum->id}}"> مشاهده و ویرایش زیر واحدها </a></td>
-                                @endif
                                 @if(count($datum->subUnits) == 0)
                                     <td style="font-size: 120%;"><a class="btn btn-default col-md-8 col-md-offset-2">فاقد زیر واحد</a></td>
                                 @endif
+                                @if(count($datum->subUnits) > 0)
+                                    <td style="font-size: 120%;"><a class="btn btn-dark col-md-8 col-md-offset-2" href="{{url('admin/subUnitManagement')}}/{{$datum->id}}"> مشاهده و ویرایش زیر واحدها </a></td>
+                                @endif
+                                @if($datum->active  ==  0)
+                                    <td style="font-size: 120%;"><a class="btn btn-danger col-md-8 col-md-offset-2" >غیر فعال</a></td>
+                                @endif
+                                @if($datum->active  ==  1)
+                                    <td style="font-size: 120%;"><a class="btn btn-success col-md-8 col-md-offset-2" >فعال</a></td>
+                                @endif
+                                <td style="font-size: 120%;"><a class="btn btn-warning col-md-8 col-md-offset-2"  href="{{url('admin/editUnitCount')}}/{{$datum->id}}">ویرایش</a></td>
                             </tr>
                             {{--@endif--}}
                         @endforeach

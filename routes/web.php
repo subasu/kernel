@@ -51,7 +51,7 @@ Route::group(['prefix'=>'admin'],function() {
     Route::get('subUnitManagement/{id}', 'UnitController@subUnitManagement');//show view of all units and subUnits
     Route::get('editUnitCount/{id}', 'UnitController@editUnitCount');
     Route::post('editUnitCountTitle', 'UnitController@editUnitCountTitle');
-
+    Route::post('enableOrDisableUnitCount','UnitController@enableOrDisableUnitCount');
 //productFiles
     Route::get('addProduct', 'ProductController@addProduct');//show add product view
     Route::get('productsManagement', 'ProductController@productsManagement');//show view of all product's details

@@ -607,7 +607,9 @@
                                                 {{--<a class="price price" id="productFlag" data-toggle="" name="{{$flag->price}}" title="تومان">{{number_format($flag->price)}} </a>--}}
                                                 {{--@endif--}}
                                                 {{--@endforeach--}}
-                                                <img src="{{url('public/dashboard/productFiles/picture/'.$product->productImages[0]->image_src)}}"  alt="عنوان محصول" width="200" height="250"  style="text-decoration: underline;"/>
+                                                @if(!empty($product->productImages[0]))
+                                                    <img src="{{url('public/dashboard/productFiles/picture/'.$product->productImages[0]->image_src)}}"  alt="عنوان محصول" width="200" height="250"  style="text-decoration: underline;"/>
+                                                @endif
                                                 {{--<img src="public/main/assets/data/ld2.jpg"  alt=" عنوان محصول"  style="text-decoration: underline;"/>--}}
                                             </a>
                                             <div class="quick-view">

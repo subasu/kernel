@@ -29,6 +29,7 @@
                         <tr>
                             <th style="text-align: center">ردیف</th>
                             <th style="text-align: center">عنوان واحد شمارش</th>
+                            <th style="text-align: center">وضعیت</th>
                             <th style="text-align: center">ویرایش</th>
                         </tr>
                         </thead>
@@ -41,6 +42,12 @@
                             <tr class="unit">
                                 <td>{{++$i}}</td>
                                 <td class="col-md-6 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$subUnit->title}}"></td>
+                                @if($subUnit->active  ==  0)
+                                    <td style="font-size: 120%;"><a class="btn btn-danger col-md-8 col-md-offset-2" >غیر فعال</a></td>
+                                @endif
+                                @if($subUnit->active  ==  1)
+                                    <td style="font-size: 120%;"><a class="btn btn-success col-md-8 col-md-offset-2" >فعال</a></td>
+                                @endif
                                 <td><button id="edit" type="button" class="btn btn-success">ویرایش</button></td>
                                 <input type="hidden" value="{{$subUnit->id}}" id="id" name="id">
                                 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">

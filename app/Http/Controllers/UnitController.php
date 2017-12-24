@@ -58,7 +58,7 @@ class UnitController extends Controller
     public function unitCountManagement()
     {
         $pageTitle = 'مدیریت واحد های شمارش';
-        $data= UnitCount::where('active',1)->get();
+        $data= UnitCount::all();
         return view('admin.unitCountManagement',compact('data','pageTitle'));
     }
 
@@ -131,4 +131,42 @@ class UnitController extends Controller
             }
 
     }
+
+    //below function is related to make unit counts enable or disable
+    public function enableOrDisableUnitCount(Request $request)
+    {
+        if(!$request->ajax())
+        {
+            abort(403);
+        }
+        else
+        {
+            switch ($request->active)
+            {
+                case 1 :
+                    $update = DB::table('unit_counts')->where('id',$request->unitId)->update(['active' => 0 ]);
+                    if($update)
+                    {
+                        return response()->json(['message' => 'دسته مورد نظر شما غیر فعال گردید' , 'code' => '1']);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+                case 0 :
+                    $update = DB::table('unit_counts')->where('id',$request->unitId)->update(['active' => 1 ]);
+                    if($update)
+                    {
+                        return response()->json(['message' => 'دسته مورد نظر شما  فعال گردید' , 'code' => '1']);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+            }
+        }
+    }
+
 }

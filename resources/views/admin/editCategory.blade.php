@@ -249,7 +249,7 @@
             })
         </script>
 
-        <!-- belwo script is to make it active or deactive -->
+        <!-- below script is to make it active or deactive -->
         <script>
             $(document).on('click','#active',function () {
                 var active     = $(this).attr('content');
