@@ -4380,8 +4380,8 @@ span.notify-right {
 }
 
 #product .pb-right-column .form-option .attributes .attribute-label {
-    width: 50px;
-    float: left;
+    width: 60px;
+    float: right;
 }
 
 #product .pb-right-column .form-option .form-option-title {
@@ -6059,4 +6059,10 @@ span.notify-right {
 }
 .display-inline{
     display: inline !important;
+}
+.margin-r-0{
+    margin-right: 0px !important;
+}
+.float-r{
+    float: right;
 }
