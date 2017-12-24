@@ -52,6 +52,7 @@ Route::group(['prefix'=>'admin'],function() {
     Route::get('editUnitCount/{id}', 'UnitController@editUnitCount');
     Route::post('editUnitCountTitle', 'UnitController@editUnitCountTitle');
     Route::post('enableOrDisableUnitCount','UnitController@enableOrDisableUnitCount');
+    Route::post('enableOrDisableSubUnitCount','UnitController@enableOrDisableSubUnitCount');
 //productFiles
     Route::get('addProduct', 'ProductController@addProduct');//show add product view
     Route::get('productsManagement', 'ProductController@productsManagement');//show view of all product's details
@@ -75,6 +76,7 @@ Route::group(['prefix'=>'admin'],function() {
     Route::post('addNewColors','ColorController@addNewColors');//this route is related to add new colors
     Route::get('editColor/{id}','ColorController@editColor'); //this route is related to return edit color view
     Route::post('editColorTitle','ColorController@editColorTitle');//this route is related to edit color title
+    Route::post('enableOrDisableColor','ColorController@enableOrDisableColor');
 
 //size routes
     Route::get('sizesManagement','SizeController@sizesManagement');//this route is related to return view of size management
@@ -82,7 +84,7 @@ Route::group(['prefix'=>'admin'],function() {
     Route::post('addNewSize','SizeController@addNewSize');//this route is related to add new size in data base
     Route::get('editSize/{id}','SizeController@editSize'); //this route is related to return edit color view
     Route::post('editSizeTitle','SizeController@editSizeTitle');//this route is related to edit size title
-
+    Route::post('enableOrDisableSize','ColorController@enableOrDisableSize');
 //payment type routes
     Route::get('addPaymentType','PaymentTypeController@addPaymentType');//this route is related to return add payment type blade
     Route::post('addNewPaymentTypes','PaymentTypeController@addNewPaymentTypes');

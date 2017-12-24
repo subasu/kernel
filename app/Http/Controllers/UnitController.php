@@ -147,7 +147,7 @@ class UnitController extends Controller
                     $update = DB::table('unit_counts')->where('id',$request->unitId)->update(['active' => 0 ]);
                     if($update)
                     {
-                        return response()->json(['message' => 'دسته مورد نظر شما غیر فعال گردید' , 'code' => '1']);
+                        return response()->json(['message' => 'واحد شمارش مورد نظر شما غیر فعال گردید' , 'code' => '1']);
                     }else
                     {
                         return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
@@ -158,7 +158,7 @@ class UnitController extends Controller
                     $update = DB::table('unit_counts')->where('id',$request->unitId)->update(['active' => 1 ]);
                     if($update)
                     {
-                        return response()->json(['message' => 'دسته مورد نظر شما  فعال گردید' , 'code' => '1']);
+                        return response()->json(['message' => 'واحد شمارش مورد  نظر شما  فعال گردید' , 'code' => '1']);
                     }else
                     {
                         return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
@@ -169,4 +169,41 @@ class UnitController extends Controller
         }
     }
 
+
+    //below function is related to make sub unit counts enable or disable
+    public function enableOrDisableSubUnitCount(Request $request)
+    {
+        if(!$request->ajax())
+        {
+            abort(403);
+        }
+        else
+        {
+            switch ($request->active)
+            {
+                case 1 :
+                    $update = DB::table('sub_unit_counts')->where('id',$request->subUnitId)->update(['active' => 0 ]);
+                    if($update)
+                    {
+                        return response()->json(['message' => 'واحد شمارش مورد نظر شما غیر فعال گردید' , 'code' => '1']);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+                case 0 :
+                    $update = DB::table('sub_unit_counts')->where('id',$request->subUnitId)->update(['active' => 1 ]);
+                    if($update)
+                    {
+                        return response()->json(['message' => 'واحد شمارش مورد نظر شما  فعال گردید' , 'code' => '1']);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+            }
+        }
+    }
 }

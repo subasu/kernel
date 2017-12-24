@@ -81,4 +81,41 @@ class ColorController extends Controller
                     }
             }
     }
+
+    //below function is related to make color enable or disable
+    public function enableOrDisableColor(Request $request)
+    {
+        if(!$request->ajax())
+        {
+            abort(403);
+        }
+        else
+        {
+            switch ($request->active)
+            {
+                case 1 :
+                    $update = DB::table('colors')->where('id',$request->colorId)->update(['active' => 0 ]);
+                    if($update)
+                    {
+                        return response()->json(['message' => 'رنگ  مورد نظر شما غیر فعال گردید' , 'code' => '1']);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+                case 0 :
+                    $update = DB::table('colors')->where('id',$request->colorId)->update(['active' => 1 ]);
+                    if($update)
+                    {
+                        return response()->json(['message' => 'رنگ مورد نظر شما  فعال گردید' , 'code' => '1']);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+            }
+        }
+    }
 }

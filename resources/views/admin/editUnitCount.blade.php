@@ -151,7 +151,7 @@
                 var title      = $(this).attr('data-content');
                 //alert(title);
                 swal({
-                        title:   " آیا در نظر دارید وضعیت دسته را " +"(( "+ title +" ))"+  "  نمایید؟ ",
+                        title:   " آیا در نظر دارید وضعیت واحد شمارش را " +"(( "+ title +" ))"+  "  نمایید؟ ",
                         text: "",
                         type: "info",
                         showCancelButton: true,

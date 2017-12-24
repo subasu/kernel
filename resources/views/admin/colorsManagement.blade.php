@@ -29,6 +29,7 @@
                         <tr>
                             <th style="text-align: center">ردیف</th>
                             <th style="text-align: center"> عنوان رنگ</th>
+                            <th style="text-align: center">وضعیت</th>
                             <th style="text-align: center;border-right: 1px solid #d6d6c2">ویرایش</th>
                         </tr>
                         </thead>
@@ -40,6 +41,12 @@
                             <tr class="unit">
                                 <td style="font-size: 120%;">{{++$i}}</td>
                                 <td style="font-size: 120%;">{{$datum->title}}</td>
+                                @if($datum->active == 1)
+                                    <td><button class="btn btn-success col-lg-8 col-md-offset-2" >فعال</button></td>
+                                @endif
+                                @if($datum->active == 0)
+                                    <td><button class="btn btn-danger col-lg-8 col-md-offset-2" >غیر فعال</button></td>
+                                @endif
                                 <td style="font-size: 120%;"><a class="btn btn-warning col-md-8 col-md-offset-2"  href="{{url('admin/editColor')}}/{{$datum->id}}">ویرایش</a></td>
                             </tr>
                             {{--@endif--}}

@@ -81,4 +81,42 @@ class SizeController extends Controller
             }
         }
     }
+
+
+    //below function is related to make size enable or disable
+    public function enableOrDisableSize(Request $request)
+    {
+        if(!$request->ajax())
+        {
+            abort(403);
+        }
+        else
+        {
+            switch ($request->active)
+            {
+                case 1 :
+                    $update = DB::table('sizes')->where('id',$request->sizeId)->update(['active' => 0 ]);
+                    if($update)
+                    {
+                        return response()->json(['message' => 'سایز  مورد نظر شما غیر فعال گردید' , 'code' => '1']);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+                case 0 :
+                    $update = DB::table('sizes')->where('id',$request->sizeId)->update(['active' => 1 ]);
+                    if($update)
+                    {
+                        return response()->json(['message' => 'سایز مورد نظر شما  فعال گردید' , 'code' => '1']);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+            }
+        }
+    }
 }
