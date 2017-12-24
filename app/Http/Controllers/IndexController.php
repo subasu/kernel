@@ -23,7 +23,7 @@ class IndexController extends Controller
 
     public function loadMenu()
     {
-        $menu = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
+        $menu = Category::where([['parent_id',null],['grand_parent_id',null]])->get();
         return $menu;
 
     }

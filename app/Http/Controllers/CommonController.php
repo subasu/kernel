@@ -48,7 +48,7 @@ class CommonController extends Controller
     //below function is to get brands from database
     public function getBrands($id)
     {
-        $brands = Category::where([['parent_id',$id],['active',1]])->get();
+        $brands = Category::where([['parent_id',$id],['active',1],['title','<>','سایر']])->get();
         if(count($brands) > 0 )
         {
             return response()->json($brands);
