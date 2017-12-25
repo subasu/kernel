@@ -38,7 +38,8 @@
                                     </div>
                                 </div>
                                 <div class="product-price-group" dir="rtl">
-                                    <span class="price margin-r-0" dir="rtl">@foreach($product->productFlags as $flag)
+                                    <span class="price margin-r-0" dir="rtl">
+                                        @foreach($product->productFlags as $flag)
                                             @if($flag->active == 1)
                                                 <b><a class="price margin-r-0" id="productFlag" data-toggle=""
                                                       name="{{$flag->price}}"
