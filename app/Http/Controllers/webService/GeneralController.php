@@ -13,7 +13,7 @@ class GeneralController extends Controller
     //below function is related to get main menu
     public function getMainMenu()
     {
-        $mainMenu  = Category::where([['parent_id',null],['grand_parent_id',null],['depth','<>',0]])->get();
+        $mainMenu  = Category::where([['parent_id',null],['grand_parent_id',null]])->get();
         return response()->json(['mainMenu' => $mainMenu]);
     }
 
@@ -34,15 +34,14 @@ class GeneralController extends Controller
     //below function is related to show basket detail
     public function order(Request $request)
     {
-        if($basket = Basket::where([['cookie',$request->cookie],['payment',0]])->count() > 0)
+        if($basket = Basket::where([['id',$request->basketId],['payment',0]])->count() > 0)
         {
             switch ($request->parameter)
             {
                 case 'basketDetail':
-                    $basketId  = Basket::where([['cookie',$request->cookie],['payment',0]])->value('id');
-                    if($basketId)
+                    if($request->basketId)
                     {
-                        $baskets   = Basket::find($basketId);
+                        $baskets   = Basket::find($request->basketId);
                         $total     = 0;
                         foreach ($baskets->products as $basket)
                         {
@@ -62,8 +61,7 @@ class GeneralController extends Controller
 
                 case 'orderDetail':
                     $paymentTypes = PaymentType::where('active',1)->get();
-                    $basketId  = Basket::where([['cookie',$request->cookie],['payment',0]])->value('id');
-                    $baskets   = Basket::find($basketId);
+                    $baskets   = Basket::find($request->basketId);
                     $total          = 0;
                     $totalDiscount  = 0 ;
                     $totalPostPrice = 0;

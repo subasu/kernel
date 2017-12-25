@@ -70,7 +70,7 @@
                                 <th class="cart_product" align="center">عنوان محصول</th>
                                 <th class="rtl" align="center"> توضیحات</th>
                                 <th class="rtl" align="center">قیمت واحد</th>
-                                <th class="rtl" align="center">  تعداد</th>
+                                <th class="rtl" align="center">تعداد/مقدار</th>
                                 <th class="rtl">جمع کل (تومان)</th>
                                 <th class="rtl">تخفیف محصول (درصد)</th>
                                 <th class="rtl">هزینه ی پست (تومان)</th>

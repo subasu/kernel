@@ -256,21 +256,25 @@ class UserController extends Controller
             $order->basket_id = $request->basketId;
             $order->payment_type = $request->paymentType;
             $order->save();
-            if ($order) {
+            if ($order)
+            {
                 $update = Basket::find($request->basketId);
                 $update->payment = 1;
                 $update->save();
                 if ($update)
                 {
-                    if($newPassword == '')
-                    {
-                        return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید ، لطفا در جهت پیگیری سفارش خود وارد پنل شوید', 'code' => 1 , 'userPassword' => $newPassword]);
-                    }else
+
+                        if($newPassword == '')
+                        {
+                            return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید ، لطفا در جهت پیگیری سفارش خود وارد پنل شوید', 'code' => 1 , 'userPassword' => $newPassword]);
+                        }else
                         {
                             return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید ، لطفا در جهت پیگیری سفارش خود با رمز عبور زیر وارد پنل شوید', 'code' => 1 , 'userPassword' => $newPassword]);
                         }
 
-                } else {
+                }
+                else
+                {
                     return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
                 }
 
@@ -282,11 +286,13 @@ class UserController extends Controller
     {
         $pageTitle = 'مشاهده و بررسی سفارشات';
         $data = Order::where([['user_id',Auth::user()->id],['pay' , '<>' , null],['transaction_code','<>',null]])->get();
+        $baskets = Basket::find($data[0]->basket_id);
         foreach ($data as $datum)
         {
             $datum->orderDate = $this->toPersian($datum->created_at->toDateString());
         }
-        return view('user.ordersList',compact('data','pageTitle'));
+
+        return view('user.ordersList',compact('data','pageTitle','baskets'));
     }
 
     //
@@ -318,6 +324,7 @@ class UserController extends Controller
             {
                 $basket->product_price = $basket->pivot->product_price;
                 $basket->basket_id     = $basket->pivot->basket_id;
+                $basket->basketComment = $basket->pivot->comments;
             }
 
             return view('user.orderDetails',compact('baskets','pageTitle'));
@@ -328,10 +335,10 @@ class UserController extends Controller
     }
 
     //below function is related to get information of factor
-    public function userFactor($id)
+    public function userShowFactor($id)
     {
-        $pageTitle = 'فاکتور سفارش';
-        $baskets   = Basket::find($id);
+        $pageTitle      = 'فاکتور سفارش';
+        $baskets        = Basket::find($id);
         $total          = 0;
         $totalDiscount  = 0 ;
         $totalPostPrice = 0;
@@ -341,8 +348,9 @@ class UserController extends Controller
             foreach ($baskets->products as $basket)
             {
                 $basket->count         = $basket->pivot->count;
-                $basket->price         = $basket->pivot->product_price;
+                 $basket->price         = $basket->pivot->product_price;
                 $basket->sum           = $basket->pivot->count * $basket->pivot->product_price;
+                $basket->basketComment = $basket->pivot->comments;
                 $total                += $basket->sum;
                 $basket->basket_id     = $basket->pivot->basket_id;
                 $totalPostPrice       += $basket->post_price;
@@ -357,11 +365,12 @@ class UserController extends Controller
 
             }
             $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
-            return view('common.factor',compact('pageTitle','baskets','total','totalPostPrice','finalPrice','paymentTypes'));
+            return view('user.userFactor',compact('pageTitle','baskets','total','totalPostPrice','finalPrice','paymentTypes'));
         }else
         {
             return view('errors.403');
         }
+
     }
 }
 

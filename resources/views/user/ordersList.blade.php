@@ -25,6 +25,14 @@
                 {{--</div>--}}
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
+                    <div align="right">
+                        <ul style="direction: rtl; font-size: 140%;"> عنوان محصولات خرید شده :
+                            @foreach($baskets->products as $product)
+                                <li class="text-right" style="direction: rtl; margin-right: 3%; font-size: 80%;">{{$product->title}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <br/>
                     <table style="direction:rtl;text-align: center" id="example"
                            class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                         <input type="hidden" id="token" value="{{ csrf_token() }}">
@@ -37,7 +45,6 @@
                             <th style="text-align: center">هزینه نهایی (تومان)</th>
                             <th style="text-align: center">وضعیت تحویل</th>
                             <th style="text-align: center">مشاهده جزییات</th>
-
                         </tr>
                         </thead>
 
@@ -50,12 +57,23 @@
                                 <td style="font-size: 120%">{{number_format($datum->total_price)}}</td>
                                 <td style="font-size: 120%">{{number_format($datum->discount_price)}}</td>
                                 <td style="font-size: 120%">{{number_format($datum->factor_price)}}</td>
-                                <td style="font-size: 120%">{{$datum->order_status}}</td>
+                                @if($datum->order_status == null)
+                                    <td><button class="btn btn-default" style="font-size: 120%;">نا مشخص</button></td>
+                                @endif
+                                @if($datum->order_status != null)
+                                    <td style="font-size: 120%">{{$datum->order_status}}</td>
+                                @endif
                                 <td ><strong><a style="font-size: 120%" class="btn btn-dark" href="{{url('user/orderDetails/'.$datum->basket_id)}}">مشاهده جزئیات</a></strong></td>
 
                             </tr>
                         @endforeach
+                        <tr  style="background-color:#204d74; ">
+                            <td  colspan="10"></td>
+                        </tr>
+                        <th style="font-size: 150%;">توضیحات کلی سفارش :   <td colspan="10" class="text-justify" style="font-size: 120%;">@if($data[0]->comments != null){{$data[0]->comments}}@endif @if($data[0]->comments == null)توضیحات ندارد@endif</td></th>
+                        {{--<tr><td></td></tr>--}}
                         </tbody>
+
                     </table>
                 </div>
             </div>

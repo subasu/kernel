@@ -25,13 +25,9 @@
                             <th style="text-align: center">ردیف</th>
                             <th style="text-align: center">نلفن خریدار</th>
                             <th style="text-align: center">مکان خریدار</th>
-                            <th style="text-align: center">تاریخ</th>
-                            <th style="text-align: center">ساعت</th>
-                            <th style="text-align: center">وضعیت ارسال</th>
-                            <th style="text-align: center">شیوه ی ارسال</th>
-                            <th style="text-align: center">مبلغ تخفیف</th>
-                            <th style="text-align: center">مبلغ کل سفارش</th>
-                            <th style="text-align: center">جمع کل سفارش</th>
+                            <th style="text-align: center"> تاریخ ثبت سفارش</th>
+                            <th style="text-align: center">ساعت ثبت سفارش</th>
+                            <th style="text-align: center">جمع کل</th>
                             <th style="text-align: center">نوع پرداخت</th>
                             <th style="text-align: center">کد تراکنش</th>
                             <th style="text-align: center;border-right: 1px solid #d6d6c2">نمایش جزئیات فاکتور</th>
@@ -40,32 +36,19 @@
 
                         <tbody>
                         <?php $i = 0 ?>
-                        @foreach($data as $val)
-                            {{--                            @if($val->unit_id!=3)--}}
+                        @foreach($data as $datum)
+
                             <tr class="unit">
-                                <td style="font-size:18px;@if($val->is_supervisor==1) background-color:#ffff80 @endif">{{++$i}}</td>
-                                <td>{{$val->title. ' '.$val->name.' '.$val->family}}</td>
-                                <td>@if($val->username!=null){{$val->username}} @endif</td>
-                                <td>{{$val->cellphone}} </td>
-                                <td>{{$val->unit->title}}</td>
-                                <td>{{$val->user->title.' '.$val->user->name .' '.$val->user->family }}</td>
-                                <td>
-                                    @if($val->unit_id!=3)
-                                        @if($val->active === 0)
-                                            <button  id="{{$val->id}}" value="{{$val->active}}" class="btn btn-danger">غیرفعال</button>
-                                        @else
-                                            <button  id="{{$val->id}}" value="{{$val->active}}" class="btn btn-success">فعال</button>
-                                        @endif
-                                    @endif
-                                </td>
-                                <td id="{{$val->id}}">
-                                    <a class="btn btn-primary" href="{{url('systemManager/access_level/'.$val->id)}}">تعیین سطح دسترسی</a>
-                                </td>
-                                <td style="border-right: 1px solid #d6d6c2" id="{{$val->id}}">
-                                    <a class="btn btn-info" href="{{url('admin/usersUpdate'.'/'.$val->id)}}">ویرایش</a>
-                                </td>
+                                <td style="font-size:18px;">{{++$i}}</td>
+                                <td style="font-size:18px;">{{$datum->user_cellphone}}</td>
+                                <td style="font-size:18px;">{{$datum->user_coordination}}</td>
+                                <td style="font-size:18px;">{{$datum->persianDate}} </td>
+                                <td style="font-size:18px;">{{$datum->time}}</td>
+                                <td style="font-size:18px;">{{number_format($datum->factor_price)}}</td>
+                                <td style="font-size:18px;"> با کارت</td>
+                                <td style="font-size:18px;">{{$datum->transaction_code}}</td>
+                                <td style="font-size:18px;"><a class="btn btn-dark" href="{{url('admin/adminShowFactor/'.$datum->basket_id)}}">مشاهده جزئیات فاکتور</a></td>
                             </tr>
-                            {{--@endif--}}
                         @endforeach
                         </tbody>
                     </table>

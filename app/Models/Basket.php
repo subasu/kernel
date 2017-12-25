@@ -9,7 +9,7 @@ class Basket extends Model
     //relation of product and basket
     public function products()
     {
-        return $this->belongsToMany('App\Models\Product')->withPivot('count','product_price','date','time');
+        return $this->belongsToMany('App\Models\Product')->withPivot('count','product_price','date','time','comments');
     }
 
     //relation of basket and user

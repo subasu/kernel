@@ -23,13 +23,14 @@
     <table class="formTable col-md-12 width100 border-right" dir="rtl">
         <thead>
         <tr class=" padding-formTable">
-            <th class="col-md-1">ردیف</th>
-            <th class="col-md-2" colspan="3">عنوان محصول</th>
-            <th class="col-md-2"> قیمت واحد (تومان)</th>
-            <th class="col-md-1">تعداد</th>
-            <th class="col-md-2">جمع کل (تومان)</th>
-            <th class="col-md-2">تخفیف محصول (درصد)</th>
-            <th class="col-md-2">هزینه ی پست (تومان)</th>
+            <th class="col-md-1">R</th>
+            <th class="col-md-1" colspan="3">عنوان محصول</th>
+            <th class="col-md-4">توضیحات</th>
+            <th class="col-md-1"> قیمت واحد (تومان)</th>
+            <th class="col-md-1"> تعداد / مقدار </th>
+            <th class="col-md-1">جمع کل (تومان)</th>
+            <th class="col-md-1">تخفیف محصول (درصد)</th>
+            <th class="col-md-1">هزینه ی پست (تومان)</th>
         </tr>
         </thead>
         <?php $i = 1 ?>
@@ -37,12 +38,13 @@
         @foreach($baskets->products as $basket)
             <tr>
                 <td class="col-md-1">{{$i++}}</td>
-                <td class="col-md-2" colspan="3">{{$basket->title}}</td>
-                <td class="col-md-2">{{number_format($basket->price)}}</td>
+                <td class="col-md-1" colspan="3">{{$basket->title}}</td>
+                <td class="col-md-4">@if($basket->basketComment != null){{$basket->basketComment}}@endif @if($basket->basketComment == null) توضیحات ندارد @endif</td>
+                <td class="col-md-1">{{number_format($basket->price)}}</td>
                 <td class="col-md-1">{{$basket->count}}</td>
-                <td class="col-md-2">{{number_format($basket->sum)}}</td>
-                <td class="col-md-2">@if($basket->discount_volume != null){{$basket->discount_volume}}@endif @if($basket->discount_volume == null) تخفیف ندارد @endif</td>
-                <td class="col-md-2">{{number_format($basket->post_price)}}</td>
+                <td class="col-md-1">{{number_format($basket->sum)}}</td>
+                <td class="col-md-1">@if($basket->discount_volume != null){{$basket->discount_volume}}@endif @if($basket->discount_volume == null) تخفیف ندارد @endif</td>
+                <td class="col-md-1">{{number_format($basket->post_price)}}</td>
             </tr>
         @endforeach
         <tr>

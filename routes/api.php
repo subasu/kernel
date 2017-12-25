@@ -51,6 +51,7 @@ Route::group(['prefix' => '/v1/user'],function (){
     Route::post('removeItemFromBasket','webService\UserController@removeItemFromBasket');
     Route::post('addOrSubCount','webService\UserController@addOrSubCount');
     Route::post('orderRegistration','webService\UserController@orderRegistration');
+    Route::post('addCommentForEachProduct','webService\UserController@addCommentForEachProduct');
 
 });
 

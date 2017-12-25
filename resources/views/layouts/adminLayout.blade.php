@@ -167,7 +167,17 @@
                                     </li>
                                 </ul>
                             </li>
+                            //admin
+                            <li><a><i class="fa fa-first-order"></i>بررسی سفارشات و فاکتورها<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('admin/ordersManagement')}}">نمایش لیست سفارشات</a>
+                                    </li>
+                                    {{--<li><a href="{{url('admin/addPaymentType')}}">افزودن وضعیت پرداخت</a>--}}
+                                    </li>
+                                </ul>
+                            </li>
                             {{--@if(Auth::user()->roll_id == 3)--}}
+                            //user
                             <li><a><i class="fa fa-first-order"></i>بررسی سفارشات و فاکتورها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('user/userOrders')}}">نمایش لیست سفارشات</a>

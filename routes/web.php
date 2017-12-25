@@ -65,6 +65,7 @@ Route::group(['prefix'=>'admin'],function() {
 
 //orders
     Route::get('ordersManagement', 'OrderController@ordersManagement');//show view of all orders
+    Route::get('adminShowFactor/{id}','OrderController@adminShowFactor');
 
 //deliveryMan
     Route::get('addDeliveryMan', 'DeliveryManController@addDeliveryMan');//show add DeliveryMan view
@@ -106,7 +107,7 @@ Route::group(['prefix'=>'user'],function() {
     Route::post('orderRegistration','UserController@orderRegistration');
     Route::get('userOrders','UserController@userOrders');
     Route::get('orderDetails/{id}','UserController@orderDetails');
-    Route::get('userFactor/{id}','UserController@userFactor');
+    Route::get('userShowFactor/{id}','UserController@userShowFactor');
 
 });
 

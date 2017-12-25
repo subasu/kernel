@@ -32,6 +32,7 @@
                         <tr>
                             <th style="text-align: center">ردیف</th>
                             <th style="text-align: center">عنوان محصول</th>
+                            <th style="text-align: center">توضیحات شما</th>
                             <th style="text-align: center">قیمت محصول(تومان)</th>
                             <th style="text-align: center">هزینه پست(تومان)</th>
                             <th style="text-align: center">حجم تخفیف کلی(درصد)</th>
@@ -46,16 +47,37 @@
                             <tr class="unit">
                                 <td style="font-size: 120%"> {{++$i}}</td>
                                 <td style="font-size: 120%">{{$basket->title}}</td>
+                                @if($basket->basketComment == null)
+                                    <td><textarea class="form-control" disabled>توضیحات ندارد</textarea></td>
+                                @endif
+                                @if($basket->basketComment != null)
+                                    <td style="font-size: 120%"><textarea class="form-control" disabled>{{$basket->basketComment}}</textarea></td>
+                                @endif
                                 <td style="font-size: 120%">{{number_format($basket->product_price)}}</td>
-                                <td style="font-size: 120%">{{number_format($basket->post_price)}}</td>
-                                <td style="font-size: 120%">{{$basket->discount_volume}}</td>
-                                <td style="font-size: 120%">{{$basket->delivery_volume}}</td>
+                                @if($basket->post_price == null)
+                                    <td><button class="btn btn-default" style="font-size: 120%;">فاقد هزینه پست</button></td>
+                                @endif
+                                @if($basket->post_price != null)
+                                    <td style="font-size: 120%">{{number_format($basket->post_price)}}</td>
+                                @endif
+                                @if($basket->discount_volume == null)
+                                    <td><button class="btn btn-default" style="font-size: 120%;">تخفیف ندارد</button></td>
+                                @endif
+                                @if($basket->discount_volume != null)
+                                    <td style="font-size: 120%">{{$basket->discount_volume}}</td>
+                                @endif
+                                @if($basket->delivery_volume == null)
+                                    <td><button class="btn btn-default" style="font-size: 120%;">فاقد تخفیف تحویل</button></td>
+                                @endif
+                                @if($basket->delivery_volume != null)
+                                    <td style="font-size: 120%">{{$basket->delivery_volume}}</td>
+                                @endif
 
 
                             </tr>
                         @endforeach
                             <tr>
-                                <td colspan="10" ><strong><a style="font-size: 120%" class="btn btn-dark col-md-4 col-md-offset-4" href="{{url('user/userFactor/'.$basket->basket_id)}}">چاپ فاکتور</a></strong></td>
+                                <td colspan="10" ><strong><a style="font-size: 120%" class="btn btn-dark col-md-4 col-md-offset-4" href="{{url('user/userShowFactor/'.$basket->basket_id)}}">چاپ فاکتور</a></strong></td>
                             </tr>
                         </tbody>
                     </table>
