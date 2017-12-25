@@ -97,6 +97,9 @@ class UpdateProduct
         }
         $pr->save();
         $lastProductId = $pr->id;
+        $deleteColors=ProductColor::where('product_id','=',$lastProductId)->get();
+//        ProductColor::find($deleteColors)->delete();
+        return ($deleteColors);
         //above line find product_id that now saved for use in pivot table
         // $lastProductId = Product::orderBy('created_at', 'desc')->offset(0)->limit(1)->value('id');
         //this block code save color array of product in color_product table
@@ -125,6 +128,7 @@ class UpdateProduct
             }
 
         }
+
         //this block code save and upload picture array of product in product_Images table
         $countPic = count($product->file);
         if ($countPic) {

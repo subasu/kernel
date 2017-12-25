@@ -23,6 +23,7 @@
         .overflow-x {
             overflow-x: hidden;
         }
+
         .myColor {
             width: 13px;
             height: 13px;
@@ -465,8 +466,8 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="ready_time"> :
-                                                زمان آماده شدن بر حسب ساعت
+                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="ready_time">
+                                                زمان آماده شدن بر حسب ساعت:
                                                 <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                             </label>
                                         </div>
@@ -582,8 +583,27 @@
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
-                                                    <select id="editable" class="editable form-control" disabled
-                                                            name="activePrice">
+                                                    @foreach($products[0]->productFlags as $flag)
+                                                        @if($flag->active == 1)
+                                                            @php
+                                                                if($flag->title=="price")
+                                                                    $title="قیمت اصلی";
+                                                                elseif($flag->title=="sales_price")
+                                                                    $title="قیمت حراج";
+                                                                elseif($flag->title=="special_price")
+                                                                    $title="قیمت ویژه";
+                                                                elseif($flag->title=="wholesale_price")
+                                                                    $title="قیمت عمده";
+                                                                elseif($flag->title=="free_price")
+                                                                    $title="قیمت زاپاس";
+                                                            @endphp
+                                                            <input class=" form-control currentPrice1" disabled
+                                                                   value="{{$title}}"/>
+                                                        @endif
+                                                    @endforeach
+                                                    <select class="editable form-control currentPrice2" disabled
+                                                            id="editable"
+                                                            name="activePrice" style="display: none">
                                                         <option value="price">قیمت اصلی</option>
                                                         <option value="sales_price">قیمت حراج</option>
                                                         <option value="special_price">قیمت ویژه</option>
@@ -594,8 +614,7 @@
                                             </div>
                                         </div>
                                         <label class="control-label col-md-2 col-sm-4 col-xs-3" for="color">انتخاب قیمت
-                                            فعلی
-                                            محصول :
+                                            فعلی محصول :
                                         </label>
                                     </div>
                                     <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
@@ -604,7 +623,6 @@
                                                 <div class="col-md-2 ">
                                                     <a type="button" name="edit" id="edit"
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
@@ -632,7 +650,6 @@
                                                 <div class="col-md-2">
                                                     <a type="button" name="edit" id="edit"
                                                        class="glyphicon glyphicon-edit btn btn-success edit"
-                                                       products-toggle=""
                                                        title="ویرایش "></a>
                                                 </div>
                                                 <div class="col-md-10">
@@ -667,10 +684,8 @@
                                             @foreach($products[0]->productImages as $image)
                                                 <div class="parent" name="parent">
                                                     <div class="col-md-10 margin-1">
-
                                                         <div class="col-md-2 col-md-offset-3">
                                                             <a class="glyphicon glyphicon-edit btn btn-success editPic"
-                                                               products-toggle=""
                                                                title="ویرایش "></a>
                                                         </div>
                                                         <div class="col-md-5 col-sm-6 col-xs-9 newFile" id="newFile"
@@ -684,10 +699,7 @@
                                                                  style="height: 100px; width: 100px; margin-left: 80%;"
                                                                  src="{{url('public/dashboard/productFiles/picture')}}/{{$image->image_src}}">
                                                         </div>
-
-                                                        <label class="control-label col-md-2 col-sm-4 col-xs-3"
-                                                               for="pic">
-                                                            تصویر محصول :
+                                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic">
                                                             <span class="required star"></span>
                                                         </label>
                                                     </div>
@@ -723,7 +735,6 @@
                                             <div class="col-md-2 col-md-offset-3">
                                                 <a type="button" name="edit" id="edit"
                                                    class="glyphicon glyphicon-edit btn btn-success edit"
-                                                   products-toggle=""
                                                    title="ویرایش "></a>
                                             </div>
                                             <div class="col-md-5 col-sm-6 col-xs-9 ">
@@ -748,26 +759,61 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="col-md-12 margin-2 ">
-                                            <div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3 margin-1 padding-right-2"
-                                                 id="color">
+                                    <div class="grandparent" id="grandparent">
+                                        <div class="col-md-10 margin-bot-1 parent">
+                                            <div class="col-md-2 col-md-offset-3">
+                                                <a type="button" name="edit" id="edit"
+                                                   class="glyphicon glyphicon-edit btn btn-success edit"
+                                                   title="ویرایش "></a>
                                             </div>
-                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="color">انتخاب رنگ
+
+                                                <div class="col-md-5 col-sm-6 col-xs-9 editable" name="colors" id="editable">
+                                                    @foreach($products[0]->colors as $color)
+                                                        <div class="col-md-4 col-sm-6 col-xs-3 float-right">
+                                                            <label class="myLabel">
+                                                                <input class="form-control myColor" disabled="disabled" checked type="checkbox"
+                                                                       name="color[]" value="{{$color->title}}"/>
+                                                                {{$color->title}}
+                                                            </label></div>
+                                                    @endforeach
+                                                </div>
+                                            <label  class="control-label col-md-2 col-sm-4 col-xs-3" for="color">انتخاب
+                                                رنگهای محصول :
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="grandparent" id="grandparent">
+                                        <div class="col-md-10 margin-bot-1 parent">
+                                            <div class="col-md-2 col-md-offset-3">
+                                                <a type="button" name="edit" id="edit"
+                                                   class="glyphicon glyphicon-edit btn btn-success edit"
+                                                   title="ویرایش "></a>
+                                            </div>
+
+                                                <div class="col-md-5 col-sm-6 col-xs-9 editable" name="sizes" id="editable">
+                                                    @foreach($products[0]->sizes as $size)
+                                                        <div class="col-md-4 col-sm-6 col-xs-3 float-right">
+                                                            <label class="myLabel">
+                                                                <input class="form-control myColor" disabled="disabled" checked type="checkbox"
+                                                                       name="size[]" value="{{$size->title}}"/>
+                                                                {{$size->title}}
+                                                            </label></div>
+                                                    @endforeach
+                                                </div>
+                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="size">انتخاب
+                                                اندازه
                                                 های محصول :
                                             </label>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="col-md-12 margin-2 margin-bot-1">
-                                            <div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3 margin-1 padding-right-2"
-                                                 id="size">
-                                            </div>
-                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="size">انتخاب اندازه
-                                                های محصول :
-                                            </label>
-                                        </div>
-                                    </div>
+                                    {{--<div>--}}
+                                        {{--<div class="col-md-12 margin-2 margin-bot-1">--}}
+                                            {{--<div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3 margin-1 padding-right-2"--}}
+                                                 {{--id="size">--}}
+                                            {{--</div>--}}
+
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                 </div>
                             </div>
                         </div>
@@ -776,7 +822,7 @@
                 <br/>
             </form>
         </div>
-        <!-- Include SmartWizard JavaScript source -->
+        <!-- 1-Include SmartWizard JavaScript source -->
         <script type="text/javascript"
                 src="{{url('public/dashboard/stepWizard/js/jquery.smartWizard.min.js')}}"></script>
         <script type="text/javascript">
@@ -861,7 +907,7 @@
 //
             });
         </script>
-        <!-- send product form -->
+        <!-- 2-send product form -->
         <script>
             $(document).ready(function () {
                 //add input type file for add pic for product
@@ -887,7 +933,7 @@
                 })
             });
         </script>
-        <!-- below script is to zoom in/out picture  -->
+        <!-- 3-below script is to zoom in/out picture  -->
         <script>
             $(document).ready(function () {
                 $('.image').hover(
@@ -899,9 +945,28 @@
                     });
             });
         </script>
-
-        <!-- below script is to make inputs editable -->
+        <!-- 4-below script is to make inputs editable -->
         <script>
+            function appendItem(divId, inputName, myUrl) {
+                $.ajax({
+                    url: myUrl,
+                    dataType: "json",
+                    cache: false,
+                    type: "get",
+                    success: function (response) {
+                        var item = $(divId);
+                        item.empty();
+                        $.each(response, function (key, value) {
+                            item.append(
+                                '<div class="col-md-4 col-sm-6 col-xs-3 float-right">' +
+                                '<label class="myLabel">' +
+                                '<input class="form-control myColor" type="checkbox" name="' + inputName + '[]" value="' + value.id + '"/>'
+                                + value.title + '</label></div>')
+                        });
+                    }
+                })
+            }
+
             $(function () {
                 $('.edit').each(function () {
                     $(this).click(function () {
@@ -939,11 +1004,21 @@
                                 }
                             });
                         }
+                        else if(editable.attr('name') == 'activePrice') {
+                            $(".currentPrice1").remove();
+                            $(".currentPrice2").show();
+                        }
+                        else if(editable.attr('name') == 'colors'){
+                            appendItem("[name='colors']", "color", "{{url('api/v1/getColors')}}");
+                        }
+                        else if(editable.attr('name') == 'sizes'){
+                            appendItem("[name='sizes']", "size", "{{url('api/v1/getSizes')}}");
+                        }
                     })
                 })
             })
         </script>
-        <!-- below script is to make picture hidden and display7 an another input type file -->
+        <!-- 5-below script is to make picture hidden and display7 an another input type file -->
         <script>
             $(function () {
                 $('.editPic').each(function () {
@@ -958,8 +1033,7 @@
                 })
             })
         </script>
-
-        <!-- below script is to handle category management -->
+        <!-- 6-below script is to handle category management -->
         <script>
             $(document).on('click', '#editCategory', function () {
                 //var categoryId = $(this).attr('content');
@@ -967,10 +1041,8 @@
                 $('#myModal').modal('show');
             })
         </script>
-
-
         <script src="{{ URL::asset('public/js/persianDatepicker.js')}}"></script>
-        {{--persianDatepicker--}}
+        {{--7-persianDatepicker--}}
         <script>
             $(function () {
                 $("[name = 'produce_date']").each(function () {
@@ -981,6 +1053,7 @@
                 })
             })
         </script>
+        {{--8-formatNumber for price value--}}
         <script>
             $(function () {
                 function formatNumber(num) {
@@ -997,7 +1070,7 @@
             })
         </script>
         <script>
-            //load item in select box
+            //9-load item in select box
             function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2) {
                 var item = $(selectBoxId);
                 item.empty();
@@ -1008,7 +1081,7 @@
                     ("<option value='" + value.id + "' depth='" + value.depth + "'>" + value.title + "</option>");
                 });
             }
-            //load all main category in select box in addProductForm
+            //10-load all main category in select box in addProductForm
             $.ajax({
                 cache: false,
                 url: "{{url('api/v1/getMainCategories')}}",
@@ -1028,7 +1101,7 @@
                     }
                 }
             })
-            //load subCategories after ask do you want load it's sub Categories or no then load product title related selected category
+            //11-load subCategories after ask do you want load it's sub Categories or no then load product title related selected category
             $('#categories').on("change", function () {
                 var id = $(this).val();
                 var depth = $(this).find("option:selected ").attr('depth');
@@ -1088,7 +1161,7 @@
                 $("#lastCategory").val(id);
                 $("#lastCategory").attr('disabled', false);
             })
-            //load brands after ask do you want load it's brands or no then load product title related selected subCategory
+            //12-load brands after ask do you want load it's brands or no then load product title related selected subCategory
             $('#subCategories').on("change", function () {
                 var id = $(this).val();
                 var depth1 = $(this).find("option:selected ").attr('depth');
@@ -1141,7 +1214,7 @@
                 $("#lastCategory").val(id);
                 $("#lastCategory").attr('disabled', false);
             })
-            //check option 2 selected or not, if yes redirect to addCategory view
+            //13-check option 2 selected or not, if yes redirect to addCategory view
             $('#brands').on("change", function () {
                 var id = $(this).val();
                 if (id == 000) {
@@ -1198,320 +1271,4 @@
             }
             loadUnits();
         </script>
-
-        <script>
-            $(document).ready(function () {
-                //add input type file for add pic for product
-                var counter = 0
-                $('#addInput').on('click', function () {
-                    if (counter < 3) {
-                        $('#addPic').append
-                        (
-                            '<div class="col-md-12 margin-1">' +
-                            '<div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3">' +
-                            '<input class="form-control col-md-12 col-xs-12" type="file" name="file[]" id="file"/>' +
-                            '</div>' +
-                            '<label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic"> تصویر محصول :' +
-                            '<span class="required star"></span>' +
-                            '</label></div>'
-                        );
-                        counter++;
-                    }
-                    else {
-                    }
-                })
-                //load all main category in select box in addProductForm
-                $.ajax({
-                    cache: false,
-                    url: "{{url('api/v1/getMainCategories')}}",
-                    type: 'get',
-                    dataType: "json",
-                    success: function (response) {
-                        if (response != 0) {
-                            var responses = response;
-                            var selectBoxId = "#categories";
-                            var msgOpt1 = "لطفا دسته مورد نظر خود را انتخاب نمایید";
-                            var msgOpt2 = "اگر دسته مورد نظر در این لیست وجود ندارد این گزینه را انتخاب نمایید";
-                            var valueOption2 = "000";
-                            loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
-                        }
-                        else {
-                            location.href = '{{url("admin/addCategory")}}';
-                        }
-                    }
-                })
-                //load subCategories after ask do you want load it's sub Categories or no then load product title related selected category
-                $('#categories').on("change", function () {
-                    var id = $(this).val();
-                    var depth = $(this).find("option:selected ").attr('depth');
-                    if (id == 000) {
-                        location.href = '{{url("admin/addCategory")}}';
-                    }
-                    else if (depth != 0) {
-                        swal({
-                                title: '',
-                                text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از زیر دسته ها ذخیره کنید؟',
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "  #5cb85c",
-                                cancelButtonText: "خیر",
-                                confirmButtonText: "آری",
-                                closeOnConfirm: true,
-                                closeOnCancel: true
-                            },
-                            function (isConfirm) {
-                                if (isConfirm) {
-                                    //load all subCategory in select box in addProductForm
-                                    $.ajax
-                                    ({
-                                        cache: false,
-                                        url: "{{Url('api/v1/getSubCategories')}}/" + id,
-                                        dataType: "json",
-                                        type: "get",
-                                        success: function (response) {
-                                            var responses = response;
-                                            var selectBoxId = '#subCategories';
-                                            var msgOpt1 = "لطفا زیر دسته مورد نظر را انتخاب نمایید";
-                                            var msgOpt2 = "اگر زیر دسته مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
-                                            var valueOption2 = "000";
-                                            loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
-                                            $('#subCategoriesDiv').css('display', 'block');
-                                            //hide brands selector parent div after change categories and empty it's selector
-                                            $('#BrandsDiv').css('display', 'none');
-                                            $('#brands').empty();
-                                            findTitle(id)
-                                        }
-                                    });
-                                }
-                                else {//if user select 'خیر'
-                                    $('#subCategoriesDiv').css('display', 'none');
-                                    $('#subCategories').empty();
-                                    //hide brands selector parent div after change categories and empty it's selector
-                                    $('#BrandsDiv').css('display', 'none');
-                                    $('#brands').empty();
-                                    findTitle(id, 'method2')
-                                }
-                            });
-                    }
-                    else {
-                        $('#subCategoriesDiv').css('display', 'none');
-                        $('#BrandsDiv').css('display', 'none');
-                        $('#subCategories').empty();
-                        $('#brands').empty();
-                        console.log('100');
-                        findTitle(id,'method2')
-                    }
-                })
-
-                //load brands after ask do you want load it's brands or no then load product title related selected subCategory
-                $('#subCategories').on("change", function () {
-                    var id = $(this).val();
-                    var depth1 = $(this).find("option:selected ").attr('depth');
-                    if (id == 000) {
-                        location.href = '{{url("admin/addCategory")}}';
-                    }
-                    else if (depth1 != 0) {
-                        swal({
-                                title: '',
-                                text: 'آیا میخواهید زیردسته های دسته ی منتخب را ببینید و محصول را در یکی از برندها ذخیره کنید؟',
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "  #5cb85c",
-                                cancelButtonText: "خیر",
-                                confirmButtonText: "آری",
-                                closeOnConfirm: true,
-                                closeOnCancel: true
-                            },
-                            function (isConfirm) {
-                                if (isConfirm) {
-                                    //load all subCategory in select box in addProductForm
-                                    $.ajax
-                                    ({
-                                        cache: false,
-                                        url: "{{Url('api/v1/getBrands')}}/" + id,
-                                        dataType: "json",
-                                        type: "get",
-                                        success: function (response) {
-                                            var responses = response;
-                                            var selectBoxId = '#brands';
-                                            var msgOpt1 = "لطفا زیر دسته مورد نظر را انتخاب نمایید";
-                                            var msgOpt2 = "اگر زیر دسته مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
-                                            var valueOption2 = "000";
-                                            loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
-                                            $('#BrandsDiv').css('display', 'block');
-                                            findTitle(id)
-                                        }
-                                    });
-                                }
-                                else {//if user select 'خیر'
-                                    //hide brands selector parent div after change categories and empty it's selector
-                                    $('#BrandsDiv').css('display', 'none');
-                                    $('#brands').empty();
-                                    findTitle(id, 'method2')
-                                }
-                            });
-                    }
-                    else {
-                        $('#BrandsDiv').css('display', 'none');
-                        $('#brands').empty();
-                        findTitle(id, 'method2')
-                    }
-                })
-                //check option 2 selected or not, if yes redirect to addCategory view
-                $('#brands').on("change", function () {
-                    var id = $(this).val();
-                    if (id == 000) {
-                        location.href = '{{url("admin/addCategory")}}';
-                    }
-                    findTitle(id)
-                })
-                //check option 2 selected or not, if yes redirect to add unit view//in main unit select box
-                $('#unit').on("change", function () {
-                    var id = $(this).val();
-
-                    if (id == 0) {
-                        location.href = '{{url("admin/addUnit")}}';
-                    }
-                })
-                //check option 2 selected or not, if yes redirect to add unit //view in subunit select box
-                $('#subunit').on("change", function () {
-                    var id = $(this).val();
-
-                    if (id == 0) {
-                        location.href = '{{url("admin/addUnit")}}';
-
-                    }
-                })
-                //load MainUnitsCount if there is no category in table redirect addCategory
-                $.ajax({
-                    cache: false,
-                    url: "{{Url('api/v1/getMainUnits')}}",
-                    dataType: "json",
-                    type: "get",
-                    success: function (response) {
-                        console.log(response);
-                        if (response != 0) {
-                            var responses = response;
-                            var selectBoxId = '#unit';
-                            var msgOpt1 = "لطفا واحد شمارش مورد نظر خود را انتخاب نمایید";
-                            var msgOpt2 = "اگر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
-                            var valueOption2 = 0000;
-                            loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
-                        }
-                        else {
-                            location.href = '{{url("admin/addUnit")}}';
-                        }
-                    }
-                });
-                //load brands
-                //id = 0000 it's for second option for redirect to add unit
-                $('#unit').on("change", function () {
-                    var id = $(this).val();
-                    if (id == 0) {
-                        location.href = '{{url("admin/addUnit")}}';
-                    }
-                    else {
-                        $.ajax
-                        ({
-                            cache: false,
-                            url: "{{Url('api/v1/getSubunits')}}/" + id,
-                            dataType: "json",
-                            type: "get",
-                            success: function (response) {
-                                var responses = response;
-                                var selectBoxId = '#subunit';
-                                var msgOpt1 = "لطفا زیر واحد شمارش مورد نظر خود را انتخاب نمایید";
-                                var msgOpt2 = "اگر زیر واحد شمارش مورد نظر در این لیست وجود ندارد این گزینه انتخاب نمایید";
-                                var valueOption2 = 0;
-                                loadItems(responses, selectBoxId, msgOpt1, msgOpt2, valueOption2)
-                            }
-                        });
-                    }
-                });
-                //load item in select box
-                function loadItems(responses, selectBoxId, msgOption1, msgOption2, valueOption2) {
-                    var item = $(selectBoxId);
-                    item.empty();
-                    item.append("<option selected='true' disabled='disabled'>" + msgOption1 + "</option>")
-                    item.append("<option value='" + valueOption2 + "'>" + msgOption2 + "</option>")
-                    $.each(responses, function (key, value) {
-                        item.append
-                        ("<option value='" + value.id + "' depth='" + value.depth + "'>" + value.title + "</option>");
-                    });
-                }
-
-                //find categori's selected product title
-                function findTitle(cid, method) {
-                    if (method == "method2") {
-                        $.ajax
-                        ({
-                            cache: false,
-                            url: "{{url('api/v1/findCategoryProduct')}}",
-                            dataType: "json",
-                            type: "post",
-                            data: {'id': cid, 'my_method': 2},
-                            success: function (response) {
-                                var item = $('#oldProduct');
-                                item.empty();
-                                if (response != 0) {
-                                    $.each(response, function (key, value) {
-                                        item.append("<option disabled='disabled' selected='selected'>" + value + "</option>");
-                                    });
-                                }
-                                else {
-                                    item.append("<option  selected='selected'>تا کنون برای این دسته محصولی ثبت نشده است</option>");
-                                }
-                            }
-                        });
-                    }
-                    else {
-                        $.ajax
-                        ({
-                            cache: false,
-                            url: "{{url('api/v1/findCategoryProduct')}}",
-                            dataType: "json",
-                            type: "post",
-                            data: {'id': cid, 'my_method': '1'},
-                            success: function (response) {console.log(response);
-                                var item = $('#oldProduct');
-                                item.empty();
-                                if (response != 0) {
-                                    $.each(response, function (key, value) {
-                                        item.append("<option disabled='disabled' selected='selected'>" + value + "</option>");
-                                    });
-                                }
-                                else {
-                                    item.append("<option  selected='selected'>تا کنون برای این دسته محصولی ثبت نشده است</option>");
-                                }
-                            }
-                        });
-                    }
-
-                }//end find title of selected categories->we show title's product of this category to user that admin registered before
-                function appendItem(divId, inputName, myUrl) {
-                    $.ajax({
-                        url: myUrl,
-                        dataType: "json",
-                        cache: false,
-                        type: "get",
-                        success: function (response) {
-                            var item = $(divId);
-                            item.empty();
-                            $.each(response, function (key, value) {
-
-                                item.append(
-                                    '<div class="col-md-4 col-sm-6 col-xs-3 float-right">' +
-                                    '<label class="myLabel">' +
-                                    '<input class="form-control myColor" type="checkbox" name="' + inputName + '[]" value="' + value.id + '"/>'
-                                    + value.title + '</label></div>')
-                            });
-                        }
-                    })
-                }
-
-                appendItem("#color", "color", "{{url('api/v1/getColors')}}");
-                appendItem("#size", "size", "{{url('api/v1/getSizes')}}");
-            });
-        </script>
-
 @endsection
