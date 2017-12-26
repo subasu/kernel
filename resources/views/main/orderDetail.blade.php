@@ -31,6 +31,15 @@
                         </div>
                     </div>
                 </div>
+                <h3 class="checkout-sep">توضیحات سفارش</h3>
+                <div class="box-border" style="border-color: #0a0a0a;">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-6" >
+                            <label>توضیحات</label>
+                            <textarea name="comments" id="comments" class="form-control input overflow_hidden_x" style="border-color: #0a0a0a;"></textarea>
+                        </div>
+                    </div>
+                </div>
                 {{--<h3 class="checkout-sep">نوع پست</h3>--}}
                 {{--<div class="box-border" style="border-color: #0a0a0a;">--}}
                     {{--<ul class="shipping_method">--}}

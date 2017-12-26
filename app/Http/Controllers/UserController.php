@@ -226,6 +226,7 @@ class UserController extends Controller
         $order->payment_type = $request->paymentType;
         $order->pay = 1;
         $order->transaction_code = 46456464;
+        $order->comments         = $request->comments;
         $order->save();
         if ($order) {
             $update = Basket::find($request->basketId);
