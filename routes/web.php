@@ -93,6 +93,8 @@ Route::group(['prefix'=>'admin'],function() {
     Route::get('paymentTypesManagement','PaymentTypeController@paymentTypesManagement');
     Route::get('editPaymentType/{id}','PaymentTypeController@editPaymentType');
     Route::post('editPaymentTypeTitle','PaymentTypeController@editPaymentTypeTitle');
+//printer route
+    Route::get('connectToPrinter','OrderController@connectToPrinter');
 });
 
 //user routes

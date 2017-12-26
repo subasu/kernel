@@ -167,6 +167,11 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li><a><i class="fa fa-dollar"></i>مدیریت پرینتر<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('admin/connectToPrinter')}}"> اتصال به پرینتر</a>
+                                </ul>
+                            </li>
                             //admin
                             <li><a><i class="fa fa-first-order"></i>بررسی سفارشات و فاکتورها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">

@@ -93,4 +93,18 @@ class OrderController extends Controller
                 return response()->json(['data' => 'no data' , 'code' => 0]);
             }
     }
+
+    //
+    public function connectToPrinter()
+    {
+        $handle = printer_open("HP Deskjet 930c");
+        //$handle = printer_open();
+        if($handle)
+        {
+            dd('connected....');
+        }else
+            {
+                dd('not connected....');
+            }
+    }
 }
