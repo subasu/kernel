@@ -36,7 +36,7 @@
             <div class="dropdown">
                 <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>حساب من</span></a>
                 <ul class="dropdown-menu mega_dropdown text-right" role="menu">
-                    <li><a href="login.html">ورود/ثبت نام</a></li>
+                    <li><a href="{{url('login')}}">ورود/ثبت نام</a></li>
                     <li><a href="#">مقایسه</a></li>
                     <li><a href="#">علاقه مندی ها</a></li>
                 </ul>

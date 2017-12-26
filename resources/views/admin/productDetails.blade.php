@@ -695,11 +695,12 @@
                                                         </div>
                                                         <div class="col-md-5 col-sm-6 col-xs-9 showPic" id="showPic"
                                                              style="display: block;">
-                                                            <img class="image" id="editable"
+                                                            <img class="image" id="editable" imageId="{{$image->id}}"
                                                                  style="height: 100px; width: 100px; margin-left: 80%;"
                                                                  src="{{url('public/dashboard/productFiles/picture')}}/{{$image->image_src}}">
                                                         </div>
-                                                        <label class="control-label col-md-2 col-sm-4 col-xs-3" for="pic">
+                                                        <label class="control-label col-md-2 col-sm-4 col-xs-3"
+                                                               for="pic">
                                                             <span class="required star"></span>
                                                         </label>
                                                     </div>
@@ -767,17 +768,19 @@
                                                    title="ویرایش "></a>
                                             </div>
 
-                                                <div class="col-md-5 col-sm-6 col-xs-9 editable" name="colors" id="editable">
-                                                    @foreach($products[0]->colors as $color)
-                                                        <div class="col-md-4 col-sm-6 col-xs-3 float-right">
-                                                            <label class="myLabel">
-                                                                <input class="form-control myColor" disabled="disabled" checked type="checkbox"
-                                                                       name="color[]" value="{{$color->title}}"/>
-                                                                {{$color->title}}
-                                                            </label></div>
-                                                    @endforeach
-                                                </div>
-                                            <label  class="control-label col-md-2 col-sm-4 col-xs-3" for="color">انتخاب
+                                            <div class="col-md-5 col-sm-6 col-xs-9 editable" name="colors"
+                                                 id="editable">
+                                                @foreach($products[0]->colors as $color)
+                                                    <div class="col-md-4 col-sm-6 col-xs-3 float-right">
+                                                        <label class="myLabel">
+                                                            <input class="form-control myColor" disabled="disabled"
+                                                                   checked type="checkbox"
+                                                                   name="color[]" value="{{$color->title}}"/>
+                                                            {{$color->title}}
+                                                        </label></div>
+                                                @endforeach
+                                            </div>
+                                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="color">انتخاب
                                                 رنگهای محصول :
                                             </label>
                                         </div>
@@ -790,16 +793,17 @@
                                                    title="ویرایش "></a>
                                             </div>
 
-                                                <div class="col-md-5 col-sm-6 col-xs-9 editable" name="sizes" id="editable">
-                                                    @foreach($products[0]->sizes as $size)
-                                                        <div class="col-md-4 col-sm-6 col-xs-3 float-right">
-                                                            <label class="myLabel">
-                                                                <input class="form-control myColor" disabled="disabled" checked type="checkbox"
-                                                                       name="size[]" value="{{$size->title}}"/>
-                                                                {{$size->title}}
-                                                            </label></div>
-                                                    @endforeach
-                                                </div>
+                                            <div class="col-md-5 col-sm-6 col-xs-9 editable" name="sizes" id="editable">
+                                                @foreach($products[0]->sizes as $size)
+                                                    <div class="col-md-4 col-sm-6 col-xs-3 float-right">
+                                                        <label class="myLabel">
+                                                            <input class="form-control myColor" disabled="disabled"
+                                                                   checked type="checkbox"
+                                                                   name="size[]" value="{{$size->title}}"/>
+                                                            {{$size->title}}
+                                                        </label></div>
+                                                @endforeach
+                                            </div>
                                             <label class="control-label col-md-2 col-sm-4 col-xs-3" for="size">انتخاب
                                                 اندازه
                                                 های محصول :
@@ -807,12 +811,12 @@
                                         </div>
                                     </div>
                                     {{--<div>--}}
-                                        {{--<div class="col-md-12 margin-2 margin-bot-1">--}}
-                                            {{--<div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3 margin-1 padding-right-2"--}}
-                                                 {{--id="size">--}}
-                                            {{--</div>--}}
+                                    {{--<div class="col-md-12 margin-2 margin-bot-1">--}}
+                                    {{--<div class="col-md-5 col-sm-6 col-xs-9 col-md-offset-3 margin-1 padding-right-2"--}}
+                                    {{--id="size">--}}
+                                    {{--</div>--}}
 
-                                        {{--</div>--}}
+                                    {{--</div>--}}
                                     {{--</div>--}}
                                 </div>
                             </div>
@@ -1004,14 +1008,14 @@
                                 }
                             });
                         }
-                        else if(editable.attr('name') == 'activePrice') {
+                        else if (editable.attr('name') == 'activePrice') {
                             $(".currentPrice1").remove();
                             $(".currentPrice2").show();
                         }
-                        else if(editable.attr('name') == 'colors'){
+                        else if (editable.attr('name') == 'colors') {
                             appendItem("[name='colors']", "color", "{{url('api/v1/getColors')}}");
                         }
-                        else if(editable.attr('name') == 'sizes'){
+                        else if (editable.attr('name') == 'sizes') {
                             appendItem("[name='sizes']", "size", "{{url('api/v1/getSizes')}}");
                         }
                     })
@@ -1022,13 +1026,43 @@
         <script>
             $(function () {
                 $('.editPic').each(function () {
+
                     $(this).click(function () {
                         var DOM = $(this).parentsUntil('.grandparent');
                         var showPic = $(DOM).find('.showPic');
-                        $(showPic).css('display', 'none');
-                        var newFile = $(DOM).find('.newFile');
-                        $(newFile).find('input').attr('disabled', false);
-                        $(newFile).css('display', 'block');
+                        var imageId = $(showPic).find("img").attr("imageId");
+                        swal({
+                                title: '',
+                                text: 'قبل از ویرایش تصویر باید تصویر فعلی حذف شود، آیا از حذف تصویر اطمینان دارید؟',
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "  #5cb85c",
+                                cancelButtonText: "خیر",
+                                confirmButtonText: "آری",
+                                closeOnConfirm: true,
+                                closeOnCancel: true
+                            },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    //load all subCategory in select box in addProductForm
+                                    $.ajax({
+                                        url: "{{url('admin/deleteProductPicture')}}/"+imageId,
+                                        type: 'get',
+                                        dataType: "json",
+                                        success: function (response) {
+                                            console.log(response)
+                                            if (response == true) {
+                                                $(showPic).css('display', 'none');
+                                                var newFile = $(DOM).find('.newFile');
+                                                $(newFile).find('input').attr('disabled', false);
+                                                $(newFile).css('display', 'block');
+                                            }
+                                        }
+                                    });
+                                }
+                                else {
+                                }
+                            });
                     })
                 })
             })
@@ -1105,6 +1139,7 @@
             $('#categories').on("change", function () {
                 var id = $(this).val();
                 var depth = $(this).find("option:selected ").attr('depth');
+                var selectedText = $(this).find("option:selected").text();
                 if (id == 000) {
                     location.href = '{{url("admin/addCategory")}}';
                 }
@@ -1159,12 +1194,13 @@
                     $('#brands').empty();
                 }
                 $("#lastCategory").val(id);
-                $("#lastCategory").attr('disabled', false);
+                $("#lastCategoryName").attr('name', selectedText)
             })
             //12-load brands after ask do you want load it's brands or no then load product title related selected subCategory
             $('#subCategories').on("change", function () {
                 var id = $(this).val();
                 var depth1 = $(this).find("option:selected ").attr('depth');
+                var selectedText = $(this).find("option:selected").text();
                 if (id == 000) {
                     location.href = '{{url("admin/addCategory")}}';
                 }
@@ -1212,17 +1248,22 @@
                     $('#brands').empty();
                 }
                 $("#lastCategory").val(id);
-                $("#lastCategory").attr('disabled', false);
+                $("#lastCategoryName").attr('name', selectedText)
             })
             //13-check option 2 selected or not, if yes redirect to addCategory view
             $('#brands').on("change", function () {
                 var id = $(this).val();
+                var selectedText = $(this).find("option:selected").text();
                 if (id == 000) {
                     location.href = '{{url("admin/addCategory")}}';
                 }
                 $("#lastCategory").val(id);
+                $("#lastCategoryName").attr('name', selectedText)
+            });
+            $("#submitCategory").click(function () {
                 $("#lastCategory").attr('disabled', false);
-
+                selectedText = $("#lastCategoryName").attr('name')
+                $("#lastCategoryName").val(selectedText);
             });
             $("#unit_count_parent").on("change", function () {
                 var id = ($(this).find("select").val());

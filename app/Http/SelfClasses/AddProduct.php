@@ -114,9 +114,10 @@ class AddProduct
             for ($i = 0; $i < $countPic; $i++) {
                 $productPicture = new ProductImage();
                 $productPicture->product_id = $lastProductId;
-                $imageName = $product->file[$i]->getClientOriginalName();
-                $productPicture->image_src = $imageName;
-                $product->file[$i]->move('public/dashboard/productFiles/picture/', $imageName);
+                $imageExtension = $product->file[$i]->getClientOriginalExtension();
+                $imageName=microtime();
+                $productPicture->image_src = $imageName.'.'.$imageExtension;
+                $product->file[$i]->move('public/dashboard/productFiles/picture/', $imageName.'.'.$imageExtension);
                 $productPicture->active = 1;
                 $productPicture->save();
 

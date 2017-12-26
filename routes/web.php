@@ -12,8 +12,8 @@
 //main site
 use App\Models\Category;
 
-Route::get('/','IndexController@index');
-Route::get('index','IndexController@home');
+Route::get('/admin','IndexController@index');
+Route::get('/','IndexController@home');
 Route::get('productFiles','IndexController@productFiles');
 Route::get('myLogin','IndexController@login');
 Route::get('town/{cid}','IndexController@town');
@@ -34,7 +34,8 @@ Route::get('productDetail/{id}','IndexController@productDetail');
 //admin routes
 
 Route::group(['prefix'=>'admin'],function() {
-
+//images
+    Route::get('deleteProductPicture/{id}', 'ProductController@deleteProductPicture');//show add category view
 //categories
     Route::get('addCategory', 'CategoryController@addCategory');//show add category view
     Route::get('categoriesManagement', 'CategoryController@categoriesManagement');//show view of all category
