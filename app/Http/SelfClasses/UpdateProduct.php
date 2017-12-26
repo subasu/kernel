@@ -30,7 +30,6 @@ class UpdateProduct
             $productCategory->category_id = $cateId;
             $productCategory->save();
         }
-
         //add a flags with flag's price in product flags
         function updateProductFlag($title, $price, $lastProductId)
         {
@@ -40,7 +39,6 @@ class UpdateProduct
             $prices->price = str_replace(',', '', $price);
             $prices->save();
         }
-
         //upload product's video
         $videoSrc = '';
         if (!empty($product->video_src)) {
@@ -48,7 +46,6 @@ class UpdateProduct
             $videoSrc = $file->getClientOriginalName();
             $file->move('public/dashboard/productFiles/video/', $videoSrc);
         }
-
         $unit_count = UnitCount::where('id', '=', $product->unit_count)->value('title');
         $sub_unit_count = SubUnitCount::where('id', '=', $product->sub_unit_count)->value('title');
         //add a new product in product table
@@ -97,52 +94,63 @@ class UpdateProduct
         }
         $pr->save();
         $lastProductId = $pr->id;
-        $deleteColors=ProductColor::where('product_id','=',$lastProductId)->get();
-//        ProductColor::find($deleteColors)->delete();
-        return ($deleteColors);
         //above line find product_id that now saved for use in pivot table
         // $lastProductId = Product::orderBy('created_at', 'desc')->offset(0)->limit(1)->value('id');
         //this block code save color array of product in color_product table
         $countColor = count($product->color);
-        if ($countColor) {
+        //by below block code and  instructions ,if new color sent old color deleted and new color insert in productColor table
+        if ($countColor > 0) {
+            $deleteColors = ProductColor::where('product_id', '=', $lastProductId)->get();
+            foreach ($deleteColors as $delColor) {
+                ProductColor::destroy($delColor->id);
+            }
             for ($i = 0; $i < $countColor; $i++) {
                 $productColor = new ProductColor();
                 $productColor->product_id = $lastProductId;
                 $productColor->color_id = $product->color[$i];
                 $productColor->active = 1;
                 $productColor->save();
-
             }
-
         }
         //this block code save size array of product in product_size table
         $countSize = count($product->size);
-        if ($countSize) {
+        //by below block code and  instructions ,if new size sent old color deleted and new color insert in productSize table
+        if ($countColor > 0) {
+            $deleteColors = ProductSize::where('product_id', '=', $lastProductId)->get();
+            foreach ($deleteColors as $delColor) {
+                ProductSize::destroy($delColor->id);
+            }
             for ($i = 0; $i < $countSize; $i++) {
                 $productColor = new ProductSize();
                 $productColor->product_id = $lastProductId;
                 $productColor->size_id = $product->size[$i];
                 $productColor->active = 1;
                 $productColor->save();
-
             }
-
         }
 
         //this block code save and upload picture array of product in product_Images table
         $countPic = count($product->file);
-        if ($countPic) {
+        if ($countPic>0) {
             for ($i = 0; $i < $countPic; $i++) {
                 $productPicture = new ProductImage();
                 $productPicture->product_id = $lastProductId;
-                $imageName = $product->file[$i]->getClientOriginalName();
-                $productPicture->image_src = $imageName;
-                $product->file[$i]->move('public/dashboard/productFiles/picture/', $imageName);
+                $imageExtension = $product->file[$i]->getClientOriginalExtension();
+                $imageName=microtime();
+                $productPicture->image_src = $imageName.'.'.$imageExtension;
+                $product->file[$i]->move('public/dashboard/productFiles/picture/', $imageName.'.'.$imageExtension);
                 $productPicture->active = 1;
                 $productPicture->save();
-
             }
-
+        }
+        if(!empty($product->activePrice))
+        {
+            //if new active price was sent old row active must be 0 and new active price field active 1
+            ProductFlag::where('product_id','=',$lastProductId)
+                ->where('title','=',$product->activePrice)->update(['active'=>'1']);
+            ProductFlag::where('product_id','=',$lastProductId)
+                ->where('title','<>',$product->activePrice)->where('active','=','1')
+                ->update(['active'=>'0']);
         }
         /**this block code save flags and prices of product in product_flags table
          * by calling updateProductFlag(title of flag, price of flag, product_id) **/
@@ -176,30 +184,27 @@ class UpdateProduct
                 $subCatId = $catId;
             }
             updateCategoryProduct($lastProductId, $subCatId);
-
         }
         return (true);
     }
-
 //below function is related to convert jalali date to Miladi date
-function dateConvert($jalaliDate)
-{
-    if (count($jalaliDate) > 0) {
-        if ($date = explode('/', $jalaliDate)) {
-            $year = $date[0];
-            $month = $date[1];
-            $day = $date[2];
+    function dateConvert($jalaliDate)
+    {
+        if (count($jalaliDate) > 0) {
+            if ($date = explode('/', $jalaliDate)) {
+                $year = $date[0];
+                $month = $date[1];
+                $day = $date[2];
+            }
+            $gDate = $this->jalaliToGregorian($year, $month, $day);
+            $gDate = $gDate[0] . '-' . $gDate[1] . '-' . $gDate[2];
+            return $gDate;
         }
-        $gDate = $this->jalaliToGregorian($year, $month, $day);
-        $gDate = $gDate[0] . '-' . $gDate[1] . '-' . $gDate[2];
-        return $gDate;
+        return;
     }
-    return;
-}
-
-public
-function jalaliToGregorian($year, $month, $day)
-{
-    return Verta::getGregorian($year, $month, $day);
-}
+    public
+    function jalaliToGregorian($year, $month, $day)
+    {
+        return Verta::getGregorian($year, $month, $day);
+    }
 }

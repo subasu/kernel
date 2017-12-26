@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\SelfClasses\AddProduct;
 use App\Http\SelfClasses\CheckFiles;
 use App\Http\SelfClasses\CheckJalaliDate;
@@ -9,8 +10,11 @@ use App\Http\SelfClasses\CheckUpdateProduct;
 use App\Http\SelfClasses\NotToBeRepeated;
 use App\Http\SelfClasses\UpdateProduct;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
 class ProductController extends Controller
 {
     public function addProduct()
@@ -18,6 +22,7 @@ class ProductController extends Controller
         $pageTitle = 'درج محصول';
         return view('admin.addProduct', compact('pageTitle'));
     }
+
     public function productsManagement()
     {
         $pageTitle = 'مدیریت محصولات';
@@ -27,6 +32,7 @@ class ProductController extends Controller
         }
         return view('admin.productManagement', compact('data', 'pageTitle'));
     }
+
     //add new product to database
     public function addNewProduct(Request $request)
     {
@@ -62,6 +68,7 @@ class ProductController extends Controller
                 return response()->json(['data' => $checkTitles]);
             }
     }
+
     //update product to database
     public function updateProduct(Request $request)
     {
@@ -79,7 +86,7 @@ class ProductController extends Controller
                     if ($ans == "true")
                         return response()->json(['data' => 'ویرایش محصول شما با مؤفقیت انجام شد']);
                     else
-                        return response()->json(['data' => 'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.']);
+                        return response()->json(['data' => 'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.', 'ans' => $ans]);
                 } else
                     return response()->json(['message' => $result, 'code' => '1']);
             } else {
@@ -89,6 +96,7 @@ class ProductController extends Controller
             return response()->json(['data' => 'تاریخ را بطور صحیح وارد نمائید : 1396/09/19']);
         }
     }
+
     public function productDetailsGet($id)
     {
         $pageTitle = 'ویرایش محصول';
@@ -101,6 +109,7 @@ class ProductController extends Controller
             return view('errors.403');
         }
     }
+
     public function toPersian($date)
     {
         if (count($date) > 0) {
@@ -115,5 +124,15 @@ class ProductController extends Controller
             return $myDate;
         }
         return;
+    }
+
+    public function deleteProductPicture($id)
+    {
+        $ImageName = ProductImage::where('id', '=', $id)->value('image_src');
+        $srcImage = '/dashboard/productFiles/picture/' . $ImageName;
+        $res=unlink(public_path().$srcImage);
+        $res1 = ProductImage::destroy($id);
+        if ($res1 == 1 && $res == 1)
+            return response()->json(true);
     }
 }
