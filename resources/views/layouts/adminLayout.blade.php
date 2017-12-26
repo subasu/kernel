@@ -123,12 +123,12 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-cubes"></i> مدیریت سفارشات<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/ordersManagement')}}"> نمایش و مدیریت سفارشات</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            {{--<li><a><i class="fa fa-cubes"></i> مدیریت سفارشات<span class="fa fa-chevron-down"></span></a>--}}
+                                {{--<ul class="nav child_menu" style="display: none">--}}
+                                    {{--<li><a href="{{url('admin/ordersManagement')}}"> نمایش و مدیریت سفارشات</a>--}}
+                                    {{--</li>--}}
+                                {{--</ul>--}}
+                            {{--</li>--}}
                             <li><a><i class="fa fa-motorcycle"></i> مدیریت پیک ها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/deliveryMansManagement')}}"> نمایش و مدیریت پیک ها</a>
@@ -183,6 +183,13 @@
                                     <li><a href="{{url('user/userOrders')}}">نمایش لیست سفارشات</a>
                                     </li>
                                     {{--<li><a href="{{url('admin/addPaymentType')}}">افزودن وضعیت پرداخت</a>--}}
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-key"></i>مدیرت رمز عبور<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('user/changePassword')}}">تغییر رمز عبور</a>
+                                    </li>
                                     </li>
                                 </ul>
                             </li>
@@ -624,6 +631,30 @@
         });
     });
 </script>
+
+{{--<script>--}}
+    {{--$(document).ready(function(){--}}
+        {{--setInterval(function(){--}}
+
+            {{--$.ajax--}}
+            {{--({--}}
+                {{--url      : "{{url('admin/checkOrders')}}",--}}
+                {{--type     : "get",--}}
+                {{--dataType : "JSON",--}}
+                {{--success : function(response)--}}
+                {{--{--}}
+                    {{--if(response.data > 0)--}}
+                    {{--{--}}
+                        {{--window.open('adminShowFactor/'+response.data);--}}
+                    {{--}--}}
+                {{--},error:function (error) {--}}
+                  {{--console.log(error);--}}
+                {{--}--}}
+            {{--})--}}
+
+        {{--},1000);--}}
+    {{--})--}}
+{{--</script>--}}
 
 </body>
 </html>

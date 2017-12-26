@@ -45,9 +45,9 @@
                     <tr>
                         <th class="cart_product" align="center">عنوان محصول</th>
                         <th class="rtl" align="center"> توضیحات</th>
+                        <th class="rtl" align="center">واحد شمارش</th>
                         <th class="rtl" align="center">قیمت واحد</th>
                         <th class="rtl" align="center">تعداد/مقدار</th>
-                        <th class="rtl" align="center">واحد شمارش</th>
                         <th class="rtl" align="center">مجموع</th>
                         <th  class="action">عملیات</th>
                     </tr>
@@ -60,14 +60,14 @@
                             <td class="cart_description">
                                 <textarea class="form-control" disabled="">{{$basket->description}}</textarea>
                             </td>
+                            <td>
+                                {{$basket->unit_count}}
+                            </td>
                             <td id="unitPrice" content="{{$basket->price}}" class="price">{{number_format($basket->price)}} تومان</td>
                             <td class="qty">
                                 <input class="form-control input-sm" id="count" name="count" type="text" value="{{$basket->count}}">
                                 <a class="addToCount" content="{{$basket->id}}" name="{{$basket->basket_id}}"><i class="fa fa-caret-up"></i></a>
                                 <a class="subFromCount" content="{{$basket->id}}" name="{{$basket->basket_id}}"><i class="fa fa-caret-down"></i></a>
-                            </td>
-                            <td>
-                                {{$basket->unit_count}}
                             </td>
                             <td id="oldSum" content="{{$basket->sum}}" class="price">
                                 {{number_format($basket->sum)}} تومان

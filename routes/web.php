@@ -66,7 +66,7 @@ Route::group(['prefix'=>'admin'],function() {
 //orders
     Route::get('ordersManagement', 'OrderController@ordersManagement');//show view of all orders
     Route::get('adminShowFactor/{id}','OrderController@adminShowFactor');
-
+    Route::get('checkOrders','OrderController@checkOrders');
 //deliveryMan
     Route::get('addDeliveryMan', 'DeliveryManController@addDeliveryMan');//show add DeliveryMan view
     Route::get('deliveryMansManagement', 'DeliveryManController@deliveryMansManagement');//show view of all deliveryMans's details
@@ -108,6 +108,8 @@ Route::group(['prefix'=>'user'],function() {
     Route::get('userOrders','UserController@userOrders');
     Route::get('orderDetails/{id}','UserController@orderDetails');
     Route::get('userShowFactor/{id}','UserController@userShowFactor');
+    Route::get('changePassword','UserController@changePassword');
+    Route::post('saveNewPassword','UserController@saveNewPassword');
 
 });
 

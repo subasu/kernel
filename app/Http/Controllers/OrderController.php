@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Basket;
 use App\Models\Order;
+use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 
@@ -41,6 +42,7 @@ class OrderController extends Controller
 
     public function adminShowFactor($id)
     {
+        $order = Basket::find($id)->orders;
         $pageTitle      = 'فاکتور سفارش';
         $baskets        = Basket::find($id);
         $total          = 0;
@@ -69,10 +71,26 @@ class OrderController extends Controller
 
             }
             $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
-            return view('admin.adminFactor',compact('pageTitle','baskets','total','totalPostPrice','finalPrice','paymentTypes'));
+            return view('admin.adminFactor',compact('pageTitle','baskets','total','totalPostPrice','finalPrice','paymentTypes','order'));
         }else
         {
             return view('errors.403');
         }
+
+    }
+
+
+    //below function is related to check orders
+    public function checkOrders()
+    {
+        $oneSecondAgo = Carbon::now()->subSecond(1);
+        $checkOrders  = Order::where([['transaction_code','<>',null],['pay','<>',null],['created_at','>',$oneSecondAgo]])->value('basket_id');
+        if($checkOrders)
+        {
+            return response()->json(['data' => $checkOrders , 'code' => 1]);
+        }else
+            {
+                return response()->json(['data' => 'no data' , 'code' => 0]);
+            }
     }
 }
