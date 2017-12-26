@@ -1030,7 +1030,7 @@ img.alignright {
 }
 
 .cart-block .cart-block-content .product-info .p-left {
-    width: 100px;
+    width: 35px;
     float: left;
     position: relative;
 }
@@ -2353,6 +2353,7 @@ span.notify-right {
 
 .product-list li .product-name {
     padding-bottom: 5px;
+    height:60px;
 }
 
 .product-list li .product-info {
@@ -6069,4 +6070,10 @@ span.notify-right {
 .product-image-size{
     min-width: 300px;
     min-height: 350px
+}
+.color-black{
+    color: #000;
+}
+.color-red{
+    color: #ff3524 !important;
 }

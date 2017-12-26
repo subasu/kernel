@@ -76,29 +76,29 @@
                         <table id="orderTable" class="table table-bordered table-responsive cart_summary rtl">
                             <thead>
                             <tr>
-                                <th class="cart_product" align="center">عنوان محصول</th>
-                                <th class="rtl" align="center"> توضیحات</th>
-                                <th class="rtl" align="center">قیمت واحد</th>
-                                <th class="rtl" align="center">تعداد/مقدار</th>
-                                <th class="rtl">جمع کل (تومان)</th>
-                                <th class="rtl">تخفیف محصول (درصد)</th>
-                                <th class="rtl">هزینه ی پست (تومان)</th>
+                                <th class="text-center cart_product">عنوان محصول</th>
+                                <th class="text-center"> توضیحات</th>
+                                <th class="text-center">قیمت واحد</th>
+                                <th class="text-center" align="center">تعداد/مقدار</th>
+                                <th class="text-center">جمع کل (تومان)</th>
+                                <th class="text-center">تخفیف محصول (درصد)</th>
+                                <th class="text-center">هزینه ی پست (تومان)</th>
 
                             </tr>
                             </thead>
                             <tbody>
 
                             @foreach($baskets->products as $basket)
-                                <tr>
+                                <tr class="text-center">
                                     <td class="cart_product">{{$basket->title}}</td>
                                     <td class="cart_description">
                                         <textarea class="form-control" disabled="">{{$basket->description}}</textarea>
                                     </td>
-                                    <td id="unitPrice" content="{{$basket->price}}" class="price">{{number_format($basket->price)}}</td>
+                                    <td id="unitPrice" content="{{$basket->price}}">{{number_format($basket->price)}}</td>
                                     <td class="qty">
                                         <input disabled="disabled" class="form-control input-sm" id="count" name="count" type="text" value="{{$basket->count}}">
                                     </td>
-                                    <td id="oldSum" content="{{$basket->sum}}" class="price">{{number_format($basket->sum)}}</td>
+                                    <td id="oldSum" content="{{$basket->sum}}">{{number_format($basket->sum)}}</td>
                                     <td class="col-md-2">@if($basket->discount_volume != null){{$basket->discount_volume}}@endif @if($basket->discount_volume == null) تخفیف ندارد @endif</td>
                                     <td class="col-md-2">{{number_format($basket->post_price)}}</td>
                                     <input type="hidden" name="basketId" value="{{$basket->basket_id}}">

@@ -527,12 +527,12 @@
                         '<ul>'+
                         '<li class="product-info">'+
                         '<div class="p-left">'+
-                        '<a href="#" name="'+response.products[i].product_id+'" content="'+response.products[i].basket_id+'" id="removeFromBasket" class="remove_link"></a>'+
+                        '<a name="'+response.products[i].product_id+'" content="'+response.products[i].basket_id+'" id="removeFromBasket" class="fa fa-trash-o color-red"></a>'+
                         '</div>'+
                         '<div class="p-right">'+
-                        '<p class="p-name">'+response.products[i].title+'</p>'+
-                        '<p class="p-rice">'+formatNumber(response.products[i].price)+'</p>'+
-                        '<p>'+response.products[i].count+'</p>'+
+                        '<p class="p-name"><span>عنوان : </span><span class="color-black">'+response.products[i].title+'</span></p>'+
+                        '<p><span> قیمت : </span><span class="p-rice color-black">'+formatNumber(response.products[i].price)+'</span></p>'+
+                        '<p><span>تعداد : </span><span class="color-black">'+response.products[i].count+'</span></p>'+
                         '</div>'+
                         '</li>'+
                         '</ul>'

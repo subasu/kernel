@@ -38,24 +38,24 @@
             {{--<div align="center" class="heading-counter warning">--}}
                 {{--<h2>سبد خرید شما حاوی  {{$count}} نوع محصول است </h2>--}}
             {{--</div>--}}
-            <div class="order-detail-content rtl" align="center">
+            <div class="order-detail-content " align="center">
                 @if(!empty($baskets))
                 <table id="orderTable" class="table table-bordered table-responsive cart_summary rtl">
                     <thead>
                     <tr>
-                        <th class="cart_product" align="center">عنوان محصول</th>
-                        <th class="rtl" align="center"> توضیحات</th>
-                        <th class="rtl" align="center">واحد شمارش</th>
-                        <th class="rtl" align="center">قیمت واحد</th>
-                        <th class="rtl" align="center">تعداد/مقدار</th>
-                        <th class="rtl" align="center">مجموع</th>
+                        <th class="cart_product text-center">عنوان محصول</th>
+                        <th class="text-center"> توضیحات</th>
+                        <th class="text-center">واحد شمارش</th>
+                        <th class="text-center">قیمت واحد</th>
+                        <th class="text-center">تعداد/مقدار</th>
+                        <th class="text-center">مجموع</th>
                         <th  class="action">عملیات</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     @foreach($baskets->products as $basket)
-                        <tr>
+                        <tr class="text-center">
                             <td class="cart_product">{{$basket->title}}</td>
                             <td class="cart_description">
                                 <textarea class="form-control" disabled="">{{$basket->description}}</textarea>
@@ -63,13 +63,13 @@
                             <td>
                                 {{$basket->unit_count}}
                             </td>
-                            <td id="unitPrice" content="{{$basket->price}}" class="price">{{number_format($basket->price)}} تومان</td>
+                            <td id="unitPrice" content="{{$basket->price}}" class=" text-center">{{number_format($basket->price)}} تومان</td>
                             <td class="qty">
                                 <input class="form-control input-sm" id="count" name="count" type="text" value="{{$basket->count}}">
                                 <a class="addToCount" content="{{$basket->id}}" name="{{$basket->basket_id}}"><i class="fa fa-caret-up"></i></a>
                                 <a class="subFromCount" content="{{$basket->id}}" name="{{$basket->basket_id}}"><i class="fa fa-caret-down"></i></a>
                             </td>
-                            <td id="oldSum" content="{{$basket->sum}}" class="price">
+                            <td id="oldSum" content="{{$basket->sum}}" class=" text-center">
                                 {{number_format($basket->sum)}} تومان
                             </td>
                             <td class="col-md-2">
