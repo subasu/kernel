@@ -863,6 +863,7 @@
                                     text: x,
                                     type: "info",
                                 })
+                                location.reload();
                             },
                             error: function (xhr) {
                                 console.log(xhr)

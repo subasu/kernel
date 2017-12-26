@@ -37,8 +37,8 @@
                 <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>حساب من</span></a>
                 <ul class="dropdown-menu mega_dropdown text-right" role="menu">
                     <li><a href="{{url('login')}}">ورود/ثبت نام</a></li>
-                    <li><a href="#">مقایسه</a></li>
-                    <li><a href="#">علاقه مندی ها</a></li>
+                    {{--<li><a href="#">مقایسه</a></li>--}}
+                    {{--<li><a href="#">علاقه مندی ها</a></li>--}}
                 </ul>
             </div>
         </div>
@@ -48,7 +48,7 @@
 <div class="container main-header">
     <div class="row">
         <div class="col-xs-12 col-sm-3 logo">
-            <a href="index.html"><img alt="Kute shop - themelot.net"  src="{{url('public/main/assets/images/logo.png')}}" /></a>
+            <a href="{{url('/')}}"><img alt="KernelShop"  src="{{url('public/main/assets/images/logo.png')}}" /></a>
         </div>
         <div class="col-xs-7 col-sm-7 header-search-box">
             <form class="form-inline">
