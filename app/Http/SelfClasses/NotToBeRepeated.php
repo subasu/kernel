@@ -11,6 +11,7 @@ namespace App\Http\SelfClasses;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class NotToBeRepeated
 {
@@ -20,25 +21,29 @@ class NotToBeRepeated
         {
             //below block of code is to check title of products not to be repeated
             case 'product' :
-                $titles = '';
-                $products = Product::all();
-                foreach ($products as $product)
-                {
-                    if($product->title == $request->title)
-                    {
-                        $titles .= $request->title;
-                    }
-                }
-                if($titles != '')
-                {
-                    return 'محصولی با این عنوان قبلا ذخیره شده است';
-                }else
-                    {
-                        return true;
-                    }
-
+                  $categoryId = 0;
+                  if($request->categories != null && $request->subCategories == null)
+                  {
+                        $categoryId += $request->categories;
+                        $otherId     = DB::table('categories')->where([['parent_id',$categoryId],['title','سایر']])->value('id');
+                        return $this->checkProductTitle($otherId,$request);
+                  }
+                  elseif($request->subCategories !=null && $request->brands == null)
+                  {
+                        $categoryId += $request->subCategories;
+                        $otherId     = DB::table('categories')->where([['parent_id',$categoryId],['title','سایر']])->value('id');
+                        return $this->checkProductTitle($otherId,$request);
+                  }
+                  elseif($request->brnads != null)
+                  {
+                        $categoryId += $request->brands;
+                        return $this->checkProductTitle($categoryId,$request);
+                  }
+                  else
+                      {
+                          return 'لطفا دسته ای را انتخاب نمائید سپس درخواست ثبت محصول را بزنید';
+                      }
             break;
-
             //below block of code is to check title of categories not to be repeated
             case 'category':
                 $titles = '';
@@ -49,14 +54,13 @@ class NotToBeRepeated
                 {
                     foreach ($categories as $category)
                     {
-                       if($category->title == $request->category[$i])
+                       if($category->title == trim($request->category[$i]))
                        {
                           $titles .="\n". $request->category[$i];
                        }
                     }
                     $i++;
                 }
-
                 if($titles != '')
                 {
                     return 'دسته یا دسته های زیر قبلا ذخیره شده اند'. "\n".$titles;
@@ -66,5 +70,20 @@ class NotToBeRepeated
                     }
             break;
         }
+    }
+
+    //below function is to check titles of products
+    public function checkProductTitle($id,$request)
+    {
+        $productId = DB::table('category_product')->where('category_id',$id)->pluck('product_id');
+        if(DB::table('products')->whereIn('id',$productId)->where('title',trim($request->title))->count() > 0)
+        {
+            return 'محصولی با این عنوان قبلا ذخیره گردیده است';
+        }
+        else
+        {
+            return true;
+        }
+
     }
 }

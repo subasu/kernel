@@ -102,6 +102,7 @@
                                     <td class="col-md-2">@if($basket->discount_volume != null){{$basket->discount_volume}}@endif @if($basket->discount_volume == null) تخفیف ندارد @endif</td>
                                     <td class="col-md-2">{{number_format($basket->post_price)}}</td>
                                     <input type="hidden" name="basketId" value="{{$basket->basket_id}}">
+                                    <input type="hidden" name="productId[]" value="{{$basket->product_id}}">
                                 </tr>
                             @endforeach
                             </tbody>

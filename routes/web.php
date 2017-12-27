@@ -55,12 +55,13 @@ Route::group(['prefix'=>'admin'],function() {
     Route::post('editUnitCountTitle', 'UnitController@editUnitCountTitle');
     Route::post('enableOrDisableUnitCount','UnitController@enableOrDisableUnitCount');
     Route::post('enableOrDisableSubUnitCount','UnitController@enableOrDisableSubUnitCount');
-//productFiles
+//product
     Route::get('addProduct', 'ProductController@addProduct');//show add product view
     Route::get('productsManagement', 'ProductController@productsManagement');//show view of all product's details
     Route::post('addNewProduct', 'ProductController@addNewProduct');// add new product in database
     Route::post('updateProduct', 'ProductController@updateProduct');// update Product in database
     Route::get('productDetails/{id}', 'ProductController@productDetailsGet');
+    Route::post('changeProductStatus/{parameter}','ProductController@changeProductStatus');
 //users
     Route::get('usersManagement', 'UserController@usersManagement');//show view of all customer's details
 
@@ -94,6 +95,8 @@ Route::group(['prefix'=>'admin'],function() {
     Route::get('paymentTypesManagement','PaymentTypeController@paymentTypesManagement');
     Route::get('editPaymentType/{id}','PaymentTypeController@editPaymentType');
     Route::post('editPaymentTypeTitle','PaymentTypeController@editPaymentTypeTitle');
+//printer route
+    Route::get('connectToPrinter','OrderController@connectToPrinter');
 });
 
 //user routes
@@ -112,6 +115,7 @@ Route::group(['prefix'=>'user'],function() {
     Route::get('userShowFactor/{id}','UserController@userShowFactor');
     Route::get('changePassword','UserController@changePassword');
     Route::post('saveNewPassword','UserController@saveNewPassword');
+    Route::post('addToSeenCount','UserController@addToSeenCount');
 
 });
 

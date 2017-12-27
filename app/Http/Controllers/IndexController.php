@@ -256,70 +256,82 @@ class IndexController extends Controller
     //below function is related to return order view
     public function order($parameter)
     {
-        $menu = $menu = $this->loadMenu();
+        $menu = $menu=$this->loadMenu();
 
 
         //$categories  = Category::find($id);
-        if (isset($_COOKIE['addToBasket'])) {
+        if(isset($_COOKIE['addToBasket']))
+        {
 
-            switch ($parameter) {
+            switch ($parameter)
+            {
                 case 'basketDetail':
-                    $pageTitle = 'لیست سفارشات';
-                    $basketId = Basket::where([['cookie', $_COOKIE['addToBasket']], ['payment', 0]])->value('id');
-                    if ($basketId) {
-                        $baskets = Basket::find($basketId);
-                        $total = 0;
-                        foreach ($baskets->products as $basket) {
-                            $basket->count = $basket->pivot->count;
-                            $basket->price = $basket->pivot->product_price;
-                            $basket->sum = $basket->pivot->count * $basket->pivot->product_price;
-                            $total += $basket->sum;
-                            $basket->basket_id = $basket->pivot->basket_id;
+                    $pageTitle  = 'لیست سفارشات';
+                    $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
+                    if($basketId)
+                    {
+                        $baskets   = Basket::find($basketId);
+                        $total     = 0;
+                        foreach ($baskets->products as $basket)
+                        {
+                            $basket->count       = $basket->pivot->count;
+                            $basket->price       = $basket->pivot->product_price;
+                            $basket->sum         = $basket->pivot->count * $basket->pivot->product_price;
+                            $total              += $basket->sum;
+                            $basket->basket_id   = $basket->pivot->basket_id;
                         }
-                        return view('main.order', compact('menu', 'pageTitle', 'baskets', 'total'));
-                    } else {
-                        return Redirect::back();
-                    }
+                        return view('main.order',compact('menu','pageTitle','baskets','total'));
+                    }else
+                        {
+                            return Redirect::back();
+                        }
 
-                    break;
+                break;
 
                 case 'orderDetail':
                     $pageTitle = 'جزئیات سفارش';
-                    $paymentTypes = PaymentType::where('active', 1)->get();
-                    $basketId = Basket::where([['cookie', $_COOKIE['addToBasket']], ['payment', 0]])->value('id');
-                    $baskets = Basket::find($basketId);
-                    $total = 0;
-                    $totalDiscount = 0;
+                    $paymentTypes = PaymentType::where('active',1)->get();
+                    $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
+                    $baskets   = Basket::find($basketId);
+                    $total          = 0;
+                    $totalDiscount  = 0 ;
                     $totalPostPrice = 0;
-                    $finalPrice = 0;
-                    if (!empty($baskets)) {
-                        foreach ($baskets->products as $basket) {
-                            $basket->count = $basket->pivot->count;
-                            $basket->price = $basket->pivot->product_price;
-                            $basket->sum = $basket->pivot->count * $basket->pivot->product_price;
-                            $total += $basket->sum;
-                            $basket->basket_id = $basket->pivot->basket_id;
-                            $totalPostPrice += $basket->post_price;
-                            if ($basket->discount_volume != null) {
-                                $totalDiscount += $basket->discount_volume;
-                                if ($totalDiscount > 0) {
-                                    $basket->sumOfDiscount = ($total * $totalDiscount) / 100;
+                    $finalPrice     = 0;
+                    if(!empty($baskets))
+                    {
+                        foreach ($baskets->products as $basket)
+                        {
+                            $basket->count         = $basket->pivot->count;
+                            $basket->price         = $basket->pivot->product_price;
+                            $basket->sum           = $basket->pivot->count * $basket->pivot->product_price;
+                            $total                += $basket->sum;
+                            $basket->basket_id     = $basket->pivot->basket_id;
+                            $totalPostPrice       += $basket->post_price;
+                            $basket->product_id    = $basket->pivot->product_id;
+                            if($basket->discount_volume != null )
+                            {
+                                $totalDiscount        += $basket->discount_volume;
+                                if($totalDiscount > 0)
+                                {
+                                    $basket->sumOfDiscount = ($total * $totalDiscount ) / 100 ;
                                 }
                             }
 
                         }
                         $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
-                        return view('main.orderDetail', compact('menu', 'pageTitle', 'baskets', 'total', 'totalPostPrice', 'finalPrice', 'paymentTypes'));
-                    } else {
-                        return view('errors.403');
-                    }
+                        return view('main.orderDetail',compact('menu','pageTitle','baskets','total','totalPostPrice','finalPrice','paymentTypes'));
+                    }else
+                        {
+                            return view('errors.403');
+                        }
 
-                    break;
+                break;
             }
 
-        } else {
-            return Redirect::back();
-        }
+        }else
+            {
+                return Redirect::back();
+            }
 
     }
 
