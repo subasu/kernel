@@ -598,6 +598,7 @@
                         <!-- PRODUCT LIST -->
                         <ul class="row product-list style2 grid">
                             @foreach($categories->products as $product)
+                                @if($product->active == 1)
                                 <li class="col-sx-12 col-sm-4">
                                     <div class="product-container">
                                         <div align="center" >
@@ -615,7 +616,7 @@
                                             <div class="quick-view">
                                                 <a title="افزودن به علاقه مندی ها" class="heart" ></a>
                                                 <a title="مقایسه" class="compare" ></a>
-                                                <a title="نمایش جزئیات" class="search" href="{{url('productDetail/'.$product->id)}}"></a>
+                                                <a title="نمایش جزئیات" class="search" id="goToDetail" content="{{$product->id}}" href="{{url('productDetail/'.$product->id)}}"></a>
                                             </div>
                                         </div>
 
@@ -679,6 +680,7 @@
                                     </div>
 
                                 </li>
+                                @endif
                             @endforeach
                         </ul>
                         <!-- ./PRODUCT LIST -->

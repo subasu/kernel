@@ -36,6 +36,7 @@
                             <th style="text-align: center">تعداد خرید</th>
                             <th style="text-align: center">تاریخ ثبت محصول</th>
                             <th style="text-align: center">مشاهده جزییات</th>
+                            <th style="text-align: center">وضعیت / تغییر وضعیت</th>
 
                         </tr>
                         </thead>
@@ -44,13 +45,18 @@
 
                         @foreach($data as $datum)
                             <tr class="unit">
-                                <td style="font-size: 120%"> {{$datum->id}}</td>
+                                <td style="font-size: 120%">{{$datum->id}}</td>
                                 <td style="font-size: 120%">{{$datum->title}}</td>
                                 <td style="font-size: 120%">{{$datum->seen_count}}</td>
                                 <td style="font-size: 120%">{{$datum->sell_count}}</td>
                                 <td style="font-size: 120%">{{$datum->date}}</td>
                                 <td ><strong><a style="font-size: 120%" class="btn btn-dark" href="{{url('admin/productDetails/'.$datum->id)}}">مشاهده جزئیات</a></strong></td>
-
+                                @if($datum->active == 1)
+                                    <td ><strong><a style="font-size: 120%" class="btn btn-success col-md-10 col-md-offset-1" id="{{$datum->id}}">فعال</a></strong></td>
+                                @endif
+                                @if($datum->active == 0)
+                                    <td ><strong><a style="font-size: 120%" class="btn btn-danger col-md-10 col-md-offset-1">غیرفعال</a></strong></td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>
@@ -58,17 +64,16 @@
                 </div>
             </div>
         </div>
-        {{--edit user's status by user-id --}}
 
+        <!-- below script is make related product disable -->
         <script>
             $(document).on('click','.btn-success',function () {
-                var userId = $(this).attr('id');
-                var status = $(this).val();
+                var productId = $(this).attr('id');
                 var token  = $('#token').val();
                 var button = $(this);
                 swal({
                         title: "",
-                        text: "آیا از غیرفعال کردن کاربر اطمینان دارید؟",
+                        text: "محصول مورد نظر شما هم اکنون فعال است ، آیا در نظر دارید آن را غیر فعال کنید؟",
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "	#5cb85c",
@@ -80,21 +85,33 @@
                     function () {
                         $.ajax
                         ({
-                            url     : "{{Url('admin/changeUserStatus')}}/{{1}}",
+                            url     : "{{Url('admin/changeProductStatus')}}/{{'disable'}}",
                             type    : 'post',
-                            data    : {'userId':userId,'_token':token},
+                            data    : {'productId':productId,'_token':token},
                             context :  button,
-                            //dataType:'json',
+                            dataType:'json',
                             success : function (response)
                             {
                                 $(button).text('غیر فعال');
                                 $(button).toggleClass('btn-success btn-danger');
-                                swal({
-                                    title: "",
-                                    text: response,
-                                    type: "info",
-                                    confirmButtonText: "بستن"
-                                });
+                                if(response.code == 'success')
+                                {
+                                    swal({
+                                        title: "",
+                                        text: response.message,
+                                        type: "success",
+                                        confirmButtonText: "بستن"
+                                    });
+                                }else
+                                    {
+                                        swal({
+                                            title: "",
+                                            text: "خطایی رخ داده است ، تماس با بخش پشتیبانی",
+                                            type: "warning",
+                                            confirmButtonText: "بستن"
+                                        });
+                                    }
+
                             },
                             error : function(error)
                             {
@@ -110,15 +127,15 @@
                     });
             })
         </script>
+        <!--below script is related to make related product enable -->
         <script>
             $(document).on('click','.btn-danger',function () {
-                var userId = $(this).attr('id');
-                var status = $(this).val();
+                var productId = $(this).attr('id');
                 var token = $('#token').val();
                 var button = $(this);
                 swal({
                         title: "",
-                        text: "آیا از فعال کردن کاربر اطمینان دارید؟",
+                        text: "محصول مورد نظر شما هم اکنون غیر فعال است ، آیا در نظر دارید آن را فعال کنید؟",
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "	#5cb85c",
@@ -130,20 +147,31 @@
                     function () {
                         $.ajax
                         ({
-                            url: "{{Url('admin/changeUserStatus')}}/{{2}}",
+                            url: "{{Url('admin/changeProductStatus')}}/{{'enable'}}",
                             type: 'post',
-                            data: {'userId': userId, '_token': token},
+                            data: {'productId': productId, '_token': token},
                             context: button,
-                            //dataType:'json',
+                            dataType:'json',
                             success: function (response) {
                                 $(button).text('فعال');
                                 $(button).toggleClass('btn-success btn-danger');
-                                swal({
-                                    title: "",
-                                    text: response,
-                                    type: "info",
-                                    confirmButtonText: "بستن"
-                                });
+                                if(response.code == 'success')
+                                {
+                                    swal({
+                                        title: "",
+                                        text: response.message,
+                                        type: "success",
+                                        confirmButtonText: "بستن"
+                                    });
+                                }else
+                                {
+                                    swal({
+                                        title: "",
+                                        text: "خطایی رخ داده است ، تماس با بخش پشتیبانی",
+                                        type: "warning",
+                                        confirmButtonText: "بستن"
+                                    });
+                                }
                             },
                             error: function (error) {
                                 console.log(error);

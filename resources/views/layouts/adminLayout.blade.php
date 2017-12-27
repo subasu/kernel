@@ -96,7 +96,7 @@
                             {{--//system manager menu--}}
                             <li><a><i class="fa f a-home"></i>پنل مدیریت<span></span></a>
                             </li>
-                            <li><a><i class="fa fa-users"></i> مدیریت محصولات<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-product-hunt"></i> مدیریت محصولات<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/productsManagement')}}"> نمایش و مدیریت محصولات</a>
                                     </li>
@@ -107,7 +107,7 @@
                                     {{--</li>--}}
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-th-list"></i> مدیریت دسته بندی ها<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-object-group"></i> مدیریت دسته بندی ها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/categoriesManagement')}}"> نمایش و مدیریت دسته بندی ها</a>
                                     </li>
@@ -129,20 +129,20 @@
                                     {{--</li>--}}
                                 {{--</ul>--}}
                             {{--</li>--}}
-                            <li><a><i class="fa fa-motorcycle"></i> مدیریت پیک ها<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/deliveryMansManagement')}}"> نمایش و مدیریت پیک ها</a>
-                                    </li>
-                                    <li><a href="{{url('admin/addDeliveryMan')}}">درج پیک جدید </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-users"></i> مدیریت کاربران<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/usersManagement')}}"> نمایش و مدیریت کاربران</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            {{--<li><a><i class="fa fa-motorcycle"></i> مدیریت پیک ها<span class="fa fa-chevron-down"></span></a>--}}
+                                {{--<ul class="nav child_menu" style="display: none">--}}
+                                    {{--<li><a href="{{url('admin/deliveryMansManagement')}}"> نمایش و مدیریت پیک ها</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li><a href="{{url('admin/addDeliveryMan')}}">درج پیک جدید </a>--}}
+                                    {{--</li>--}}
+                                {{--</ul>--}}
+                            {{--</li>--}}
+                            {{--<li><a><i class="fa fa-users"></i> مدیریت کاربران<span class="fa fa-chevron-down"></span></a>--}}
+                                {{--<ul class="nav child_menu" style="display: none">--}}
+                                    {{--<li><a href="{{url('admin/usersManagement')}}"> نمایش و مدیریت کاربران</a>--}}
+                                    {{--</li>--}}
+                                {{--</ul>--}}
+                            {{--</li>--}}
                             <li><a><i class="fa fa-paint-brush"></i>مدیریت رنگها <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/colorsManagement')}}"> نمایش و مدیریت رنگها</a>
@@ -167,13 +167,13 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-dollar"></i>مدیریت پرینتر<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/connectToPrinter')}}"> اتصال به پرینتر</a>
-                                </ul>
-                            </li>
+                            {{--<li><a><i class="fa fa-dollar"></i>مدیریت پرینتر<span class="fa fa-chevron-down"></span></a>--}}
+                                {{--<ul class="nav child_menu" style="display: none">--}}
+                                    {{--<li><a href="{{url('admin/connectToPrinter')}}"> اتصال به پرینتر</a>--}}
+                                {{--</ul>--}}
+                            {{--</li>--}}
                             //admin
-                            <li><a><i class="fa fa-first-order"></i>بررسی سفارشات و فاکتورها<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-print"></i>بررسی سفارشات و فاکتورها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/ordersManagement')}}">نمایش لیست سفارشات</a>
                                     </li>
@@ -183,7 +183,7 @@
                             </li>
                             {{--@if(Auth::user()->roll_id == 3)--}}
                             //user
-                            <li><a><i class="fa fa-first-order"></i>بررسی سفارشات و فاکتورها<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-print"></i>بررسی سفارشات و فاکتورها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('user/userOrders')}}">نمایش لیست سفارشات</a>
                                     </li>

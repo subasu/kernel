@@ -135,4 +135,36 @@ class ProductController extends Controller
         if ($res1 == 1 && $res == 1)
             return response()->json(true);
     }
+
+    //below function is related to change product status
+    public function changeProductStatus(Request $request,$parameter)
+    {
+        switch ($parameter)
+        {
+            case 'disable':
+                $product = Product::find($request->productId);
+                $product->active = 0;
+                $product->save();
+                if($product)
+                {
+                    return response()->json(['message' => 'محصول مورد نظر شما غیر فعال گردید' , 'code' => 'success']);
+                }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است' , 'code' => 'error']);
+                    }
+            break;
+            case 'enable':
+                $product = Product::find($request->productId);
+                $product->active = 1;
+                $product->save();
+                if($product)
+                {
+                    return response()->json(['message' => 'محصول مورد نظر شما  فعال گردید' , 'code' => 'success']);
+                }else
+                {
+                    return response()->json(['message' => 'خطایی رخ داده است' , 'code' => 'error']);
+                }
+            break;
+        }
+    }
 }

@@ -859,5 +859,27 @@
         })
     })
 </script>
+
+
+<!-- below script is related to add seen count of product -->
+<script>
+    $(document).on('click','#goToDetail',function(){
+            var productId = $(this).attr('content');
+            var token     = $('#token').val();
+            $.ajax
+            ({
+                url     : "{{url('user/addToSeenCount')}}",
+                type    : "post",
+                data    : {'productId': productId , '_token' : token},
+                success : function(response)
+                {
+                    console.log(response);
+                },error : function(error)
+                {
+                  console.log(error);
+                }
+            })
+    })
+</script>
 </body>
 </html>

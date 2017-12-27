@@ -256,6 +256,7 @@ class IndexController extends Controller
                             $total                += $basket->sum;
                             $basket->basket_id     = $basket->pivot->basket_id;
                             $totalPostPrice       += $basket->post_price;
+                            $basket->product_id    = $basket->pivot->product_id;
                             if($basket->discount_volume != null )
                             {
                                 $totalDiscount        += $basket->discount_volume;

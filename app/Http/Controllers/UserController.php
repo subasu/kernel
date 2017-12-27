@@ -212,39 +212,65 @@ class UserController extends Controller
     //below function is related to add items in orders table
     public function addToOrder($request, $user, $newPassword)
     {
-        $now = Carbon::now(new\DateTimeZone('Asia/Tehran'));
-        $order = new Order();
-        $order->user_id = $user->id;
-        $order->user_coordination = trim($request->userCoordination);
-        $order->date = $now->toDateString();
-        $order->time = $now->toTimeString();
-        $order->total_price = $request->totalPrice;
-        $order->discount_price = $request->discountPrice;
-        $order->factor_price = $request->factorPrice;
-        $order->user_cellphone = $request->userCellphone;
-        $order->basket_id = $request->basketId;
-        $order->payment_type = $request->paymentType;
-        $order->pay = 1;
-        $order->transaction_code = 46456464;
-        $order->comments         = $request->comments;
-        $order->save();
-        if ($order) {
-            $update = Basket::find($request->basketId);
-            $update->payment = 1;
-            $update->save();
-            if ($update) {
+        $product = $this->addToSellCount($request);
+        if($product)
+        {
+            $now = Carbon::now(new\DateTimeZone('Asia/Tehran'));
+            $order = new Order();
+            $order->user_id = $user->id;
+            $order->user_coordination = trim($request->userCoordination);
+            $order->date = $now->toDateString();
+            $order->time = $now->toTimeString();
+            $order->total_price = $request->totalPrice;
+            $order->discount_price = $request->discountPrice;
+            $order->factor_price = $request->factorPrice;
+            $order->user_cellphone = $request->userCellphone;
+            $order->basket_id = $request->basketId;
+            $order->payment_type = $request->paymentType;
+            $order->pay = 1;
+            $order->transaction_code = 46456464;
+            $order->comments         = $request->comments;
+            $order->save();
+            if ($order) {
+                $update = Basket::find($request->basketId);
+                $update->payment = 1;
+                $update->save();
+                if ($update) {
 
-                if ($newPassword == '') {
-                    return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید ، لطفا در جهت پیگیری سفارش خود وارد پنل شوید', 'code' => 1, 'userPassword' => $newPassword]);
+                    if ($newPassword == '') {
+                        return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید ، لطفا در جهت پیگیری سفارش خود وارد پنل شوید', 'code' => 1, 'userPassword' => $newPassword]);
+                    } else {
+                        return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید ، لطفا در جهت پیگیری سفارش خود با رمز عبور زیر وارد پنل شوید', 'code' => 1, 'userPassword' => $newPassword]);
+                    }
+
                 } else {
-                    return response()->json(['message' => 'سفارش  شما با موفقیت ثبت گردید ، لطفا در جهت پیگیری سفارش خود با رمز عبور زیر وارد پنل شوید', 'code' => 1, 'userPassword' => $newPassword]);
+                    return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
                 }
 
-            } else {
-                return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
             }
-
         }
+        else
+        {
+            return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+        }
+
+    }
+
+    //below function is related to add sell count of product
+    public function addToSellCount($request)
+    {
+        for($i=0; $i <= count($request);$i++)
+        {
+            $product = DB::table('products')->where('id',$request->productId[$i])->increment('sell_count');
+        }
+        if($product)
+        {
+            return true;
+        }
+        else
+            {
+                return false;
+            }
     }
 
     //below function is related to show user orders
@@ -371,6 +397,27 @@ class UserController extends Controller
                 return redirect('/logout');
             }
         }
+    }
+
+    //below function is related to add to seen count
+    public function addToSeenCount(Request $request)
+    {
+        if($request->ajax())
+        {
+           $product = Product::find($request->productId);
+           $product->seen_count += 1;
+           $product->save();
+           if($product)
+           {
+               return response()->json(['message' => 'success']);
+           }else
+               {
+                   return response()->json(['message' => 'error']);
+               }
+        }else
+            {
+                abort(403);
+            }
     }
 }
 
