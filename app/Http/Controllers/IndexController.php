@@ -8,6 +8,7 @@ use App\Models\CategoryProduct;
 use App\Models\City;
 use App\Models\PaymentType;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -21,22 +22,71 @@ class IndexController extends Controller
         return view('layouts.adminLayout');
     }
 
+    public function search(Request $request)
+    {
+//        if($request->search_type==1)
+//        {
+//
+//        }
+//        elseif($request->search_type==2)
+//        {
+//            $result=Category::where('title','like','%'.$request->search_key.'%')->get();
+//            foreach ($result as $item) {
+//                if($item->depth==2)
+//                {
+//                    $item->subcat=Category::where('parent_id','=',$item->id)->get();
+//                }
+//                if($item->depth==1)
+//                {
+//                    $item->brand=Category::where('parent_id','=',$item->id)->get();
+//                }
+//                $results1=CategoryProduct::where('category_id','=','383')->get();
+//                $results2=CategoryProduct::where('category_id','=','383')->get();
+//                $results = array_merge($results1->toArray(), $results2->toArray());
+//                $collection = collect($results);
+//            }
+//            dd($collection);
+//        }
+
+        $results = Product::where('title', 'like', '%' . $request->search_key . '%')
+            ->orWhere('description', 'like', '%' . $request->search_key . '%')->get();
+        $menu = $this->loadMenu();
+        return view('main.searchResult', compact('results', 'menu'));
+    }
+
     public function loadMenu()
     {
-        $menu = Category::where([['parent_id',null],['grand_parent_id',null],['active',1]])->get();
+        $menu = Category::where([['parent_id', null], ['grand_parent_id', null], ['active', 1]])->get();
+        foreach ($menu as $sub)
+        {
+            $submenu = Category::where([['parent_id', $sub->id], ['active', 1]])->orderBy('depth', 'DESC')->get();
+            foreach ($submenu as $sm) {
+                $sm->brands = Category::where([['parent_id', $sm->id], ['active', 1]])->get();
+                $x=0;
+                foreach ($sm->brands as $val) {
+                    $x = CategoryProduct::where('product_id', '=', $val->id)->get();
+                }
+            }
+            if ($x)
+            $sub->hasProduct = 1;
+        else
+            $sub->hasProduct = 0;
+        }
+
         return $menu;
 
     }
+
     public function home()
     {
-        $menu=$this->loadMenu();
+        $menu = $this->loadMenu();
         $pageTitle = 'صفحه ی اصلی';
         return view('main.index', compact('pageTitle', 'menu'));
     }
 
     public function login()
     {
-        $menu=$this->loadMenu();
+        $menu = $this->loadMenu();
         $capital = City::where('parent_id', '=', '1')->get();
         $pageTitle = 'ورود/عضویت';
         return view('main.login', compact('pageTitle', 'menu', 'capital'));
@@ -45,7 +95,7 @@ class IndexController extends Controller
     //show product page in main site
     public function products()
     {
-        $menu = $menu=$this->loadMenu();
+        $menu = $menu = $this->loadMenu();
         $pageTitle = 'لیست محصولات';
         return view('main.products', compact('pageTitle', 'menu'));
     }
@@ -172,9 +222,9 @@ class IndexController extends Controller
 //            'register_date' => date_create(),
         ]);
         if ($result)
-            return response()->json(['data'=>1]);
+            return response()->json(['data' => 1]);
         else
-            return response()->json(['data'=>0]);
+            return response()->json(['data' => 0]);
 
     }
 
@@ -182,23 +232,24 @@ class IndexController extends Controller
     //below function is to return show product blade
     public function showProducts($id)
     {
-        $menu = $menu=$this->loadMenu();
+        $menu = $menu = $this->loadMenu();
         $pageTitle = 'لیست محصولات';
-        $categories  = Category::find($id);
+        $categories = Category::find($id);
         //dd($categories);
-        return view('main.showProducts',compact('menu','pageTitle','categories'));
+        return view('main.showProducts', compact('menu', 'pageTitle', 'categories'));
     }
+
     //below function is to return show product blade
     public function productDetail($id)
     {
-        $menu = $menu=$this->loadMenu();
-        $product  = Product::find($id);
-        $pageTitle = Product::where('id','=',$id)->value('title');
-        $brand=$product->categories[0]->id;
-        $subcatId =  Category::where('id','=',$brand)->value('parent_id');
-        $subcat =  \App\Models\Category::where('id','=',$subcatId)->value('title');
-        $cat =  Category::where('id','=',$subcat)->value('title');
-        return view('main.productDetail',compact('menu','pageTitle','product','cat','subcat'));
+        $menu = $menu = $this->loadMenu();
+        $product = Product::find($id);
+        $pageTitle = Product::where('id', '=', $id)->value('title');
+        $brand = $product->categories[0]->id;
+        $subcatId = Category::where('id', '=', $brand)->value('parent_id');
+        $subcat = \App\Models\Category::where('id', '=', $subcatId)->value('title');
+        $cat = Category::where('id', '=', $subcat)->value('title');
+        return view('main.productDetail', compact('menu', 'pageTitle', 'product', 'cat', 'subcat'));
     }
 
 
