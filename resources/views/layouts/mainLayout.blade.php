@@ -316,47 +316,51 @@
                         var item = $(".submenu");
                         item.empty();
                         var x = 1;
-                        $.each(response, function (key, value) {
-                            if (value.catImg != null && x == 1) {
-                                item.append('<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">' +
-                                    '<ul class="block">' +
-                                    '<li class="img_container">' +
-                                    '<img src="public/main/assets/data/banner-topmenu.jpg" alt="' + response.catImg + '" title="' + response.catImg + '" >' +
-                                    '</li>' +
-                                    '</ul></li>')
-                            }
-                            x = 0;
-                            var len = value.brands.length;
-                            if (len != 0 || value.title == 'سایر') {
-                                if (value.title == 'سایر')
-                                {
-                                    var temp = '<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">' +
+                        $.each(response.submenu, function (key, value) {
+                            if(value.hasProduct==1)
+                            {
+                                if (value.catImg != null && x == 1) {
+                                    item.append('<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">' +
                                         '<ul class="block">' +
-                                        '<li class="link_container group_header">' +
-                                        '<a href="#">سایر محصولات</a>' +
-                                        '</li>';
-                                    temp += '<li class="link_container" id="' + value.id + '">' +
-                                        '<a href="{{url('showProducts')}}'+"/"+value.id+'">مشاهده ی سایر محصولات</a>' +
-                                        '</li>';
-                                    temp += '</ul>' + '</li>'
-                                    item.append(temp)
+                                        '<li class="img_container">' +
+                                        '<img src="{{url('public/dashboard/image')}}/'+value.catImg+'" alt="' + value.title + '" title="' + value.title + '" >' +
+                                        '</li>' +
+                                        '</ul></li>')
                                 }
-                                else {
-                                    var temp = '<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">' +
-                                        '<ul class="block">' +
-                                        '<li class="link_container group_header">' +
-                                        '<a href="#">' + value.title + '</a>' +
-                                        '</li>';
-                                    $.each(value.brands, function (key, value) {
-                                        temp += '<li class="link_container" id="' + value.id + '">' +
-                                            '<a href="{{url('showProducts')}}'+"/"+value.id+' ">' + value.title + '</a>' +
+                                x = 0;
+                                var len = value.brands.length;
+                                if (len != 0 || value.title == 'سایر') {
+                                    if (value.title == 'سایر')
+                                    {
+                                        var temp = '<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">' +
+                                            '<ul class="block">' +
+                                            '<li class="link_container group_header">' +
+                                            '<a href="#">سایر محصولات</a>' +
                                             '</li>';
-                                    });
-                                    temp += '</ul>' + '</li>'
-                                    item.append(temp)
-                                }
+                                        temp += '<li class="link_container" id="' + value.id + '">' +
+                                            '<a href="{{url('showProducts')}}'+"/"+value.id+'">مشاهده ی سایر محصولات</a>' +
+                                            '</li>';
+                                        temp += '</ul>' + '</li>';
+                                        item.append(temp)
+                                    }
+                                    else {
+                                        var temp = '<li class="block-container col-md-3 col-xs-12 float-xs-none" style="float: right">' +
+                                            '<ul class="block">' +
+                                            '<li class="link_container group_header">' +
+                                            '<a href="#">' + value.title + '</a>' +
+                                            '</li>';
+                                        $.each(value.brands, function (key, value) {
+                                            temp += '<li class="link_container" id="' + value.id + '">' +
+                                                '<a href="{{url('showProducts')}}'+"/"+value.id+' ">' + value.title + '</a>' +
+                                                '</li>';
+                                        });
+                                        temp += '</ul>' + '</li>'
+                                        item.append(temp)
+                                    }
 
+                                }
                             }
+
                         });
                     }
                 })
@@ -856,6 +860,10 @@
                     });
                 }
             }
+        });
+        $("[name='search_select']").change(function () {
+            console.log($(this).val())
+            $("#form_search").attr('action','{{url('search')}}/'+$(this).val())
         })
     })
 </script>

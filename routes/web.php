@@ -14,6 +14,7 @@ use App\Models\Category;
 
 Route::get('/admin','IndexController@index');
 Route::get('/','IndexController@home');
+Route::post('/search','IndexController@search');
 Route::get('productFiles','IndexController@productFiles');
 Route::get('myLogin','IndexController@login');
 Route::get('town/{cid}','IndexController@town');

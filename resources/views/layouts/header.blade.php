@@ -17,12 +17,12 @@
         <div class="language ">
             <div class="dropdown">
                 <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
-                    <img alt="email"  src="{{url('public/main/assets/images/fr.jpg')}}" />فارسی
+                    <img alt="email" src="{{url('public/main/assets/images/fr.jpg')}}" />فارسی
 
                 </a>
                 <ul class="dropdown-menu text-right" role="menu">
-                    <li><a href="#"><img alt="email"  src="{{url('public/main/assets/images/en.jpg')}}" />انگلیسی</a></li>
-                    <li><a href="#"><img alt="email"  src="{{url('public/main/assets/images/fr.jpg')}}" />فارسی</a></li>
+                    <li><a href="#"><img alt="email" src="{{url('public/main/assets/images/en.jpg')}}" />انگلیسی</a></li>
+                    <li><a href="#"><img alt="email" src="{{url('public/main/assets/images/fr.jpg')}}" />فارسی</a></li>
                 </ul>
             </div>
         </div>
@@ -51,16 +51,18 @@
             <a href="{{url('/')}}"><img alt="KernelShop"  src="{{url('public/main/assets/images/logo.png')}}" /></a>
         </div>
         <div class="col-xs-7 col-sm-7 header-search-box">
-            <form class="form-inline">
+            <form class="form-inline" id="search_form" action="{{url('search')}}" method="post">
+                {{csrf_field()}}
                 <div class="form-group form-category">
-                    <select class="select-category">
-                        <option value="2">همه ی دسته بندی ها</option>
-                    </select>
+                    {{--<select class="select-category1" name="search_type">--}}
+                        {{--<option value="1">جستجو نام محصول</option>--}}
+                        {{--<option value="2">جستجو در دسته بندیها</option>--}}
+                    {{--</select>--}}
                 </div>
                 <div class="form-group input-serach ">
-                    <input type="text" class="text-right"  placeholder="...عبارت مورد نظر را تایپ نمائید">
+                    <input type="text" class="text-right" name="search_key" placeholder="...جستجو در عنوان و توضیحات محصول">
                 </div>
-                <button type="submit" class="pull-right btn-search"></button>
+                <button type="submit" id="send_search" class="pull-right btn-search"></button>
             </form>
         </div>
         <div id="cart-block" class="col-xs-5 col-sm-2 shopping-cart-box">
@@ -108,12 +110,14 @@
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="#">صفحه ی اصلی</a></li>
                                 @foreach($menu as $mnu)
+                                    @if($mnu->hasProduct)
                                     <li class="dropdown mainMenu"  name="{{$mnu->id}}">
                                         <a class="dropdown-toggle" data-toggle="dropdown">{{$mnu->title}}</a>
                                         <ul class="dropdown-menu mega_dropdown submenu" role="menu" style="width: 830px;">
 
                                         </ul>
                                     </li>
+                                    @endif
                                 @endforeach
                                 {{--<li class="dropdown">--}}
                                     {{--<a href="category.html" class="dropdown-toggle" data-toggle="dropdown">Foods</a>--}}
