@@ -24,6 +24,7 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('getBrands/{id}','CommonController@getBrands');
     Route::get('getExistedCategories/{id}','CommonController@getExistedCategories'); //get existed categories to show to shop manager not to be confused
     Route::post('findCategoryProduct','CommonController@findCategoryProduct');
+    Route::get('getDisabledCategories/{depth}','CommonController@getDisabledCategories');
 
     //unit counts routes
     Route::get('getSubunits/{id}','CommonController@getSubunits');
@@ -63,6 +64,7 @@ Route::group(['prefix' => '/v1/general'],function(){
     Route::get('getSubMenu/{id}','webService\GeneralController@getSubMenu');
     Route::get('getBrands/{id}','webService\GeneralController@getBrands');
     Route::post('order','webService\GeneralController@order');
+
 });
 
 

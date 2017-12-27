@@ -676,7 +676,6 @@
                         {
 
                             getBrands(id);
-
                             function getBrands (id) {
                                 var option="";
                                 $.ajaxSetup({
@@ -694,7 +693,6 @@
                                     {
 
                                         console.log(response);
-
                                         $.each(response, function (key, value) {
                                             var item = $('#brands');
                                             item.empty();
@@ -718,5 +716,34 @@
                     })
 
                 })
+        </script>
+        <script>
+            $(document).ready(function () {
+                getDisabledCategories(0);
+            })
+        </script>
+        <!--below script is related to get disabled categories of each step -->
+        <script>
+                function getDisabledCategories(depth)
+                {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                        }
+                    })
+                    $.ajax
+                    ({
+                        cache :false,
+                        url: "{{Url('api/v1/getDisabledCategories')}}/" + depth,
+                        dataType: "json",
+                        type: "get",
+                        success: function (response)
+                        {
+                            console.log(response);
+                        },error : function(error){
+                            console.log(error);
+                        }
+                    })
+                }
         </script>
 @endsection

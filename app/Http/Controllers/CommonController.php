@@ -25,7 +25,6 @@ class CommonController extends Controller
         } else {
             return response()->json(0);
         }
-
     }
 
     //below function is to get sub categories from database
@@ -110,7 +109,6 @@ class CommonController extends Controller
         } else {
             return response()->json(0);
         }
-
     }
 
     public function getExistedCategories($id)
@@ -177,6 +175,17 @@ class CommonController extends Controller
         $paymentTypes = PaymentType::all();
         if (count($paymentTypes) > 0) {
             return response()->json($paymentTypes);
+        } else {
+            return response()->json(0);
+        }
+    }
+
+    //below function is related to show disabled categories
+    public function getDisabledCategories($depth)
+    {
+        $disabledCategories = Category::where([['depth', $depth],['active', 0]])->get();
+        if (count($disabledCategories) > 0) {
+            return response()->json($disabledCategories);
         } else {
             return response()->json(0);
         }
