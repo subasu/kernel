@@ -183,11 +183,24 @@ class CommonController extends Controller
     //below function is related to show disabled categories
     public function getDisabledCategories($depth)
     {
-        $disabledCategories = Category::where([['depth', $depth],['active', 0]])->get();
-        if (count($disabledCategories) > 0) {
-            return response()->json($disabledCategories);
-        } else {
-            return response()->json(0);
+        if($depth == null)
+        {
+            $disabledCategories = Category::where('active', 0)->get();
+            if (count($disabledCategories) > 0) {
+                return response()->json($disabledCategories);
+            } else {
+                return response()->json(0);
+            }
         }
+        else
+            {
+                $disabledCategories = Category::where([['depth',$depth],['active', 0]])->get();
+                if (count($disabledCategories) > 0) {
+                    return response()->json($disabledCategories);
+                } else {
+                    return response()->json(0);
+                }
+            }
+
     }
 }

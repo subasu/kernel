@@ -53,6 +53,11 @@
                             <div class="item form-group">
                                 <div id="showCategories" style="display: none; !important;">
                                     <div class="col-md-9 col-sm-6 col-xs-9">
+
+                                        <select id="disabledCategories"  class="form-control" name="brands" style="display: none;">
+
+                                        </select>
+                                        <br/>
                                         <select id="categories"  class="form-control" name="categories">
 
                                         </select>
@@ -66,17 +71,20 @@
 
                                         </select>
 
-
                                     </div>
-                                <label class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> دسته های اصلی  موجود : <span
-                                            class="star" title="پر کردن این فیلد الزامی است"></span>
-                                </label>
-                                <label id="existedSub" style="display: none; margin-top: 3%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> زیر دسته های دسته اصلی : <span
-                                            class="star" title="پر کردن این فیلد الزامی است"></span>
-                                </label>
-                                <label id="existedBrands" style="display: none; margin-top: 3%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> زیر دسته های دسته فوق : <span
-                                            class="star" title="پر کردن این فیلد الزامی است"></span>
-                                </label>
+                                    <label id="disabled" style="display: none; margin-top: 1%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title">دسته های غیر فعال : <span
+                                                class="star" title="پر کردن این فیلد الزامی است"></span>
+                                    </label>
+                                    <label class="control-label col-md-3 col-sm-4 col-xs-3" style="margin-top: 2%;" for="title"> دسته های اصلی  موجود : <span
+                                                class="star" title="پر کردن این فیلد الزامی است"></span>
+                                    </label>
+                                    <label id="existedSub" style="display: none; margin-top: 3%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> زیر دسته های دسته اصلی : <span
+                                                class="star" title="پر کردن این فیلد الزامی است"></span>
+                                    </label>
+                                    <label id="existedBrands" style="display: none; margin-top: 3%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> زیر دسته های دسته فوق : <span
+                                                class="star" title="پر کردن این فیلد الزامی است"></span>
+                                    </label>
+
                                     @if ($errors->has('name'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -349,9 +357,9 @@
                                 dataType:"json",
                                 success:function (response) {
                                     console.log(response);
-                                    console.log(response);
                                     if(response)
                                     {
+                                        getDisabledCategories(response.depth);
                                         $('#showCategories').css('display','block');
                                         $('#reg').css('display','none');
 
@@ -719,13 +727,14 @@
         </script>
         <script>
             $(document).ready(function () {
-                getDisabledCategories(0);
+                getDisabledCategories(depth);
             })
         </script>
-        <!--below script is related to get disabled categories of each step -->
+        <!--below script is related to get all disabled categories  -->
         <script>
                 function getDisabledCategories(depth)
                 {
+                    var option = '';
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -734,12 +743,31 @@
                     $.ajax
                     ({
                         cache :false,
-                        url: "{{Url('api/v1/getDisabledCategories')}}/" + depth,
+                        url: "{{Url('api/v1/getDisabledCategories')}}"+'/'+depth,
                         dataType: "json",
                         type: "get",
                         success: function (response)
                         {
-                            console.log(response);
+                            if(response != 0)
+                            {
+                                $.each(response,function (key,value) {
+                                    var item = $('#disabledCategories');
+                                    item.empty();
+                                    //
+                                    item.append
+                                    (
+                                        "<option selected='true' disabled='disabled' style='font-size: 150%;'>قبل از ایجاد دسته ی جدید ، دسته های غیر فعال را بررسی نمائید</option>"
+                                    )
+
+                                    item.append
+                                    (
+                                        option += "<option id='" + value.id + "' name='" + value.depth + "'>" + value.title + "</option>"
+                                    );
+                                })
+                                $('#disabledCategories').css('display','block');
+                                $('#disabled').css('display','block');
+                            }
+
                         },error : function(error){
                             console.log(error);
                         }
