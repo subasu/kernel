@@ -54,7 +54,7 @@
                                 <div id="showCategories" style="display: none; !important;">
                                     <div class="col-md-9 col-sm-6 col-xs-9">
 
-                                        <select id="disabledCategories"  class="form-control" name="brands" style="display: none;">
+                                        <select id="disabledCategories"  class="form-control" name="brands" style="display: none; background-color: lightgray;">
 
                                         </select>
                                         <br/>
@@ -72,7 +72,11 @@
                                         </select>
 
                                     </div>
-                                    <label id="disabled" style="display: none; margin-top: 1%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title">دسته های غیر فعال : <span
+
+                                    <label id="disableOfEachCategory" style="display: none; margin-top: 1%; color: #964b00;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title">غیر فعال های دسته منتخب  :  <span
+                                                class="star" title="پر کردن این فیلد الزامی است"></span>
+                                    </label>
+                                    <label id="totalDisabled" style="display: none; margin-top: 1%; color: #964b00;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title">کل دسته های غیر فعال  :  <span
                                                 class="star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
                                     <label class="control-label col-md-3 col-sm-4 col-xs-3" style="margin-top: 2%;" for="title"> دسته های اصلی  موجود : <span
@@ -81,7 +85,7 @@
                                     <label id="existedSub" style="display: none; margin-top: 3%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> زیر دسته های دسته اصلی : <span
                                                 class="star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
-                                    <label id="existedBrands" style="display: none; margin-top: 3%;" class="control-label col-md-3 col-sm-4 col-xs-3" for="title"> زیر دسته های دسته فوق : <span
+                                    <label id="existedBrands" style="display: none; margin-top: 3%;" class="control-label col-md-3 col-sm-4 col-xs-3"  for="title"> زیر دسته های دسته فوق : <span
                                                 class="star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
 
@@ -359,7 +363,6 @@
                                     console.log(response);
                                     if(response)
                                     {
-                                        getDisabledCategories(response.depth);
                                         $('#showCategories').css('display','block');
                                         $('#reg').css('display','none');
 
@@ -614,6 +617,7 @@
                         //alert(depth);
                         if(depth != 0)
                         {
+                            getDisabledCategories(id);
                             getSubCategory(id);
                         }else
                             {
@@ -682,7 +686,7 @@
                         $('#subId').val(id);
                         if(depth != 0)
                         {
-
+                            getDisabledCategories(id);
                             getBrands(id);
                             function getBrands (id) {
                                 var option="";
@@ -727,13 +731,14 @@
         </script>
         <script>
             $(document).ready(function () {
-                getDisabledCategories(depth);
+                getAllDisabledCategories();
             })
         </script>
-        <!--below script is related to get all disabled categories  -->
+        <!--below script is related to get  disabled categories of each category  -->
         <script>
-                function getDisabledCategories(depth)
+                function getDisabledCategories(id)
                 {
+                    console.log(id);
                     var option = '';
                     $.ajaxSetup({
                         headers: {
@@ -743,35 +748,85 @@
                     $.ajax
                     ({
                         cache :false,
-                        url: "{{Url('api/v1/getDisabledCategories')}}"+'/'+depth,
+                        url: "{{Url('api/v1/getDisabledCategories')}}"+'/'+id,
                         dataType: "json",
                         type: "get",
                         success: function (response)
                         {
-                            if(response != 0)
-                            {
-                                $.each(response,function (key,value) {
-                                    var item = $('#disabledCategories');
-                                    item.empty();
-                                    //
-                                    item.append
-                                    (
-                                        "<option selected='true' disabled='disabled' style='font-size: 150%;'>قبل از ایجاد دسته ی جدید ، دسته های غیر فعال را بررسی نمائید</option>"
-                                    )
 
-                                    item.append
-                                    (
-                                        option += "<option id='" + value.id + "' name='" + value.depth + "'>" + value.title + "</option>"
-                                    );
-                                })
-                                $('#disabledCategories').css('display','block');
-                                $('#disabled').css('display','block');
-                            }
+                                if(response != 0)
+                                {
+                                    $.each(response,function (key,value) {
+                                        var item = $('#disabledCategories');
+                                        item.empty();
+                                        //
+                                        item.append
+                                        (
+                                            "<option selected='true' disabled='disabled' style='font-size: 150%;'>قبل از ایجاد دسته ی جدید ، دسته های غیر فعال را بررسی نمائید</option>"
+                                        )
+
+                                        item.append
+                                        (
+                                            option += "<option id='" + value.id + "' name='" + value.depth + "' selected='true' disabled='disabled'>" + value.title + "</option>"
+                                        );
+                                    })
+                                    $('#disabledCategories').css('display','block');
+                                    $('#disableOfEachCategory').css('display','block');
+                                    $('#totalDisabled').css('display','none');
+                                }
+
 
                         },error : function(error){
                             console.log(error);
                         }
                     })
                 }
+        </script>
+        <!-- below script is related to get all disabled categories-->
+        <script>
+            function getAllDisabledCategories()
+            {
+
+                var option = '';
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                })
+                $.ajax
+                ({
+                    cache :false,
+                    url: "{{Url('api/v1/getAllDisabledCategories')}}",
+                    dataType: "json",
+                    type: "get",
+                    success: function (response)
+                    {
+
+                        if(response != 0)
+                        {
+                            $.each(response,function (key,value) {
+                                var item = $('#disabledCategories');
+                                item.empty();
+                                //
+                                item.append
+                                (
+                                    "<option selected='true' disabled='disabled' style='font-size: 150%;'>قبل از ایجاد دسته ی جدید ، دسته های غیر فعال را بررسی نمائید</option>"
+                                )
+
+                                item.append
+                                (
+                                    option += "<option id='" + value.id + "' name='" + value.depth + "' selected='true' disabled='disabled'>" + value.title + "</option>"
+                                );
+                            })
+                            $('#disabledCategories').css('display','block');
+                            $('#totalDisabled').css('display','block');
+                        }
+
+
+                    },error : function(error){
+                        console.log(error);
+                    }
+                })
+            }
         </script>
 @endsection

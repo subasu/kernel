@@ -660,6 +660,35 @@
         {{--},1000);--}}
     {{--})--}}
 {{--</script>--}}
-
+<!-- below function is related to refresh page for every 30 seconds -->
+<script>
+    $(function(){
+        setInterval(function(){
+            $.ajax
+            ({
+                utl      : "{{url('checkOrderStatus')}}",
+                type     : "get",
+                dataType : "JSON",
+                success  : function(response)
+                {
+                    if(response.message = 'exist')
+                    {
+                        setTimeout(function(){
+                            var audio = new Audio('dashboard/mp3/alarm.mp3');
+                            audio.play();
+         //                   window.location.reload(true);
+                        },10000);
+                    }else
+                    {
+                        console.log('nothing new');
+                    }
+                },error  : function(error)
+                {
+                    console.log(error);
+                }
+            })
+        },30000);
+    })
+</script>
 </body>
 </html>

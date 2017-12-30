@@ -259,18 +259,32 @@ class UserController extends Controller
     //below function is related to add sell count of product
     public function addToSellCount($request)
     {
-        for($i=0; $i <= count($request);$i++)
+        if(count($request) > 1)
         {
-            $product = DB::table('products')->where('id',$request->productId[$i])->increment('sell_count');
-        }
-        if($product)
-        {
-            return true;
-        }
-        else
+            for($i=0; $i <= count($request);$i++)
+            {
+                $product = DB::table('products')->where('id',$request->productId[$i])->increment('sell_count');
+            }
+            if($product)
+            {
+                return true;
+            }
+            else
             {
                 return false;
             }
+        }else
+            {
+                $product = DB::table('products')->where('id',$request->productId)->increment('sell_count');
+                if($product)
+                {
+                    return true;
+                }else
+                    {
+                        return false;
+                    }
+            }
+
     }
 
     //below function is related to show user orders

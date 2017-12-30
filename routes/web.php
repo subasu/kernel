@@ -70,6 +70,7 @@ Route::group(['prefix'=>'admin'],function() {
     Route::get('ordersManagement', 'OrderController@ordersManagement');//show view of all orders
     Route::get('adminShowFactor/{id}','OrderController@adminShowFactor');
     Route::get('checkOrders','OrderController@checkOrders');
+    Route::get('checkOrderStatus','OrderController@checkOrderStatus');
 //deliveryMan
     Route::get('addDeliveryMan', 'DeliveryManController@addDeliveryMan');//show add DeliveryMan view
     Route::get('deliveryMansManagement', 'DeliveryManController@deliveryMansManagement');//show view of all deliveryMans's details
