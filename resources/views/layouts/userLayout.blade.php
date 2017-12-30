@@ -1,4 +1,4 @@
-@if(Auth::user()->role_id!=1)
+@if(Auth::user()->role_id!=3)
         <!DOCTYPE html>
 <html lang="en">
 
@@ -72,7 +72,8 @@
 </div>
 </body>
 </html>
-@else<!DOCTYPE html>
+@else
+    <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
@@ -84,9 +85,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>@if(!empty($pageTitle)){{$pageTitle}}@endif</title>
 <link rel="short icon" href="{{URL::asset('public/main/assets/img/logo.png')}}"/>
-
 <!-- Bootstrap core CSS -->
-
 <link href="{{ URL::asset('public/dashboard/css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{ URL::asset('public/dashboard/fonts/css/font-awesome.min.css')}}" rel="stylesheet">
 <link href="{{ URL::asset('public/dashboard/css/animate.min.css')}}" rel="stylesheet">
@@ -170,90 +169,22 @@
                             {{--//system manager menu--}}
                             <li><a><i class="fa f a-home"></i>پنل مدیریت<span></span></a>
                             </li>
-                            <li><a><i class="fa fa-product-hunt"></i> مدیریت محصولات<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/productsManagement')}}"> نمایش و مدیریت محصولات</a>
-                                    </li>
-                                    <li><a href="{{url('admin/addProduct')}}">درج محصول جدید </a>
-                                    </li>
-                                    {{--<li><a href="{{url('admin/unitCountManagement')}}"> نمایش و مدیریت واحد شمارش </a>--}}
-                                    {{--<li><a href="{{url('admin/addUnit')}}">درج واحد شمارش و زیرواحد شمارش </a>--}}
-                                    {{--</li>--}}
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-object-group"></i> مدیریت دسته بندی ها<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/categoriesManagement')}}"> نمایش و مدیریت دسته بندی ها</a>
-                                    </li>
-                                    <li><a href="{{url('admin/addCategory')}}">درج دسته بندی جدید </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-th-list"></i> مدیریت واحد های شمارش<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/unitCountManagement')}}"> نمایش و مدیریت واحد های شمارش</a>
-                                    </li>
-                                    <li><a href="{{url('admin/addUnit')}}">درج واحد های شمارش  جدید </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            {{--<li><a><i class="fa fa-cubes"></i> مدیریت سفارشات<span class="fa fa-chevron-down"></span></a>--}}
-                                {{--<ul class="nav child_menu" style="display: none">--}}
-                                    {{--<li><a href="{{url('admin/ordersManagement')}}"> نمایش و مدیریت سفارشات</a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                            {{--<li><a><i class="fa fa-motorcycle"></i> مدیریت پیک ها<span class="fa fa-chevron-down"></span></a>--}}
-                                {{--<ul class="nav child_menu" style="display: none">--}}
-                                    {{--<li><a href="{{url('admin/deliveryMansManagement')}}"> نمایش و مدیریت پیک ها</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li><a href="{{url('admin/addDeliveryMan')}}">درج پیک جدید </a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                            {{--<li><a><i class="fa fa-users"></i> مدیریت کاربران<span class="fa fa-chevron-down"></span></a>--}}
-                                {{--<ul class="nav child_menu" style="display: none">--}}
-                                    {{--<li><a href="{{url('admin/usersManagement')}}"> نمایش و مدیریت کاربران</a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                            <li><a><i class="fa fa-paint-brush"></i>مدیریت رنگها <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/colorsManagement')}}"> نمایش و مدیریت رنگها</a>
-                                    </li>
-                                    <li><a href="{{url('admin/addColors')}}">افزودن رنگها</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-expand"></i>مدیریت سایزها<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/sizesManagement')}}"> نمایش و مدیریت سایزها</a>
-                                    </li>
-                                    <li><a href="{{url('admin/addSizes')}}">افزودن سایزها</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-dollar"></i>مدیریت وضعیتهای پرداخت<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/paymentTypesManagement')}}"> نمایش و مدیریت وضعیتهای پرداخت</a>
-                                    </li>
-                                    <li><a href="{{url('admin/addPaymentType')}}">افزودن وضعیت پرداخت</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            {{--<li><a><i class="fa fa-dollar"></i>مدیریت پرینتر<span class="fa fa-chevron-down"></span></a>--}}
-                                {{--<ul class="nav child_menu" style="display: none">--}}
-                                    {{--<li><a href="{{url('admin/connectToPrinter')}}"> اتصال به پرینتر</a>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
                             <li><a><i class="fa fa-print"></i>بررسی سفارشات و فاکتورها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/ordersManagement')}}">نمایش لیست سفارشات</a>
+                                    <li><a href="{{url('user/userOrders')}}">نمایش لیست سفارشات</a>
                                     </li>
                                     {{--<li><a href="{{url('admin/addPaymentType')}}">افزودن وضعیت پرداخت</a>--}}
                                     </li>
                                 </ul>
                             </li>
+                            <li><a><i class="fa fa-key"></i>مدیرت رمز عبور<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('user/changePassword')}}">تغییر رمز عبور</a>
+                                    </li>
+                                    </li>
+                                </ul>
+                            </li>
+                            {{--@endif--}}
                             {{--<li><a><i class="fa fa-handshake-o"></i>مدیریت وضعیتهای تحویل<span class="fa fa-chevron-down"></span></a>--}}
                                 {{--<ul class="nav child_menu" style="display: none">--}}
                                     {{--<li><a href="{{url('admin/paymentTypesManagement')}}">  نمایش و مدیریت وضعیتهای تحویل</a>--}}
@@ -718,4 +649,4 @@
 
 </body>
 </html>
-    @endif
+@endif
