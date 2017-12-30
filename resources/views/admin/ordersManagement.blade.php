@@ -52,6 +52,7 @@
                         @endforeach
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
@@ -153,7 +154,7 @@
                             }
                         });
                     }
-                );//end swal
+                );
             });
         </script>
 

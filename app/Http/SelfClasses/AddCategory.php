@@ -72,7 +72,7 @@ class AddCategory
                     $others->save();
                 }
                 $update = DB::table('categories')->where('id', $request->mainId)->update(['depth' => 1]);
-                    if ($update && $others)
+                    if ($update)
                     {
                        return ('اطلاعات با موفقیت ثبت گردید ، لطفا جهت ثبت دسته جدید ابتدا دسته های موجود را بررسی نمائید ، تا از بروز هرگونه مشکلی جلوگیری بعمل آید ');
                     }else
