@@ -17,6 +17,15 @@ class CheckFiles
             $allowedExtensions = array('png','jpg');
             $allowedSize       = 10000000;
             $count             = count($request->file);
+//            list($originalWidth, $originalHeight) = getimagesize($request->file);
+//            if($originalWidth < 300)
+//            {
+//                return ('تعداد پیکسل های طول تصویر نباید از 200 کمتر باشد.');
+//            }
+//            else if($originalHeight <300)
+//            {
+//                return ('تعداد پیکسل های ارتفاع تصویر نباید از 200 کمتر باشد.');
+//            }
             $sentExtensions    = '';
             $sentSizes         = '';
             $notAllowedSize    = 0;

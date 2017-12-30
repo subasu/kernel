@@ -1,4 +1,4 @@
-@extends('layouts.adminLayout')
+@extends('layouts.userLayout')
 @section('content')
 
     <div class="clearfix"></div>
