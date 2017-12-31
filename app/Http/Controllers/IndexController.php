@@ -229,13 +229,14 @@ class IndexController extends Controller
     }
 
 
-    //below function is to return show product blade
+    //below function is to return show product blade with pagination
+    //first time show by view second time show by ajax
     public function showProducts($id,Request $request)
     {
         $menu = $menu = $this->loadMenu();
         $pageTitle = 'لیست محصولات';
         $categories = Category::find($id);
-        $products=$categories->products()->paginate(1);
+        $products=$categories->products()->paginate(12);
         if ($request->ajax()) {
             return view('main.presult',  compact('menu', 'pageTitle', 'categories','products'));
         }
