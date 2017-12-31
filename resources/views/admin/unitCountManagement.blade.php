@@ -48,11 +48,11 @@
                                 @if(count($datum->subUnits) > 0)
                                     <td style="font-size: 120%;"><a class="btn btn-dark col-md-8 col-md-offset-2" href="{{url('admin/subUnitManagement')}}/{{$datum->id}}"> مشاهده و ویرایش زیر واحدها </a></td>
                                 @endif
-                                @if($datum->active  ==  0)
-                                    <td style="font-size: 120%;"><a class="btn btn-danger col-md-8 col-md-offset-2" >غیر فعال</a></td>
+                                @if($datum->active == 1)
+                                    <td style="color: green; font-size: 150%;">فعال</td>
                                 @endif
-                                @if($datum->active  ==  1)
-                                    <td style="font-size: 120%;"><a class="btn btn-success col-md-8 col-md-offset-2" >فعال</a></td>
+                                @if($datum->active == 0)
+                                    <td style="color:red; font-size : 150%;">غیر فعال</td>
                                 @endif
                                 <td style="font-size: 120%;"><a class="btn btn-warning col-md-8 col-md-offset-2"  href="{{url('admin/editUnitCount')}}/{{$datum->id}}">ویرایش</a></td>
                             </tr>

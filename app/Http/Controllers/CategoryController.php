@@ -83,7 +83,6 @@ class CategoryController extends Controller
     //below function is related to edit category picture
     public function editCategoryPicture(Request $request)
     {
-
         $checkFiles = new CheckFiles();
         $result = $checkFiles->checkCategoryFiles($request);
         if(is_bool($result))

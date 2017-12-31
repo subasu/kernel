@@ -19,9 +19,9 @@ class CheckFiles
             $allowedExtensions = array('png','jpg');
             $allowedSize       = 10000000;
             $count             = count($request->file);
-            return Validator::make($request->file, [
-                'file' => 'image|mimes:jpeg|max:2048',
-            ]);
+//            return Validator::make($request->file, [
+//                'file' => 'image|mimes:jpeg|max:2048',
+//            ]);
             $sentExtensions    = '';
             $sentSizes         = '';
             $notAllowedSize    = 0;

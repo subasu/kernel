@@ -77,10 +77,10 @@
                                         <td><button class="btn btn-basic" id="showPicture">مشاهده تصویر</button></td>
                                     @endif
                                     @if($category->active == 1)
-                                        <td><button class="btn btn-success col-lg-8 col-md-offset-2" >فعال</button></td>
+                                        <td style="color: green; font-size: 150%;">فعال</td>
                                     @endif
                                     @if($category->active == 0)
-                                        <td><button class="btn btn-danger col-lg-8 col-md-offset-2" >غیر فعال</button></td>
+                                        <td style="color:red; font-size : 150%;">غیر فعال</td>
                                     @endif
                                     <td><a  href="{{url('admin/editCategory/'.$category->id)}}" class="btn btn-warning col-md-8 col-md-offset-1">ویرایش</a></td>
                                     @if($category->depth > 0)
