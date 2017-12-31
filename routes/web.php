@@ -20,6 +20,8 @@ Route::get('products', 'IndexController@products');
 Route::get('captcha', 'IndexController@create_image');
 Route::get('getSubmenu/{id}', 'CommonController@getSubmenu');
 Route::get('showProducts/{id}', 'IndexController@showProducts');
+Route::get('laravel-ajax-pagination',array('as'=>'ajax-pagination','uses'=>'IndexController@productList'));
+
 Route::get('order/{parameter}', 'IndexController@order');
 Route::get('productDetail/{id}', 'IndexController@productDetail');
 //user routes => for basket
