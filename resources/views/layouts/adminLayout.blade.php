@@ -246,11 +246,11 @@
                                     {{--<li><a href="{{url('admin/connectToPrinter')}}"> اتصال به پرینتر</a>--}}
                                 {{--</ul>--}}
                             {{--</li>--}}
-                            <li><a><i class="fa fa-print"></i>بررسی سفارشات و فاکتورها<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-print"></i>بررسی سفارش ها و فاکتورها<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/ordersManagement')}}">نمایش لیست سفارشات</a>
+                                    <li><a href="{{url('admin/ordersManagement')}}">سفارش های جدید</a>
                                     </li>
-                                    {{--<li><a href="{{url('admin/addPaymentType')}}">افزودن وضعیت پرداخت</a>--}}
+                                    <li><a href="{{url('admin/oldOrders')}}">سفارش های پیگیری شده</a>
                                     </li>
                                 </ul>
                             </li>
@@ -290,6 +290,10 @@
                             </li>
 
                         </ul>
+                        <audio id="audio" controls style="display: none;">
+                            <source src="{{url('public/dashboard/mp3/alarm.mp3')}}" type="audio/mpeg">
+
+                        </audio>
                     </div>
                 </div>
                 <!-- /sidebar menu -->
@@ -721,28 +725,32 @@
         setInterval(function(){
             $.ajax
             ({
-                utl      : "{{url('checkOrderStatus')}}",
+                cache    : false,
+                url      : "{{url('admin/checkOrderStatus')}}",
                 type     : "get",
-                dataType : "JSON",
+                dataType : "json",
                 success  : function(response)
                 {
-                    if(response.message = 'exist')
+                    if(response.message == 'exist')
                     {
-                        setTimeout(function(){
-                            var audio = new Audio('dashboard/mp3/alarm.mp3');
-                            audio.play();
-         //                   window.location.reload(true);
-                        },10000);
+                        console.log('new order...');
+                        var audio = document.getElementById('audio');
+                        audio.autoplay = true;
+                        audio.load();
+//                        setTimeout(function(){
+//                            window.location.replace('ordersManagement');
+//                        },10000);
                     }else
                     {
                         console.log('nothing new');
                     }
                 },error  : function(error)
                 {
+//                    console.log(error.responseText);
                     console.log(error);
                 }
             })
-        },30000);
+        },10000);
     })
 </script>
 </body>

@@ -31,7 +31,6 @@
                             <th style="text-align: center">نوع پرداخت</th>
                             <th style="text-align: center">کد تراکنش</th>
                             <th style="text-align: center;border-right: 1px solid #d6d6c2">نمایش جزئیات فاکتور</th>
-                            <th style="text-align: center;border-right: 1px solid #d6d6c2">تغییر وضعیت سفارش</th>
                         </tr>
                         </thead>
 
@@ -49,7 +48,6 @@
                                 <td style="font-size:18px;"> با کارت</td>
                                 <td style="font-size:18px;">{{$datum->transaction_code}}</td>
                                 <td style="font-size:18px;"><a class="btn btn-dark" href="{{url('admin/adminShowFactor/'.$datum->basket_id)}}">جزئیات فاکتور</a></td>
-                                <td style="font-size:18px;"><a class="btn btn-default" content="{{$datum->id}}" id="changeOrderStatus" >تغییر وضعیت</a></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -60,29 +58,6 @@
         </div>
 
 
-        <!-- below script is related to change order status -->
-        <script>
-            $(document).on('click','#changeOrderStatus',function(){
-               var  orderId = $(this).attr('content');
-               var  token   = $('#token').val();
-               $.ajax
-               ({
-                   url      : "{{url('admin/changeOrderStatus')}}",
-                   type     : "post",
-                   data     : {'orderId' : orderId , '_token' : token},
-                   dataType : "json",
-                   success  : function(response)
-                   {
-                       if(response.message == 'success')
-                       {
-                           window.location.reload(true);
-                       }
-                   },error  : function(error)
-                   {
-                       console.log(error);
-                   }
-               })
-            });
-        </script>
 
-        @endsection
+
+@endsection

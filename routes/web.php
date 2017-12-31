@@ -84,6 +84,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('adminShowFactor/{id}', 'OrderController@adminShowFactor');
         Route::get('checkOrders', 'OrderController@checkOrders');
         Route::get('checkOrderStatus','OrderController@checkOrderStatus');
+        Route::post('changeOrderStatus','OrderController@changeOrderStatus');
+        Route::get('oldOrders','OrderController@oldOrders');
         //deliveryMan
         Route::get('addDeliveryMan', 'DeliveryManController@addDeliveryMan');//show add DeliveryMan view
         Route::get('deliveryMansManagement', 'DeliveryManController@deliveryMansManagement');//show view of all deliveryMans's details

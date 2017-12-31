@@ -14,7 +14,7 @@ class OrderController extends Controller
     public function ordersManagement()
     {
         $pageTitle = 'مدیریت سفارشات';
-        $data=Order::where([['transaction_code','<>',null],['pay','<>',null]])->get();
+        $data=Order::where([['transaction_code','<>',null],['pay','<>',null],['order_status',null]])->get();
         foreach ($data as $datum)
         {
             $datum->persianDate = $this->toPersian($datum->date);
@@ -112,7 +112,7 @@ class OrderController extends Controller
     public function checkOrderStatus()
     {
 
-        if(Order::where([['transaction_code','<>',null],['pay','<>',null]])->count() > 0)
+        if(Order::where([['transaction_code','<>',null],['pay','<>',null],['order_status',null]])->count() > 0)
         {
             return response()->json(['message' => 'exist']);
         }
@@ -120,5 +120,28 @@ class OrderController extends Controller
             {
                 return response()->json(['message' => 'not exist']);
             }
+    }
+
+    //below function is to change order status
+    public function changeOrderStatus(Request $request)
+    {
+        $order = Order::find($request->orderId);
+        $order->order_status = 'OK';
+        $order->save();
+        if($order)
+        {
+            return response()->json(['message' => 'success']);
+        }else
+            {
+                return response()->json(['message' => 'error']);
+            }
+    }
+
+    //below function is related to get old orders
+    public function oldOrders()
+    {
+        $pageTitle = "سفارش های پیگیری شده";
+        $data = Order::where([['transaction_code','<>',null],['pay','<>',null],['order_status','<>',null]])->get();
+        return view('admin.oldOrders',compact('data','pageTitle'));
     }
 }

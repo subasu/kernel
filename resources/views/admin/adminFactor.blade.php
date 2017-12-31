@@ -82,80 +82,17 @@
     <br/>
     <br/>
     <br/>
-    {{--<div align="center" class="col-md-8">--}}
-        {{--<button id="print" class="selfBtn" >چاپ فاکتور</button>--}}
-    {{--</div>--}}
-    {{--<form>--}}
-        {{--<input type="button" value="Print Page" onClick="window.print()">--}}
-    {{--</form>--}}
+    <div align="center" class="col-md-8">
+        <button id="print" class="selfBtn" >چاپ فاکتور</button>
+    </div>
 </div>
 <script type="text/javascript" src="{{url('public/main/assets/lib/jquery/jquery-1.11.2.min.js')}}"></script>
-{{--<script>--}}
-    {{--$(document).on('click','#print',function(){--}}
-        {{--$(this).css('display','none');--}}
-        {{--window.print();--}}
-    {{--})--}}
-{{--</script>--}}
-<script language='VBScript'>
-Sub Print()
-       OLECMDID_PRINT = 6
-       OLECMDEXECOPT_DONTPROMPTUSER = 2
-       OLECMDEXECOPT_PROMPTUSER = 1
-       call WB.ExecWB(OLECMDID_PRINT, OLECMDEXECOPT_DONTPROMPTUSER,1)
-End Sub
-document.write "<object ID='WB' WIDTH=0 HEIGHT=0 CLASSID='CLSID:8856F961-340A-11D0-A96B-00C04FD705A2'></object>"
-</script>
-<script type="text/javascript">
-    $(function(){
-        window.self.print();
+<script>
+    $(document).on('click','#print',function(){
+        $(this).css('display','none');
+        window.print();
     })
 </script>
 
-
-
-
-{{--<script language="VBScript">--}}
-{{--// THIS VB SCRIP REMOVES THE PRINT DIALOG BOX AND PRINTS TO YOUR DEFAULT PRINTER--}}
-{{--Sub window_onunload()--}}
-{{--On Error Resume Next--}}
-{{--Set WB = nothing--}}
-{{--On Error Goto 0--}}
-{{--End Sub--}}
-
-{{--Sub Print()--}}
-{{--OLECMDID_PRINT = 6--}}
-{{--OLECMDEXECOPT_DONTPROMPTUSER = 2--}}
-{{--OLECMDEXECOPT_PROMPTUSER = 1--}}
-
-
-{{--On Error Resume Next--}}
-
-{{--If DA Then--}}
-{{--call WB.ExecWB(OLECMDID_PRINT, OLECMDEXECOPT_DONTPROMPTUSER,1)--}}
-
-{{--Else--}}
-{{--call WB.IOleCommandTarget.Exec(OLECMDID_PRINT ,OLECMDEXECOPT_DONTPROMPTUSER,"","","")--}}
-
-{{--End If--}}
-
-{{--If Err.Number <> 0 Then--}}
-{{--If DA Then--}}
-{{--Alert("Nothing Printed :" & err.number & " : " & err.description)--}}
-{{--Else--}}
-{{--HandleError()--}}
-{{--End if--}}
-{{--End If--}}
-{{--On Error Goto 0--}}
-{{--End Sub--}}
-
-{{--If DA Then--}}
-{{--wbvers="8856F961-340A-11D0-A96B-00C04FD705A2"--}}
-{{--Else--}}
-{{--wbvers="EAB22AC3-30C1-11CF-A7EB-0000C05BAE0B"--}}
-{{--End If--}}
-
-{{--document.write "<object ID=""WB"" WIDTH=0 HEIGHT=0 CLASSID=""CLSID:"--}}
-{{--document.write wbvers & """> </object>"--}}
-{{--</script>--}}
 </body>
 </html>
