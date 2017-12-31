@@ -8,6 +8,8 @@
 
 namespace App\Http\SelfClasses;
 
+use Illuminate\Support\Facades\Validator;
+
 class CheckFiles
 {
     public function checkCategoryFiles($request)
@@ -17,15 +19,9 @@ class CheckFiles
             $allowedExtensions = array('png','jpg');
             $allowedSize       = 10000000;
             $count             = count($request->file);
-//            list($originalWidth, $originalHeight) = getimagesize($request->file);
-//            if($originalWidth < 300)
-//            {
-//                return ('تعداد پیکسل های طول تصویر نباید از 200 کمتر باشد.');
-//            }
-//            else if($originalHeight <300)
-//            {
-//                return ('تعداد پیکسل های ارتفاع تصویر نباید از 200 کمتر باشد.');
-//            }
+            return Validator::make($request->file, [
+                'file' => 'image|mimes:jpeg|max:2048',
+            ]);
             $sentExtensions    = '';
             $sentSizes         = '';
             $notAllowedSize    = 0;

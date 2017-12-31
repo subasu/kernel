@@ -230,13 +230,16 @@ class IndexController extends Controller
 
 
     //below function is to return show product blade
-    public function showProducts($id)
+    public function showProducts($id,Request $request)
     {
         $menu = $menu = $this->loadMenu();
         $pageTitle = 'لیست محصولات';
         $categories = Category::find($id);
-        //dd($categories);
-        return view('main.showProducts', compact('menu', 'pageTitle', 'categories'));
+        $products=$categories->products()->paginate(1);
+        if ($request->ajax()) {
+            return view('main.presult',  compact('menu', 'pageTitle', 'categories','products'));
+        }
+        return view('main.showProducts', compact('menu', 'pageTitle', 'categories','products'));
     }
 
     //below function is to return show product blade
@@ -257,8 +260,6 @@ class IndexController extends Controller
     public function order($parameter)
     {
         $menu = $menu=$this->loadMenu();
-
-
         //$categories  = Category::find($id);
         if(isset($_COOKIE['addToBasket']))
         {
