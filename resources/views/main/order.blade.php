@@ -65,7 +65,7 @@
                             </td>
                             <td id="unitPrice" content="{{$basket->price}}" class=" text-center">{{number_format($basket->price)}} تومان</td>
                             <td class="qty">
-                                <input class="form-control input-sm" id="count" name="count" type="text" value="{{$basket->count}}">
+                                <input class="form-control input-sm" id="count" name="count" onkeydown="return false" type="text" value="{{$basket->count}}">
                                 <a class="addToCount" content="{{$basket->id}}" name="{{$basket->basket_id}}"><i class="fa fa-caret-up"></i></a>
                                 <a class="subFromCount" content="{{$basket->id}}" name="{{$basket->basket_id}}"><i class="fa fa-caret-down"></i></a>
                             </td>

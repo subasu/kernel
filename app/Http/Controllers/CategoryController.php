@@ -19,7 +19,6 @@ class CategoryController extends Controller
         $titleCheck      = $notToBeRepeated->notToBeRepeated($request,'category');
         if(is_bool($titleCheck))
         {
-
             $checkFiles = new CheckFiles();
             $result =$checkFiles->checkCategoryFiles($request);
             if(is_bool($result))
@@ -39,7 +38,6 @@ class CategoryController extends Controller
         {
             return response()->json(['message' => $titleCheck , 'code' => 0]);
         }
-
     }
 
     //below function returns addCategory blade....

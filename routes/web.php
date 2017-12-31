@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
         //categories
         Route::get('addCategory', 'CategoryController@addCategory');//show add category view
         Route::get('categoriesManagement', 'CategoryController@categoriesManagement');//show view of all category
-        Route::post('addNewCategory', 'CategoryController@addNewCategory');// add new category in database
+        Route::post('addNewCategory','CategoryController@addNewCategory');// add new category in database
         Route::get('editCategory/{id}', 'CategoryController@editCategory');//this route is related to edit main category
         Route::get('showSubCategory/{id}', 'CategoryController@showSubCategory');//this route is related to edit sub category
         Route::post('editCategoryPicture', 'CategoryController@editCategoryPicture');//this route is related to edit category picture

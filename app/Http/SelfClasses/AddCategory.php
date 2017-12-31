@@ -12,8 +12,6 @@ class AddCategory
     //below function is related to add categories
     public function addNewCategory($category, $request)
     {
-
-        //return $category;
         //the below block of code is related to step one that shop manager wants to register main categories
         $count = count($category);
         if ($count > 0)
