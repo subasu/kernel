@@ -13,7 +13,6 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
