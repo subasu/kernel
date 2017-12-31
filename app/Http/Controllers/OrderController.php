@@ -107,4 +107,18 @@ class OrderController extends Controller
                 dd('not connected....');
             }
     }
+
+    //
+    public function checkOrderStatus()
+    {
+
+        if(Order::where([['transaction_code','<>',null],['pay','<>',null]])->count() > 0)
+        {
+            return response()->json(['message' => 'exist']);
+        }
+        else
+            {
+                return response()->json(['message' => 'not exist']);
+            }
+    }
 }

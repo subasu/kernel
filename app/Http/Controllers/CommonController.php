@@ -58,7 +58,7 @@ class CommonController extends Controller
         foreach ($submenu as $sm) {
             $sm->catImg = $catImg;
             $sm->brands = Category::where([['parent_id', $sm->id], ['active', 1]])->get();
-            $x=0;
+            $x = 0;
             foreach ($sm->brands as $val) {
                 $x = CategoryProduct::where('product_id', '=', $val->id)->get();
             }
@@ -180,27 +180,25 @@ class CommonController extends Controller
         }
     }
 
-    //below function is related to show disabled categories
-    public function getDisabledCategories($depth)
+    //below function is related to show disabled categories of each category
+    public function getDisabledCategories($id)
     {
-        if($depth == null)
-        {
-            $disabledCategories = Category::where('active', 0)->get();
-            if (count($disabledCategories) > 0) {
-                return response()->json($disabledCategories);
-            } else {
-                return response()->json(0);
-            }
+        $disabledCategories = Category::where([['parent_id', $id], ['active', 0]])->get();
+        if (count($disabledCategories) > 0) {
+            return response()->json($disabledCategories);
+        } else {
+            return response()->json(0);
         }
-        else
-            {
-                $disabledCategories = Category::where([['depth',$depth],['active', 0]])->get();
-                if (count($disabledCategories) > 0) {
-                    return response()->json($disabledCategories);
-                } else {
-                    return response()->json(0);
-                }
-            }
+    }
 
+    // below function is related to get all disabled categories
+    public function getAllDisabledCategories()
+    {
+        $disabledCategories = Category::where('active', 0)->get();
+        if (count($disabledCategories) > 0) {
+            return response()->json($disabledCategories);
+        } else {
+            return response()->json(0);
+        }
     }
 }

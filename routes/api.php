@@ -24,7 +24,8 @@ Route::group(['prefix' => '/v1'], function () {
     Route::get('getBrands/{id}','CommonController@getBrands');
     Route::get('getExistedCategories/{id}','CommonController@getExistedCategories'); //get existed categories to show to shop manager not to be confused
     Route::post('findCategoryProduct','CommonController@findCategoryProduct');
-    Route::get('getDisabledCategories/{depth}','CommonController@getDisabledCategories');
+    Route::get('getDisabledCategories/{id}','CommonController@getDisabledCategories');
+    Route::get('getAllDisabledCategories','CommonController@getAllDisabledCategories');
 
     //unit counts routes
     Route::get('getSubunits/{id}','CommonController@getSubunits');
