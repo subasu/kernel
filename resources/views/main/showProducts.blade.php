@@ -596,14 +596,6 @@
                         </ul>
                         <div id="product_container">
                             @include('main.presult')
-
-
-
-
-
-
-
-
                         <!-- ./PRODUCT LIST -->
                         </div>
                     </div>

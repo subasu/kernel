@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{{url('public/main/assets/css/responsive.css')}}"/>
     <link rel="stylesheet" href="{{URL::asset('public/css/persianDatepicker-default.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('public/css/sweetalert.css')}}">
+    <link href="{{URL::asset('public/css/pnotify.custom.min.css')}}" media="all" rel="stylesheet" type="text/css" />
     <title>@if(!empty($pageTitle)){{$pageTitle}}@endif</title>
 </head>
 <body class="home">
@@ -384,8 +385,7 @@
 <script type="text/javascript" src="{{url('public/main/assets/lib/jquery.elevatezoom.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/js/theme-script.js')}}"></script>
 <script src="{{url('public/js/sweetalert.min.js')}}"></script>
-
-
+<script type="text/javascript" src="{{URL::asset('public/js/pnotify.custom.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         basketCountNotify();
@@ -394,9 +394,8 @@
        // handlePayButton();
     })
 </script>
-
-
 <!-- below script is related to add to basket -->
+
 <script>
     $(document).on('click','#addToBasket',function () {
 
@@ -419,23 +418,27 @@
                 console.log(response);
                 if(response.code == 1)
                 {
-                    swal({
-                        title: "",
-                        text: response.message,
-                        type: "success",
-                        confirmButtonText: "بستن"
-                    });
+                    var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+                    new PNotify({
+                        title: response.message,
+                        text: "",
+                        addclass: "stack-custom",
+                        type:"success",
+                        stack: myStack
+                    })
                     basketCountNotify();
                     basketTotalPrice();
                     basketContent();
                 }else
                 {
-                    swal({
-                        title: "",
-                        text: response.message,
-                        type: "warning",
-                        confirmButtonText: "بستن"
-                    });
+                    var myStack = {"dir1":"down", "dir2":"right", "push":"top"};
+                    new PNotify({
+                        title: response.message,
+                        text: '',
+                        addclass: "stack-custom",
+                        type:"success",
+                        stack: myStack
+                    })
                 }
 
             },error  : function(error)
@@ -685,6 +688,7 @@
             var unitPrice  = $(this).closest('td').prev('td').attr('content');
             var td         = $(this);
             $(td).css('pointer-events','none');
+            $(td).css('color','#adaaaa');
             $.ajax
             ({
                 url      : "{{url('user/addOrSubCount')}}",
@@ -704,6 +708,7 @@
                         basketTotalPrice();
                         setTimeout(function () {
                             $(td).css('pointer-events','');
+                            $(td).css('color','#666');
                         },5000);
                     }
                 },error  : function(error)
@@ -726,6 +731,7 @@
             var unitPrice  = $(this).closest('td').prev('td').attr('content');
             var td         = $(this);
             $(td).css('pointer-events','none');
+            $(td).css('color','#adaaaa');
             if(count == 1)
             {
                 swal({
@@ -760,6 +766,7 @@
                             basketTotalPrice();
                             setTimeout(function () {
                                 $(td).css('pointer-events','');
+                                $(td).css('color','#666');
                             },5000);
 
                         }
