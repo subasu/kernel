@@ -33,9 +33,8 @@ class UpdateProduct
         //add a flags with flag's price in product flags
         function updateProductFlag($title, $price, $lastProductId)
         {
-            $productId = ProductFlag::where('product_id', '=', $lastProductId)->value('id');
+            $productId = ProductFlag::where('product_id', '=', $lastProductId)->where('title','=',$title)->value('id');
             $prices = ProductFlag::find($productId);
-            $prices->title = $title;
             $prices->price = str_replace(',', '', $price);
             $prices->save();
         }
@@ -93,9 +92,8 @@ class UpdateProduct
             $pr->barcode = $product->barcode;
         }
         $pr->save();
-        $lastProductId = $pr->id;
-        //above line find product_id that now saved for use in pivot table
-        // $lastProductId = Product::orderBy('created_at', 'desc')->offset(0)->limit(1)->value('id');
+        $lastProductId = $pr->id;//or $lastProductId=$product->id;
+        //$lastProductId for use in pivot table
         //this block code save color array of product in color_product table
         $countColor = count($product->color);
         //by below block code and  instructions ,if new color sent old color deleted and new color insert in productColor table
@@ -202,8 +200,7 @@ class UpdateProduct
         }
         return;
     }
-    public
-    function jalaliToGregorian($year, $month, $day)
+    public function jalaliToGregorian($year, $month, $day)
     {
         return Verta::getGregorian($year, $month, $day);
     }

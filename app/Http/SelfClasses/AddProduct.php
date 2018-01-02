@@ -44,7 +44,7 @@ class AddProduct
                 $prices->active = 1;
             else
                 $prices->active = 0;
-            $prices->price = str_replace(',', '', $price);
+            $prices->price = str_replace(',', '', $price);//remove separator number from price before save
             $prices->save();
         }
 
@@ -91,9 +91,7 @@ class AddProduct
                 $productColor->color_id = $product->color[$i];
                 $productColor->active = 1;
                 $productColor->save();
-
             }
-
         }
         //this block code save size array of product in product_size table
         $countSize = count($product->size);
@@ -120,9 +118,7 @@ class AddProduct
                 $product->file[$i]->move('public/dashboard/productFiles/picture/', $imageName.'.'.$imageExtension);
                 $productPicture->active = 1;
                 $productPicture->save();
-
             }
-
         }
         /**this block code save flags and prices of product in product_flags table
          * by calling addProductFlag(title of flag, price of flag, product_id) **/
