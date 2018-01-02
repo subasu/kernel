@@ -14,14 +14,13 @@ Route::get('/admin', 'IndexController@index');
 Route::get('/', 'IndexController@home');
 Route::post('/search', 'IndexController@search');
 Route::get('productFiles', 'IndexController@productFiles');
-Route::get('myLogin', 'IndexController@login');
 Route::get('town/{cid}', 'IndexController@town');
 Route::get('products', 'IndexController@products');
 Route::get('captcha', 'IndexController@create_image');
 Route::get('getSubmenu/{id}', 'CommonController@getSubmenu');
 Route::get('showProducts/{id}', 'IndexController@showProducts');
+//pagination for shopping product page
 Route::get('laravel-ajax-pagination',array('as'=>'ajax-pagination','uses'=>'IndexController@productList'));
-
 Route::get('order/{parameter}', 'IndexController@order');
 Route::get('productDetail/{id}', 'IndexController@productDetail');
 //user routes => for basket
@@ -52,8 +51,6 @@ Route::post('reset', 'Auth\ResetPasswordController@reset');//rayat 20-9-96
 Route::group(['middleware' => ['auth']], function () {
     //admin routes
     Route::group(['prefix' => 'admin'], function () {
-        //images
-        Route::get('deleteProductPicture/{id}', 'ProductController@deleteProductPicture');//
         //categories
         Route::get('addCategory', 'CategoryController@addCategory');//show add category view
         Route::get('categoriesManagement', 'CategoryController@categoriesManagement');//show view of all category
@@ -79,6 +76,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('updateProduct', 'ProductController@updateProduct');// update Product in database
         Route::get('productDetails/{id}', 'ProductController@productDetailsGet');
         Route::post('changeProductStatus/{parameter}', 'ProductController@changeProductStatus');
+        //images product
+        Route::get('deleteProductPicture/{id}', 'ProductController@deleteProductPicture');//use in updating product (product details blade)
         //users
         Route::get('usersManagement', 'UserController@usersManagement');//show view of all customer's details
         //orders

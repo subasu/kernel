@@ -125,6 +125,8 @@ class ProductController extends Controller
         return;
     }
 
+    //delete product picture from '/dashboard/productFiles/picture/' and from product_images table
+    // call this me by ajax from productDetails for updating and change products picture
     public function deleteProductPicture($id)
     {
         $ImageName = ProductImage::where('id', '=', $id)->value('image_src');

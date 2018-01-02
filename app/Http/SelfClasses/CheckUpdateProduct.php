@@ -35,7 +35,7 @@ class CheckUpdateProduct
             'special_price' => 'sometimes|nullable',
             'wholesale_price' => 'sometimes|nullable',
             'free_price' => 'sometimes|nullable',
-            'discount' => 'sometimes|nullable||numeric|',
+            'discount' => 'sometimes|nullable|numeric|',
             'discount_volume' => 'sometimes|nullable|numeric',
             'delivery_volume' => 'sometimes|nullable|numeric',
             'video_src' => 'sometimes|nullable|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:4096',

@@ -14,6 +14,7 @@ class CheckProduct
 {
     public function ProductValidate($request)
     {
+        //validation for products when adding a product
         $validation=Validator::make($request->all(),[
 
             'categories' => 'required|numeric',
