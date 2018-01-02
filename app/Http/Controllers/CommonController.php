@@ -168,7 +168,6 @@ class CommonController extends Controller
             return response()->json(0);
         }
     }
-
     //below function is related to existed payment types
     public function getPaymentTypes()
     {
@@ -179,7 +178,6 @@ class CommonController extends Controller
             return response()->json(0);
         }
     }
-
     //below function is related to show disabled categories of each category
     public function getDisabledCategories($id)
     {
@@ -190,7 +188,6 @@ class CommonController extends Controller
             return response()->json(0);
         }
     }
-
     // below function is related to get all disabled categories
     public function getAllDisabledCategories()
     {

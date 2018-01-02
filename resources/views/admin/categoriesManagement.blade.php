@@ -1,33 +1,23 @@
 @extends('layouts.adminLayout')
 @section('content')
+
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog" dir="rtl">
         <div class="modal-dialog">
-
-            <!-- Modal content-->
-            @if(!empty($categories[0]))
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h2 class="modal-title">نمایش تصویر دسته</h2>
                 </div>
                 <div class="modal-body">
-
-                            <img class="image" id="editable"
-                                 style=" height: 350px; width: 350px; margin-left: 80%;"
-                                 src="{{url('public/dashboard/image')}}/{{$categories[0]->image_src}}">
-
+                            <img class="image" id="image"  style=" height: 350px; width: 350px; margin-left: 80%;"  src="">
                 </div>
                 <div class="modal-footer" >
                     <button type="button" class="btn btn-dark col-md-6 col-md-offset-3" data-dismiss="modal">بستن</button>
                 </div>
             </div>
-            @endif
-
         </div>
     </div>
-
-
 
 
     <div class="clearfix"></div>
@@ -68,7 +58,6 @@
 
                         <tbody>
                         <?php $i = 0 ?>
-                        @if(!empty($categories))
                             @foreach($categories as $category)
                                 <tr class="unit">
                                     <td style="font-size: 120%">{{++$i}}</td>
@@ -78,7 +67,7 @@
                                         <td style="font-size: 120%">تصویر ندارد</td>
                                     @endif
                                     @if($category->image_src != null)
-                                        <td><button class="btn btn-basic" id="showPicture">مشاهده تصویر</button></td>
+                                        <td><button class="btn btn-basic" content="{{$category->image_src}}" id="showPicture">مشاهده تصویر</button></td>
                                     @endif
                                     @if($category->active == 1)
                                         <td style="color: green; font-size: 150%;">فعال</td>
@@ -95,16 +84,16 @@
                                     @endif
                                 </tr>
                             @endforeach
-                        @endif
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
         <script>
             $(document).on('click','#showPicture',function(){
-                $('#myModal').modal('show');
+                  var src= $(this).attr('content');
+                  $('#image').attr("src","{{url('public/dashboard/image')}}"+'/'+src);
+                  $('#myModal').modal('show');
             })
         </script>
-        @endsection
+@endsection

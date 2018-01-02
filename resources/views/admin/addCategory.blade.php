@@ -269,7 +269,6 @@
                     });
             }
         </script>
-        
         <!-- below script is related to remove input from change  -->  
         <script>
             $(function () {
@@ -284,18 +283,13 @@
 
                 }
             });
-
         </script>
-
         <!-- below script is related to append input -->
         <script>
             var depth = 0;
             $(document).on('click','#addInput',function(){
                     appendToChange();
             })
-
-
-
             $(document).on('click','#reg',function(){
                 var option = '';
                 var formData = new FormData ($('#categoryForm')[0]);
@@ -394,9 +388,7 @@
                                         $('#existedDiv').css('display','none');
                                         $('#existed').empty();
                                     }
-
                                 }
-
                             })
                         }
                     },error:function(error)
@@ -414,7 +406,6 @@
                         {
                             console.log(error);
                         }
-
                     }
                 });
             })
@@ -424,7 +415,6 @@
             $(function () {
                 var option = '';
                 $.ajax({
-
                     cache    :false,
                     url      :"{{url('api/v1/getMainCategories')}}",
                     type     :'get',
@@ -439,22 +429,17 @@
                             $('#addSubCategory').css('display','none');
                             $('#addInput').css('display','none');
                             $('#removeInput').css('display','none');
-
                             $.each(response,function (key,value) {
                                 var item = $('#categories');
                                 item.empty();
-
                                     item.append
                                     (
                                         "<option selected='true' disabled='disabled' style='font-size: 150%;'>برای اضافه کردن زیر دسته ها ، دسته ای را انتخاب کنید</option>"
                                     )
-
-
                                 item.append
                                 (
                                      option +="<option id='"+value.id+"' name='"+value.depth+"' >"+value.title+"</option>"
                                 );
-
                             })
                         }else if(response == 0)
                             {
@@ -467,24 +452,19 @@
                                 appendToChange();
                                 $('#change').css('display','block');
                             }
-
                     }
-
                 })
             })
-
         </script>
         <!-- below script is related to add main category button  -->
         <script>
             $(function () {
                    $(document).on('click','#addMainCategory',function () {
-
                    $('#mainId').val('');
                    $('#subId').val('');
                        var option = '';
                        $.ajax
                        ({
-
                            cache    :false,
                            url      :"{{url('api/v1/getMainCategories')}}",
                            type     :'get',
@@ -506,7 +486,6 @@
                                    (
                                        option +="<option selected='true' disabled='disabled' id='"+value.id+"' name='"+value.depth+"' >"+value.title+"</option>"
                                    );
-
                                })
                                $('#change').empty();
                                $('#change').css('display','block');
@@ -528,7 +507,6 @@
                 });
             })
         </script>
-
         <!-- below script is related to add sub category button  -->
         <script>
             $(function () {
@@ -560,7 +538,6 @@
                 })
             })
         </script>
-
         <!-- below script is related to add brands button -->
         <script>
             $(function () {
@@ -594,7 +571,6 @@
                 })
             })
         </script>
-
         <!-- below script to get sub category -->
         <script>
             $(function () {
@@ -751,7 +727,6 @@
                         type: "get",
                         success: function (response)
                         {
-
                                 if(response != 0)
                                 {
                                     $.each(response,function (key,value) {
@@ -762,7 +737,6 @@
                                         (
                                             "<option selected='true' disabled='disabled' style='font-size: 150%;'>قبل از ایجاد دسته ی جدید ، دسته های غیر فعال را بررسی نمائید</option>"
                                         )
-
                                         item.append
                                         (
                                             option += "<option id='" + value.id + "' name='" + value.depth + "' selected='true' disabled='disabled'>" + value.title + "</option>"
@@ -772,8 +746,6 @@
                                     $('#disableOfEachCategory').css('display','block');
                                     $('#totalDisabled').css('display','none');
                                 }
-
-
                         },error : function(error){
                             console.log(error);
                         }
@@ -784,7 +756,6 @@
         <script>
             function getAllDisabledCategories()
             {
-
                 var option = '';
                 $.ajaxSetup({
                     headers: {
@@ -819,8 +790,6 @@
                             $('#disabledCategories').css('display','block');
                             $('#totalDisabled').css('display','block');
                         }
-
-
                     },error : function(error){
                         console.log(error);
                     }

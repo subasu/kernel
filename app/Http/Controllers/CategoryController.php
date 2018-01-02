@@ -73,8 +73,16 @@ class CategoryController extends Controller
     //below function is related to edit main category
     public function showSubCategory($id)
     {
+        $pageTitle = 'مدیریت دسته ها';
         $categoryInfo = Category::where([['parent_id',$id],['title','<>','سایر']])->get();
-        return view('admin.showSubCategory',compact('categoryInfo'));
+        if(count($categoryInfo) > 0)
+        {
+            return view('admin.showSubCategory',compact('categoryInfo','pageTitle'));
+        }
+        else
+            {
+                return view('errors.403');
+            }
     }
 
 
