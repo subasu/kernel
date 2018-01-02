@@ -89,7 +89,7 @@ class CommonController extends Controller
     //below function is to get sub units from database
     public function getSubunits($id)
     {
-        $subUnits = SubUnitCount::where([['unit_count_id', $id], ['active', 1]])->orderBy('title')->get();
+        $subUnits = SubUnitCount::where('unit_count_id', $id)->orderBy('title')->get();
         if (count($subUnits) > 0) {
             return response()->json($subUnits);
         } else {
@@ -150,7 +150,7 @@ class CommonController extends Controller
     //below function is related to existed colors
     public function getColors()
     {
-        $colors = Color::where('active', '=', '1')->get();
+        $colors = Color::all();
         if (count($colors) > 0) {
             return response()->json($colors);
         } else {

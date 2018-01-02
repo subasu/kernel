@@ -35,7 +35,6 @@ class ColorController extends Controller
             $newColor->save();
             $i++;
         }
-
         if($newColor)
         {
             return response()->json(['message' => 'اطلاعات با موفقیت ثبت شد', 'code' => '1']);

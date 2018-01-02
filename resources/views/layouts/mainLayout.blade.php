@@ -857,7 +857,7 @@
                     $.each(errors, function (key, value) {
                         errorsHtml += value[0] + '\n'; //showing only the first error.
                     });
-                    //errorsHtml += errorsHtml;
+                     //errorsHtml += errorsHtml;
 
                     swal({
                         title: "",

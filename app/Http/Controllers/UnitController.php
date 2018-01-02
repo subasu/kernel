@@ -74,7 +74,6 @@ class UnitController extends Controller
             {
                 return view('errors.403');
             }
-
     }
 
     //below function is to return editUnitCount view
@@ -153,7 +152,6 @@ class UnitController extends Controller
                         return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
                     }
                     break;
-
                 case 0 :
                     $update = DB::table('unit_counts')->where('id',$request->unitId)->update(['active' => 1 ]);
                     if($update)
@@ -164,7 +162,6 @@ class UnitController extends Controller
                         return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
                     }
                     break;
-
             }
         }
     }

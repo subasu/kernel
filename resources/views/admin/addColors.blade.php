@@ -117,10 +117,21 @@
                                 (
                                     "<option selected='true' disabled='disabled'>رنگهای موجود</option>"
                                 )
-                                item.append
-                                (
-                                    option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
-                                );
+                                if(value.active == 1)
+                                {
+                                    item.append
+                                    (
+                                        option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                                    );
+                                }
+                                if(value.active == 0)
+                                {
+                                    item.append
+                                    (
+                                        option += "<option id='"+value.id+"' name='"+value.depth+"' style='background-color: lightgray;' disabled>"+value.title+"</option>"
+                                    );
+                                }
+
                             });
                             //$('#addMainUnit').css('display','block');
                             $('#addInput').css('display','block');

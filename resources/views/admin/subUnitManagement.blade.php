@@ -48,7 +48,7 @@
                                 @if($subUnit->active  ==  1)
                                     <td style="font-size: 120%;"><a id="active" content="{{$subUnit->active}}" name="{{$subUnit->id}}" class="btn btn-success col-md-8 col-md-offset-2" data-content="غیر فعال">فعال</a></td>
                                 @endif
-                                <td><button id="edit" type="button" class="btn btn-success col-md-8 col-md-offset-2">ویرایش</button></td>
+                                <td><button id="edit" type="button" class="btn btn-warning col-md-8 col-md-offset-2">ویرایش</button></td>
                                 <input type="hidden" value="{{$subUnit->id}}" id="id" name="id">
                                 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
                             </tr>

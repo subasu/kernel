@@ -18,7 +18,7 @@
                 </div>
 
 
-                <a href="{{url('admin/addUnit')}}" id="user-send" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style="font-weight: bold;">
+                <a href="{{url('admin/addUnit')}}" id="user-send" type="button" class="col-md-3 col-md-offset-4 btn btn-info" style="font-weight: bold;">
                                         افزودن واحد شمارش جدید                </a>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">

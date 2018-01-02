@@ -135,10 +135,21 @@
                             (
                                 "<option selected='true' disabled='disabled'>برای اضافه کردن زیر واحد ، واحد اصلی را انتخاب کنید</option>"
                             )
-                        item.append
-                            (
-                                option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
-                            );
+                            if(value.active == 1)
+                            {
+                                item.append
+                                (
+                                    option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                                );
+                            }
+                            if(value.active == 0)
+                            {
+                                item.append
+                                (
+                                    option += "<option id='"+value.id+"' name='"+value.depth+"' style='background-color: lightgray;' disabled >"+value.title+"</option>"
+                                );
+                            }
+
                         });
                         $('#addMainUnit').css('display','block');
                         $('#addInput').css('display','none');
@@ -222,10 +233,23 @@
                         (
                             "<option selected='true' disabled='disabled'>واحد های شمارش موجود</option>"
                         )
-                        item.append
-                        (
-                            option += "<option selected='true' disabled='disabled' id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
-                        );
+                        if(value.active == 1)
+                        {
+                            item.append
+                            (
+
+                                option += "<option selected='true' disabled='disabled' id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                            );
+                        }
+                        if(value.active == 0)
+                        {
+                            item.append
+                            (
+
+                                option += "<option selected='true' disabled='disabled' style='background-color: lightgray;' id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                            );
+                        }
+
 
                     });
                     $('#addMainUnit').css('display','none');
@@ -310,18 +334,26 @@
                                         (
                                             "<option selected='true' disabled='disabled'>برای اضافه کردن زیر واحد ، واحد اصلی را انتخاب کنید</option>"
                                         )
+                                        if(value.active == 1)
+                                        {
+                                            item.append
+                                            (
+                                                option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                                            );
+                                        }
+                                        if(value.active == 0)
+                                        {
+                                            item.append
+                                            (
+                                                option += "<option id='"+value.id+"' name='"+value.depth+"' style='background-color: lightgray;' disabled>"+value.title+"</option>"
+                                            );
+                                        }
 
-                                        item.append
-                                        (
-                                            option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
-                                        );
 
                                     })
                                     $('#change').empty();
                                     $('#addMainUnit').css('display','block');
-
                                 }
-
                             }
 
                         })
@@ -381,11 +413,20 @@
                                         (
                                             "<option selected='true' disabled='disabled'>زیر واحد های موجود</option>"
                                         );
-
-                                        item.append
-                                        (
-                                            option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
-                                        );
+                                        if(value.active == 1)
+                                        {
+                                            item.append
+                                            (
+                                                option += "<option id='"+value.id+"' name='"+value.depth+"'>"+value.title+"</option>"
+                                            );
+                                        }
+                                        if(value.active == 0)
+                                        {
+                                            item.append
+                                            (
+                                                option += "<option id='"+value.id+"' name='"+value.depth+"' style='background-color: lightgray;' disabled>"+value.title+"</option>"
+                                            );
+                                        }
 
                                     })
                                     $('#subUnits').css('display','block');
@@ -434,8 +475,10 @@
                                     console.log(result);
                                     console.log('I am result');
                                     if (result != 0) {
+
                                         var option = '';
                                         $.each(result, function (key, value) {
+
                                             $('#existed').empty();
                                             $('#existed').append
                                             (
@@ -445,6 +488,7 @@
                                             (
                                                 option += "<option selected='true' disabled='disabled' id='" + value.id + "' name='" + value.depth + "'>" + value.title + "</option>"
                                             );
+
                                         });
                                         $('#subUnits').css('display', 'block');
                                         $('#showUnits').css('display', 'none');
@@ -474,9 +518,12 @@
                                 }
                             })
                         }
-                        else {
 
-                        }
+                     else
+                         {
+                     //        $('#subUnits').css('display','none');
+                         }
+
                         $('#change').append
                         (
                             '<div id="main" class="col-md-5 col-md-offset-4">' +
@@ -488,7 +535,13 @@
                         );
 
                         $('#existedDiv').css('display', 'block');
+
                         appendToChange();
+                    }
+                    else
+                    {
+                        $('#subUnits').css('display','none');
+                        $('#addSubUnit').css('display','none');
                     }
                 });
         }
