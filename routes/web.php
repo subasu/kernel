@@ -14,16 +14,14 @@ Route::get('/admin', 'IndexController@index');
 Route::get('/', 'IndexController@home');
 Route::post('/search', 'IndexController@search');
 Route::get('productFiles', 'IndexController@productFiles');
-Route::get('town/{cid}', 'IndexController@town');
 Route::get('products', 'IndexController@products');
-Route::get('captcha', 'IndexController@create_image');
 Route::get('getSubmenu/{id}', 'CommonController@getSubmenu');
 Route::get('showProducts/{id}', 'IndexController@showProducts');
 //pagination for shopping product page
 Route::get('laravel-ajax-pagination',array('as'=>'ajax-pagination','uses'=>'IndexController@productList'));
 Route::get('order/{parameter}', 'IndexController@order');
 Route::get('productDetail/{id}', 'IndexController@productDetail');
-//user routes => for basket
+//user routes => for basket //Mr shiri
 Route::group(['prefix' => 'user'], function () {
     Route::post('addToBasket', 'UserController@addToBasket');
     Route::get('getBasketCountNotify', 'UserController@getBasketCountNotify');
@@ -37,11 +35,12 @@ Route::group(['prefix' => 'user'], function () {
 });
 //Auth::routes();
 // Authentication Routes...
-Route::get('login', 'IndexController@login')->name('login');//rayat 20-9-96
+Route::get('login', 'IndexController@login')->name('login');//rayat 20-9-96 //show register and login form
 Route::post('login', 'Auth\LoginController@login');//rayat 20-9-96
 // Registration Routes...
-Route::get('register', 'IndexController@showRegistrationForm');//rayat 20-9-96
 Route::post('register', 'IndexController@register');//rayat 20-9-96
+Route::get('captcha', 'IndexController@createCaptchaImage');
+Route::get('town/{cid}', 'IndexController@town');
 // Password Reset Routes...
 Route::get('reset', 'Auth\ForgotPasswordController@showLinkRequestForm');//rayat 20-9-96
 Route::post('email', 'Auth\ForgotPasswordController@sendResetLinkEmail');//rayat 20-9-96

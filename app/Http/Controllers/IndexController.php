@@ -84,6 +84,7 @@ class IndexController extends Controller
         return view('main.index', compact('pageTitle', 'menu'));
     }
 
+    //show login blade :in login blade there are 2 form for login and registeration
     public function login()
     {
         $menu = $this->loadMenu();
@@ -100,7 +101,7 @@ class IndexController extends Controller
         return view('main.products', compact('pageTitle', 'menu'));
     }
 
-    //find city of a selected capital in register page
+    //find city of a selected capital in register page,call by ajax from login blade
     public function town($cid)
     {
         $towns = City::where('parent_id', '=', $cid)->get();
@@ -108,7 +109,7 @@ class IndexController extends Controller
     }
 
     //make captcha- called by ajax
-    function create_image()
+    function createCaptchaImage()
     {
         $time = round(microtime(true) * 1000);
         $image = imagecreate(180, 45);
