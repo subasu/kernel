@@ -1,6 +1,36 @@
 @extends('layouts.userLayout')
 @section('content')
 
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog" dir="rtl">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">توضیحات کلی سفارش</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="pictureForm" enctype="multipart/form-data">
+                        {{csrf_field()}}
+                        @if($comments != null)
+                            <textarea class="form-control" disabled="">{{$comments}}</textarea>
+                        @endif
+                        @if($comments == null)
+                            <textarea class="form-control" disabled="">توضیحاتی برای این سفارش ثبت نشده است</textarea>
+                        @endif
+                    </form>
+                </div>
+                <div class="modal-footer" >
+                    <button type="button" class="btn btn-dark col-md-8 col-md-offset-2" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <div class="clearfix"></div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -30,10 +60,11 @@
                         <input type="hidden" id="token" value="{{ csrf_token() }}">
                         <thead>
                         <tr>
-                            <th style="text-align: center">ردیف</th>
+                            <th style="text-align: center">R</th>
                             <th style="text-align: center">عنوان محصول</th>
-                            <th style="text-align: center">توضیحات شما</th>
+                            <th style="text-align: center">توضیحات  سبد خرید</th>
                             <th style="text-align: center">قیمت محصول(تومان)</th>
+                            <th style="text-align: center">تعداد/مقدار</th>
                             <th style="text-align: center">هزینه پست(تومان)</th>
                             <th style="text-align: center">حجم تخفیف کلی(درصد)</th>
                             <th style="text-align: center">حجم تخفیف تحویل</th>
@@ -54,6 +85,7 @@
                                     <td style="font-size: 120%"><textarea class="form-control" disabled>{{$basket->basketComment}}</textarea></td>
                                 @endif
                                 <td style="font-size: 120%">{{number_format($basket->product_price)}}</td>
+                                <td style="font-size: 120%">{{number_format($basket->basketCount)}}</td>
                                 @if($basket->post_price == null)
                                     <td><button class="btn btn-default" style="font-size: 120%;">فاقد هزینه پست</button></td>
                                 @endif
@@ -72,118 +104,26 @@
                                 @if($basket->delivery_volume != null)
                                     <td style="font-size: 120%">{{$basket->delivery_volume}}</td>
                                 @endif
+                                <tr>
 
 
                             </tr>
                         @endforeach
                             <tr>
-                                <td colspan="10" ><strong><a style="font-size: 120%" class="btn btn-dark col-md-4 col-md-offset-4" href="{{url('user/userShowFactor/'.$basket->basket_id)}}">چاپ فاکتور</a></strong></td>
+                                <td  colspan="5"><strong><a style=" font-size: 120%" class="btn btn-dark col-md-5  col-md-offset-3" href="{{url('user/userShowFactor/'.$basket->basket_id)}}">چاپ فاکتور</a></strong></td>
+                                <td  colspan="5"><strong><a style="font-size: 120%" class="btn btn-info col-md-7  col-md-offset-7" id="comments">مشاهده توضیحات سفارش</a></strong></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        {{--edit user's status by user-id --}}
+
 
         <script>
-            $(document).on('click','.btn-success',function () {
-                var userId = $(this).attr('id');
-                var status = $(this).val();
-                var token  = $('#token').val();
-                var button = $(this);
-                swal({
-                        title: "",
-                        text: "آیا از غیرفعال کردن کاربر اطمینان دارید؟",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "	#5cb85c",
-                        cancelButtonText: "خیر ، منصرف شدم",
-                        confirmButtonText: "بله غیرفعال شود",
-                        closeOnConfirm: true,
-                        closeOnCancel: true
-                    },
-                    function () {
-                        $.ajax
-                        ({
-                            url     : "{{Url('admin/changeUserStatus')}}/{{1}}",
-                            type    : 'post',
-                            data    : {'userId':userId,'_token':token},
-                            context :  button,
-                            //dataType:'json',
-                            success : function (response)
-                            {
-                                $(button).text('غیر فعال');
-                                $(button).toggleClass('btn-success btn-danger');
-                                swal({
-                                    title: "",
-                                    text: response,
-                                    type: "info",
-                                    confirmButtonText: "بستن"
-                                });
-                            },
-                            error : function(error)
-                            {
-                                console.log(error);
-                                swal({
-                                    title: "",
-                                    text: "خطایی رخ داده است ، تماس با بخش پشتیبانی",
-                                    type: "warning",
-                                    confirmButtonText: "بستن"
-                                });
-                            }
-                        });
-                    });
+            $(document).on('click','#comments',function(){
+                $('#myModal').modal('show');
             })
-        </script>
-        <script>
-            $(document).on('click','.btn-danger',function () {
-                var userId = $(this).attr('id');
-                var status = $(this).val();
-                var token = $('#token').val();
-                var button = $(this);
-                swal({
-                        title: "",
-                        text: "آیا از فعال کردن کاربر اطمینان دارید؟",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "	#5cb85c",
-                        cancelButtonText: "خیر ، منصرف شدم",
-                        confirmButtonText: "بله فعال شود",
-                        closeOnConfirm: true,
-                        closeOnCancel: true
-                    },
-                    function () {
-                        $.ajax
-                        ({
-                            url: "{{Url('admin/changeUserStatus')}}/{{2}}",
-                            type: 'post',
-                            data: {'userId': userId, '_token': token},
-                            context: button,
-                            //dataType:'json',
-                            success: function (response) {
-                                $(button).text('فعال');
-                                $(button).toggleClass('btn-success btn-danger');
-                                swal({
-                                    title: "",
-                                    text: response,
-                                    type: "info",
-                                    confirmButtonText: "بستن"
-                                });
-                            },
-                            error: function (error) {
-                                console.log(error);
-                                swal({
-                                    title: "",
-                                    text: "خطایی رخ داده است ، تماس با بخش پشتیبانی",
-                                    type: "warning",
-                                    confirmButtonText: "بستن"
-                                });
-                            }
-                        });
-                    }
-                );//end swal
-            });
         </script>
 
 @endsection

@@ -320,7 +320,7 @@ class UserController extends Controller
     //below function is related to show order detail
     public function orderDetails($id)
     {
-
+        $comments = Basket::find($id)->orders->comments;
         $baskets = Basket::find($id);
         if (count($baskets) > 0) {
             $pageTitle = 'جزئیات سفارش';
@@ -328,9 +328,10 @@ class UserController extends Controller
                 $basket->product_price = $basket->pivot->product_price;
                 $basket->basket_id = $basket->pivot->basket_id;
                 $basket->basketComment = $basket->pivot->comments;
+                $basket->basketCount = $basket->pivot->count;
             }
 
-            return view('user.orderDetails', compact('baskets', 'pageTitle'));
+            return view('user.orderDetails', compact('baskets', 'pageTitle','comments'));
         } else {
             return view('errors.403');
         }
@@ -340,6 +341,7 @@ class UserController extends Controller
     public function userShowFactor($id)
     {
         $pageTitle = 'فاکتور سفارش';
+        $comments = Basket::find($id)->orders->comments;
         $baskets = Basket::find($id);
         $total = 0;
         $totalDiscount = 0;
@@ -363,7 +365,7 @@ class UserController extends Controller
 
             }
             $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
-            return view('user.userFactor', compact('pageTitle', 'baskets', 'total', 'totalPostPrice', 'finalPrice', 'paymentTypes'));
+            return view('user.userFactor', compact('pageTitle', 'baskets', 'total', 'totalPostPrice', 'finalPrice', 'paymentTypes','comments'));
         } else {
             return view('errors.403');
         }

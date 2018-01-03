@@ -199,7 +199,7 @@
                                     {{--</ul>--}}
                                 {{--</li>--}}
 
-                            <li><a href="{{url('/index')}}"><i class="fa fa-laptop"></i>صفحه ی اصلی سایت</a>
+                            <li><a href="{{url('/')}}"><i class="fa fa-laptop"></i>صفحه ی اصلی سایت</a>
 
                             </li>
 

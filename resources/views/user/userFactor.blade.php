@@ -25,7 +25,7 @@
         <tr class=" padding-formTable">
             <th class="col-md-1">R</th>
             <th class="col-md-1" colspan="3">عنوان محصول</th>
-            <th class="col-md-4">توضیحات</th>
+            <th class="col-md-4">توضیحات سبد خرید</th>
             <th class="col-md-1"> قیمت واحد (تومان)</th>
             <th class="col-md-1"> تعداد / مقدار </th>
             <th class="col-md-1">جمع کل (تومان)</th>
@@ -62,6 +62,10 @@
         <tr>
             <td class="col-md-2" colspan="8" style="text-align: left"><b>قیمت نهایی (تومان)</b></td>
             <th class="col-md-3" colspan="2">{{number_format($finalPrice)}}</th>
+        </tr>
+        <tr>
+            <td class="col-md-10" colspan="1" style="text-align: right;"><b>توضیحات سفارش</b></td>
+            <th class="col-md-2" colspan="9" style="text-align: right;">@if($comments == null )  توضیحات ندارد @endif @if($comments != null ){{$comments}} @endif</th>
         </tr>
         </tbody>
     </table>

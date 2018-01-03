@@ -142,6 +142,10 @@ class OrderController extends Controller
     {
         $pageTitle = "سفارش های پیگیری شده";
         $data = Order::where([['transaction_code','<>',null],['pay','<>',null],['order_status','<>',null]])->get();
+        foreach ($data as $datum)
+        {
+            $datum->persianDate = $this->toPersian($datum->created_at);
+        }
         return view('admin.oldOrders',compact('data','pageTitle'));
     }
 }
