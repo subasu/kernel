@@ -8,9 +8,10 @@ use App\Models\CategoryProduct;
 use App\Models\City;
 use App\Models\PaymentType;
 use App\Models\Product;
-use App\Models\ProductImage;
+use App\Models\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,7 +20,13 @@ class IndexController extends Controller
     //
     public function index()
     {
-        return view('layouts.adminLayout');
+        $role_id = Auth::user()->role_id;
+        $admin_id = Role::where('title', '=', 'admin')->value('id');
+        $user_id = Role::where('title', '=', 'user')->value('id');
+        if ($role_id == $admin_id)
+            return view('layouts.adminLayout');
+        elseif ($role_id == $user_id)
+            return view('layouts.userLayout');
     }
 
     public function search(Request $request)
@@ -57,20 +64,19 @@ class IndexController extends Controller
     public function loadMenu()
     {
         $menu = Category::where([['parent_id', null], ['grand_parent_id', null], ['active', 1]])->get();
-        foreach ($menu as $sub)
-        {
+        foreach ($menu as $sub) {
             $submenu = Category::where([['parent_id', $sub->id], ['active', 1]])->orderBy('depth', 'DESC')->get();
             foreach ($submenu as $sm) {
                 $sm->brands = Category::where([['parent_id', $sm->id], ['active', 1]])->get();
-                $x=0;
+                $x = 0;
                 foreach ($sm->brands as $val) {
                     $x = CategoryProduct::where('product_id', '=', $val->id)->get();
                 }
             }
             if ($x)
-            $sub->hasProduct = 1;
-        else
-            $sub->hasProduct = 0;
+                $sub->hasProduct = 1;
+            else
+                $sub->hasProduct = 0;
         }
 
         return $menu;
@@ -232,16 +238,16 @@ class IndexController extends Controller
 
     //below function is to return show product blade with pagination
     //first time show by view second time show by ajax
-    public function showProducts($id,Request $request)
+    public function showProducts($id, Request $request)
     {
         $menu = $menu = $this->loadMenu();
         $pageTitle = 'لیست محصولات';
         $categories = Category::find($id);
-        $products=$categories->products()->paginate(12);
+        $products = $categories->products()->paginate(12);
         if ($request->ajax()) {
-            return view('main.presult',  compact('menu', 'pageTitle', 'categories','products'));
+            return view('main.presult', compact('menu', 'pageTitle', 'categories', 'products'));
         }
-        return view('main.showProducts', compact('menu', 'pageTitle', 'categories','products'));
+        return view('main.showProducts', compact('menu', 'pageTitle', 'categories', 'products'));
     }
 
     //below function is to return show product blade
@@ -261,80 +267,69 @@ class IndexController extends Controller
     //below function is related to return order view
     public function order($parameter)
     {
-        $menu = $menu=$this->loadMenu();
+        $menu = $menu = $this->loadMenu();
         //$categories  = Category::find($id);
-        if(isset($_COOKIE['addToBasket']))
-        {
+        if (isset($_COOKIE['addToBasket'])) {
 
-            switch ($parameter)
-            {
+            switch ($parameter) {
                 case 'basketDetail':
-                    $pageTitle  = 'لیست سفارشات';
-                    $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
-                    if($basketId)
-                    {
-                        $baskets   = Basket::find($basketId);
-                        $total     = 0;
-                        foreach ($baskets->products as $basket)
-                        {
-                            $basket->count       = $basket->pivot->count;
-                            $basket->price       = $basket->pivot->product_price;
-                            $basket->sum         = $basket->pivot->count * $basket->pivot->product_price;
-                            $total              += $basket->sum;
-                            $basket->basket_id   = $basket->pivot->basket_id;
+                    $pageTitle = 'لیست سفارشات';
+                    $basketId = Basket::where([['cookie', $_COOKIE['addToBasket']], ['payment', 0]])->value('id');
+                    if ($basketId) {
+                        $baskets = Basket::find($basketId);
+                        $total = 0;
+                        foreach ($baskets->products as $basket) {
+                            $basket->count = $basket->pivot->count;
+                            $basket->price = $basket->pivot->product_price;
+                            $basket->sum = $basket->pivot->count * $basket->pivot->product_price;
+                            $total += $basket->sum;
+                            $basket->basket_id = $basket->pivot->basket_id;
                         }
-                        return view('main.order',compact('menu','pageTitle','baskets','total'));
-                    }else
-                        {
-                            return Redirect::back();
-                        }
+                        return view('main.order', compact('menu', 'pageTitle', 'baskets', 'total'));
+                    } else {
+                        return Redirect::back();
+                    }
 
-                break;
+                    break;
 
                 case 'orderDetail':
                     $pageTitle = 'جزئیات سفارش';
-                    $paymentTypes = PaymentType::where('active',1)->get();
-                    $basketId  = Basket::where([['cookie',$_COOKIE['addToBasket']],['payment',0]])->value('id');
-                    $baskets   = Basket::find($basketId);
-                    $total          = 0;
-                    $totalDiscount  = 0 ;
+                    $paymentTypes = PaymentType::where('active', 1)->get();
+                    $basketId = Basket::where([['cookie', $_COOKIE['addToBasket']], ['payment', 0]])->value('id');
+                    $baskets = Basket::find($basketId);
+                    $total = 0;
+                    $totalDiscount = 0;
                     $totalPostPrice = 0;
-                    $finalPrice     = 0;
-                    if(!empty($baskets))
-                    {
-                        foreach ($baskets->products as $basket)
-                        {
-                            $basket->count         = $basket->pivot->count;
-                            $basket->price         = $basket->pivot->product_price;
-                            $basket->sum           = $basket->pivot->count * $basket->pivot->product_price;
-                            $total                += $basket->sum;
-                            $basket->basket_id     = $basket->pivot->basket_id;
-                            $totalPostPrice       += $basket->post_price;
-                            $basket->product_id    = $basket->pivot->product_id;
-                            if($basket->discount_volume != null )
-                            {
-                                $totalDiscount        += $basket->discount_volume;
-                                if($totalDiscount > 0)
-                                {
-                                    $basket->sumOfDiscount = ($total * $totalDiscount ) / 100 ;
+                    $finalPrice = 0;
+                    if (!empty($baskets)) {
+                        foreach ($baskets->products as $basket) {
+                            $basket->count = $basket->pivot->count;
+                            $basket->price = $basket->pivot->product_price;
+                            $basket->sum = $basket->pivot->count * $basket->pivot->product_price;
+                            $total += $basket->sum;
+                            $basket->basket_id = $basket->pivot->basket_id;
+                            $totalPostPrice += $basket->post_price;
+                            $basket->product_id = $basket->pivot->product_id;
+                            if ($basket->discount_volume != null) {
+                                $totalDiscount += $basket->discount_volume;
+                                if ($totalDiscount > 0) {
+                                    $basket->sumOfDiscount = ($total * $totalDiscount) / 100;
                                 }
                             }
 
                         }
                         $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
-                        return view('main.orderDetail',compact('menu','pageTitle','baskets','total','totalPostPrice','finalPrice','paymentTypes'));
-                    }else
-                        {
-                            return view('errors.403');
-                        }
+                        return view('main.orderDetail', compact('menu', 'pageTitle', 'baskets', 'total', 'totalPostPrice', 'finalPrice', 'paymentTypes'));
+                    } else {
+                        return view('errors.403');
+                    }
 
-                break;
+                    break;
             }
 
-        }else
-            {
-                return Redirect::back();
-            }
+        } else {
+            return Redirect::back();
+        }
 
     }
 

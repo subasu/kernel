@@ -408,15 +408,8 @@
                                 confirmButtonText: "بستن"
                             });
                         }
-                        else {
-//                            swal({
-//                                title: "",
-////                                text: 'خطایی رخ داده است، لطفا با پشتیبانی تماس حاصل فرمائید',
-////                                  text: "اطلاعات شما با مؤفقیت ثبت شد، پس از تأیید شدن توسط مدیر سایت برای شما ایمیل فعال سازی ارسال خواهد شد.منتظر پیامک اطلاعیه از طرف سایت باشید.",
-//                                type: "warning",
-//                                confirmButtonText: "بستن"
-//                            });
-                            location.href = '{{url('admin/addProduct')}}'
+                        else if(response.status!=500 && response.status!=422){
+                            location.href = '{{url('/panel')}}'
                         }
                     }//error
 
