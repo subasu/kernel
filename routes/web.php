@@ -10,7 +10,6 @@
 |
 */
 //main site
-Route::get('/admin', 'IndexController@index');
 Route::get('/', 'IndexController@home');
 Route::post('/search', 'IndexController@search');
 Route::get('productFiles', 'IndexController@productFiles');
@@ -48,6 +47,7 @@ Route::get('reset/{token}', 'Auth\ResetPasswordController@showResetForm');//raya
 Route::post('reset', 'Auth\ResetPasswordController@reset');//rayat 20-9-96
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/panel', 'IndexController@index');
     //admin routes
     Route::group(['prefix' => 'admin'], function () {
         //categories
