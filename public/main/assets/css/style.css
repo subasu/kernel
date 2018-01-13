@@ -4641,16 +4641,19 @@ span.notify-right {
     text-transform: uppercase;
     font-weight: bold;
     padding-bottom: 17px;
+    text-align: right;
 }
 
 .page-product-box .owl-next {
     top: -20px;
+    right: inherit;
+    left: 26px;
 }
 
 .page-product-box .owl-prev {
     top: -20px;
-    left: inherit;
-    right: 26px;
+    /*right: inherit;*/
+    /*left: 26px;*/
 }
 
 /* ----------------
@@ -6076,4 +6079,7 @@ span.notify-right {
 }
 .color-red{
     color: #ff3524 !important;
+}
+.similar-product-image{
+    height:300px;
 }
