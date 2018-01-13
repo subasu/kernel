@@ -408,8 +408,8 @@
                                 confirmButtonText: "بستن"
                             });
                         }
-                        else if(response.status!=500 && response.status!=422){
-                            location.href = '{{url('/panel')}}'
+                        else if(response.status!=500){
+                            location.href = '{{url('/panel')}}';
                         }
                     }//error
 
