@@ -40,6 +40,7 @@ Route::group(['prefix' => '/v1'], function () {
 
     //payment type routes
     Route::get('getPaymentTypes','CommonController@getPaymentTypes');
+    Route::post('login','webService\LoginController@login');
 });
 
 //below routes are related to some special operation in index page such as add to basket or ...
@@ -55,6 +56,10 @@ Route::group(['prefix' => '/v1/user'],function (){
     Route::post('orderRegistration','webService\UserController@orderRegistration');
     Route::post('addCommentForEachProduct','webService\UserController@addCommentForEachProduct');
 
+});
+
+Route::group(['prefix' => '/v1/admin'],function(){
+    Route::post('addNewCategory','webService\CategoryController@addNewCategory');// add new category in database
 });
 
 //below routes are related to some general routes in index routes such menu and ...
