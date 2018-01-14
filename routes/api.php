@@ -59,7 +59,13 @@ Route::group(['prefix' => '/v1/user'],function (){
 });
 
 Route::group(['prefix' => '/v1/admin'],function(){
+    //category routes
     Route::post('addNewCategory','webService\CategoryController@addNewCategory');// add new category in database
+
+    //product routes
+    Route::get('productsManagement','webService\ProductController@productsManagement');// productManagement
+  //  Route::get('updateProduct','webService\ProductController@updateProduct');
+    Route::post('addNewProduct', 'webService\ProductController@addNewProduct');// add new product in database
 });
 
 //below routes are related to some general routes in index routes such menu and ...
