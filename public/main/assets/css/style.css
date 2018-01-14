@@ -5059,7 +5059,7 @@ span.notify-right {
 .box-authentication {
     border: 1px solid #eaeaea;
     padding: 30px;
-    min-height: 320px;
+    min-height: max-content;
 }
 
 .box-authentication > h3 {

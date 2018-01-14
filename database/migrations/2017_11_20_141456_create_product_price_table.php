@@ -15,8 +15,8 @@ class CreateProductPriceTable extends Migration
     {
         Schema::create('product_prices', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('shop_id')->unsigned()->index();
-            $table->foreign('shop_id')->references('id')->on('shops');
+//            $table->integer('shop_id')->unsigned()->index();
+//            $table->foreign('shop_id')->references('id')->on('shops');
 //            $table->integer('price_type_id')->unsigned()->index();
 //            $table->foreign('price_type_id')->references('id')->on('price_types');
             $table->integer('product_id')->unsigned()->index();
