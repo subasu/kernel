@@ -344,9 +344,9 @@
                                 <div class="col-md-10 col-md-offset-1 margin-1 margin-bot-1">
                                     <div class="col-md-7 col-sm-6 col-xs-9 col-md-offset-2">
                                         <input id="discount" class="form-control col-md-12 col-xs-12" name="discount"
-                                               type="text">
+                                               type="number" max="99" min="1" maxlength="2">
                                     </div>
-                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount"> درصد تخفیف :
+                                    <label class="control-label col-md-2 col-sm-4 col-xs-3" for="discount" > درصد تخفیف :
                                         <span class="required star" title="پر کردن این فیلد الزامی است"></span>
                                     </label>
                                 </div>
@@ -856,7 +856,12 @@
                     price.val(v2)
                 })
 
-            })
-
+            });
+            //discount input length in add product nus not above 2 number(1% to 99%)
+            $('input[name="discount"]').keypress(function() {
+                if (this.value.length >= 2) {
+                    return false;
+                }
+            });
         </script>
 @endsection

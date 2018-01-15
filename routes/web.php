@@ -111,6 +111,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('editPaymentTypeTitle', 'PaymentTypeController@editPaymentTypeTitle');
         //printer route
         Route::get('connectToPrinter', 'OrderController@connectToPrinter');
+        //slider
+        Route::get('addSlider','HomeController@addSlider');
+        Route::post('addNewSlider','HomeController@addNewSlider');
     });
     //end admin panel routes
     //user panel routes
