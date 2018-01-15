@@ -32,7 +32,8 @@ class ProductController extends Controller
         return view('admin.productManagement', compact('data', 'pageTitle'));
     }
 
-    //add new product to database
+
+//add new product to database
     public function addNewProduct(Request $request)
     {
         $notToBeRepeated = new NotToBeRepeated();
@@ -63,11 +64,10 @@ class ProductController extends Controller
                 return response()->json(['data' => 'تاریخ را بطور صحیح وارد نمائید : 1396/09/19']);
             }
         }else
-            {
-                return response()->json(['data' => $checkTitles]);
-            }
+        {
+            return response()->json(['data' => $checkTitles]);
+        }
     }
-
     //update product to database
     public function updateProduct(Request $request)
     {
@@ -167,5 +167,31 @@ class ProductController extends Controller
                 }
             break;
         }
+    }
+
+    //below function is to delete video of product
+    public function deleteVideo(Request $request)
+    {
+        $videoName = Product::where('id',$request->productId)->value('video_src');
+        if($videoName)
+        {
+            $product = Product::find($request->productId);
+            $product->video_src = '';
+            $product->save();
+            if($product)
+            {
+                $videoSrc = '/dashboard/productFiles/video/' . $videoName;
+                $result   = unlink(public_path().$videoSrc);
+                if($result)
+                {
+                    return response()->json(['message' => 'success']);
+                }
+                else
+                    {
+                        return response()->json(['message' => 'error']);
+                    }
+            }
+        }
+
     }
 }

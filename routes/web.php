@@ -75,6 +75,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('updateProduct', 'ProductController@updateProduct');// update Product in database
         Route::get('productDetails/{id}', 'ProductController@productDetailsGet');
         Route::post('changeProductStatus/{parameter}', 'ProductController@changeProductStatus');
+        Route::get('deleteVideo','ProductController@deleteVideo');
         //images product
         Route::get('deleteProductPicture/{id}', 'ProductController@deleteProductPicture');//use in updating product (product details blade)
         //users

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\webService;
 use App\Http\SelfClasses\AddCategory;
 use App\Http\SelfClasses\CheckFiles;
 use App\Http\SelfClasses\NotToBeRepeated;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use JWTAuth;
@@ -44,5 +45,12 @@ class CategoryController extends Controller
                 return response()->json(['message' => $titleCheck, 'code' => 0]);
             }
         }
+    }
+
+    //below function is to returns all categories to the categoriesManagement blade....
+    public function categoriesManagement()
+    {
+        $categories = Category::where('parent_id',null)->get();
+        return response()->json(['categories' => $categories]);
     }
 }

@@ -31,7 +31,7 @@ class CheckProduct
             'warehouse_place' => '',
             'ready_time' => 'sometimes|nullable|numeric',
             'barcode' => 'sometimes|nullable|numeric',
-            'price' => 'required|numeric',
+            'price' => 'required',
 //            'sales_price' => 'sometimes|nullable',
 //            'special_price' => 'sometimes|nullable',
 //            'wholesale_price' => 'sometimes|nullable',

@@ -61,6 +61,7 @@ Route::group(['prefix' => '/v1/user'],function (){
 Route::group(['prefix' => '/v1/admin'],function(){
     //category routes
     Route::post('addNewCategory','webService\CategoryController@addNewCategory');// add new category in database
+    Route::get('categoriesManagement','webService\CategoryController@categoriesManagement');
 
     //product routes
     Route::get('productsManagement','webService\ProductController@productsManagement');// productManagement
