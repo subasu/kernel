@@ -62,6 +62,7 @@ Route::group(['prefix' => '/v1/admin'],function(){
     //category routes
     Route::post('addNewCategory','webService\CategoryController@addNewCategory');// add new category in database
     Route::get('categoriesManagement','webService\CategoryController@categoriesManagement');
+    Route::get('editCategory/{id}', 'webService\CategoryController@editCategory');//this route is related to edit main category
 
     //product routes
     Route::get('productsManagement','webService\ProductController@productsManagement');// productManagement

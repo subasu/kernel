@@ -16,11 +16,11 @@ use JWTAuth;
 class CategoryController extends Controller
 {
 
-//    public function __construct()
-//    {
-//        $this->middleware('jwt.auth', ['except' => ['login']]);
-//
-//    }
+    public function __construct()
+    {
+        $this->middleware('jwt.auth', ['except' => ['login']]);
+
+    }
     //
     public function addNewCategory(Request $request)
     {
@@ -52,5 +52,19 @@ class CategoryController extends Controller
     {
         $categories = Category::where('parent_id',null)->get();
         return response()->json(['categories' => $categories]);
+    }
+
+    //below function is related to edit category
+    public function editCategory($id)
+    {
+        $categoryInfo = Category::where('id',$id)->get();
+        if(count($categoryInfo) > 0)
+        {
+            return response()->json(['categoryInfo' => $categoryInfo]);
+        }else
+        {
+            return response()->json(['message' => 'no info about this']);
+        }
+
     }
 }
