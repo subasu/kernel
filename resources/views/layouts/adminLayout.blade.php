@@ -9,7 +9,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="املاک آنلاین خمینی شهر">
-    <meta name="keywords" content="املاک آنلاین خمینی شهر،خمینی شهر،املاک آنلاین،خرید و فروش آنلاین ملک،لیست املاک خمینی شهر،املاک خمینی شهر،مشاور املاک در خمینی شهر،مشاور املاک منظریه،مشاور املاک پاسدارن،مشاور املاک هفتصد دستگاه">
+    <meta name="keywords"
+          content="املاک آنلاین خمینی شهر،خمینی شهر،املاک آنلاین،خرید و فروش آنلاین ملک،لیست املاک خمینی شهر،املاک خمینی شهر،مشاور املاک در خمینی شهر،مشاور املاک منظریه،مشاور املاک پاسدارن،مشاور املاک هفتصد دستگاه">
     <meta name="author" content="www.melkomalek.ir">
     <title>صفحه مورد نظر یافت نشد!</title>
 
@@ -24,9 +25,10 @@
 
     <!-- Custom styling plus plugins -->
     <link href="{{ URL::asset('public/dashboard/css/custom.css')}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('public/dashboard/css/maps/jquery-jvectormap-2.0.3.css')}}" />
-    <link href="{{ URL::asset('public/dashboard/css/icheck/flat/green.css')}}" rel="stylesheet" />
-    <link href="{{ URL::asset('public/dashboard/css/floatexamples.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css"
+          href="{{ URL::asset('public/dashboard/css/maps/jquery-jvectormap-2.0.3.css')}}"/>
+    <link href="{{ URL::asset('public/dashboard/css/icheck/flat/green.css')}}" rel="stylesheet"/>
+    <link href="{{ URL::asset('public/dashboard/css/floatexamples.css')}}" rel="stylesheet" type="text/css"/>
 
     <script src="{{ URL::asset('public/js/jquery.min.js')}}"></script>
 
@@ -39,7 +41,9 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style> body {font-family:"Yekan" !important;}</style>
+    <style> body {
+            font-family: "Yekan" !important;
+        }</style>
 </head>
 
 
@@ -168,20 +172,19 @@
                         <h3 style="font-size: 16px;color:white">پروفایل</h3>
                         <ul class="nav side-menu">
                             {{--//system manager menu--}}
-                            <li><a><i class="fa f a-home"></i>پنل مدیریت<span></span></a>
+                            <li><a></a>
                             </li>
-                            <li><a><i class="fa fa-product-hunt"></i> مدیریت محصولات<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-product-hunt"></i> مدیریت محصولات<span
+                                            class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/productsManagement')}}"> نمایش و مدیریت محصولات</a>
                                     </li>
                                     <li><a href="{{url('admin/addProduct')}}">درج محصول جدید </a>
                                     </li>
-                                    {{--<li><a href="{{url('admin/unitCountManagement')}}"> نمایش و مدیریت واحد شمارش </a>--}}
-                                    {{--<li><a href="{{url('admin/addUnit')}}">درج واحد شمارش و زیرواحد شمارش </a>--}}
-                                    {{--</li>--}}
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-object-group"></i> مدیریت دسته بندی ها<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-object-group"></i> مدیریت دسته بندی ها<span
+                                            class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/categoriesManagement')}}"> نمایش و مدیریت دسته بندی ها</a>
                                     </li>
@@ -189,35 +192,18 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-th-list"></i> مدیریت واحد های شمارش<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-th-list"></i> مدیریت واحد های شمارش<span
+                                            class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/unitCountManagement')}}"> نمایش و مدیریت واحد های شمارش</a>
+                                    <li><a href="{{url('admin/unitCountManagement')}}"> نمایش و مدیریت واحد های
+                                            شمارش</a>
                                     </li>
-                                    <li><a href="{{url('admin/addUnit')}}">درج واحد های شمارش  جدید </a>
+                                    <li><a href="{{url('admin/addUnit')}}">درج واحد های شمارش جدید </a>
                                     </li>
                                 </ul>
                             </li>
-                            {{--<li><a><i class="fa fa-cubes"></i> مدیریت سفارشات<span class="fa fa-chevron-down"></span></a>--}}
-                                {{--<ul class="nav child_menu" style="display: none">--}}
-                                    {{--<li><a href="{{url('admin/ordersManagement')}}"> نمایش و مدیریت سفارشات</a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                            {{--<li><a><i class="fa fa-motorcycle"></i> مدیریت پیک ها<span class="fa fa-chevron-down"></span></a>--}}
-                                {{--<ul class="nav child_menu" style="display: none">--}}
-                                    {{--<li><a href="{{url('admin/deliveryMansManagement')}}"> نمایش و مدیریت پیک ها</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li><a href="{{url('admin/addDeliveryMan')}}">درج پیک جدید </a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                            {{--<li><a><i class="fa fa-users"></i> مدیریت کاربران<span class="fa fa-chevron-down"></span></a>--}}
-                                {{--<ul class="nav child_menu" style="display: none">--}}
-                                    {{--<li><a href="{{url('admin/usersManagement')}}"> نمایش و مدیریت کاربران</a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                            <li><a><i class="fa fa-paint-brush"></i>مدیریت رنگها <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-paint-brush"></i>مدیریت رنگها <span
+                                            class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/colorsManagement')}}"> نمایش و مدیریت رنگها</a>
                                     </li>
@@ -233,20 +219,18 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-dollar"></i>مدیریت وضعیتهای پرداخت<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-dollar"></i>مدیریت وضعیتهای پرداخت<span
+                                            class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/paymentTypesManagement')}}"> نمایش و مدیریت وضعیتهای پرداخت</a>
+                                    <li><a href="{{url('admin/paymentTypesManagement')}}"> نمایش و مدیریت وضعیتهای
+                                            پرداخت</a>
                                     </li>
                                     <li><a href="{{url('admin/addPaymentType')}}">افزودن وضعیت پرداخت</a>
                                     </li>
                                 </ul>
                             </li>
-                            {{--<li><a><i class="fa fa-dollar"></i>مدیریت پرینتر<span class="fa fa-chevron-down"></span></a>--}}
-                                {{--<ul class="nav child_menu" style="display: none">--}}
-                                    {{--<li><a href="{{url('admin/connectToPrinter')}}"> اتصال به پرینتر</a>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                            <li><a><i class="fa fa-print"></i>بررسی سفارش ها و فاکتورها<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-print"></i>بررسی سفارش ها و فاکتورها<span
+                                            class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/ordersManagement')}}">سفارش های جدید</a>
                                     </li>
@@ -254,35 +238,47 @@
                                     </li>
                                 </ul>
                             </li>
-                            {{--<li><a><i class="fa fa-handshake-o"></i>مدیریت وضعیتهای تحویل<span class="fa fa-chevron-down"></span></a>--}}
-                                {{--<ul class="nav child_menu" style="display: none">--}}
-                                    {{--<li><a href="{{url('admin/paymentTypesManagement')}}">  نمایش و مدیریت وضعیتهای تحویل</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li><a href="{{url('admin/addPaymentType')}}">افزودن وضعیت تحویل</a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                            {{--<li><a><i class="fa fa-comments"></i> مدیریت نظرات<span class="fa fa-chevron-down"></span></a>--}}
-                                {{--<ul class="nav child_menu" style="display: none">--}}
-                                    {{--<li><a href="{{url('admin/systemManager')}}"> نمایش و مدیریت دسته بندی های پروژه</a>--}}
-                                        {{--</li>--}}
-                                    {{--<li><a href="{{url('systemManager')}}">درج دسته بندی جدید </a>--}}
-                                        {{--</li>--}}
-                                    {{--</ul>--}}
-                                {{--</li>--}}
-                            {{--<li><a><i class="fa fa-star-half-full"></i> مدیریت امتیازات<span class="fa fa-chevron-down"></span></a>--}}
-                                {{--<ul class="nav child_menu" style="display: none">--}}
-                                    {{--<li><a href="{{url('systemManager')}}"> نمایش و مدیریت دسته بندی های پروژه</a>--}}
-                                        {{--</li>--}}
-                                    {{--<li><a href="{{url('systemManager')}}">درج دسته بندی جدید </a>--}}
-                                        {{--</li>--}}
-                                    {{--</ul>--}}
-                                {{--</li>--}}
-
-                            <li><a href="{{url('/')}}"><i class="fa fa-laptop"></i>صفحه ی اصلی سایت</a>
-
+                            <li><a><i class="fa fa-photo"></i>مدیریت اسلایدشو و لوگو سایت<span
+                                            class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('admin/addSlider')}}">درج اسلایدشو تصاویر</a>
+                                    </li>
+                                    <li><a href="{{url('admin/SliderManagement')}}">ویرایش و مدیریت تصویر اسلایدشو</a>
+                                    </li>
+                                    <li><a href="{{url('admin/addLogo')}}">درج لوگو سایت تصاویر</a>
+                                    </li>
+                                    <li><a href="{{url('admin/LogoManagement')}}">ویرایش و مدیریت لوگوی سایت</a>
+                                    </li>
+                                </ul>
                             </li>
-
+                            <li><a><i class="fa fa-cog"></i>مدیریت سرویس های سایت<span
+                                            class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('admin/addService')}}">درج سرویس های سایت</a>
+                                    </li>
+                                    <li><a href="{{url('admin/SliderManagement')}}">ویرایش سرویس های سایت</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-info-circle"></i>مدیریت درباره ی ما <span
+                                            class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('admin/addAboutUs')}}">درج اسلایدشو تصاویر</a>
+                                    </li>
+                                    <li><a href="{{url('admin/SliderManagement')}}">ویرایش و مدیریت تصویر اسلایدشو</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-map-marker"></i>مدیریت گوگل مپ<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu" style="display: none">
+                                    <li><a href="{{url('admin/addGoogleMap')}}">درج اسلایدشو تصاویر</a>
+                                    </li>
+                                    <li><a href="{{url('admin/GoogleMapManagement')}}">ویرایش و مدیریت تصویر اسلایدشو</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="{{url('/')}}"><i class="fa fa-laptop"></i>صفحه ی اصلی سایت</a>
+                            </li>
                             {{--//End User menu--}}
                             {{-- end user dashboard menu --}}
                             <li><a style="background-color: rgba(231, 76, 60, 0.88)" href="{{url('/logout')}}"><i
@@ -697,42 +693,40 @@
 </script>
 
 {{--<script>--}}
-    {{--$(document).ready(function(){--}}
-        {{--setInterval(function(){--}}
+{{--$(document).ready(function(){--}}
+{{--setInterval(function(){--}}
 
-            {{--$.ajax--}}
-            {{--({--}}
-                {{--url      : "{{url('admin/checkOrders')}}",--}}
-                {{--type     : "get",--}}
-                {{--dataType : "JSON",--}}
-                {{--success : function(response)--}}
-                {{--{--}}
-                    {{--if(response.data > 0)--}}
-                    {{--{--}}
-                        {{--window.open('adminShowFactor/'+response.data);--}}
-                    {{--}--}}
-                {{--},error:function (error) {--}}
-                  {{--console.log(error);--}}
-                {{--}--}}
-            {{--})--}}
+{{--$.ajax--}}
+{{--({--}}
+{{--url      : "{{url('admin/checkOrders')}}",--}}
+{{--type     : "get",--}}
+{{--dataType : "JSON",--}}
+{{--success : function(response)--}}
+{{--{--}}
+{{--if(response.data > 0)--}}
+{{--{--}}
+{{--window.open('adminShowFactor/'+response.data);--}}
+{{--}--}}
+{{--},error:function (error) {--}}
+{{--console.log(error);--}}
+{{--}--}}
+{{--})--}}
 
-        {{--},1000);--}}
-    {{--})--}}
+{{--},1000);--}}
+{{--})--}}
 {{--</script>--}}
 <!-- below function is related to refresh page for every 30 seconds -->
 <script>
-    $(function(){
-        setInterval(function(){
+    $(function () {
+        setInterval(function () {
             $.ajax
             ({
-                cache    : false,
-                url      : "{{url('admin/checkOrderStatus')}}",
-                type     : "get",
-                dataType : "json",
-                success  : function(response)
-                {
-                    if(response.message == 'exist')
-                    {
+                cache: false,
+                url: "{{url('admin/checkOrderStatus')}}",
+                type: "get",
+                dataType: "json",
+                success: function (response) {
+                    if (response.message == 'exist') {
                         console.log('new order...');
                         var audio = document.getElementById('audio');
                         audio.autoplay = true;
@@ -740,19 +734,17 @@
 //                        setTimeout(function(){
 //                            window.location.replace('ordersManagement');
 //                        },10000);
-                    }else
-                    {
+                    } else {
                         console.log('nothing new');
                     }
-                },error  : function(error)
-                {
+                }, error: function (error) {
 //                    console.log(error.responseText);
                     console.log(error);
                 }
             })
-        },10000);
+        }, 10000);
     })
 </script>
 </body>
 </html>
-    @endif
+@endif

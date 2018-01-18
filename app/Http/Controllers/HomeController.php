@@ -30,6 +30,7 @@ class HomeController extends Controller
     }
     public function addSliderPost()
     {
-        return view('admin.addNewSlider');
+
+        return response()->json('admin.addNewSlider');
     }
 }

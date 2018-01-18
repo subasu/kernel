@@ -136,7 +136,7 @@
                         $('#addPic').append
                         (
                             '<div class="col-md-12 margin-1">' +
-                            '<div class="col-md-4 col-sm-6 col-xs-9 col-md-offset-3">' +
+                            '<div class="col-md-4 col-sm-6 col-xs-9 col-md-offset-1">' +
                             '<input class="form-control col-md-12 col-xs-12" type="file" name="file[]" id="file"/>' +
                             '</div>' +
                             '<div class="col-md-2 col-sm-6 col-xs-9 ">' +
