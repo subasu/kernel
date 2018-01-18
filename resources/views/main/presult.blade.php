@@ -6,7 +6,7 @@
                     <div align="center" >
                         <a>
                             @if(!empty($product->productImages[0]))
-                                <img src="{{url('public/dashboard/productFiles/picture/'.$product->productImages[0]->image_src)}}"  alt="عنوان محصول" width="200" height="250"  style="text-decoration: underline;"/>
+                                <img src="{{url('public/dashboard/productFiles/picture/'.$product->productImages[0]->image_src)}}"  alt="عنوان محصول" height="250"/>
                             @endif
                         </a>
                         <div class="quick-view">
