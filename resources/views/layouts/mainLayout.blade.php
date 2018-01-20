@@ -375,10 +375,10 @@
         })
     })
 </script>
+<script type="text/javascript" src="{{url('public/main/assets/lib/owl.carousel/owl.carousel.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/select2/js/select2.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/jquery.bxslider/jquery.bxslider.min.js')}}"></script>
-<script type="text/javascript" src="{{url('public/main/assets/lib/owl.carousel/owl.carousel.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/jquery.countdown/jquery.countdown.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/js/jquery.actual.min.js')}}"></script>
 <script type="text/javascript" src="{{url('public/main/assets/lib/jquery-ui/jquery-ui.min.js')}}"></script>

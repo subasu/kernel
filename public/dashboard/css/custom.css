@@ -115,6 +115,7 @@ body.nav-sm .profile {
 }
 .menu_section >ul {
   margin-top: 10px;
+  font-size:12px;
 }
 .profile_pic {
   width: 35%;
@@ -658,8 +659,8 @@ li.current-page a {
 }
 .nav.child_menu > li > a {
   color: rgba(255, 255, 255, 0.75) !important;
-  font-size: 12px;
-  padding: 9px;
+  font-size: 10px;
+  padding: 7px;
 }
 .panel_toolbox {
   float: left !important;
@@ -1686,7 +1687,7 @@ h4.graph_title {
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 12px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -20,7 +20,7 @@
                                                     <a>
                                                         @if(!empty($product->productImages[0]))
                                                             <img src="{{url('public/dashboard/productFiles/picture/'.$product->productImages[0]->image_src)}}"
-                                                                 alt="عنوان محصول" height="250"
+                                                                 alt="عنوان محصول"   height="250"
                                                                  style="text-decoration: underline;"/>
                                                         @endif
                                                     </a>

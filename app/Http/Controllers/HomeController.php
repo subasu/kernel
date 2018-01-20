@@ -23,14 +23,4 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function addSlider()
-    {
-        $pageTitle='افزودن گالری تصاویر';
-        return view('admin.addSlider',compact($pageTitle));
-    }
-    public function addSliderPost()
-    {
-
-        return response()->json('admin.addNewSlider');
-    }
 }
