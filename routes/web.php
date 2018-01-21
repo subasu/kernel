@@ -120,6 +120,13 @@
             //addAboutUs
             Route::get('addAboutUs', 'AdminController@addAboutUs');
             Route::post('addAboutUsPost', 'AdminController@addAboutUsPost');
+            Route::get('editAboutUs', 'AdminController@editAboutUs');
+            Route::post('editAboutUsPost', 'AdminController@editAboutUsPost');
+            //addService
+            Route::get('addService', 'AdminController@addService');
+            Route::post('addServicePost', 'AdminController@addServicePost');
+            Route::get('editService', 'AdminController@editService');
+            Route::post('editServicePost', 'AdminController@editServicePost');
         });
         //end admin panel routes
         //user panel routes

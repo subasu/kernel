@@ -265,7 +265,7 @@
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/addAboutUs')}}">درج درباره ی ما</a>
                                     </li>
-                                    <li><a href="{{url('admin/SliderManagement')}}">ویرایش درباره ی ما</a>
+                                    <li><a href="{{url('admin/editAboutUs')}}">ویرایش درباره ی ما</a>
                                     </li>
                                 </ul>
                             </li>

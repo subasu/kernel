@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\Basket;
 use App\Models\Category;
 use App\Models\CategoryProduct;
@@ -33,7 +34,8 @@ class IndexController extends Controller
     {
         $menu = $this->loadMenu();
         $pageTitle = 'درباره ی ما';
-        return view('main.about', compact('pageTitle', 'menu'));
+        $aboutUs=About::latest()->first()->value('description');
+        return view('main.about', compact('pageTitle', 'menu','aboutUs'));
     }
 
     public function search(Request $request)
