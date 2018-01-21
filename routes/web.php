@@ -117,9 +117,9 @@
             //slider
             Route::get('addSlider', 'AdminController@addSlider');
             Route::post('addNewSlider', 'AdminController@addSliderPost');
-            //slider
+            //addAboutUs
             Route::get('addAboutUs', 'AdminController@addAboutUs');
-            Route::post('addAboutUs', 'AdminController@addAboutUsPost');
+            Route::post('addAboutUsPost', 'AdminController@addAboutUsPost');
         });
         //end admin panel routes
         //user panel routes

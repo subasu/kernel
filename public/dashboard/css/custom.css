@@ -32,6 +32,7 @@ body.nav-sm .container.body .left_col {
   position: fixed;
   height: 100%;
   z-index: 200;
+  overflow-y: scroll;
 }
 body.nav-sm .container.body .right_col {
   padding: 10px 20px;

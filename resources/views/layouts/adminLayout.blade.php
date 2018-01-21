@@ -16,8 +16,6 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href=""/>
-
-    <link href="{{ URL::asset('public/dashboard/simditor-2.3.6/styles/simditor.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('public/dashboard/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <link href="{{ URL::asset('public/dashboard/fonts/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -518,19 +516,6 @@
 <script src="{{ URL::asset('public/dashboard/js/datatables/responsive.bootstrap.min.js')}}"></script>
 <script src="{{ URL::asset('public/dashboard/js/datatables/dataTables.scroller.min.js')}}"></script>
 <link rel="stylesheet" href="{{URL::asset('public/css/persianDatepicker-default.css')}}"/>
-{{--<script type="text/javascript" src="{{URL::asset('public/dashboard/simditor-2.3.6/scripts/jquery.min.js')}}"></script>--}}
-<script type="text/javascript" src="{{URL::asset('public/dashboard/simditor-2.3.6/scripts/module.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('public/dashboard/simditor-2.3.6/scripts/hotkeys.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('public/dashboard/simditor-2.3.6/scripts/uploader.js')}}"></script>
-<script type="text/javascript" src="{{URL::asset('public/dashboard/simditor-2.3.6/scripts/simditor.js')}}"></script>
-<script>
-    $(document).ready(function () {
-            var editor = new Simditor({
-                textarea: $('#editor')
-            });
-        }
-    );
-</script>
 
 {{--<script type="text/javascript">--}}
 {{--$(document).ready(function () {--}}
