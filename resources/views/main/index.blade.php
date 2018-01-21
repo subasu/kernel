@@ -22,7 +22,6 @@
                     </div>
                 </div>
                 <div class="col-sm-3 slider-left"></div>
-
             </div>
         </div>
     </div>

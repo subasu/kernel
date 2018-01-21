@@ -13,6 +13,7 @@
 
     Route::get('/', 'IndexController@home');
     Route::post('/search', 'IndexController@search');
+    Route::get('/aboutUs', 'IndexController@aboutUs');
     Route::get('productFiles', 'IndexController@productFiles');
     Route::get('products', 'IndexController@products');
     Route::get('getSubmenu/{id}', 'CommonController@getSubmenu');
@@ -114,8 +115,11 @@
             //printer route
             Route::get('connectToPrinter', 'OrderController@connectToPrinter');
             //slider
-            Route::get('addSlider', 'HomeController@addSlider');
-            Route::post('addNewSlider', 'HomeController@addNewSlider');
+            Route::get('addSlider', 'AdminController@addSlider');
+            Route::post('addNewSlider', 'AdminController@addSliderPost');
+            //addAboutUs
+            Route::get('addAboutUs', 'AdminController@addAboutUs');
+            Route::post('addAboutUsPost', 'AdminController@addAboutUsPost');
         });
         //end admin panel routes
         //user panel routes

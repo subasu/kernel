@@ -8,14 +8,14 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="املاک آنلاین خمینی شهر">
+    <meta name="description" content="فروشگاه اینترنتی">
     <meta name="keywords"
-          content="املاک آنلاین خمینی شهر،خمینی شهر،املاک آنلاین،خرید و فروش آنلاین ملک،لیست املاک خمینی شهر،املاک خمینی شهر،مشاور املاک در خمینی شهر،مشاور املاک منظریه،مشاور املاک پاسدارن،مشاور املاک هفتصد دستگاه">
-    <meta name="author" content="www.melkomalek.ir">
+          content="فروشگاه اینترنتی">
+    <meta name="author" content="">
     <title>صفحه مورد نظر یافت نشد!</title>
 
     <!-- Bootstrap core CSS -->
-
+    <link rel="stylesheet" type="text/css" href=""/>
     <link href="{{ URL::asset('public/dashboard/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <link href="{{ URL::asset('public/dashboard/fonts/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -263,24 +263,22 @@
                             <li><a><i class="fa fa-info-circle"></i>مدیریت درباره ی ما <span
                                             class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/addAboutUs')}}">درج اسلایدشو تصاویر</a>
+                                    <li><a href="{{url('admin/addAboutUs')}}">درج درباره ی ما</a>
                                     </li>
-                                    <li><a href="{{url('admin/SliderManagement')}}">ویرایش و مدیریت تصویر اسلایدشو</a>
+                                    <li><a href="{{url('admin/SliderManagement')}}">ویرایش درباره ی ما</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-map-marker"></i>مدیریت گوگل مپ<span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-map-marker"></i>مدیریت نقشه گوگل<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu" style="display: none">
-                                    <li><a href="{{url('admin/addGoogleMap')}}">درج اسلایدشو تصاویر</a>
+                                    <li><a href="{{url('admin/addGoogleMap')}}">درج نقشه گوگل</a>
                                     </li>
-                                    <li><a href="{{url('admin/GoogleMapManagement')}}">ویرایش و مدیریت تصویر اسلایدشو</a>
+                                    <li><a href="{{url('admin/GoogleMapManagement')}}">ویرایش و مدیریت نقشه گوگل</a>
                                     </li>
                                 </ul>
                             </li>
                             <li><a href="{{url('/')}}"><i class="fa fa-laptop"></i>صفحه ی اصلی سایت</a>
                             </li>
-                            {{--//End User menu--}}
-                            {{-- end user dashboard menu --}}
                             <li><a style="background-color: rgba(231, 76, 60, 0.88)" href="{{url('/logout')}}"><i
                                             class="fa fa-sign-out"></i>خروج</a>
                             </li>
@@ -518,7 +516,6 @@
 <script src="{{ URL::asset('public/dashboard/js/datatables/responsive.bootstrap.min.js')}}"></script>
 <script src="{{ URL::asset('public/dashboard/js/datatables/dataTables.scroller.min.js')}}"></script>
 <link rel="stylesheet" href="{{URL::asset('public/css/persianDatepicker-default.css')}}"/>
-
 
 {{--<script type="text/javascript">--}}
 {{--$(document).ready(function () {--}}

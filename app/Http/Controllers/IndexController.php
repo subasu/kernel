@@ -29,6 +29,13 @@ class IndexController extends Controller
             return view('layouts.userLayout');
     }
 
+    public function aboutUs()
+    {
+        $menu = $this->loadMenu();
+        $pageTitle = 'درباره ی ما';
+        return view('main.about', compact('pageTitle', 'menu'));
+    }
+
     public function search(Request $request)
     {
 //        if($request->search_type==1)
