@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Icon;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -64,5 +65,17 @@ class AdminController extends Controller
         $icons=Icon::all();
         $pageTitle = 'افزودن سرویس های سایت';
         return view('admin.addService', compact('pageTitle' , 'icons'));
+    }
+    public function addServicePost(Request $request)
+    {
+        $services = new Service();
+        $services->description = $request->description;
+        $services->title = $request->title;
+        $services->icon  = $request->icon;
+        $res = $services->save();
+        if ($res == 1)
+            return response()->json('سرویس شما با مؤفقیت ویرایش شد');
+        else
+            return response()->json('متاسفانه سرویس شما ویرایش نشد');
     }
 }
