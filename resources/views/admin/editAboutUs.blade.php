@@ -117,7 +117,8 @@
                                                 class="icon-repeat"></i></a>
                                 </div>
                             </div>
-                            <div id="editor">
+                            <div id="editor" aboutId="{{$about->id}}">
+                                {!!$about->description !!}
                             </div>
                             <textarea name="descr" id="descr" style="display:none;"></textarea>
                             <br/>
@@ -139,6 +140,7 @@
         $(document).ready(function () {
             $("#send1").click(function () {
                 var editorText = $("#editor").html();
+                var id=$("#editor").attr('aboutId');
                 console.log(editorText);
                 $.ajaxSetup({
                     headers: {
@@ -146,8 +148,8 @@
                     }
                 });
                 $.ajax({
-                    url: "{{url('admin/addAboutUsPost')}}",
-                    data: {'description': editorText},
+                    url: "{{url('admin/editAboutUsPost')}}",
+                    data: {'description': editorText,'id':id},
                     dataType: "json",
                     method: "post",
                     success: function(response) {
