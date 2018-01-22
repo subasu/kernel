@@ -33,32 +33,38 @@
                             <div class="col-md-1 col-sm-1 col-xs-1 ">
                                 <a id="addInput" class="glyphicon glyphicon-plus btn btn-success"
                                    data-toggle=""
-                                   title="افزودن تصویر"></a>
+                                   title="افزودن فیلد"></a>
                             </div>
-                            <div class="col-md-4 col-sm-6 col-xs-9 ">
+                            {{--<div class="col-md-1 col-sm-1 col-xs-1 ">--}}
+                                {{--<a id="removeInput" class="glyphicon glyphicon-minus btn btn-danger"--}}
+                                   {{--data-toggle=""--}}
+                                   {{--title="کاستن فیلد"></a>--}}
+                            {{--</div>--}}
+                            <div class="col-md-4 col-sm-6 col-xs-9 col-md-offset-1 ">
                                 <input class="form-control col-md-12 col-xs-12"
                                        type="file" name="file[]" id="pic"/>
                             </div>
-                            <div class="col-md-2 col-sm-6 col-xs-9 ">
-                                <input class="form-control col-md-12 col-xs-12"
-                                       name="alt[]" id="alt"/>
-                            </div>
-                            <label class="control-label col-md-1 col-sm-4 col-xs-3" for="file"> alt تصویر
-                                :
-                                <span class="required star"></span>
-                            </label>
-                            <div class="col-md-2 col-sm-6 col-xs-9 ">
+                            {{--<div class="col-md-2 col-sm-6 col-xs-9 ">--}}
+                                {{--<input class="form-control col-md-12 col-xs-12"--}}
+                                       {{--name="alt[]" id="alt"/>--}}
+                            {{--</div>--}}
+                            {{--<label class="control-label col-md-1 col-sm-4 col-xs-3" for="file"> alt تصویر--}}
+                                {{--:--}}
+                                {{--<span class="required star"></span>--}}
+                            {{--</label>--}}
+                            <div class="col-md-5 col-sm-6 col-xs-9 ">
                                 <input class="form-control col-md-12 col-xs-12"
                                        name="title[]" id="title"/>
                             </div>
-                            <label class="control-label col-md-1 col-sm-4 col-xs-3" for="file">title تصویر
+                            <label class="control-label col-md-1 col-sm-4 col-xs-3" for="file">عنوان تصویر
                                 :
                                 <span class="required star"></span>
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-10 ">
-                        <hr>
+                    <br/>
+                    <div class="col-md-12 ">
+                        <button type="button" class="btn btn-dark col-md-6 col-md-offset-3" style="margin-top: 3%;" id="reg"> ثبت تصویر یا تصاویر اسلایدر</button>
                     </div>
                 </div>
             </form>
@@ -135,20 +141,24 @@
                     if (counter < 10) {
                         $('#addPic').append
                         (
-                            '<div class="col-md-12 margin-1">' +
-                            '<div class="col-md-4 col-sm-6 col-xs-9 col-md-offset-1">' +
+                        '<div class="col-md-12 margin-1">' +
+                            '<div class="col-md-4 col-sm-6 col-xs-9 col-md-offset-2">' +
                             '<input class="form-control col-md-12 col-xs-12" type="file" name="file[]" id="file"/>' +
                             '</div>' +
-                            '<div class="col-md-2 col-sm-6 col-xs-9 ">' +
-                            '<input class="form-control col-md-12 col-xs-12" name="alt[]" id="alt"/>' +
-                            '</div>' +
-                            '<label class="control-label col-md-1 col-sm-4 col-xs-3" for="file"> alt تصویر:' +
-                            '<span class="required star"></span>' +
-                            '</label>'+
-                            '<div class="col-md-2 col-sm-6 col-xs-9 ">'+
+//                            '<div class="col-md-2 col-sm-6 col-xs-9 ">' +
+//                            '<input class="form-control col-md-12 col-xs-12" name="alt[]" id="alt"/>' +
+//                            '</div>' +
+//                            '<label class="control-label col-md-1 col-sm-4 col-xs-3" for="file"> alt تصویر:' +
+//                            '<span class="required star"></span>' +
+//                            '</label>'+
+//                            '<div class="col-md-1 col-sm-1 col-xs-1 ">'+
+//                            '</div>'+
+//                            '<div class="col-md-1 col-sm-1 col-xs-1 ">'+
+//                            '</div>'+
+                            '<div class="col-md-5 col-sm-6 col-xs-9">'+
                             '<input class="form-control col-md-12 col-xs-12" name="title[]" id="title"/>'+
                             '</div>'+
-                            '<label class="control-label col-md-1 col-sm-4 col-xs-3" for="file">title تصویر:'+
+                            '<label class="control-label col-md-1 col-sm-4 col-xs-3" for="file">عنوان تصویر:'+
                             '<span class="required star"></span>'+
                             '</label>'+
                         '</div>'
@@ -160,5 +170,17 @@
                     }
                 });
             });
+
+//            $('#removeInput').on('click',function(){
+//               if($('#addPic > #child ').length >1 )
+//               {
+//                   $('#addPic > #child').last().remove();
+//               }
+//
+//            });
+        </script>
+        <!-- below script is related to remove input from change  -->
+        <script>
+
         </script>
 @endsection

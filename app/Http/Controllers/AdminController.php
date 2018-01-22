@@ -15,10 +15,11 @@ class AdminController extends Controller
         return view('admin.addSlider', compact($pageTitle));
     }
 
+    //below function is related to add sliders photo
     public function addSliderPost()
     {
 
-        return response()->json('admin.addNewSlider');
+        
     }
 
     public function addAboutUs()
@@ -65,4 +66,5 @@ class AdminController extends Controller
         $pageTitle = 'افزودن سرویس های سایت';
         return view('admin.addService', compact('pageTitle' , 'icons'));
     }
+
 }
