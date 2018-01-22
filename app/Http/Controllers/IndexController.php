@@ -10,6 +10,7 @@ use App\Models\City;
 use App\Models\PaymentType;
 use App\Models\Product;
 use App\Models\Role;
+use App\Models\Service;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -96,7 +97,8 @@ class IndexController extends Controller
     {
         $menu = $this->loadMenu();
         $pageTitle = 'صفحه ی اصلی';
-        return view('main.index', compact('pageTitle', 'menu'));
+        $services=Service::all();
+        return view('main.index', compact('pageTitle', 'menu','services'));
     }
 
     //show login blade :in login blade there are 2 form for login and registeration
