@@ -13,8 +13,8 @@
           content="فروشگاه اینترنتی">
     <meta name="author" content="">
     <title>صفحه مورد نظر یافت نشد!</title>
-
-    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+<!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href=""/>
     <link href="{{ URL::asset('public/dashboard/css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -31,7 +31,8 @@
     <link href="{{ URL::asset('public/dashboard/css/floatexamples.css')}}" rel="stylesheet" type="text/css"/>
 
     <script src="{{ URL::asset('public/js/jquery.min.js')}}"></script>
-
+{{--<link href="fontawesome-iconpicker.min.css" rel="stylesheet">
+--}}
     <!--[if lt IE 9]>
     <script src="../assets/js/ie8-responsive-file-warning.js"></script>
     <![endif]-->
@@ -41,14 +42,12 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="{{ URL::asset('public/dashboard/css/iconPicker/fontawesome-iconpicker.min.css')}}" rel="stylesheet">
     <style> body {
             font-family: "Yekan" !important;
         }</style>
 </head>
-
-
 <body class="nav-md">
-
 <div class="container body">
     <div class="main_container">
         <!-- page content -->
@@ -570,12 +569,19 @@
 <script type="text/javascript" src="{{ URL::asset('public/dashboard/js/notify/pnotify.core.js')}}"></script>
 <script type="text/javascript" src="{{ URL::asset('public/dashboard/js/notify/pnotify.buttons.js')}}"></script>
 <script type="text/javascript" src="{{ URL::asset('public/dashboard/js/notify/pnotify.nonblock.js')}}"></script>
-
-
 <!-- richtext editor -->
 <script src="{{URL::asset('public/dashboard/js/editor/bootstrap-wysiwyg.js')}}"></script>
 <script src="{{URL::asset('public/dashboard/js/editor/external/jquery.hotkeys.js')}}"></script>
 <script src="{{URL::asset('public/dashboard/js/editor/external/google-code-prettify/prettify.js')}}"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>--}}
+
+
+{{--icon picker plugin--}}
+<script src="public/dashboard/css/iconPicker/fontawesome-iconpicker.js"></script>
+<link href="{{ URL::asset('fontawesome-iconpicker.min.css')}}" rel="stylesheet">
 
 
 <!-- editor -->

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\Icon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -60,7 +61,8 @@ class AdminController extends Controller
     }
     public function addService()
     {
+        $icons=Icon::all();
         $pageTitle = 'افزودن سرویس های سایت';
-        return view('admin.addService', compact($pageTitle));
+        return view('admin.addService', compact('pageTitle' , 'icons'));
     }
 }
