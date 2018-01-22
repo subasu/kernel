@@ -5,166 +5,105 @@
             font-size: 15px;
         }
     </style>
-    <div class="clearfix"></div>
-    <div class="col-md-12 col-sm-6 col-xs-12">
-        <div class="col-md-3 col-sm-3 col-xs-12"></div>
-        <div class="col-md-12 col-sm-6 col-xs-12 ">
-            <div class="x_content">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>ثبت درباره ی ما</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                       aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Settings 1</a>
-                                        </li>
-                                        <li><a href="#">Settings 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <div id="alerts"></div>
-                            <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor">
-                                <div class="btn-group">
-                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i
-                                                class="fa icon-font"></i><b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                    </ul>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2> فرم ایجاد کاربر
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                {{-- table --}}
+                <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
+                    <div class="x_content">
+                        <form class="form-horizontal form-label-left" id="user-send-form" method="POST"
+                              style="direction: rtl !important;">
+                            {{ csrf_field() }}
+                            <div class="item form-group">
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                    <select class="my col-md-7 col-xs-12"
+                                            name="title"  style="font-family: FontAwesome;">
+                                        @foreach($icons as $icon)
+                                            <option data-icon="fa {{$icon->icon}}">{{$icon->icon}}</option>
+                                        @endforeach
+                                    </select>
+                                    div>
+                                    <label class="settinglabel">Icon Class</label>
+                                    <input type="text" class="icon-class-input" value="fa fa-music" />
+                                    <button type="button" class="btn btn-primary picker-button">Pick an Icon</button>
+                                    <span class="demo-icon"></span>
                                 </div>
-                                <div class="btn-group">
-                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i
-                                                class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a data-edit="fontSize 5">
-                                                <p style="font-size:17px">خیلی بزرگ</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-edit="fontSize 3">
-                                                <p style="font-size:14px">عادی</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a data-edit="fontSize 1">
-                                                <p style="font-size:11px">کوچک</p>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <div>
+                                    <label class="settinglabel">Icon Class</label>
+                                    <input type="text" class="icon-class-input" value="fa fa-search" />
+                                    <button type="button" class="btn btn-primary picker-button">Pick an Icon</button>
+                                    <span class="demo-icon"></span>
                                 </div>
-                                <div class="btn-group">
-                                    <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i
-                                                class="icon-bold"></i></a>
-                                    <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i
-                                                class="icon-italic"></i></a>
-                                    <a class="btn" data-edit="strikethrough" title="Strikethrough"><i
-                                                class="icon-strikethrough"></i></a>
-                                    <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i
-                                                class="icon-underline"></i></a>
-                                </div>
-                                <div class="btn-group">
-                                    <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i
-                                                class="icon-list-ul"></i></a>
-                                    <a class="btn" data-edit="insertorderedlist" title="Number list"><i
-                                                class="icon-list-ol"></i></a>
-                                    <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i
-                                                class="icon-indent-left"></i></a>
-                                    <a class="btn" data-edit="indent" title="Indent (Tab)"><i
-                                                class="icon-indent-right"></i></a>
-                                </div>
-                                <div class="btn-group">
-                                    <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i
-                                                class="icon-align-left"></i></a>
-                                    <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i
-                                                class="icon-align-center"></i></a>
-                                    <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i
-                                                class="icon-align-right"></i></a>
-                                    <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i
-                                                class="icon-align-justify"></i></a>
-                                </div>
-                                <div class="btn-group">
-                                    <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i
-                                                class="icon-link"></i></a>
-                                    <div class="dropdown-menu input-append">
-                                        <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
-                                        <button class="btn" type="button">Add</button>
+
+                                <div id="iconPicker" class="modal fade">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">Icon Picker</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div>
+                                                    <ul class="icon-picker-list">
+                                                        @foreach($icons as $item)
+                                                        <li>
+                                                            <a data-class="{{$item->icon}}" data-index="{{$item->icon}}">
+                                                                <span class="{{$item->icon}}"></span>
+                                                                <span class="name-class">{{$item->icon}}</span>
+                                                            </a>
+                                                        </li>
+                                                            @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" id="change-icon" class="btn btn-success">
+                                                    <span class="fa fa-check-circle-o"></span>
+                                                    Use Selected Icon
+                                                </button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i
-                                                class="icon-cut"></i></a>
-
                                 </div>
-
-                                <div class="btn-group">
-                                    <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i
-                                                class="icon-picture"></i></a>
-                                    <input type="file" data-role="magic-overlay" data-target="#pictureBtn"
-                                           data-edit="insertImage"/>
                                 </div>
-                                <div class="btn-group">
-                                    <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i
-                                                class="icon-undo"></i></a>
-                                    <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i
-                                                class="icon-repeat"></i></a>
-                                </div>
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="title"> آیکن : <span
+                                            class="required star" title="پر کردن این فیلد الزامی است">*</span>
+                                </label>
                             </div>
-                            <div id="editor">
-                            </div>
-                            <textarea name="descr" id="descr" style="display:none;"></textarea>
-                            <br/>
-                            <div class="ln_solid"></div>
-                            <div class="form-group">
-                                <div class="col-md-10 col-md-offset-2">
-                                    <button id="send1" type="button" class="col-md-9 btn btn-primary">ثبت نهایی
-                                    </button>
+                            <div class="item form-group">
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                    <input id="name" class="form-control col-md-7 col-xs-12" name="name" placeholder=""
+                                           required="required" type="text">
                                 </div>
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="name"> عنوان : <span
+                                            class="required star" title="پر کردن این فیلد الزامی است">*</span>
+                                </label>
                             </div>
-                        </div>
+                            <div class="item form-group">
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                    <textarea id="family" class="form-control col-md-7 col-xs-12" name="family"
+                                              placeholder="" required="required" type="text"></textarea>
+                                </div>
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="family"> توضیحات :
+                                    <span class="required star" title="پر کردن این فیلد الزامی است">*</span>
+                                </label>
+                            </div>
+                        </form>
                     </div>
                 </div>
+                <div class="col-md-3 col-sm-3 col-xs-12"></div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-3 col-xs-12"></div>
-    </div>
-    <script>
-        $(document).ready(function () {
-            $("#send1").click(function () {
-                var editorText = $("#editor").html();
-                console.log(editorText);
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    url: "{{url('admin/addAboutUsPost')}}",
-                    data: {'description': editorText},
-                    dataType: "json",
-                    method: "post",
-                    success: function(response) {
-                        swal({
-                            title: "",
-                            text: response,
-                            type: "info"
-                        });
-                    }, error: function(response) {
-                        swal({
-                            title: "",
-                            text: response,
-                            type: "warning"
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 @endsection
