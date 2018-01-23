@@ -24,8 +24,8 @@
     <div class="clearfix"></div>
     <div class="row">
         <div class="container">
-            <form class="form-horizontal form-label-left" id="productForm" enctype="multipart/form-data"
-                  style="direction: rtl !important;">
+            <form class="form-horizontal form-label-left" id="sliderForm" enctype="multipart/form-data" style="direction: rtl !important;">
+
                 {{ csrf_field() }}
                 <div class="container">
                     <div id="addPic">
@@ -35,25 +35,15 @@
                                    data-toggle=""
                                    title="افزودن فیلد"></a>
                             </div>
-                            {{--<div class="col-md-1 col-sm-1 col-xs-1 ">--}}
-                                {{--<a id="removeInput" class="glyphicon glyphicon-minus btn btn-danger"--}}
-                                   {{--data-toggle=""--}}
-                                   {{--title="کاستن فیلد"></a>--}}
+                            {{--<div class="col-md-1 col-sm-1 col-xs-1">--}}
+                                {{--<a id="removeInput" class="glyphicon glyphicon-minus btn btn-danger" data-toggle="" title="کاستن فیلد"></a>--}}
                             {{--</div>--}}
                             <div class="col-md-4 col-sm-6 col-xs-9 col-md-offset-1 ">
-                                <input class="form-control col-md-12 col-xs-12"
+                                <input class="form-control col-md-12 col-xs-12 required"
                                        type="file" name="file[]" id="pic"/>
                             </div>
-                            {{--<div class="col-md-2 col-sm-6 col-xs-9 ">--}}
-                                {{--<input class="form-control col-md-12 col-xs-12"--}}
-                                       {{--name="alt[]" id="alt"/>--}}
-                            {{--</div>--}}
-                            {{--<label class="control-label col-md-1 col-sm-4 col-xs-3" for="file"> alt تصویر--}}
-                                {{--:--}}
-                                {{--<span class="required star"></span>--}}
-                            {{--</label>--}}
                             <div class="col-md-5 col-sm-6 col-xs-9 ">
-                                <input class="form-control col-md-12 col-xs-12"
+                                <input class="form-control col-md-12 col-xs-12 required"
                                        name="title[]" id="title"/>
                             </div>
                             <label class="control-label col-md-1 col-sm-4 col-xs-3" for="file">عنوان تصویر
@@ -64,74 +54,12 @@
                     </div>
                     <br/>
                     <div class="col-md-12 ">
-                        <button type="button" class="btn btn-dark col-md-6 col-md-offset-3" style="margin-top: 3%;" id="reg"> ثبت تصویر یا تصاویر اسلایدر</button>
+                        <button type="button" class="btn btn-dark col-md-6 col-md-offset-3" style="margin-top: 3%; margin-bottom: 3%;" id="reg"> ثبت تصویر یا تصاویر اسلایدر</button>
                     </div>
                 </div>
             </form>
         </div>
-        <!-- Include SmartWizard JavaScript source -->
-        <script type="text/javascript"
-                src="{{url('public/dashboard/stepWizard/js/jquery.smartWizard.min.js')}}"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#productForm").submit(function (e) {
-                    e.preventDefault();
-                });
-                // Toolbar extra buttons
-                var btnFinish = $('<button></button>').text('ثبت گالری تصاویر')
-                    .addClass('btn btn-info')
-                    .on('click', function () {
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                            }
-                        });
-                        var formData = new FormData($("#productForm")[0])
-                        $.ajax({
-                            url: '{{url('admin/addNewSlider')}}',
-                            type: 'post',
-                            cache: false,
-                            data: formData,
-                            dataType: 'json',
-                            contentType: false,
-                            processData: false,
-                            success: function (data) {
-                                console.log(data);
-                                var x = '';
-                                $.each(data, function (key, val) {
-                                    x += val + '\n'
-                                });
-                                console.log(data.responseText)
-                                swal({
-                                    title: '',
-                                    text: x,
-                                    type: "info",
-                                    confirmButtonText: "بستن"
-                                });
-                                if (data.data == 'محصول شما با مؤفقیت درج شد') {
-                                    setTimeout(function () {
-                                        window.location.reload(true);
-                                    }, 3000);
-                                }
 
-
-                            },
-                            error: function (xhr) {
-                                var x;
-                                $.each(xhr, function (key, val) {
-                                    x += val + '\n'
-                                });
-                                swal({
-                                    title: '',
-                                    text: xhr,
-                                    type: "info",
-                                })
-                            }//error
-                        })//ajax
-                    });//onclick
-
-            });
-        </script>
         <!-- send product form -->
         <script>
             $(document).ready(function () {
@@ -143,44 +71,116 @@
                         (
                         '<div class="col-md-12 margin-1">' +
                             '<div class="col-md-4 col-sm-6 col-xs-9 col-md-offset-2">' +
-                            '<input class="form-control col-md-12 col-xs-12" type="file" name="file[]" id="file"/>' +
+                            '<input class="form-control col-md-12 col-xs-12 required" type="file" name="file[]" id="file"/>' +
                             '</div>' +
-//                            '<div class="col-md-2 col-sm-6 col-xs-9 ">' +
-//                            '<input class="form-control col-md-12 col-xs-12" name="alt[]" id="alt"/>' +
-//                            '</div>' +
-//                            '<label class="control-label col-md-1 col-sm-4 col-xs-3" for="file"> alt تصویر:' +
-//                            '<span class="required star"></span>' +
-//                            '</label>'+
-//                            '<div class="col-md-1 col-sm-1 col-xs-1 ">'+
-//                            '</div>'+
-//                            '<div class="col-md-1 col-sm-1 col-xs-1 ">'+
-//                            '</div>'+
                             '<div class="col-md-5 col-sm-6 col-xs-9">'+
-                            '<input class="form-control col-md-12 col-xs-12" name="title[]" id="title"/>'+
+                            '<input class="form-control col-md-12 col-xs-12 required" name="title[]" id="title"/>'+
                             '</div>'+
                             '<label class="control-label col-md-1 col-sm-4 col-xs-3" for="file">عنوان تصویر:'+
                             '<span class="required star"></span>'+
                             '</label>'+
                         '</div>'
-                    )
-                        ;
+                    );
                         counter++;
                     }
-                    else {
-                    }
+                    else
+                        {
+                            swal
+                            ({
+                                title: '',
+                                text: 'نمی توانید بیش از 10 تصویر برای اسلایدرها در نظر بگیرید',
+                                type:'warning',
+                                confirmButtonText: "بستن"
+                            });
+                        }
                 });
             });
+        </script>
 
-//            $('#removeInput').on('click',function(){
-//               if($('#addPic > #child ').length >1 )
-//               {
-//                   $('#addPic > #child').last().remove();
-//               }
-//
-//            });
+        <script>
+            $(document).on('click','#reg',function () {
+                var data = new FormData($('#sliderForm')[0]);
+                    $.ajax
+                    ({
+                        cache       : false,
+                        url         : "{{url('admin/addNewSlider')}}",
+                        type        : "post",
+                        dataType    : "json",
+                        contentType : false,
+                        processData : false,
+                        data        : data,
+                        beforeSend  : function()
+                        {
+                            var counter = 0;
+                            $(".required").each(function() {
+                                    if ($(this).val() == "") {
+                                        $(this).css("border-color" , "red");
+                                        counter++;
+                                    }
+                                });
+                                if(counter > 0)
+                                {
+                                    swal
+                                    ({
+                                        title: '',
+                                        text: 'لطفا تمامی فیلدها را پر نمایید سپس دکمه ثبت تصاویر را بزنید',
+                                        type:'warning',
+                                        confirmButtonText: "بستن"
+                                    });
+                                    return false;
+                                }
+                        },
+                        success    : function(response)
+                        {
+                                if(response.code == 'status')
+                                {
+                                    swal
+                                    ({
+                                        title: '',
+                                        text: response.message,
+                                        type:'success',
+                                        confirmButtonText: "بستن"
+                                    });
+                                }else
+                                    {
+                                        swal
+                                        ({
+                                            title: '',
+                                            text: response.message,
+                                            type:'warning',
+                                            confirmButtonText: "بستن"
+                                        });
+                                    }
+                        },
+                        error      : function(error)
+                        {
+                          console.log(error);
+                            swal
+                            ({
+                                title: '',
+                                text: 'خطایی رخ داده است لطفا با بخش پشتیبانی تماس بگیرید',
+                                type:'warning',
+                                confirmButtonText: "بستن"
+                            });
+                        }
+                    });
+            })
         </script>
         <!-- below script is related to remove input from change  -->
-        <script>
+        {{--<script>--}}
 
-        </script>
+            {{--$(function () {--}}
+                {{--$(document).on('click','#removeInput',function () {--}}
+                    {{--removeFromChange();--}}
+                {{--});--}}
+                {{--function removeFromChange() {--}}
+                    {{--if ($('#addPic > #child').length >= 2 )--}}
+                    {{--{--}}
+                        {{--$('#addPic > #child').last().remove();--}}
+                    {{--};--}}
+
+                {{--}--}}
+            {{--});--}}
+
+        {{--</script>--}}
 @endsection

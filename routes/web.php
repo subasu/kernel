@@ -116,7 +116,7 @@
             Route::get('connectToPrinter', 'OrderController@connectToPrinter');
             //slider
             Route::get('addSlider', 'AdminController@addSlider');
-            Route::post('addNewSlider', 'AdminController@addSliderPost');
+            Route::post('addNewSlider', 'AdminController@addNewSlider');
             //addAboutUs
             Route::get('addAboutUs', 'AdminController@addAboutUs');
             Route::post('addAboutUsPost', 'AdminController@addAboutUsPost');

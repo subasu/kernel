@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\SelfClasses\CheckFiles;
 use App\Models\About;
 use App\Models\Icon;
 use App\Models\Service;
@@ -17,10 +18,14 @@ class AdminController extends Controller
     }
 
     //below function is related to add sliders photo
-    public function addSliderPost()
+    public function addNewSlider(Request $request)
     {
-
-
+        $checkFiles = new CheckFiles($request);
+        if(is_bool($checkFiles))
+        {
+            {
+                return response()->json(['message' => $checkFiles , 'code' => 'error']);
+            }
     }
 
     public function addAboutUs()
