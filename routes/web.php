@@ -125,7 +125,8 @@
             //addService
             Route::get('addService', 'AdminController@addService');
             Route::post('addServicePost', 'AdminController@addServicePost');
-            Route::get('editService', 'AdminController@editService');
+            Route::get('ServicesManagement', 'AdminController@ServicesManagement');
+            Route::get('editService/{id}', 'AdminController@editService');
             Route::post('editServicePost', 'AdminController@editServicePost');
         });
         //end admin panel routes

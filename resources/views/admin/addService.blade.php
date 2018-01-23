@@ -9,7 +9,7 @@
         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2> فرم ایجاد کاربر
+                    <h2> فرم ثبت سرویس
                     </h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -26,12 +26,14 @@
                             {{ csrf_field() }}
                             <div class="item form-group">
                                 <div class="col-md-8 col-sm-6 col-xs-12">
-                                    <select class="col-md-7 col-xs-12 form-control"
-                                            name="icon" style="font-family: FontAwesome;">
-                                        @foreach($icons as $icon)
-                                            <option value="fa {{$icon->icon}}">{{$icon->icon}}</option>
-                                        @endforeach
-                                    </select>
+                                    <button id="iconPicker" class="btn btn-default" data-placement="left"
+                                            role="iconpicker" style="margin: 0 !important;"></button>
+                                    <div class="col-md-9 col-sm-6 col-xs-12" style="padding: 0 !important;">
+                                        <input id="icon-name-hidden" class="form-control" name="icon"
+                                               required="required" type="hidden">
+                                        <input id="icon-name" class="form-control"
+                                               required="required" type="text">
+                                    </div>
                                 </div>
                                 <label class="control-label col-md-4 col-sm-4 col-xs-12" for="icon"> آیکن : <span
                                             class="required star" title="پر کردن این فیلد الزامی است">*</span>
@@ -57,7 +59,7 @@
                                 </label>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-10 col-md-offset-2">
+                                <div class="col-md-10">
                                     <button id="sendInfo" type="button" class="col-md-9 btn btn-primary">ثبت نهایی
                                     </button>
                                 </div>
@@ -70,6 +72,11 @@
         </div>
         <script>
             $(document).ready(function () {
+                //when icon selector change the name of icon show in input text and input hidden
+                $('#iconPicker').on('change', function (e) {
+                    $("#icon-name").val(e.icon);
+                    $("#icon-name-hidden").val(e.icon);
+                });
                 $("#sendInfo").click(function () {
                     var formData = new FormData($('#serviceForm')[0]);
                     console.log(formData);

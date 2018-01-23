@@ -29,43 +29,47 @@
     <!-- servives -->
     <div class="container">
         <div class="service text-right">
-            <div class="col-xs-6 col-sm-3 service-item">
+            <?php $x=floor(12/count($services)) ?>
+            @foreach($services as $service)
+            <div class="col-xs-6 col-md-{{$x}} service-item">
                 <div class="icon">
-                    <img alt="services" src="public/main/assets/data/s1.png"/>
+                    <i class="glyphicon {{$service->icon}} fa-3x"></i>
                 </div>
                 <div class="info">
-                    <a href="#"><h3>شعار چهارم</h3></a>
-                    <span>On order over $200</span>
+                    <a href="#"><h3>{{$service->title}}</h3></a>
+                    <span>{!! $service->description!!}</span>
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-3 service-item">
-                <div class="icon">
-                    <img alt="services" src="public/main/assets/data/s2.png"/>
-                </div>
-                <div class="info">
-                    <a href="#"><h3>شعار سوم</h3></a>
-                    <span>Moneyback guarantee</span>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-3 service-item">
-                <div class="icon">
-                    <img alt="services" src="public/main/assets/data/s3.png"/>
-                </div>
+            @endforeach
 
-                <div class="info">
-                    <a href="#"><h3>شعار دوم</h3></a>
-                    <span>Online consultations</span>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-3 service-item">
-                <div class="icon">
-                    <img alt="services" src="public/main/assets/data/s4.png"/>
-                </div>
-                <div class="info">
-                    <a href="#"><h3>شعار اول</h3></a>
-                    <span>Safe Shopping Guarantee</span>
-                </div>
-            </div>
+            {{--<div class="col-xs-6 col-sm-3 service-item">--}}
+                {{--<div class="icon">--}}
+                    {{--<img alt="services" src="public/main/assets/data/s2.png"/>--}}
+                {{--</div>--}}
+                {{--<div class="info">--}}
+                    {{--<a href="#"><h3>شعار سوم</h3></a>--}}
+                    {{--<span>Moneyback guarantee</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="col-xs-6 col-sm-3 service-item">--}}
+                {{--<div class="icon">--}}
+                    {{--<img alt="services" src="public/main/assets/data/s3.png"/>--}}
+                {{--</div>--}}
+
+                {{--<div class="info">--}}
+                    {{--<a href="#"><h3>شعار دوم</h3></a>--}}
+                    {{--<span>Online consultations</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="col-xs-6 col-sm-3 service-item">--}}
+                {{--<div class="icon">--}}
+                    {{--<img alt="services" src="public/main/assets/data/s4.png"/>--}}
+                {{--</div>--}}
+                {{--<div class="info">--}}
+                    {{--<a href="#"><h3>شعار اول</h3></a>--}}
+                    {{--<span>Safe Shopping Guarantee</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
     </div>
     <!-- end services -->
