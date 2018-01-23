@@ -48,7 +48,7 @@
                             </div>
                             <label class="control-label col-md-1 col-sm-4 col-xs-3" for="file">عنوان تصویر
                                 :
-                                <span class="required star"></span>
+                                <span class="star"></span>
                             </label>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                             '<input class="form-control col-md-12 col-xs-12 required" name="title[]" id="title"/>'+
                             '</div>'+
                             '<label class="control-label col-md-1 col-sm-4 col-xs-3" for="file">عنوان تصویر:'+
-                            '<span class="required star"></span>'+
+                            '<span class="star"></span>'+
                             '</label>'+
                         '</div>'
                     );
@@ -132,7 +132,7 @@
                         },
                         success    : function(response)
                         {
-                                if(response.code == 'status')
+                                if(response.code == 'success')
                                 {
                                     swal
                                     ({
@@ -141,6 +141,7 @@
                                         type:'success',
                                         confirmButtonText: "بستن"
                                     });
+                                    setTimeout(function(){window.location.reload(true);},3000);
                                 }else
                                     {
                                         swal
