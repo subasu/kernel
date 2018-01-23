@@ -20,7 +20,7 @@ class AdminController extends Controller
     public function addSliderPost()
     {
 
-        
+
     }
 
     public function addAboutUs()
@@ -28,11 +28,12 @@ class AdminController extends Controller
         $pageTitle = 'افزودن درباره ی ما';
         return view('admin.addAboutUs', compact($pageTitle));
     }
+
     public function editAboutUs()
     {
         $pageTitle = 'ویرایش درباره ی ما';
         $about = About::latest()->first();
-        return view('admin.editAboutUs', compact('pageTitle','about'));
+        return view('admin.editAboutUs', compact('pageTitle', 'about'));
     }
 
     public function addAboutUsPost(Request $request)
@@ -48,6 +49,7 @@ class AdminController extends Controller
         else
             return response()->json('متاسفانه متن شما ثبت نشد');
     }
+
     public function editAboutUsPost(Request $request)
     {
         $abouts = count(About::all());
@@ -61,24 +63,41 @@ class AdminController extends Controller
         else
             return response()->json('متاسفانه متن شما ویرایش نشد');
     }
+
     public function addService()
     {
-        $icons=Icon::all();
+        $icons = Icon::all();
         $pageTitle = 'افزودن سرویس های سایت';
-        return view('admin.addService', compact('pageTitle' , 'icons'));
+        return view('admin.addService', compact('pageTitle', 'icons'));
     }
 
     public function addServicePost(Request $request)
     {
+        if(count(Service::all())>=6)
+        {
+            return response()->json('تعداد سرویس های ثبت شده ی شما بیش از 6 سرویس نمی تواند باشد');
+        }
         $services = new Service();
         $services->description = $request->description;
         $services->title = $request->title;
-        $services->icon  = $request->icon;
+        $services->icon = $request->icon;
         $res = $services->save();
         if ($res == 1)
-            return response()->json('سرویس شما با مؤفقیت ویرایش شد');
+            return response()->json('سرویس شما با مؤفقیت ثبت شد');
         else
-            return response()->json('متاسفانه سرویس شما ویرایش نشد');
+            return response()->json('متاسفانه سرویس شما ثبت نشد');
     }
 
+    public function editService($id)
+    {
+        $service = Service::find($id);
+        return view('admin.editService', compact('service'));
+    }
+
+    public function ServicesManagement()
+    {
+        $services = Service::all();
+        $pageTitle = 'ویرایش سرویس های سایت';
+        return view('admin.ServicesManagement', compact('pageTitle', 'services'));
+    }
 }

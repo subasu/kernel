@@ -29,14 +29,15 @@
     <!-- servives -->
     <div class="container">
         <div class="service text-right">
+            <?php $x=floor(12/count($services)) ?>
             @foreach($services as $service)
-            <div class="col-xs-6 col-sm-3 service-item">
+            <div class="col-xs-6 col-md-{{$x}} service-item">
                 <div class="icon">
-                    <i class="fa {{$service->icon}} fa-4x"></i>
+                    <i class="glyphicon {{$service->icon}} fa-3x"></i>
                 </div>
                 <div class="info">
                     <a href="#"><h3>{{$service->title}}</h3></a>
-                    <span>{{$service->description}}</span>
+                    <span>{!! $service->description!!}</span>
                 </div>
             </div>
             @endforeach

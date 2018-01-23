@@ -17,12 +17,11 @@
 <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href=""/>
     <link href="{{ URL::asset('public/dashboard/css/bootstrap.min.css')}}" rel="stylesheet">
-
+    <link href="{{ URL::asset('public/dashboard/iconPicker/css/bootstrap-iconpicker.min.css')}}" rel="stylesheet" />
     <link href="{{ URL::asset('public/dashboard/fonts/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{ URL::asset('public/dashboard/css/animate.min.css')}}" rel="stylesheet">
     {{--My Style Code--}}
     <link href="{{ URL::asset('public/dashboard/css/mystyle.css')}}" rel="stylesheet">
-
     <!-- Custom styling plus plugins -->
     <link href="{{ URL::asset('public/dashboard/css/custom.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css"
@@ -257,7 +256,7 @@
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/addService')}}">درج سرویس های سایت</a>
                                     </li>
-                                    <li><a href="{{url('admin/SliderManagement')}}">ویرایش سرویس های سایت</a>
+                                    <li><a href="{{url('admin/ServicesManagement')}}">ویرایش سرویس های سایت</a>
                                     </li>
                                 </ul>
                             </li>
@@ -579,13 +578,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>--}}
-
-
+<!-- Bootstrap-Iconpicker Iconset -->
+<script type="text/javascript" src="{{URL::asset('public/dashboard/iconPicker/js/bootstrap-iconpicker-iconset-all.min.js')}}"></script>
+<!-- Bootstrap-Iconpicker -->
+<script type="text/javascript" src="{{URL::asset('public/dashboard/iconPicker/js/bootstrap-iconpicker.min.js')}}"></script>
 {{--icon picker plugin--}}
-<script src="fontawesome-iconpicker.js"></script>
-
 <!-- editor -->
 <script>
+    $('#convert').iconpicker({
+        iconset: 'fontawesome',
+        icon: 'fa-key',
+        rows: 5,
+        cols: 5,
+        placement: 'top',
+    });
     $(document).ready(function () {
         $('.xcxc').click(function () {
             $('#descr').val($('#editor').html());
