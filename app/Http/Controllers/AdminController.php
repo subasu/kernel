@@ -21,11 +21,10 @@ class AdminController extends Controller
     public function addNewSlider(Request $request)
     {
         $checkFiles = new CheckFiles($request);
-        if(is_bool($checkFiles))
-        {
-            {
-                return response()->json(['message' => $checkFiles , 'code' => 'error']);
-            }
+        if (is_bool($checkFiles)) {
+            return response()->json(['message' => $checkFiles, 'code' => 'error']);
+        }
+
     }
 
     public function addAboutUs()
@@ -78,8 +77,7 @@ class AdminController extends Controller
 
     public function addServicePost(Request $request)
     {
-        if(count(Service::all())>=6)
-        {
+        if (count(Service::all()) >= 6) {
             return response()->json('تعداد سرویس های ثبت شده ی شما بیش از 6 سرویس نمی تواند باشد');
         }
         $services = new Service();
