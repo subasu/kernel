@@ -12,16 +12,23 @@ use Illuminate\Support\Facades\Validator;
 
 class CheckFiles
 {
-    public function checkCategoryFiles($request)
+    public function checkCategoryFiles($request,$type)
     {
+        if($type=='slider')
+        {
+            $imageWidth=1200;
+            $imageHeight=800;
+        }
+        else
+        {
+            $imageWidth=200;
+            $imageHeight=50;
+        }
         if(count($request->file) > 0)
         {
             $allowedExtensions = array('png','jpg');
             $allowedSize       = 10000000;
             $count             = count($request->file);
-//            return Validator::make($request->file, [
-//                'file' => 'image|mimes:jpeg|max:2048',
-//            ]);
             $sentExtensions    = '';
             $sentSizes         = '';
             $notAllowedSize    = 0;
@@ -42,7 +49,7 @@ class CheckFiles
             if($extensionArrayDiff == null)
             {
                 $image = getimagesize($request->file[0]);
-                if($image[0] >= 1200 && $image[1] >= 800)
+                if($image[0] >= $imageWidth && $image[1] >= $imageHeight)
                 {
                     $sentSizes = substr($sentSizes,1);
                     $sentSizesArray = explode('-',$sentSizes);
@@ -64,7 +71,7 @@ class CheckFiles
                     }
                 }else
                     {
-                        return( ' کیفیت تصویر یا تصاویر انتخاب شده مناسب نیست ، لطفا تصاویر  با کیفیت 800*1200  یا بالاتر انتخاب نمایید');
+                        return( ' کیفیت تصویر یا تصاویر انتخاب شده مناسب نیست ، لطفا تصاویر  با کیفیت'.$imageWidth .'*'.$imageHeight.'بالاتر انتخاب نمایید');
                     }
             }
             else
