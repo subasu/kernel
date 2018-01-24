@@ -117,6 +117,11 @@
             //slider
             Route::get('addSlider', 'AdminController@addSlider');
             Route::post('addNewSlider', 'AdminController@addNewSlider');
+            Route::get('sliderManagement','AdminController@sliderManagement');
+            Route::get('editSlider/{id}','AdminController@editSlider');
+            Route::post('editSliderPicture', 'AdminController@editSliderPicture');//this route is related to edit sliders picture
+            Route::post('editSliderTitle', 'AdminController@editSliderTitle');//this route is related ti edit sliders title
+            Route::post('enableOrDisableSlider', 'AdminController@enableOrDisableSlider');//this route is related to make sliders enable or disable
             //addAboutUs
             Route::get('addAboutUs', 'AdminController@addAboutUs');
             Route::post('addAboutUsPost', 'AdminController@addAboutUsPost');

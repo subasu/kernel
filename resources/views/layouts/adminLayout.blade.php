@@ -243,7 +243,7 @@
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/addSlider')}}">درج اسلایدشو تصاویر</a>
                                     </li>
-                                    <li><a href="{{url('admin/SliderManagement')}}">ویرایش و مدیریت تصویر اسلایدشو</a>
+                                    <li><a href="{{url('admin/sliderManagement')}}">ویرایش و مدیریت تصویر اسلایدشو</a>
                                     </li>
                                     <li><a href="{{url('admin/addLogo')}}">درج لوگو سایت تصاویر</a>
                                     </li>
