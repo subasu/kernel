@@ -21,6 +21,7 @@ class AdminController extends Controller
     //below function is related to add sliders photo
     public function addNewSlider(Request $request)
     {
+<<<<<<< HEAD
         $checkFiles = new CheckFiles();
         $result = $checkFiles->checkCategoryFiles($request);
         if (is_bool($result)) {
@@ -34,6 +35,13 @@ class AdminController extends Controller
         } else {
             return response()->json(['message' => $checkFiles, 'code' => 'error']);
         }
+=======
+        $checkFiles = new CheckFiles($request);
+        if (is_bool($checkFiles)) {
+            return response()->json(['message' => $checkFiles, 'code' => 'error']);
+        }
+
+>>>>>>> 1a839d541736a1344fb1a7a78fb1e26297a3ac5c
     }
 
     public function addAboutUs()
@@ -86,8 +94,7 @@ class AdminController extends Controller
 
     public function addServicePost(Request $request)
     {
-        if(count(Service::all())>=6)
-        {
+        if (count(Service::all()) >= 6) {
             return response()->json('تعداد سرویس های ثبت شده ی شما بیش از 6 سرویس نمی تواند باشد');
         }
         $services = new Service();
