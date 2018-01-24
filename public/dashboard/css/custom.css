@@ -5429,3 +5429,6 @@ ul.notifications {
 .copyright-info {
   padding: 8px 0;
 }
+.table-head > th{
+  text-align:  center !important;
+}

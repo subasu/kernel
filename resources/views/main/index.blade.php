@@ -27,9 +27,8 @@
     </div>
     <!-- END Home slideder-->
     <!-- servives -->
-    <div class="container">
+    @if(count($services)>0)<div class="container">
         <div class="service text-right">
-
             @foreach($services as $service)
                 <?php $x=floor(12/count($services)) ?>
             <div class="col-xs-6 col-md-{{$x}} service-item">
@@ -74,7 +73,7 @@
         </div>
     </div>
     <!-- end services -->
-
+    @endif
     <div class="page-top">
         <div class="container">
             <div class="row">
