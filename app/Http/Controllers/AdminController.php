@@ -6,10 +6,12 @@ use App\Http\SelfClasses\AddNewSlider;
 use App\Http\SelfClasses\CheckFiles;
 use App\Models\About;
 use App\Models\Icon;
+use App\Models\Logo;
 use App\Models\Service;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Psy\Test\Exception\RuntimeExceptionTest;
 
 class AdminController extends Controller
 {
@@ -112,19 +114,18 @@ class AdminController extends Controller
 //below function is related to edit service title,description and icon
     public function editServicePost(Request $request)
     {
-        $update = Service::find($request->id);
-        if (!empty(trim($request->title)))
-            $update->title = trim($request->title);
-        if (!empty(trim($request->description)))
-            $update->description = trim($request->description);
-        if (!empty(trim($request->icon)))
-            $update->icon = trim($request->icon);
-        $update->save;
+        if (!(empty($request->icon)))
+            $update = Service::where('id', '=', $request->id)
+                ->update(['title' => trim($request->title), 'description' => trim($request->description), 'icon' => trim($request->icon)]);
+        else
+            $update = Service::where('id', '=', $request->id)
+                ->update(['title' => trim($request->title), 'description' => trim($request->description)]);
         if ($update) {
             return response()->json(['message' => 'ویرایش با موفقیت انجام شد', 'code' => '1']);
         } else {
             return response()->json(['message' => '  خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید ']);
         }
+        $update = Service::find($request->id);
     }
 
     public function ServicesManagement()
@@ -134,20 +135,49 @@ class AdminController extends Controller
         return view('admin.ServicesManagement', compact('pageTitle', 'services'));
     }
 
+    //below function is related to make site service enable or disable
+    public function enableOrDisableService(Request $request)
+    {
+        if (!$request->ajax()) {
+            abort(403);
+        } else {
+            switch ($request->active) {
+                case 1 :
+                    $update = Service::where('id', '=', $request->id)->update(['active' => 0]);
+                    if ($update) {
+                        return response()->json(['message' => 'سرویس  مورد نظر شما غیر فعال گردید', 'code' => '1']);
+                    } else {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+                case 0 :
+                    $update = Service::where('id', '=', $request->id)->update(['active' => 1]);
+                    if ($update) {
+                        return response()->json(['message' => 'سرویس مورد نظر شما  فعال گردید', 'code' => '1']);
+                    } else {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+            }
+        }
+    }
+
     //below function is related to return slider management view
     public function sliderManagement()
     {
         $pageTitle = 'مدیریت اسلایدرها';
-        $sliders   = Slider::all();
-        return view('admin.sliderManagement',compact('pageTitle','sliders'));
+        $sliders = Slider::all();
+        return view('admin.sliderManagement', compact('pageTitle', 'sliders'));
     }
 
     //below function is related to return edit slider view
     public function editSlider($id)
     {
         $pageTitle = 'ویرایش اسلایدر';
-        $slider    = Slider::find($id);
-        return view('admin.editSlider',compact('pageTitle','slider'));
+        $slider = Slider::find($id);
+        return view('admin.editSlider', compact('pageTitle', 'slider'));
     }
 
 
@@ -156,20 +186,18 @@ class AdminController extends Controller
     {
         $checkFiles = new CheckFiles();
         $result = $checkFiles->checkCategoryFiles($request);
-        if(is_bool($result))
-        {
+        if (is_bool($result)) {
             $slider = Slider::find($request->sliderId);
             $file = $request->file[0];
             $src = $file->getClientOriginalName();
             $file->move('public/dashboard/sliderImages/', $src);
             $slider->image_src = $request->file[0]->getClientOriginalName();
             $slider->save();
-            if($slider){
+            if ($slider) {
                 return response()->json('ویرایش با موفقیت انجام گردید');
             }
-        }else
-        {
-            return response()->json(['message' => $result , 'code' => '1']);
+        } else {
+            return response()->json(['message' => $result, 'code' => '1']);
         }
     }
 
@@ -179,11 +207,9 @@ class AdminController extends Controller
         $slider = Slider::find($request->id);
         $slider->title = trim($request->title);
         $slider->save();
-        if($slider)
-        {
-            return response()->json(['message' => 'ویرایش با موفقیت انجام گردید' , 'code' => 1 ]);
-        }else
-        {
+        if ($slider) {
+            return response()->json(['message' => 'ویرایش با موفقیت انجام گردید', 'code' => 1]);
+        } else {
             return response()->json(['message' => 'خطایی در عملیات ویرایش رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
         }
     }
@@ -191,32 +217,24 @@ class AdminController extends Controller
     //below function is related to make categories enable or disable
     public function enableOrDisableSlider(Request $request)
     {
-        if(!$request->ajax())
-        {
+        if (!$request->ajax()) {
             abort(403);
-        }
-        else
-        {
-            switch ($request->active)
-            {
+        } else {
+            switch ($request->active) {
                 case 1 :
-                    $update = DB::table('sliders')->where('id',$request->sliderId)->update(['active' => 0 ]);
-                    if($update)
-                    {
-                        return response()->json(['message' => 'اسلایدر مورد نظر شما غیر فعال گردید' , 'code' => '1']);
-                    }else
-                    {
+                    $update = DB::table('sliders')->where('id', $request->sliderId)->update(['active' => 0]);
+                    if ($update) {
+                        return response()->json(['message' => 'اسلایدر مورد نظر شما غیر فعال گردید', 'code' => '1']);
+                    } else {
                         return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
                     }
                     break;
 
                 case 0 :
-                    $update = DB::table('sliders')->where('id',$request->sliderId)->update(['active' => 1 ]);
-                    if($update)
-                    {
-                        return response()->json(['message' => 'اسلایدر مورد نظر شما  فعال گردید' , 'code' => '1']);
-                    }else
-                    {
+                    $update = DB::table('sliders')->where('id', $request->sliderId)->update(['active' => 1]);
+                    if ($update) {
+                        return response()->json(['message' => 'اسلایدر مورد نظر شما  فعال گردید', 'code' => '1']);
+                    } else {
                         return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
                     }
                     break;
@@ -224,4 +242,35 @@ class AdminController extends Controller
             }
         }
     }
+
+    public function addLogo(Request $request)
+    {
+        $pageTiltle = 'ثبت لوگو';
+        return view('admin.addLogo',compact($pageTiltle));
+
+    }
+    public function addLogoPost(Request $request)
+    {
+        $checkFiles = new CheckFiles();
+        $result = $checkFiles->checkCategoryFiles($request);
+        if (is_bool($result)) {
+            $addNewSlide = new AddNewSlider();
+            $result1 = $addNewSlide->addNewSlide($request);
+            if (is_bool($result1)) {
+                return response()->json(['message' => 'اطاعات شما با موفقیت ثبت گردید', 'code' => 'success']);
+            } else {
+                return response()->json(['message' => $result1, 'code' => 'error']);
+            }
+        } else {
+            return response()->json(['message' => $checkFiles, 'code' => 'error']);
+        }
+        $add = Logo::create([$request]);
+        if ($add) {
+            return response()->json(['message' => 'اسلایدر مورد نظر شما  ثبت شد', 'code' => '1']);
+        } else {
+            return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+        }
+
+    }
+
 }
