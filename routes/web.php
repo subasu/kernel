@@ -122,17 +122,23 @@
             Route::post('editSliderPicture', 'AdminController@editSliderPicture');//this route is related to edit sliders picture
             Route::post('editSliderTitle', 'AdminController@editSliderTitle');//this route is related ti edit sliders title
             Route::post('enableOrDisableSlider', 'AdminController@enableOrDisableSlider');//this route is related to make sliders enable or disable
-            //addAboutUs
+            //AboutUs
             Route::get('addAboutUs', 'AdminController@addAboutUs');
             Route::post('addAboutUsPost', 'AdminController@addAboutUsPost');
             Route::get('editAboutUs', 'AdminController@editAboutUs');
             Route::post('editAboutUsPost', 'AdminController@editAboutUsPost');
-            //addService
+            //Services
             Route::get('addService', 'AdminController@addService');
             Route::post('addServicePost', 'AdminController@addServicePost');
             Route::get('ServicesManagement', 'AdminController@ServicesManagement');
             Route::get('editService/{id}', 'AdminController@editService');
             Route::post('editServicePost', 'AdminController@editServicePost');
+            Route::post('enableOrDisableService', 'AdminController@enableOrDisableService');
+            //Logo
+            Route::get('addLogo', 'AdminController@addLogo');
+            Route::post('addLogoPost', 'AdminController@addLogoPost');
+            Route::get('editLogo', 'AdminController@editLogo');
+            Route::post('editLogoPost', 'AdminController@editAboutUsPost');
         });
         //end admin panel routes
         //user panel routes

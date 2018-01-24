@@ -22,24 +22,26 @@
                 {{--<i class="fa fa-th-list"></i>                    افزودن دسته ی جدید                </a>--}}
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
-                    <table style="direction:rtl;text-align: center" id="example"
-                           class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                        <input type="hidden" id="token" value="{{ csrf_token() }}">
-                        <thead>
-                        <tr class="table-head">
-                            <th>ردیف</th>
-                            <th>آیکن فعلی</th>
-                            <th>آیکن</th>
-                            <th>عنوان</th>
-                            <th>توضیحات</th>
-                            <th>ویرایش</th>
-                            <th>تغییر وضعیت</th>
-                        </tr>
-                        </thead>
+                    <form id="editForm">
+                        <table style="direction:rtl;text-align: center" id="example"
+                               class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                               width="100%">
+                            <input type="hidden" id="token" value="{{ csrf_token() }}">
+                            <thead>
+                            <tr class="table-head">
+                                <th>ردیف</th>
+                                <th>آیکن فعلی</th>
+                                <th>آیکن</th>
+                                <th>عنوان</th>
+                                <th>توضیحات</th>
+                                <th>ویرایش</th>
+                                <th>تغییر وضعیت</th>
+                            </tr>
+                            </thead>
 
-                        <tbody>
-                        <?php $i = 0 ?>
-                        <form id="editForm">
+                            <tbody>
+                            <?php $i = 0 ?>
+
                             {{csrf_field()}}
                             {{--@foreach($categoryInfo as $category)--}}
                             <tr class="unit">
@@ -83,9 +85,10 @@
                                 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
                             </tr>
                             {{--@endforeach--}}
-                        </form>
-                        </tbody>
-                    </table>
+
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
             </div>
         </div>
@@ -98,9 +101,8 @@
             });
             $(document).on('click', '#edit', function () {
                 var formData = new FormData($("#editForm")[0]);
-                var formData = $("#editForm").serialize();
                 console.log(formData);
-                var myTitle=$('#title');
+                var myTitle = $('#title');
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -151,7 +153,7 @@
                                         });
                                         setTimeout(function () {
                                             window.location.href = document.referrer;
-                                        }, 3000);
+                                        }, 4000);
                                     } else {
                                         swal({
                                             title: "",
@@ -184,7 +186,7 @@
             $(document).on('click', '#active', function () {
                 var active = $(this).attr('content');
                 var token = $("#token").val();
-                var unitId = $(this).attr('name');
+                var id = $("#id").val();
                 var title = $(this).attr('data-content');
                 swal({
                         title: " آیا در نظر دارید وضعیت سرویس را " + "(( " + title + " ))" + "  نمایید؟ ",
@@ -204,7 +206,7 @@
                                 cache: false,
                                 url: "{{url('admin/enableOrDisableService')}}",
                                 type: "post",
-                                data: {'_token': token, 'active': active, 'unitId': unitId},
+                                data: {'_token': token, 'active': active, 'id': id},
                                 dataType: "JSON",
                                 success: function (response) {
                                     if (response.code == 1) {

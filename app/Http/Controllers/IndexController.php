@@ -97,7 +97,7 @@ class IndexController extends Controller
     {
         $menu = $this->loadMenu();
         $pageTitle = 'صفحه ی اصلی';
-        $services=Service::all();
+        $services=Service::where('active','=','1')->get();
         return view('main.index', compact('pageTitle', 'menu','services'));
     }
 
