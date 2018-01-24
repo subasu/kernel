@@ -14,6 +14,10 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt.auth', ['except' => ['login']]);
+    }
     //below function is related to return all products data
     public function productsManagement()
     {

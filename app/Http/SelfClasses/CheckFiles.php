@@ -41,30 +41,35 @@ class CheckFiles
             $extensionArrayDiff = array_diff($sentExtensionsArray,$allowedExtensions);
             if($extensionArrayDiff == null)
             {
-                $sentSizes = substr($sentSizes,1);
-                $sentSizesArray = explode('-',$sentSizes);
-                foreach ($sentSizesArray as $item)
+                $image = getimagesize($request->file[0]);
+                if($image[0] >= 1200 && $image[1] >= 800)
                 {
-                    if($item > $allowedSize)
+                    $sentSizes = substr($sentSizes,1);
+                    $sentSizesArray = explode('-',$sentSizes);
+                    foreach ($sentSizesArray as $item)
                     {
-                        $notAllowedSize ++;
+                        if($item > $allowedSize)
+                        {
+                            $notAllowedSize ++;
+                        }
+                        if($notAllowedSize == 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return('سایز فایل یا فایل های انتخاب شده بیش 1 مگابایت است');
+                            // return false;
+                        }
                     }
-                    if($notAllowedSize == 0)
+                }else
                     {
-                        return true;
+                        return( ' کیفیت تصویر یا تصاویر انتخاب شده مناسب نیست ، لطفا تصاویر  با کیفیت 800*1200  یا بالاتر انتخاب نمایید');
                     }
-                    else
-                    {
-                        return('سایز فایل یا فایل های انتخاب شده بیش 1 مگابایت است');
-                        // return false;
-                    }
-                }
-
             }
             else
             {
                 return('پسوند فایل یا فایل های انتخاب شده مجاز نمیباشد');
-                //return false;
             }
         }
         else

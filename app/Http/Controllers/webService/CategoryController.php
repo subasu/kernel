@@ -57,13 +57,25 @@ class CategoryController extends Controller
     //below function is related to edit category
     public function editCategory($id)
     {
-        $categoryInfo = Category::where('id',$id)->get();
+        $categoryInfo = Category::find($id);
         if(count($categoryInfo) > 0)
         {
             return response()->json(['categoryInfo' => $categoryInfo]);
         }else
         {
-            return response()->json(['message' => 'no info about this']);
+            return response()->json(['message' => 'no match found']);
+        }
+
+    }
+
+    //below function is to get sub categories from database
+    public function getSubCategories($id)
+    {
+        $subCategories = Category::where([['parent_id', $id], ['active', 1], ['title', '<>', 'سایر']])->get();
+        if (count($subCategories) > 0) {
+            return response()->json($subCategories);
+        } else {
+            return response()->json(0);
         }
 
     }
