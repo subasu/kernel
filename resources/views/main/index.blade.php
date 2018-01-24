@@ -27,53 +27,24 @@
     </div>
     <!-- END Home slideder-->
     <!-- servives -->
-    <div class="container">
+    @if(count($services)>0)<div class="container">
         <div class="service text-right">
-            <?php $x=floor(12/count($services)) ?>
-            @foreach($services as $service)
-            <div class="col-xs-6 col-md-{{$x}} service-item">
-                <div class="icon">
-                    <i class="glyphicon {{$service->icon}} fa-3x"></i>
-                </div>
-                <div class="info">
-                    <a href="#"><h3>{{$service->title}}</h3></a>
-                    <span>{!! $service->description!!}</span>
-                </div>
-            </div>
-            @endforeach
-
-            {{--<div class="col-xs-6 col-sm-3 service-item">--}}
-                {{--<div class="icon">--}}
-                    {{--<img alt="services" src="public/main/assets/data/s2.png"/>--}}
-                {{--</div>--}}
-                {{--<div class="info">--}}
-                    {{--<a href="#"><h3>شعار سوم</h3></a>--}}
-                    {{--<span>Moneyback guarantee</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="col-xs-6 col-sm-3 service-item">--}}
-                {{--<div class="icon">--}}
-                    {{--<img alt="services" src="public/main/assets/data/s3.png"/>--}}
-                {{--</div>--}}
-
-                {{--<div class="info">--}}
-                    {{--<a href="#"><h3>شعار دوم</h3></a>--}}
-                    {{--<span>Online consultations</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="col-xs-6 col-sm-3 service-item">--}}
-                {{--<div class="icon">--}}
-                    {{--<img alt="services" src="public/main/assets/data/s4.png"/>--}}
-                {{--</div>--}}
-                {{--<div class="info">--}}
-                    {{--<a href="#"><h3>شعار اول</h3></a>--}}
-                    {{--<span>Safe Shopping Guarantee</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+                <?php $x=floor(12/count($services)) ?>
+                    @foreach($services as $service)
+                    <div class="col-xs-6 col-md-{{$x}} service-item">
+                        <div class="icon">
+                            <i class="glyphicon {{$service->icon}} fa-3x"></i>
+                        </div>
+                        <div class="info">
+                            <a href="#"><h3>{{$service->title}}</h3></a>
+                            <span>{!! $service->description!!}</span>
+                        </div>
+                    </div>
+                    @endforeach
         </div>
     </div>
     <!-- end services -->
-
+    @endif
     <div class="page-top">
         <div class="container">
             <div class="row">

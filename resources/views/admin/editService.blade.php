@@ -26,13 +26,14 @@
                            class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                         <input type="hidden" id="token" value="{{ csrf_token() }}">
                         <thead>
-                        <tr>
-                            <th style="text-align: center">ردیف</th>
-                            <th style="text-align: center">آیکن</th>
-                            <th style="text-align: center">عنوان</th>
-                            <th style="text-align: center">توضیحات</th>
-                            <th style="text-align: center">ویرایش</th>
-                            <th style="text-align: center">تغییر وضعیت</th>
+                        <tr class="table-head">
+                            <th>ردیف</th>
+                            <th>آیکن فعلی</th>
+                            <th>آیکن</th>
+                            <th>عنوان</th>
+                            <th>توضیحات</th>
+                            <th>ویرایش</th>
+                            <th>تغییر وضعیت</th>
                         </tr>
                         </thead>
 
@@ -43,39 +44,40 @@
                             {{--@foreach($categoryInfo as $category)--}}
                             <tr class="unit">
                                 <td class="col-md-1" style="font-size: 120%;">{{++$i}}</td>
+                                <td class="col-md-1"><i class="glyphicon {{$service->icon}} fa-2x"></i></td>
                                 <td class="col-md-3">
                                     <div class="col-md-12 col-sm-6 col-xs-12" style="padding: 0 !important;">
                                         <button id="iconPicker" class="btn btn-default" data-placement="left"
-                                                role="iconpicker" style="margin: 0 !important;" disabled></button>
+                                                role="iconpicker" style="margin: 0 !important;"></button>
                                         <div class="col-md-9">
                                             <input id="icon-name" class="form-control"
-                                                   required="required" type="text" >
+                                                   required="required" type="text" disabled>
                                         </div>
                                         <input id="icon-name-hidden" class="form-control" name="icon"
-                                               required="required" type="hidden" >
+                                               required="required" type="hidden">
                                     </div>
                                 </td>
                                 <td class="col-md-2"><input class="form-control" style="width: 100%;" id="title"
                                                             name="title" value="{{$service->title}}"></td>
-                                <td class="col-md-2"><input class="form-control" style="width: 100%;" id="title"
-                                                            name="title" value="{{$service->description}}"></td>
+                                <td class="col-md-2"><input class="form-control" style="width: 100%;" id="description"
+                                                            name="description" value="{{$service->description}}"></td>
                                 <td>
                                     <button id="edit" type="button" class="btn btn-warning col-md-9 col-md-offset-1">
                                         ویرایش
                                     </button>
                                 </td>
                                 @if($service->active == 1)
-                                    <td class="col-md-2"><a id="active" content="{{$service->active}}"
+                                    <td class="col-md-1"><a id="active" content="{{$service->active}}"
                                                             name="{{$service->id}}"
                                                             type="button" data-content="غیر فعال"
-                                                            class="btn btn-danger col-md-8 col-md-offset-2">غیر فعال</a>
+                                                            class="btn btn-danger">غیر فعال</a>
                                     </td>
                                 @endif
                                 @if($service->active == 0)
-                                    <td class="col-md-2"><a id="active" content="{{$service->active}}"
+                                    <td class="col-md-1"><a id="active" content="{{$service->active}}"
                                                             name="{{$service->id}}"
                                                             type="button" data-content="فعال"
-                                                            class="btn btn-success col-md-8 col-md-offset-2"> فعال</a>
+                                                            class="btn btn-success "> فعال</a>
                                     </td>
                                 @endif <input type="hidden" value="{{$service->id}}" id="id" name="id">
                                 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
@@ -95,10 +97,10 @@
                 $("#icon-name-hidden").val(e.icon);
             });
             $(document).on('click', '#edit', function () {
-                var title = $('#title').val();
-                var id = $('#id').val();
-                var token = $('#token').val();
-                var parameter = 'unitCount';
+                var formData = new FormData($("#editForm")[0]);
+                var formData = $("#editForm").serialize();
+                console.log(formData);
+                var myTitle=$('#title');
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -120,17 +122,19 @@
                             $.ajax
                             ({
                                 cache: false,
-                                url: "{{url('admin/editUnitCountTitle')}}",
-                                data: {'title': title, 'id': id, '_token': token, 'parameter': parameter},
+                                url: "{{url('admin/editServicePost')}}",
+                                data: formData,
                                 type: "post",
-                                dataType: "JSON",
+                                dataType: 'json',
+                                contentType: false,
+                                processData: false,
                                 beforeSend: function () {
-                                    if ($('#title').val() == null || $('#title').val() == '') {
-                                        $('#title').css('border-color', 'red');
-                                        $('#title').focus();
+                                    if (myTitle.val() == null || myTitle.val() == '') {
+                                        myTitle.css('border-color', 'red');
+                                        myTitle.focus();
                                         swal({
                                             title: "",
-                                            text: 'پر کردن عنوان زیر واحد الزامی است',
+                                            text: 'پر کردن عنوان الزامی است',
                                             type: "warning",
                                             confirmButtonText: "بستن"
                                         });
@@ -182,9 +186,8 @@
                 var token = $("#token").val();
                 var unitId = $(this).attr('name');
                 var title = $(this).attr('data-content');
-                //alert(title);
                 swal({
-                        title: " آیا در نظر دارید وضعیت واحد شمارش را " + "(( " + title + " ))" + "  نمایید؟ ",
+                        title: " آیا در نظر دارید وضعیت سرویس را " + "(( " + title + " ))" + "  نمایید؟ ",
                         text: "",
                         type: "info",
                         showCancelButton: true,
@@ -199,7 +202,7 @@
                             $.ajax
                             ({
                                 cache: false,
-                                url: "{{url('admin/enableOrDisableUnitCount')}}",
+                                url: "{{url('admin/enableOrDisableService')}}",
                                 type: "post",
                                 data: {'_token': token, 'active': active, 'unitId': unitId},
                                 dataType: "JSON",

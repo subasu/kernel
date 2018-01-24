@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\SelfClasses\AddNewSlider;
 use App\Http\SelfClasses\CheckFiles;
 use App\Models\About;
@@ -16,6 +17,7 @@ class AdminController extends Controller
         $pageTitle = 'افزودن گالری تصاویر';
         return view('admin.addSlider', compact($pageTitle));
     }
+
     //below function is related to add sliders photo
     public function addNewSlider(Request $request)
     {
@@ -34,17 +36,20 @@ class AdminController extends Controller
         }
 
     }
+
     public function addAboutUs()
     {
         $pageTitle = 'افزودن درباره ی ما';
         return view('admin.addAboutUs', compact($pageTitle));
     }
+
     public function editAboutUs()
     {
         $pageTitle = 'ویرایش درباره ی ما';
         $about = About::latest()->first();
         return view('admin.editAboutUs', compact('pageTitle', 'about'));
     }
+
     public function addAboutUsPost(Request $request)
     {
         $abouts = count(About::all());
@@ -96,10 +101,29 @@ class AdminController extends Controller
             return response()->json('متاسفانه سرویس شما ثبت نشد');
     }
 
+//below function is related to show edit service page with service details
     public function editService($id)
     {
         $service = Service::find($id);
         return view('admin.editService', compact('service'));
+    }
+
+//below function is related to edit service title,description and icon
+    public function editServicePost(Request $request)
+    {
+        $update = Service::find($request->id);
+        if (!empty(trim($request->title)))
+            $update->title = trim($request->title);
+        if (!empty(trim($request->description)))
+            $update->description = trim($request->description);
+        if (!empty(trim($request->icon)))
+            $update->icon = trim($request->icon);
+        $update->save;
+        if ($update) {
+            return response()->json(['message' => 'ویرایش با موفقیت انجام شد', 'code' => '1']);
+        } else {
+            return response()->json(['message' => '  خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید ']);
+        }
     }
 
     public function ServicesManagement()

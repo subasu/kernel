@@ -26,7 +26,7 @@
                            class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                         <input type="hidden" id="token" value="{{ csrf_token() }}">
                         <thead>
-                        <tr style="text-align: center">
+                        <tr class="table-head">
                             <th >ردیف</th>
                             <th> آیکن </th>
                             <th> عنوان </th>
