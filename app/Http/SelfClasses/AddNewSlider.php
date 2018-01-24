@@ -13,9 +13,9 @@ use App\Models\Slider;
 
 class AddNewSlider
 {
-   public function addNewSlider($request)
+   public function addNewSlide($request)
    {
-       $count = count($request);
+       $count = count($request->file);
        $i     = 0;
        while($i < $count)
        {
@@ -29,10 +29,10 @@ class AddNewSlider
            $i++;
        }if($slider)
        {
-           return('اطلاعات با موفقیت ثبت گردید');
+           return true;
        }else
            {
-               
+               return('خطایی رخ داده است ، لطفا بخش پشتباتی تماس بگیرید');
            }
    }
 }

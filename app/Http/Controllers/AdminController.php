@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\SelfClasses\AddNewSlider;
 use App\Http\SelfClasses\CheckFiles;
 use App\Models\About;
 use App\Models\Icon;
@@ -18,8 +19,17 @@ class AdminController extends Controller
     //below function is related to add sliders photo
     public function addNewSlider(Request $request)
     {
-        $checkFiles = new CheckFiles($request);
-        if (is_bool($checkFiles)) {
+        $checkFiles = new CheckFiles();
+        $result = $checkFiles->checkCategoryFiles($request);
+        if (is_bool($result)) {
+            $addNewSlide = new AddNewSlider();
+            $result1 = $addNewSlide->addNewSlide($request);
+            if (is_bool($result1)) {
+                return response()->json(['message' => 'اطاعات شما با موفقیت ثبت گردید', 'code' => 'success']);
+            } else {
+                return response()->json(['message' => $result1, 'code' => 'error']);
+            }
+        } else {
             return response()->json(['message' => $checkFiles, 'code' => 'error']);
         }
 
