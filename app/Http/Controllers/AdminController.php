@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\SelfClasses\AddNewSlider;
 use App\Http\SelfClasses\CheckFiles;
 use App\Models\About;
@@ -17,11 +16,9 @@ class AdminController extends Controller
         $pageTitle = 'افزودن گالری تصاویر';
         return view('admin.addSlider', compact($pageTitle));
     }
-
     //below function is related to add sliders photo
     public function addNewSlider(Request $request)
     {
-<<<<<<< HEAD
         $checkFiles = new CheckFiles();
         $result = $checkFiles->checkCategoryFiles($request);
         if (is_bool($result)) {
@@ -35,28 +32,19 @@ class AdminController extends Controller
         } else {
             return response()->json(['message' => $checkFiles, 'code' => 'error']);
         }
-=======
-        $checkFiles = new CheckFiles($request);
-        if (is_bool($checkFiles)) {
-            return response()->json(['message' => $checkFiles, 'code' => 'error']);
-        }
 
->>>>>>> 1a839d541736a1344fb1a7a78fb1e26297a3ac5c
     }
-
     public function addAboutUs()
     {
         $pageTitle = 'افزودن درباره ی ما';
         return view('admin.addAboutUs', compact($pageTitle));
     }
-
     public function editAboutUs()
     {
         $pageTitle = 'ویرایش درباره ی ما';
         $about = About::latest()->first();
         return view('admin.editAboutUs', compact('pageTitle', 'about'));
     }
-
     public function addAboutUsPost(Request $request)
     {
         $abouts = count(About::all());
