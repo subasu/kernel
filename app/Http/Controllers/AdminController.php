@@ -6,6 +6,7 @@ use App\Http\SelfClasses\CheckFiles;
 use App\Models\About;
 use App\Models\Icon;
 use App\Models\Service;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -107,5 +108,96 @@ class AdminController extends Controller
         $services = Service::all();
         $pageTitle = 'ویرایش سرویس های سایت';
         return view('admin.ServicesManagement', compact('pageTitle', 'services'));
+    }
+
+    //below function is related to return slider management view
+    public function sliderManagement()
+    {
+        $pageTitle = 'مدیریت اسلایدرها';
+        $sliders   = Slider::all();
+        return view('admin.sliderManagement',compact('pageTitle','sliders'));
+    }
+
+    //below function is related to return edit slider view
+    public function editSlider($id)
+    {
+        $pageTitle = 'ویرایش اسلایدر';
+        $slider    = Slider::find($id);
+        return view('admin.editSlider',compact('pageTitle','slider'));
+    }
+
+
+    //below function is related to edit category picture
+    public function editSliderPicture(Request $request)
+    {
+        $checkFiles = new CheckFiles();
+        $result = $checkFiles->checkCategoryFiles($request);
+        if(is_bool($result))
+        {
+            $slider = Slider::find($request->sliderId);
+            $file = $request->file[0];
+            $src = $file->getClientOriginalName();
+            $file->move('public/dashboard/sliderImages/', $src);
+            $slider->image_src = $request->file[0]->getClientOriginalName();
+            $slider->save();
+            if($slider){
+                return response()->json('ویرایش با موفقیت انجام گردید');
+            }
+        }else
+        {
+            return response()->json(['message' => $result , 'code' => '1']);
+        }
+    }
+
+    //below function is related to edit category title
+    public function editSliderTitle(Request $request)
+    {
+        $slider = Slider::find($request->id);
+        $slider->title = trim($request->title);
+        $slider->save();
+        if($slider)
+        {
+            return response()->json(['message' => 'ویرایش با موفقیت انجام گردید' , 'code' => 1 ]);
+        }else
+        {
+            return response()->json(['message' => 'خطایی در عملیات ویرایش رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+        }
+    }
+
+    //below function is related to make categories enable or disable
+    public function enableOrDisableSlider(Request $request)
+    {
+        if(!$request->ajax())
+        {
+            abort(403);
+        }
+        else
+        {
+            switch ($request->active)
+            {
+                case 1 :
+                    $update = DB::table('sliders')->where('id',$request->sliderId)->update(['active' => 0 ]);
+                    if($update)
+                    {
+                        return response()->json(['message' => 'اسلایدر مورد نظر شما غیر فعال گردید' , 'code' => '1']);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+                case 0 :
+                    $update = DB::table('sliders')->where('id',$request->sliderId)->update(['active' => 1 ]);
+                    if($update)
+                    {
+                        return response()->json(['message' => 'اسلایدر مورد نظر شما  فعال گردید' , 'code' => '1']);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+            }
+        }
     }
 }

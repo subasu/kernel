@@ -29,8 +29,9 @@
     <!-- servives -->
     <div class="container">
         <div class="service text-right">
-            <?php $x=floor(12/count($services)) ?>
+
             @foreach($services as $service)
+                <?php $x=floor(12/count($services)) ?>
             <div class="col-xs-6 col-md-{{$x}} service-item">
                 <div class="icon">
                     <i class="glyphicon {{$service->icon}} fa-3x"></i>
