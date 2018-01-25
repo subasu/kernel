@@ -14,7 +14,7 @@ class CheckFiles
 {
     public function checkCategoryFiles($request,$type)
     {
-        if($type=='slider')
+        if(null !== $type && $type == 'slider')
         {
             $imageWidth=1200;
             $imageHeight=800;

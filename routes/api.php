@@ -66,11 +66,15 @@ Route::group(['prefix' => '/v1/admin'],function(){
     Route::get('getSubCategories/{id}','webService\CategoryController@getSubCategories');
     Route::post('editCategoryTitle', 'webService\CategoryController@editCategoryTitle');//this route is related ti edit category title
     Route::post('editCategoryPicture', 'webService\CategoryController@editCategoryPicture');//this route is related to edit category picture
+    Route::post('enableOrDisableCategory', 'webService\CategoryController@enableOrDisableCategory');//this route is related to make categories enable or disable
 
     //product routes
     Route::get('productsManagement','webService\ProductController@productsManagement');// productManagement
   //  Route::get('updateProduct','webService\ProductController@updateProduct');
     Route::post('addNewProduct', 'webService\ProductController@addNewProduct');// add new product in database
+
+    //unit count routes
+    Route::get('getMainUnits','webService\UnitController@getMainUnits');
 });
 
 //below routes are related to some general routes in index routes such menu and ...

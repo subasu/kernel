@@ -185,7 +185,7 @@ class AdminController extends Controller
     public function editSliderPicture(Request $request)
     {
         $checkFiles = new CheckFiles();
-        $result = $checkFiles->checkCategoryFiles($request);
+        $result = $checkFiles->checkCategoryFiles($request,'slider');
         if (is_bool($result)) {
             $slider = Slider::find($request->sliderId);
             $file = $request->file[0];
@@ -252,7 +252,7 @@ class AdminController extends Controller
     public function addLogoPost(Request $request)
     {
         $checkFiles = new CheckFiles();
-        $result = $checkFiles->checkCategoryFiles($request);
+        $result = $checkFiles->checkCategoryFiles($request,'');
         if (is_bool($result)) {
             $addNewSlide = new AddNewSlider();
             $result1 = $addNewSlide->addNewSlide($request);
