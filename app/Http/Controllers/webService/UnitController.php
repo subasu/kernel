@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\webService;
 
+use App\Models\SubUnitCount;
 use App\Models\UnitCount;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,5 +28,45 @@ class UnitController extends Controller
                 return response()->json(0);
             }
         }
+    }
+
+    //below function is related to edit unit count title
+    public function editUnitCountTitle(Request $request)
+    {
+        if (!$user = JWTAuth::parseToken()->authenticate()) {
+            return response()->json(['msg' => 'User not found !'], 404);
+        } else
+        {
+            switch ($request->parameter)
+            {
+                case 'unitCount':
+                    $unitCount = UnitCount::find($request->id);
+                    $unitCount->title = trim($request->title);
+                    $unitCount->save();
+                    if($unitCount)
+                    {
+                        return response()->json(['message' => 'ویرایش با موفقیت انجام گردید' , 'code' => 1 ]);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی در عملیات ویرایش رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+                case 'subUnitCount':
+                    $unitCount = SubUnitCount::find($request->id);
+                    $unitCount->title = trim($request->title);
+                    $unitCount->save();
+                    if($unitCount)
+                    {
+                        return response()->json(['message' => 'ویرایش با موفقیت انجام گردید' , 'code' => 1 ]);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی در عملیات ویرایش رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+            }
+
+        }
+
     }
 }
