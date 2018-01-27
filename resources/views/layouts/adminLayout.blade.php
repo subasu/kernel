@@ -273,7 +273,7 @@
                                 <ul class="nav child_menu" style="display: none">
                                     <li><a href="{{url('admin/addGoogleMap')}}">درج نقشه گوگل</a>
                                     </li>
-                                    <li><a href="{{url('admin/GoogleMapManagement')}}">ویرایش و مدیریت نقشه گوگل</a>
+                                    <li><a href="{{url('admin/editGoogleMap')}}">ویرایش و مدیریت نقشه گوگل</a>
                                     </li>
                                 </ul>
                             </li>

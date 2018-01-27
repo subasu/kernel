@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\SelfClasses\AddNewSlider;
 use App\Http\SelfClasses\CheckFiles;
 use App\Models\About;
+use App\Models\GoogleMap;
 use App\Models\Icon;
 use App\Models\Logo;
 use App\Models\Service;
@@ -18,14 +19,14 @@ class AdminController extends Controller
     public function addSlider()
     {
         $pageTitle = 'افزودن گالری تصاویر';
-        return view('admin.addSlider', compact($pageTitle));
+        return view('admin.addSlider', compact('pageTitle'));
     }
 
     //below function is related to add sliders photo
     public function addNewSlider(Request $request)
     {
         $checkFiles = new CheckFiles();
-        $result = $checkFiles->checkCategoryFiles($request,'slider');
+        $result = $checkFiles->checkCategoryFiles($request, 'slider');
         if (is_bool($result)) {
             $addNewSlide = new AddNewSlider();
             $result1 = $addNewSlide->addNewSlide($request);
@@ -37,13 +38,12 @@ class AdminController extends Controller
         } else {
             return response()->json(['message' => $checkFiles, 'code' => 'error']);
         }
-
     }
 
     public function addAboutUs()
     {
         $pageTitle = 'افزودن درباره ی ما';
-        return view('admin.addAboutUs', compact($pageTitle));
+        return view('admin.addAboutUs', compact('pageTitle'));
     }
 
     public function editAboutUs()
@@ -185,7 +185,7 @@ class AdminController extends Controller
     public function editSliderPicture(Request $request)
     {
         $checkFiles = new CheckFiles();
-        $result = $checkFiles->checkCategoryFiles($request,'slider');
+        $result = $checkFiles->checkCategoryFiles($request, 'slider');
         if (is_bool($result)) {
             $slider = Slider::find($request->sliderId);
             $file = $request->file[0];
@@ -243,16 +243,16 @@ class AdminController extends Controller
         }
     }
 
-    public function addLogo(Request $request)
+    public function addLogo()
     {
-        $pageTiltle = 'ثبت لوگو';
-        return view('admin.addLogo',compact($pageTiltle));
-
+        $pageTitle = 'ثبت لوگو';
+        return view('admin.addLogo', compact('pageTitle'));
     }
+
     public function addLogoPost(Request $request)
     {
         $checkFiles = new CheckFiles();
-        $result = $checkFiles->checkCategoryFiles($request,'');
+        $result = $checkFiles->checkCategoryFiles($request, '');
         if (is_bool($result)) {
             $addNewSlide = new AddNewSlider();
             $result1 = $addNewSlide->addNewSlide($request);
@@ -270,7 +270,52 @@ class AdminController extends Controller
         } else {
             return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
         }
-
     }
 
+    public function addGoogleMap()
+    {
+        $pageTitle = 'ثبت گوگل مپ';
+        return view('admin.addGoogleMap', compact('pageTitle'));
+    }
+    public function editGoogleMap()
+    {
+        $myGoogleMap=GoogleMap::latest()->first();
+        $pageTitle = 'ویرایش گوگل مپ';
+        return view('admin.editGoogleMap', compact('pageTitle','myGoogleMap'));
+    }
+
+    public function addGoogleMapPost(Request $request)
+    {
+        if (!empty($request->iframe_tag)) {
+            $count = count(GoogleMap::all());
+            if ($count > 0)
+                DB::table('google_maps')->truncate();
+            $add = new GoogleMap();
+            $add->iframe_tag = $request->iframe_tag;
+            $add->save();
+            if ($add)
+                return response()->json(['message' => 'گوگل مپ شما ثبت شد', 'code' => '1']);
+            else
+                return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+        }
+        return response()->json(['message' => 'وارد کردن آدرس گوگل مپ الزامی است']);
+
+    }
+    public function editGoogleMapPost(Request $request)
+    {
+        if (!empty($request->iframe_tag)) {
+            $count = count(GoogleMap::all());
+            if ($count > 0)
+                DB::table('google_maps')->truncate();
+            $add = new GoogleMap();
+            $add->iframe_tag = $request->iframe_tag;
+            $add->save();
+            if ($add)
+                return response()->json(['message' => 'گوگل مپ شما ویرایش شد', 'code' => '1']);
+            else
+                return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+        }
+        return response()->json(['message' => 'وارد کردن آدرس گوگل مپ الزامی است']);
+
+    }
 }
