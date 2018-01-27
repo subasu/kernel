@@ -40,7 +40,30 @@
 <!-- Footer -->
 <footer id="footer">
     <div class="container" dir="rtl">
-        <!-- introduce-box -->
+        <!-- introduce-box 1-->
+        <div id="introduce-box" class="row">
+            <div class="col-md-4">
+                <div id="address-box">
+                    <a href="#"><img src="{{URL::asset('public/main/assets/images/logo.png')}}" alt="قصابی برادران"/></a>
+                    <div id="address-list">
+                        <div class="tit-name">آدرس :</div>
+                        <div class="tit-contain">دروازه تهران خ رباط اول بعداز آبشار سنگی مابین کوچه 69 و 71 </div>
+                        <div class="tit-name">تلفن 1 :</div>
+                        <div class="tit-contain">09130913273</div>
+                        <div class="tit-name">تلفن 2 :</div>
+                        <div class="tit-contain">09130913293</div>
+                        <div class="tit-name">تلفن 3 :</div>
+                        <div class="tit-contain text-right">34427230</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="contact-box">
+                    <iframe height="300" class="col-md-12" src="https://www.google.com/maps/embed?pb=!1m17!1m11!1m3!1d990.0520472200151!2d51.657446639665544!3d32.69856365896699!2m2!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fbc3515eee6f1c1%3A0x99f3cc56135ccddf!2z2KfYqNi02KfYsSDYs9mG2q_bjA!5e1!3m2!1sfa!2s!4v1515906827456" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div><!-- /#introduce-box 1-->
+        <!-- introduce-box 2-->
         <div id="introduce-box" class="row">
             <div class="col-md-3">
                 <div id="address-box">
@@ -109,8 +132,7 @@
                 </div>
 
             </div>
-        </div><!-- /#introduce-box -->
-
+        </div><!-- /#introduce-box 2-->
         <!-- #trademark-box -->
         {{--<div id="trademark-box" class="row">--}}
             {{--<div class="col-sm-12">--}}

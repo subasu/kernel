@@ -138,7 +138,12 @@
             Route::get('addLogo', 'AdminController@addLogo');
             Route::post('addLogoPost', 'AdminController@addLogoPost');
             Route::get('editLogo', 'AdminController@editLogo');
-            Route::post('editLogoPost', 'AdminController@editAboutUsPost');
+            Route::post('editLogoPost', 'AdminController@editLogoPost');
+            //google map
+            Route::get('addGoogleMap', 'AdminController@addGoogleMap');
+            Route::post('addGoogleMapPost', 'AdminController@addGoogleMapPost');
+            Route::get('editGoogleMap', 'AdminController@editGoogleMap');
+            Route::post('editGoogleMapPost', 'AdminController@editGoogleMapPost');
         });
         //end admin panel routes
         //user panel routes
