@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\SelfClasses\AddNewLogo;
 use App\Http\SelfClasses\AddNewSlider;
 use App\Http\SelfClasses\CheckFiles;
 use App\Models\About;
@@ -127,7 +128,6 @@ class AdminController extends Controller
         }
         $update = Service::find($request->id);
     }
-
     public function ServicesManagement()
     {
         $services = Service::all();
@@ -159,7 +159,6 @@ class AdminController extends Controller
                         return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
                     }
                     break;
-
             }
         }
     }
@@ -252,23 +251,17 @@ class AdminController extends Controller
     public function addLogoPost(Request $request)
     {
         $checkFiles = new CheckFiles();
-        $result = $checkFiles->checkCategoryFiles($request, '');
+        $result = $checkFiles->checkCategoryFiles($request, 'logo');
         if (is_bool($result)) {
-            $addNewSlide = new AddNewSlider();
-            $result1 = $addNewSlide->addNewSlide($request);
+            $addLogo = new AddNewLogo();
+            $result1 = $addLogo->addNewLogo($request);
             if (is_bool($result1)) {
-                return response()->json(['message' => 'اطاعات شما با موفقیت ثبت گردید', 'code' => 'success']);
+                return response()->json(['message' => 'لوگو سایت با موفقیت ثبت گردید', 'code' => 'success']);
             } else {
                 return response()->json(['message' => $result1, 'code' => 'error']);
             }
         } else {
             return response()->json(['message' => $checkFiles, 'code' => 'error']);
-        }
-        $add = Logo::create([$request]);
-        if ($add) {
-            return response()->json(['message' => 'اسلایدر مورد نظر شما  ثبت شد', 'code' => '1']);
-        } else {
-            return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
         }
     }
 

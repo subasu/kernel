@@ -16,10 +16,14 @@ class CheckFiles
     {
         if ($type == 'slider') {
             $imageWidth = 1200;
-            $imageHeight = 800;
-        } else {
+            $imageHeight = 700;
+        } else if ($type == 'logo'){
             $imageWidth = 200;
             $imageHeight = 50;
+        }
+        else{
+            $imageWidth = 300;
+            $imageHeight = 250;
         }
         $notAllowedSize = 0;
         $imageWidthHeightErr = 0;
@@ -69,7 +73,7 @@ class CheckFiles
                         }
                         if($imageWidthHeightErr != 0)
                         {
-                            return (' کیفیت تصویر یا تصاویر انتخاب شده مناسب نیست ، لطفا تصاویر  با کیفیت' . $imageWidth . '*' . $imageHeight . 'بالاتر انتخاب نمایید');
+                            return (' کیفیت تصویر یا تصاویر انتخاب شده مناسب نیست ، لطفا تصاویر  با کیفیت' . $imageWidth . '*' . $imageHeight . ' و یا بالاتر انتخاب نمایید');
                         }
                         else
                         {
