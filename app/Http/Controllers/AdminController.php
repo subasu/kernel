@@ -25,7 +25,7 @@ class AdminController extends Controller
     public function addNewSlider(Request $request)
     {
         $checkFiles = new CheckFiles();
-        $result = $checkFiles->checkCategoryFiles($request);
+        $result = $checkFiles->checkCategoryFiles($request,'slider');
         if (is_bool($result)) {
             $addNewSlide = new AddNewSlider();
             $result1 = $addNewSlide->addNewSlide($request);
