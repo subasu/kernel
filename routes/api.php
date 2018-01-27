@@ -76,6 +76,9 @@ Route::group(['prefix' => '/v1/admin'],function(){
     //unit count routes
     Route::get('getMainUnits','webService\UnitController@getMainUnits');
     Route::post('editUnitCountTitle', 'webService\UnitController@editUnitCountTitle');
+    Route::post('enableOrDisableUnitCount', 'webService\UnitController@enableOrDisableUnitCount');
+    Route::post('enableOrDisableSubUnitCount', 'webService\UnitController@enableOrDisableSubUnitCount');
+    Route::post('addNewUnit', 'webService\UnitController@addNewUnit');
 });
 
 //below routes are related to some general routes in index routes such menu and ...
