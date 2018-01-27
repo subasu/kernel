@@ -28,7 +28,7 @@
                             <div class="col-md-6 col-sm-5 col-xs-9 col-md-offset-3 margin-1">
                                 <div class="col-md-9 col-xs-12">
                                 <input class="form-control  required"
-                                       type="file" name="file" id="pic"/>
+                                       type="file" name="file[]" id="pic"/>
                                 </div>
                                 <label class="control-label col-md-3 col-sm-4 col-xs-3 margin-1" for="file"> لوگو:<span class="star"></span>
                                 </label>
