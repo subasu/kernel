@@ -35,7 +35,7 @@ class AdminController extends Controller
                 return response()->json(['message' => $result1, 'code' => 'error']);
             }
         } else {
-            return response()->json(['message' => $checkFiles, 'code' => 'error']);
+            return response()->json(['message' => $result, 'code' => 'error']);
         }
 
     }

@@ -56,6 +56,25 @@ class CheckFiles
                         return ('سایز فایل یا فایل های انتخاب شده بیش 1 مگابایت است');
                     } else {
                         // return true;
+                        $i = 0; $k = 1; $image = [];
+                        while ($i < $count)
+                        {
+                            $image = array_merge(getimagesize($request->file[$i]),$image);
+                            if ($image[$i] < $imageWidth && $image[$k] < $imageHeight)
+                            {
+                                $imageWidthHeightErr++;
+                            }
+                            $i++;
+                            $k++;
+                        }
+                        if($imageWidthHeightErr != 0)
+                        {
+                            return (' کیفیت تصویر یا تصاویر انتخاب شده مناسب نیست ، لطفا تصاویر  با کیفیت' . $imageWidth . '*' . $imageHeight . 'بالاتر انتخاب نمایید');
+                        }
+                        else
+                        {
+                            return true;
+                        }
                     }
                 }
 
@@ -64,26 +83,7 @@ class CheckFiles
             {
                 return ('پسوند فایل یا فایل های انتخاب شده مجاز نمیباشد');
             }
-            if ($notAllowedSize == 0)
-            {
-                $i = 0;$count = count($request->file);
-                while ($i < $count)
-                {
-                    $image = getimagesize($request->file[0]);
-                    if ($image[0] >= $imageWidth && $image[1] >= $imageHeight)
-                    {
-                        $imageWidthHeightErr++;
-                    }
-                    $i++;
-                }
-            } else if($imageWidthHeightErr != 0)
-            {
-                return (' کیفیت تصویر یا تصاویر انتخاب شده مناسب نیست ، لطفا تصاویر  با کیفیت' . $imageWidth . '*' . $imageHeight . 'بالاتر انتخاب نمایید');
-            }
-            else
-            {
-                return true;
-            }
+
         } else
         {
             return true;

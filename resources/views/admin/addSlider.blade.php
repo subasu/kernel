@@ -105,7 +105,7 @@
                         cache       : false,
                         url         : "{{url('admin/addNewSlider')}}",
                         type        : "post",
-                        dataType    : "json",
+                        dataType    : "JSON",
                         contentType : false,
                         processData : false,
                         data        : data,
