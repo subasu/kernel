@@ -69,7 +69,7 @@ class ColorController extends Controller
             {
                 $update = Color::find($request->id);
                 $update->title = trim($request->title);
-                $update->save;
+                $update->save();
                 if($update)
                 {
                     return response()->json(['message' => 'ویرایش با موفقیت انجام شد' , 'code' => '1']);

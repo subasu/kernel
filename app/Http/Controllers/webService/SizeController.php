@@ -1,73 +1,64 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\webService;
 
 use App\Models\Size;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use JWTAuth;
 
 class SizeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt.auth', ['except' => ['login']]);
+    }
     // below function is related to return
     public function sizesManagement()
     {
-        $pageTitle = 'مدیریت و نمایش سایزها';
-        $data = Size::all();
-        return view('admin.sizesManagement',compact('data','pageTitle'));
+        if (!$user = JWTAuth::parseToken()->authenticate()) {
+            return response()->json(['msg' => 'User not found !'], 404);
+        } else {
+            $sizes = Size::all();
+            return response()->json(['sizes' => $sizes]);
+        }
     }
 
-    //below function is related to return view of add size
-    public function addSizes()
-    {
-        $pageTitle = 'افزودن سایز';
-        return view('admin.addSizes',compact('pageTitle'));
-    }
 
     //below function is related to add new size in data base
     public function addNewSize(Request $request)
     {
-        $count = count($request->size);
-        $i = 0;
-        while($i < $count)
-        {
-            $newSize = new Size();
-            $newSize->title = trim($request->size[$i]);
-            $newSize->save();
-            $i++;
-        }
+        if (!$user = JWTAuth::parseToken()->authenticate()) {
+            return response()->json(['msg' => 'User not found !'], 404);
+        } else {
+            $count = count($request->size);
+            $i = 0;
+            while($i < $count)
+            {
+                $newSize = new Size();
+                $newSize->title = trim($request->size[$i]);
+                $newSize->save();
+                $i++;
+            }
 
-        if($newSize)
-        {
-            return response()->json(['message' => 'اطلاعات با موفقیت ثبت شد', 'code' => '1']);
-        }else
-        {
-            return response()->json(['message' => 'خطایی در ثبت اطلاعات رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
-        }
-    }
-
-
-    //below function is related to edit size
-    public function editSize($id)
-    {
-        $pageTitle = 'ویرایش سایز';
-        $data = Size::where('id',$id)->get();
-        if(count($data) > 0)
-        {
-            return view('admin.editSize',compact('data','pageTitle'));
-        }else
-        {
-            return view('errors.403');
+            if($newSize)
+            {
+                return response()->json(['message' => 'اطلاعات با موفقیت ثبت شد', 'code' => '1']);
+            }else
+            {
+                return response()->json(['message' => 'خطایی در ثبت اطلاعات رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+            }
         }
     }
+
 
     //below function is related toi edit size title
     public function editSizeTitle(Request $request)
     {
-        if(!$request->ajax())
-        {
-            abort(403);
-        }else
-        {
+        if (!$user = JWTAuth::parseToken()->authenticate()) {
+            return response()->json(['msg' => 'User not found !'], 404);
+        } else {
             $update = Size::find($request->id);
             $update->title = trim($request->title);
             $update->save();
@@ -86,13 +77,11 @@ class SizeController extends Controller
     //below function is related to make size enable or disable
     public function enableOrDisableSize(Request $request)
     {
-        if(!$request->ajax())
-        {
-            abort(403);
-        }
-        else
-        {
-            switch ($request->active)
+        if (!$user = JWTAuth::parseToken()->authenticate()) {
+            return response()->json(['msg' => 'User not found !'], 404);
+        } else {
+            $active  = Size::where('id',$request->sizeId)->value('active');
+            switch ($active)
             {
                 case 1 :
                     $update = DB::table('sizes')->where('id',$request->sizeId)->update(['active' => 0 ]);

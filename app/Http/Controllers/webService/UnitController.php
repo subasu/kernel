@@ -149,6 +149,7 @@ class UnitController extends Controller
         if (!$user = JWTAuth::parseToken()->authenticate()) {
             return response()->json(['msg' => 'User not found !'], 404);
         } else {
+            //return response()->json('hhhhhhhhhhh');
             if ($request->unitId == '') {
                 $count = count($request->unit);
                 $i = 0;

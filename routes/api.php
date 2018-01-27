@@ -79,6 +79,18 @@ Route::group(['prefix' => '/v1/admin'],function(){
     Route::post('enableOrDisableUnitCount', 'webService\UnitController@enableOrDisableUnitCount');
     Route::post('enableOrDisableSubUnitCount', 'webService\UnitController@enableOrDisableSubUnitCount');
     Route::post('addNewUnit', 'webService\UnitController@addNewUnit');
+
+    //color routes
+    Route::get('colorsManagement', 'webService\ColorController@colorsManagement'); //this route is related to show all colors
+    Route::post('editColorTitle', 'webService\ColorController@editColorTitle');//this route is related to edit color title
+    Route::post('addNewColors', 'webService\ColorController@addNewColors');//this route is related to add new colors
+    Route::post('enableOrDisableColor', 'webService\ColorController@enableOrDisableColor');
+
+    //size routes
+    Route::get('sizesManagement', 'webService\SizeController@sizesManagement');//this route is related to return view of size management
+    Route::post('addNewSize', 'webService\SizeController@addNewSize');//this route is related to add new size in data base
+    Route::post('editSizeTitle', 'webService\SizeController@editSizeTitle');//this route is related to edit size title
+    Route::post('enableOrDisableSize', 'webService\SizeController@enableOrDisableSize');
 });
 
 //below routes are related to some general routes in index routes such menu and ...
