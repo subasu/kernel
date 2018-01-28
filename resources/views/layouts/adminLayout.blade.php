@@ -247,7 +247,7 @@
                                     </li>
                                     <li><a href="{{url('admin/addLogo')}}">درج لوگو سایت تصاویر</a>
                                     </li>
-                                    <li><a href="{{url('admin/LogoManagement')}}">ویرایش و مدیریت لوگوی سایت</a>
+                                    <li><a href="{{url('admin/editLogo')}}">ویرایش و مدیریت لوگوی سایت</a>
                                     </li>
                                 </ul>
                             </li>

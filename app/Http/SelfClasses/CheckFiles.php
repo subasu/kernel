@@ -5,11 +5,7 @@
  * Date: 11/28/2017
  * Time: 3:28 PM
  */
-
 namespace App\Http\SelfClasses;
-
-use Illuminate\Support\Facades\Validator;
-
 class CheckFiles
 {
     public function checkCategoryFiles($request, $type)

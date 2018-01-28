@@ -7,10 +7,13 @@ use App\Models\Basket;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\City;
+use App\Models\GoogleMap;
+use App\Models\Logo;
 use App\Models\PaymentType;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\Service;
+use App\Models\Slider;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,7 +71,9 @@ class IndexController extends Controller
         $results = Product::where('title', 'like', '%' . $request->search_key . '%')
             ->orWhere('description', 'like', '%' . $request->search_key . '%')->get();
         $menu = $this->loadMenu();
-        return view('main.searchResult', compact('results', 'menu'));
+        $logo=Logo::latest()->first();
+        $googleMap=GoogleMap::latest()->first();
+        return view('main.searchResult', compact('results', 'menu','logo','googleMap'));
     }
 
     public function loadMenu()
@@ -98,16 +103,22 @@ class IndexController extends Controller
         $menu = $this->loadMenu();
         $pageTitle = 'صفحه ی اصلی';
         $services=Service::where('active','=','1')->get();
-        return view('main.index', compact('pageTitle', 'menu','services'));
+        $sliders=Slider::where('active','=','1')->get();
+        $logo=Logo::latest()->first();
+        $googleMap=GoogleMap::latest()->first();
+//        dd($googleMap);
+        return view('main.index', compact('pageTitle', 'menu','services','sliders','logo','googleMap'));
     }
 
     //show login blade :in login blade there are 2 form for login and registeration
     public function login()
     {
+        $logo=Logo::latest()->first();
         $menu = $this->loadMenu();
         $capital = City::where('parent_id', '=', '1')->get();
         $pageTitle = 'ورود/عضویت';
-        return view('main.login', compact('pageTitle', 'menu', 'capital'));
+        $googleMap=GoogleMap::latest()->first();
+        return view('main.login', compact('pageTitle', 'menu', 'capital','logo','googleMap'));
     }
 
     //show product page in main site
@@ -115,7 +126,9 @@ class IndexController extends Controller
     {
         $menu = $menu = $this->loadMenu();
         $pageTitle = 'لیست محصولات';
-        return view('main.products', compact('pageTitle', 'menu'));
+        $logo=Logo::latest()->first();
+        $googleMap=GoogleMap::latest()->first();
+        return view('main.products', compact('pageTitle', 'menu','logo','googleMap'));
     }
 
     //find city of a selected capital in register page,call by ajax from login blade
@@ -254,11 +267,13 @@ class IndexController extends Controller
         $menu = $menu = $this->loadMenu();
         $pageTitle = 'لیست محصولات';
         $categories = Category::find($id);
+        $logo=Logo::latest()->first();
+        $googleMap=GoogleMap::latest()->first();
         $products = $categories->products()->paginate(12);
         if ($request->ajax()) {
-            return view('main.presult', compact('menu', 'pageTitle', 'categories', 'products'));
+            return view('main.presult', compact('menu', 'pageTitle', 'categories', 'products','logo','googleMap'));
         }
-        return view('main.showProducts', compact('menu', 'pageTitle', 'categories', 'products'));
+        return view('main.showProducts', compact('menu', 'pageTitle', 'categories', 'products','logo','googleMap'));
     }
 
     //below function is to return show product blade
@@ -271,7 +286,9 @@ class IndexController extends Controller
         $subcatId = Category::where('id', '=', $brand)->value('parent_id');
         $subcat = \App\Models\Category::where('id', '=', $subcatId)->value('title');
         $cat = Category::where('id', '=', $subcat)->value('title');
-        return view('main.productDetail', compact('menu', 'pageTitle', 'product', 'cat', 'subcat'));
+        $googleMap=GoogleMap::latest()->first();
+        $logo=Logo::latest()->first();
+        return view('main.productDetail', compact('menu', 'pageTitle', 'product', 'cat', 'subcat','logo','googleMap'));
     }
 
 
@@ -279,6 +296,8 @@ class IndexController extends Controller
     public function order($parameter)
     {
         $menu = $menu = $this->loadMenu();
+        $googleMap=GoogleMap::latest()->first();
+        $logo=Logo::latest()->first();
         //$categories  = Category::find($id);
         if (isset($_COOKIE['addToBasket'])) {
 
@@ -296,7 +315,7 @@ class IndexController extends Controller
                             $total += $basket->sum;
                             $basket->basket_id = $basket->pivot->basket_id;
                         }
-                        return view('main.order', compact('menu', 'pageTitle', 'baskets', 'total'));
+                        return view('main.order', compact('menu', 'pageTitle', 'baskets', 'total','logo','googleMap'));
                     } else {
                         return Redirect::back();
                     }
@@ -330,7 +349,7 @@ class IndexController extends Controller
 
                         }
                         $finalPrice += ($total + $totalPostPrice) - $basket->sumOfDiscount;
-                        return view('main.orderDetail', compact('menu', 'pageTitle', 'baskets', 'total', 'totalPostPrice', 'finalPrice', 'paymentTypes'));
+                        return view('main.orderDetail', compact('menu', 'pageTitle', 'baskets', 'total', 'totalPostPrice', 'finalPrice', 'paymentTypes','logo','googleMap'));
                     } else {
                         return view('errors.403');
                     }
