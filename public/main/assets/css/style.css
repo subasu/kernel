@@ -1820,7 +1820,7 @@ span.notify-right {
 }
 
 .header-top-right .homeslider {
-    width: 74%;
+    width: 100%;
     float: left;
 }
 
@@ -6083,3 +6083,4 @@ span.notify-right {
 .similar-product-image{
     height:300px;
 }
+.height-slider{height:600px !important;}

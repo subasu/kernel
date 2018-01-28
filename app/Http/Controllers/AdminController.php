@@ -13,6 +13,7 @@ use App\Models\Service;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Psy\Test\Exception\RuntimeExceptionTest;
 
 class AdminController extends Controller
@@ -70,9 +71,6 @@ class AdminController extends Controller
 
     public function editAboutUsPost(Request $request)
     {
-        $abouts = count(About::all());
-        if ($abouts > 0)
-            DB::table('abouts')->truncate();
         $aboutUs = About::find($request->id);
         $aboutUs->description = $request->description;
         $res = $aboutUs->save();
@@ -247,6 +245,12 @@ class AdminController extends Controller
         $pageTitle = 'ثبت لوگو';
         return view('admin.addLogo', compact('pageTitle'));
     }
+    public function editLogo()
+    {
+        $myLogo=Logo::latest()->first();
+        $pageTitle = 'ویرایش لوگو';
+        return view('admin.editLogo', compact('pageTitle','myLogo'));
+    }
 
     public function addLogoPost(Request $request)
     {
@@ -264,7 +268,28 @@ class AdminController extends Controller
             return response()->json(['message' => $checkFiles, 'code' => 'error']);
         }
     }
-
+    public function editLogoPost(Request $request)
+    {
+        $checkFiles = new CheckFiles();
+        $result = $checkFiles->checkCategoryFiles($request, 'logo');
+        if (is_bool($result)) {
+            $logo = Logo::find($request->logoId);
+            $file = $request->file[0];
+            $src = $file->getClientOriginalName();
+            $file->move('public/dashboard/Logo/', $src);
+            $logo->image_src = $request->file[0]->getClientOriginalName();
+            if (!empty($request->title))
+            {
+                $logo->title=$request->title;
+            }
+            $logo->save();
+            if ($logo) {
+                return response()->json(['message' => 'ویرایش با موفقیت انجام گردید', 'code' => '1']);
+            }
+        } else {
+            return response()->json(['message' => $result, 'code' => '1']);
+        }
+    }
     public function addGoogleMap()
     {
         $pageTitle = 'ثبت گوگل مپ';

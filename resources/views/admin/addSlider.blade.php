@@ -16,16 +16,10 @@
             margin-top: 1%;
         }
     </style>
-    <!-- Include SmartWizard CSS -->
-    <link href="{{url('public/dashboard/stepWizard/css/smart_wizard.css')}}" rel="stylesheet" type="text/css"/>
-    <!-- Optional SmartWizard theme -->
-    <link href="{{url('public/dashboard/stepWizard/css/smart_wizard_theme_arrows.css')}}" rel="stylesheet"
-          type="text/css"/>
     <div class="clearfix"></div>
     <div class="row">
         <div class="container">
             <form class="form-horizontal form-label-left" id="sliderForm" enctype="multipart/form-data" style="direction: rtl !important;">
-
                 {{ csrf_field() }}
                 <div class="container">
                     <div id="addPic">
@@ -42,11 +36,11 @@
                                 <input class="form-control col-md-12 col-xs-12 required"
                                        type="file" name="file[]" id="pic"/>
                             </div>
-                            <div class="col-md-5 col-sm-6 col-xs-9 ">
+                            <div class="col-md-4 col-sm-6 col-xs-9 ">
                                 <input class="form-control col-md-12 col-xs-12 required"
                                        name="title[]" id="title"/>
                             </div>
-                            <label class="control-label col-md-1 col-sm-4 col-xs-3" for="file">عنوان تصویر
+                            <label class="control-label col-md-2 col-sm-4 col-xs-3" for="file">عنوان تصویر
                                 :
                                 <span class="star"></span>
                             </label>
@@ -73,10 +67,10 @@
                             '<div class="col-md-4 col-sm-6 col-xs-9 col-md-offset-2">' +
                             '<input class="form-control col-md-12 col-xs-12 required" type="file" name="file[]" id="file"/>' +
                             '</div>' +
-                            '<div class="col-md-5 col-sm-6 col-xs-9">'+
+                            '<div class="col-md-4 col-sm-6 col-xs-9">'+
                             '<input class="form-control col-md-12 col-xs-12 required" name="title[]" id="title"/>'+
                             '</div>'+
-                            '<label class="control-label col-md-1 col-sm-4 col-xs-3" for="file">عنوان تصویر:'+
+                            '<label class="control-label col-md-2 col-sm-4 col-xs-3" for="file">عنوان تصویر:'+
                             '<span class="star"></span>'+
                             '</label>'+
                         '</div>'

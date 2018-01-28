@@ -8,20 +8,18 @@
                     <div class="homeslider">
                         <div class="content-slide">
                             <ul id="contenhomeslider">
-                                <li><img alt="Funky roots" src="public/main/assets/data/slide.jpg" title="Funky roots"/>
+                                @foreach($sliders as $slide)
+                                <li><img alt="{{$slide->title}}"  class="height-slider" src="{{url('public/dashboard/sliderImages/')}}{{'/'.$slide->image_src}}" title="{{$slide->title}}"/>
                                 </li>
-                                <li><img alt="Funky roots" src="public/main/assets/data/slide.jpg" title="Funky roots"/>
-                                </li>
-                                <li><img alt="Funky roots" src="public/main/assets/data/slide.jpg" title="Funky roots"/>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
-                    <div class="header-banner banner-opacity">
-                        <a href="#"><img alt="Funky roots" src="public/main/assets/data/ads1.jpg"/></a>
-                    </div>
+                    {{--<div class="header-banner banner-opacity">--}}
+                        {{--<a href="#"><img alt="Funky roots" src="public/main/assets/data/ads1.jpg"/></a>--}}
+                    {{--</div>--}}
                 </div>
-                <div class="col-sm-3 slider-left"></div>
+                {{--<div class="col-sm-3 slider-left"></div>--}}
             </div>
         </div>
     </div>

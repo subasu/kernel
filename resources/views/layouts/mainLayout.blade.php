@@ -44,7 +44,7 @@
         <div id="introduce-box" class="row">
             <div class="col-md-4">
                 <div id="address-box">
-                    <a href="#"><img src="{{URL::asset('public/main/assets/images/logo.png')}}" alt="قصابی برادران"/></a>
+                    <a href="#"><img alt="{{$logo->title}}" title="{{$logo->title}}"  src="{{url('public/dashboard/Logo')}}{{'/'.$logo->image_src}}" /></a>
                     <div id="address-list">
                         <div class="tit-name">آدرس :</div>
                         <div class="tit-contain">دروازه تهران خ رباط اول بعداز آبشار سنگی مابین کوچه 69 و 71 </div>
@@ -59,25 +59,12 @@
             </div>
             <div class="col-md-8">
                 <div id="contact-box">
-                    <iframe height="300" class="col-md-12" src="https://www.google.com/maps/embed?pb=!1m17!1m11!1m3!1d990.0520472200151!2d51.657446639665544!3d32.69856365896699!2m2!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fbc3515eee6f1c1%3A0x99f3cc56135ccddf!2z2KfYqNi02KfYsSDYs9mG2q_bjA!5e1!3m2!1sfa!2s!4v1515906827456" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <iframe height="300" class="col-md-12" src="{{$googleMap->iframe_tag}}" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
             </div>
         </div><!-- /#introduce-box 1-->
         <!-- introduce-box 2-->
         <div id="introduce-box" class="row">
-            <div class="col-md-3">
-                <div id="address-box">
-                    <a href="#"><img src="{{url('public/main/assets/data/introduce-logo.png')}}" alt=""/></a>
-                    <div id="address-list">
-                        <div class="tit-name">آدرس:</div>
-                        <div class="tit-contain">Example Street 68, Mahattan, New York, USA.</div>
-                        <div class="tit-name">تلفن:</div>
-                        <div class="tit-contain">+00 123 456 789</div>
-                        <div class="tit-name">ایمیل:</div>
-                        <div class="tit-contain">support@business.com</div>
-                    </div>
-                </div>
-            </div>
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-sm-4">
@@ -112,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div id="contact-box">
                     <div class="introduce-title">عضویت در خبرنامه</div>
                     <div class="input-group" id="mail-box">

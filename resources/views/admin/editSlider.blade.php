@@ -67,7 +67,6 @@
                         <tr>
                             <th style="text-align: center">ردیف</th>
                             <th style="text-align: center">عنوان دسته</th>
-                            <th style="text-align: center;">سطح دسته</th>
                             <th style="text-align: center">عملیات مربوط به تصویر</th>
                             <th style="text-align: center">ویرایش</th>
                             <th style="text-align: center">تغییر وضعیت</th>
@@ -82,7 +81,6 @@
                             <tr class="unit">
                                 <td style="font-size: 120%">{{++$i}}</td>
                                 <td class="col-md-4 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$slider->title}}"></td>
-                                <td style="font-size: 120%">{{$slider->depth}}</td>
                                 <td><strong><a class="btn btn-default" id="openModal" >مشاهده و ویرایش تصویر</a></strong></td>
                                 <td><button id="edit" type="button" class="btn btn-warning">ویرایش</button></td>
                                 @if($slider->active == 1)
