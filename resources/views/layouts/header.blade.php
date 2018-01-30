@@ -48,7 +48,9 @@
 <div class="container main-header">
     <div class="row">
         <div class="col-xs-12 col-sm-3 logo">
-            <a href="{{url('/')}}"><img alt="{{$logo->title}}" title="{{$logo->title}}"  src="{{url('public/dashboard/Logo')}}{{'/'.$logo->image_src}}" /></a>
+            @if(!empty($logo))
+                <a href="{{url('/')}}"><img alt="{{$logo->title}}" title="{{$logo->title}}"  src="{{url('public/dashboard/Logo')}}{{'/'.$logo->image_src}}" /></a>
+            @endif
         </div>
         <div class="col-xs-7 col-sm-7 header-search-box">
             <form class="form-inline" id="search_form" action="{{url('search')}}" method="post">

@@ -44,7 +44,9 @@
         <div id="introduce-box" class="row">
             <div class="col-md-4">
                 <div id="address-box">
-                    <a href="#"><img alt="{{$logo->title}}" title="{{$logo->title}}"  src="{{url('public/dashboard/Logo')}}{{'/'.$logo->image_src}}" /></a>
+                    @if(!empty($logo))
+                        <a href="#"><img alt="{{$logo->title}}" title="{{$logo->title}}"  src="{{url('public/dashboard/Logo')}}{{'/'.$logo->image_src}}" /></a>
+                    @endif
                     <div id="address-list">
                         <div class="tit-name">آدرس :</div>
                         <div class="tit-contain">دروازه تهران خ رباط اول بعداز آبشار سنگی مابین کوچه 69 و 71 </div>
@@ -59,7 +61,9 @@
             </div>
             <div class="col-md-8">
                 <div id="contact-box">
-                    <iframe height="300" class="col-md-12" src="{{$googleMap->iframe_tag}}" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    @if(!empty($googleMap))
+                        <iframe height="300" class="col-md-12" src="{{$googleMap->iframe_tag}}" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    @endif
                 </div>
             </div>
         </div><!-- /#introduce-box 1-->
