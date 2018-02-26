@@ -76,20 +76,6 @@ class CategoryController extends Controller
         }
     }
 
-    //below function is to get sub categories from database
-    public function getSubCategories($id)
-    {
-        if (!$user = JWTAuth::parseToken()->authenticate()) {
-            return response()->json(['msg' => 'User not found !'], 404);
-        } else {
-            $subCategories = Category::where([['parent_id', $id], ['active', 1], ['title', '<>', 'سایر']])->get();
-            if (count($subCategories) > 0) {
-                return response()->json($subCategories);
-            } else {
-                return response()->json(0);
-            }
-        }
-    }
 
     //below function is related to edit category title
     public function editCategoryTitle(Request $request)
@@ -136,7 +122,7 @@ class CategoryController extends Controller
                 $category->image_src = $src;
                 $category->save();
                 if ($category) {
-                    return response()->json('ویرایش با موفقیت انجام گردید');
+                    return response()->json(['message'=>'ویرایش با موفقیت انجام گردید' , 'code' => 'success']);
                 }
             } else {
                 return response()->json(['message' => $result, 'code' => '1']);

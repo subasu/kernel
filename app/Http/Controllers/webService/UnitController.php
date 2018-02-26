@@ -4,6 +4,7 @@ namespace App\Http\Controllers\webService;
 
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -149,7 +150,7 @@ class UnitController extends Controller
         if (!$user = JWTAuth::parseToken()->authenticate()) {
             return response()->json(['msg' => 'User not found !'], 404);
         } else {
-            //return response()->json('hhhhhhhhhhh');
+
             if ($request->unitId == '') {
                 $count = count($request->unit);
                 $i = 0;
@@ -157,26 +158,37 @@ class UnitController extends Controller
                     $insert = DB::table('unit_counts')->insertGetId
                     ([
                         'title' => trim($request->unit[$i]),
+                        'created_at' => Carbon::now(new \DateTimeZone('Asia/Tehran')),
+                        'updated_at' => Carbon::now(new \DateTimeZone('Asia/Tehran'))
                     ]);
                     $i++;
                 }
                 if ($insert) {
-                    return response()->json('اطلاعات با موفقیت ثبت شد');
+                    return response()->json(['message' => 'اطلاعات با موفقیت ثبت شد' , 'code' => 'success']);
                 }
             } else {
-                $count = count($request->unit);
-                $i = 0;
-                while ($i < $count) {
-                    $insert = DB::table('sub_unit_counts')->insertGetId
-                    ([
-                        'title' => trim($request->unit[$i]),
-                        'unit_count_id' => $request->unitId,
-                    ]);
-                    $i++;
-                }
-                if ($insert) {
-                    return response()->json('اطلاعات با موفقیت ثبت شد');
-                }
+                if(DB::table('unit_counts')->where('id',$request->unitId)->count() > 0)
+                {
+                    $count = count($request->unit);
+                    $i = 0;
+                    while ($i < $count) {
+                        $insert = DB::table('sub_unit_counts')->insertGetId
+                        ([
+                            'title' => trim($request->unit[$i]),
+                            'unit_count_id' => $request->unitId,
+                            'created_at' => Carbon::now(new \DateTimeZone('Asia/Tehran')),
+                            'updated_at' => Carbon::now(new \DateTimeZone('Asia/Tehran'))
+                        ]);
+                        $i++;
+                    }
+                    if ($insert) {
+                        return response()->json(['message' => 'اطلاعات با موفقیت ثبت شد' , 'code' => 'success']);
+                    }
+                }else
+                    {
+                        return response()->json(['message' => ' لطفا شناسه واحد شمارش را بطور صحیح وارد نمائید' , 'code' => 'exception']);
+                    }
+
             }
 
         }

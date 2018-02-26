@@ -63,7 +63,6 @@ Route::group(['prefix' => '/v1/admin'],function(){
     Route::post('addNewCategory','webService\CategoryController@addNewCategory');// add new category in database
     Route::get('categoriesManagement','webService\CategoryController@categoriesManagement');
     Route::get('editCategory/{id}', 'webService\CategoryController@editCategory');//this route is related to edit main category
-    Route::get('getSubCategories/{id}','webService\CategoryController@getSubCategories');
     Route::post('editCategoryTitle', 'webService\CategoryController@editCategoryTitle');//this route is related ti edit category title
     Route::post('editCategoryPicture', 'webService\CategoryController@editCategoryPicture');//this route is related to edit category picture
     Route::post('enableOrDisableCategory', 'webService\CategoryController@enableOrDisableCategory');//this route is related to make categories enable or disable
@@ -81,16 +80,24 @@ Route::group(['prefix' => '/v1/admin'],function(){
     Route::post('addNewUnit', 'webService\UnitController@addNewUnit');
 
     //color routes
-    Route::get('colorsManagement', 'webService\ColorController@colorsManagement'); //this route is related to show all colors
+   // Route::get('colorsManagement', 'webService\ColorController@colorsManagement'); //this route is related to show all colors
     Route::post('editColorTitle', 'webService\ColorController@editColorTitle');//this route is related to edit color title
     Route::post('addNewColors', 'webService\ColorController@addNewColors');//this route is related to add new colors
     Route::post('enableOrDisableColor', 'webService\ColorController@enableOrDisableColor');
 
     //size routes
-    Route::get('sizesManagement', 'webService\SizeController@sizesManagement');//this route is related to return view of size management
+   // Route::get('sizesManagement', 'webService\SizeController@sizesManagement');//this route is related to return view of size management
     Route::post('addNewSize', 'webService\SizeController@addNewSize');//this route is related to add new size in data base
     Route::post('editSizeTitle', 'webService\SizeController@editSizeTitle');//this route is related to edit size title
     Route::post('enableOrDisableSize', 'webService\SizeController@enableOrDisableSize');
+
+    //below routes are common routes that needed
+    Route::get('getMainCategories','webService\CommonController@getMainCategories');
+    Route::get('getSubCategories/{id}','webService\CommonController@getSubCategories');
+    Route::get('getAllDisabledCategories','webService\CommonController@getAllDisabledCategories');
+    Route::get('getDisabledCategories/{id}','webService\CommonController@getDisabledCategories');
+    Route::get('getColors','webService\CommonController@getColors');
+    Route::get('getSizes','webService\CommonController@getSizes');
 });
 
 //below routes are related to some general routes in index routes such menu and ...

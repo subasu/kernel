@@ -15,15 +15,15 @@ class SizeController extends Controller
         $this->middleware('jwt.auth', ['except' => ['login']]);
     }
     // below function is related to return
-    public function sizesManagement()
-    {
-        if (!$user = JWTAuth::parseToken()->authenticate()) {
-            return response()->json(['msg' => 'User not found !'], 404);
-        } else {
-            $sizes = Size::all();
-            return response()->json(['sizes' => $sizes]);
-        }
-    }
+//    public function sizesManagement()
+//    {
+//        if (!$user = JWTAuth::parseToken()->authenticate()) {
+//            return response()->json(['msg' => 'User not found !'], 404);
+//        } else {
+//            $sizes = Size::all();
+//            return response()->json(['sizes' => $sizes]);
+//        }
+//    }
 
 
     //below function is related to add new size in data base

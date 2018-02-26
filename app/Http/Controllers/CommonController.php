@@ -36,7 +36,6 @@ class CommonController extends Controller
         } else {
             return response()->json(0);
         }
-
     }
 
     //below function is to get brands from database

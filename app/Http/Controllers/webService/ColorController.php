@@ -16,15 +16,15 @@ class ColorController extends Controller
         $this->middleware('jwt.auth', ['except' => ['login']]);
     }
     //below function is related to return colors management view
-    public function colorsManagement()
-    {
-        if (!$user = JWTAuth::parseToken()->authenticate()) {
-            return response()->json(['msg' => 'User not found !'], 404);
-        } else {
-            $colors = Color::all();
-            return response()->json(['colors' => $colors]);
-        }
-    }
+//    public function colorsManagement()
+//    {
+//        if (!$user = JWTAuth::parseToken()->authenticate()) {
+//            return response()->json(['msg' => 'User not found !'], 404);
+//        } else {
+//            $colors = Color::all();
+//            return response()->json(['colors' => $colors]);
+//        }
+//    }
 
     //below function is related toi edit color title
     public function editColorTitle(Request $request)
