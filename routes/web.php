@@ -112,6 +112,7 @@
             Route::get('paymentTypesManagement', 'PaymentTypeController@paymentTypesManagement');
             Route::get('editPaymentType/{id}', 'PaymentTypeController@editPaymentType');
             Route::post('editPaymentTypeTitle', 'PaymentTypeController@editPaymentTypeTitle');
+            Route::post('enableOrDisablePaymentType', 'PaymentTypeController@enableOrDisablePaymentType');
             //printer route
             Route::get('connectToPrinter', 'OrderController@connectToPrinter');
             //slider

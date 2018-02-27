@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\webService;
 
+use App\Http\Requests\TitleValidation;
 use App\Models\Color;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,7 +28,7 @@ class ColorController extends Controller
 //    }
 
     //below function is related toi edit color title
-    public function editColorTitle(Request $request)
+    public function editColorTitle(TitleValidation $request)
     {
         if (!$user = JWTAuth::parseToken()->authenticate()) {
             return response()->json(['msg' => 'User not found !'], 404);

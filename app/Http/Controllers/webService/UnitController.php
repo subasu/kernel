@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\webService;
 
+use App\Http\Requests\TitleValidation;
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
 use Carbon\Carbon;
@@ -34,7 +35,7 @@ class UnitController extends Controller
     }
 
     //below function is related to edit unit count title
-    public function editUnitCountTitle(Request $request)
+    public function editUnitCountTitle(TitleValidation $request)
     {
         if (!$user = JWTAuth::parseToken()->authenticate()) {
             return response()->json(['msg' => 'User not found !'], 404);

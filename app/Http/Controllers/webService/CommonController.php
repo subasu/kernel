@@ -4,6 +4,7 @@ namespace App\Http\Controllers\webService;
 
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\PaymentType;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -97,6 +98,21 @@ class CommonController extends Controller
                 return response()->json(['sizes' => $sizes]);
             } else {
                 return response()->json(['messages' => 'no match found']);
+            }
+        }
+    }
+
+    //below function is related to existed payment types
+    public function getPaymentTypes()
+    {
+        if (!$user = JWTAuth::parseToken()->authenticate()) {
+            return response()->json(['msg' => 'User not found !'], 404);
+        } else {
+            $paymentTypes = PaymentType::all();
+            if (count($paymentTypes) > 0) {
+                return response()->json(['paymentTypes' => $paymentTypes]);
+            } else {
+                return response()->json(['message' => 'no match found']);
             }
         }
     }

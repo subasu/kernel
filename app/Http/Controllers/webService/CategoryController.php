@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\webService;
 
+use App\Http\Requests\TitleValidation;
 use App\Http\SelfClasses\AddCategory;
 use App\Http\SelfClasses\CheckFiles;
 use App\Http\SelfClasses\NotToBeRepeated;
@@ -78,7 +79,7 @@ class CategoryController extends Controller
 
 
     //below function is related to edit category title
-    public function editCategoryTitle(Request $request)
+    public function editCategoryTitle(TitleValidation $request)
     {
         if (!$user = JWTAuth::parseToken()->authenticate()) {
             return response()->json(['msg' => 'User not found !'], 404);

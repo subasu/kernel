@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRegistrationValidation;
 use App\Http\Requests\NewPasswordValidation;
+use App\Http\SelfClasses\BankModule;
+use App\Http\SelfClasses\CheckProductExistence;
 use App\Http\SelfClasses\CheckUserCellphone;
+use App\Http\SelfClasses\RollBackWarehouseCount;
 use App\Models\Basket;
 use App\Models\Order;
 use App\Models\Product;
@@ -190,22 +193,47 @@ class UserController extends Controller
     public function orderRegistration(OrderRegistrationValidation $request)
     {
         if ($basket = Basket::where([['id', $request->basketId], ['payment', 0]])->count() > 0) {
-            $user = User::where('cellphone', $request->userCellphone)->get();
-            if (count($user) > 0) {
-                $newPassword = '';
-                return $this->addToOrder($request, $user[0], $newPassword);
-            } else {
-                $newPassword = str_random(8);
-                $user = new User();
-                $user->cellphone = $request->userCellphone;
-                $user->password = Hash::make($newPassword);
-                $user->save();
-                if ($user) {
-                    return $this->addToOrder($request, $user, $newPassword);
+            $checkProductExistence = new CheckProductExistence();
+            $result = $checkProductExistence->checkProductExistence($request);
+            if(is_bool($result))
+            {
+                $bankModule =  new BankModule();
+                $result1    =  $bankModule->bankOperation();
+                if(is_bool($result1))
+                {
+                    $user = User::where('cellphone', $request->userCellphone)->get();
+                    if (count($user) > 0) {
+                        $newPassword = '';
+                        return $this->addToOrder($request, $user[0], $newPassword);
+                    } else {
+                        $newPassword = str_random(8);
+                        $user = new User();
+                        $user->cellphone = $request->userCellphone;
+                        $user->password = Hash::make($newPassword);
+                        $user->save();
+                        if ($user) {
+                            return $this->addToOrder($request, $user, $newPassword);
+                        }
+                    }
+                }else
+                {
+                    $rollBack = new RollBackWarehouseCount();
+                    $result2  = $rollBack->rollBackWarehouseCount($request);
+                    if(is_bool($result2))
+                    {
+                        return response()->json(['message' => 'بدلیل عدم واریز وجه سفارش شما ثبت نگردید','code' => 'success']);
+                    }else
+                    {
+                        return response()->json(['message' => $result2 , 'code' => 'error']);
+                    }
                 }
+            }else
+            {
+                return response()->json(['message' => $result , 'code' => 'error1']);
             }
+
         } else {
-            return response()->json(['message' => 'این سفارش قبلا ثبت گردیده است ، لطفات تقاضای مجدد نفرمائید']);
+            return response()->json(['message' => 'این سفارش قبلا ثبت گردیده است ، لطفا تقاضای مجدد نفرمائید']);
         }
     }
 

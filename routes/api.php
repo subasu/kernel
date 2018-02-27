@@ -91,6 +91,21 @@ Route::group(['prefix' => '/v1/admin'],function(){
     Route::post('editSizeTitle', 'webService\SizeController@editSizeTitle');//this route is related to edit size title
     Route::post('enableOrDisableSize', 'webService\SizeController@enableOrDisableSize');
 
+//payment type routes
+    Route::post('addNewPaymentTypes', 'webService\PaymentTypeController@addNewPaymentTypes');
+    Route::get('editPaymentType/{id}', 'PaymentTypeController@editPaymentType');
+    Route::post('editPaymentTypeTitle', 'webService\PaymentTypeController@editPaymentTypeTitle');
+    Route::post('enableOrDisablePaymentType', 'webService\PaymentTypeController@enableOrDisablePaymentType');
+
+    //orders management routes
+    Route::get('ordersManagement', 'webService\OrderController@ordersManagement');//show view of all orders
+    Route::post('changeOrderStatus', 'webService\OrderController@changeOrderStatus');
+    Route::get('adminShowFactor/{id}', 'webService\OrderController@adminShowFactor');
+    Route::get('oldOrders', 'webService\OrderController@oldOrders');
+
+    //sync routes
+    Route::get('orderSync','webService\SyncController@orderSync');
+
     //below routes are common routes that needed
     Route::get('getMainCategories','webService\CommonController@getMainCategories');
     Route::get('getSubCategories/{id}','webService\CommonController@getSubCategories');
@@ -98,6 +113,7 @@ Route::group(['prefix' => '/v1/admin'],function(){
     Route::get('getDisabledCategories/{id}','webService\CommonController@getDisabledCategories');
     Route::get('getColors','webService\CommonController@getColors');
     Route::get('getSizes','webService\CommonController@getSizes');
+    Route::get('getPaymentTypes','webService\CommonController@getPaymentTypes');
 });
 
 //below routes are related to some general routes in index routes such menu and ...

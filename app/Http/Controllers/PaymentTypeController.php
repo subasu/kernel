@@ -71,7 +71,7 @@ class PaymentTypeController extends Controller
         {
             $update = PaymentType::find($request->id);
             $update->title = trim($request->title);
-            $update->save;
+            $update->save();
             if($update)
             {
                 return response()->json(['message' => 'ویرایش با موفقیت انجام شد' , 'code' => '1']);
@@ -79,6 +79,41 @@ class PaymentTypeController extends Controller
             else
             {
                 return response()->json(['message' => '  خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید ']);
+            }
+        }
+    }
+    public function enableOrDisablePaymentType(Request $request)
+    {
+        if(!$request->ajax())
+        {
+            abort(403);
+        }
+        else
+        {
+            switch ($request->active)
+            {
+                case 1 :
+                    $update = DB::table('payment_types')->where('id',$request->paymentTypeId)->update(['active' => 0 ]);
+                    if($update)
+                    {
+                        return response()->json(['message' => 'حالت پرداخت مورد نظر شما غیر فعال گردید' , 'code' => '1']);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
+                case 0 :
+                    $update = DB::table('payment_types')->where('id',$request->paymentTypeId)->update(['active' => 1 ]);
+                    if($update)
+                    {
+                        return response()->json(['message' => 'حالت پرداخت مورد نظر شما  فعال گردید' , 'code' => '1']);
+                    }else
+                    {
+                        return response()->json(['message' => 'خطایی رخ داده است ، با بخش پشتیبانی تماس بگیرید']);
+                    }
+                    break;
+
             }
         }
     }
