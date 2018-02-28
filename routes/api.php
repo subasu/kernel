@@ -103,6 +103,36 @@ Route::group(['prefix' => '/v1/admin'],function(){
     Route::get('adminShowFactor/{id}', 'webService\OrderController@adminShowFactor');
     Route::get('oldOrders', 'webService\OrderController@oldOrders');
 
+    //slider routes
+    Route::post('addNewSlider', 'webService\AdminController@addNewSlider');
+    Route::get('sliderManagement','webService\AdminController@sliderManagement');
+    Route::get('editSlider/{id}','webService\AdminController@editSlider');
+    Route::post('editSliderPicture', 'webService\AdminController@editSliderPicture');//this route is related to edit sliders picture
+    Route::post('editSliderTitle', 'webService\AdminController@editSliderTitle');//this route is related ti edit sliders title
+    Route::post('enableOrDisableSlider', 'webService\AdminController@enableOrDisableSlider');//this route is related to make sliders enable or disable
+
+    //Logo
+    Route::post('addLogoPost', 'webService\AdminController@addLogoPost');
+    Route::get('editLogo', 'webService\AdminController@editLogo');
+    Route::post('editLogoPost', 'webService\AdminController@editLogoPost');
+
+    //Services
+    Route::post('addServicePost', 'webService\AdminController@addServicePost');
+    Route::get('ServicesManagement', 'webService\AdminController@ServicesManagement');
+    Route::get('editService/{id}', 'webService\AdminController@editService');
+    Route::post('editServicePost', 'webService\AdminController@editServicePost');
+    Route::post('enableOrDisableService', 'webService\AdminController@enableOrDisableService');
+
+   //AboutUs
+    Route::post('addAboutUsPost', 'webService\AdminController@addAboutUsPost');
+    Route::get('editAboutUs', 'webService\AdminController@editAboutUs');
+    Route::post('editAboutUsPost', 'webService\AdminController@editAboutUsPost');
+
+    //google map
+    Route::post('addGoogleMapPost', 'webService\AdminController@addGoogleMapPost');
+    Route::get('editGoogleMap', 'webService\AdminController@editGoogleMap');
+    Route::post('editGoogleMapPost', 'webService\AdminController@editGoogleMapPost');
+
     //sync routes
     Route::get('orderSync','webService\SyncController@orderSync');
 
@@ -114,6 +144,7 @@ Route::group(['prefix' => '/v1/admin'],function(){
     Route::get('getColors','webService\CommonController@getColors');
     Route::get('getSizes','webService\CommonController@getSizes');
     Route::get('getPaymentTypes','webService\CommonController@getPaymentTypes');
+
 });
 
 //below routes are related to some general routes in index routes such menu and ...

@@ -115,7 +115,9 @@ return [
     */
 
     'attributes' => [
-                        'title' => 'عنوان'
+                        'title' => 'عنوان',
+                        'description' => 'توضیحات',
+                        'icon' => 'آیکون',
                     ],
 
 ];
