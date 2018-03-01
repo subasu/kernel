@@ -27,7 +27,7 @@ class CheckProduct
             'produce_date' => 'sometimes|nullable|max:10|min:8',
             'expire_date' => 'sometimes|nullable|max:10|min:8',
             'produce_place' => '',
-            'warehouse_count' => 'sometimes|nullable|numeric',
+            'warehouse_count' => 'required|numeric',
             'warehouse_place' => '',
             'ready_time' => 'sometimes|nullable|numeric',
             'barcode' => 'sometimes|nullable|numeric',
@@ -53,7 +53,8 @@ class CheckProduct
                 'price.required'=>'فیلد قیمت الزامی است',
                 'video_src.mimetypes'=>'فرمت ویدئوی انتخاب شده اشتباه است ',
                 'pic[].image'=>'فرمت تصویر یا تصاویر انتخاب شده اشتباه است ',
-                'warehouse_count.numeric' => 'مقدار وارد شده انبار باید مقدار عددی باشد'
+                'warehouse_count.numeric' => 'مقدار وارد شده انبار باید مقدار عددی باشد',
+                'warehouse_count.required' => 'وارد کردن موجودی انبار الزامی است',
             ]);
         $errors = $validation->errors();
         if(!$errors->isEmpty())

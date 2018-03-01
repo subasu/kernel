@@ -11,6 +11,7 @@ use App\Models\Product;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use JWTAuth;
 
 class ProductController extends Controller
 {
@@ -71,7 +72,7 @@ class ProductController extends Controller
                             $addNewProduct = new AddProduct();
                             $ans = $addNewProduct->addProduct($request);
                             if ($ans == "true")
-                                return response()->json(['data' => 'محصول شما با مؤفقیت درج شد']);
+                                return response()->json(['message' => 'محصول شما با مؤفقیت درج شد' , 'code' => 'success']);
                             else
                                 return response()->json(['data' => 'خطایی رخ داده است، -لطفا با بخش پشتیبانی تماس بگیرید.']);
                         } else
