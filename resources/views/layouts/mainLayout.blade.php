@@ -822,31 +822,48 @@
                 }
 
             },
-            success : function(response)
-            {
+            success: function (response) {
                 console.log(response);
-                if(response.code == 1)
+                if (response.code == 1) {
+                    swal
+                    ({
+                        title: "",
+                        text: response.message + '\n' + response.userPassword,
+                        type: "success",
+                        confirmButtonText: "بستن"
+                    });
+//                    setTimeout(function () {
+//                        window.location.href = '../login';
+//                    }, 15000);
+                } else if(response.code == 'error1') {
+                    swal
+                    ({
+                        title: "",
+                        text: response.message,
+                        type: "info",
+                        confirmButtonText: "بستن"
+                    });
+                }else if(response.code == 'success')
                 {
                     swal
                     ({
                         title: "",
-                        text: response.message +'\n' + response.userPassword,
-                        type: "success",
+                        text: response.message,
+                        type: "info",
                         confirmButtonText: "بستن"
                     });
-                    setTimeout(function(){
-                        window.location.href = '../login';
-                    },15000);
-                }else
-                    {
-                        swal
-                        ({
-                            title: "",
-                            text: response.message,
-                            type: "warning",
-                            confirmButtonText: "بستن"
-                        });
-                    }
+                    //setTimeout(function(){window.location.reload(true);},5000);
+                }
+                else
+                {
+                    swal
+                    ({
+                        title: "",
+                        text: response.message,
+                        type: "warning",
+                        confirmButtonText: "بستن"
+                    });
+                }
             },
             error   : function(error)
             {
