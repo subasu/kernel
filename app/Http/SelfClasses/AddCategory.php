@@ -26,9 +26,10 @@ class AddCategory
                     if (!empty($request->file[$i]))
                     {
                         $file = $request->file[$i];
-                        $src = $file->getClientOriginalName();
-                        $file->move('public/dashboard/image/', $src);
-                        $categories->image_src = $src;
+                        $imageExtension = $file->getClientOriginalExtension();
+                        $imageName=microtime(true);
+                        $file->move('public/dashboard/image/', $imageName.'.'.$imageExtension);
+                        $categories->image_src = $imageName.'.'.$imageExtension;
                     }
                     $categories->save();
                     $i++;
@@ -57,9 +58,10 @@ class AddCategory
                      if (!empty($request->file[$i]))
                      {
                          $file = $request->file[$i];
-                         $src = $file->getClientOriginalName();
-                         $file->move('public/dashboard/image/', $src);
-                         $categories->image_src = $src;
+                         $imageExtension = $file->getClientOriginalExtension();
+                         $imageName=microtime(true);
+                         $file->move('public/dashboard/image/', $imageName.'.'.$imageExtension);
+                         $categories->image_src = $imageName.'.'.$imageExtension;
                      }
                      $categories->parent_id = $request->mainId;
                      $categories->save();
@@ -90,9 +92,10 @@ class AddCategory
                    if (!empty($request->file[$i]))
                    {
                        $file = $request->file[$i];
-                       $src = $file->getClientOriginalName();
-                       $file->move('public/dashboard/image/', $src);
-                       $categories->image_src = $src;
+                       $imageExtension = $file->getClientOriginalExtension();
+                       $imageName=microtime(true);
+                       $file->move('public/dashboard/image/', $imageName.'.'.$imageExtension);
+                       $categories->image_src = $imageName.'.'.$imageExtension;
                    }
                    $categories->grand_parent_id = $request->mainId;
                    $categories->parent_id = $request->subId;

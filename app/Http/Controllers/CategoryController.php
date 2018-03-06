@@ -95,9 +95,10 @@ class CategoryController extends Controller
         {
             $category = Category::find($request->categoryId);
             $file = $request->file[0];
-            $src = $file->getClientOriginalName();
-            $file->move('public/dashboard/image/', $src);
-            $category->image_src = $request->file[0]->getClientOriginalName();
+            $imageExtension = $file->getClientOriginalExtension();
+            $imageName=microtime(true);
+            $file->move('public/dashboard/image/', $imageName.'.'.$imageExtension);
+            $category->image_src = $imageName.'.'.$imageExtension;
             $category->save();
             if($category){
                 return response()->json('ویرایش با موفقیت انجام گردید');

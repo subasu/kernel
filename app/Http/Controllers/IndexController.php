@@ -299,12 +299,12 @@ class IndexController extends Controller
         $googleMap=GoogleMap::latest()->first();
         $logo=Logo::latest()->first();
         //$categories  = Category::find($id);
-        if (isset($_COOKIE['addToBasket'])) {
+        if (isset($_COOKIE['addToKernelBasket'])) {
 
             switch ($parameter) {
                 case 'basketDetail':
                     $pageTitle = 'لیست سفارشات';
-                    $basketId = Basket::where([['cookie', $_COOKIE['addToBasket']], ['payment', 0]])->value('id');
+                    $basketId = Basket::where([['cookie', $_COOKIE['addToKernelBasket']], ['payment', 0]])->value('id');
                     if ($basketId) {
                         $baskets = Basket::find($basketId);
                         $total = 0;
@@ -325,7 +325,7 @@ class IndexController extends Controller
                 case 'orderDetail':
                     $pageTitle = 'جزئیات سفارش';
                     $paymentTypes = PaymentType::where('active', 1)->get();
-                    $basketId = Basket::where([['cookie', $_COOKIE['addToBasket']], ['payment', 0]])->value('id');
+                    $basketId = Basket::where([['cookie', $_COOKIE['addToKernelBasket']], ['payment', 0]])->value('id');
                     $baskets = Basket::find($basketId);
                     $total = 0;
                     $totalDiscount = 0;
