@@ -15,6 +15,7 @@ use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductFlag;
 use App\Models\ProductImage;
+use App\Models\ProductOption;
 use App\Models\ProductSize;
 use App\Models\SubUnitCount;
 use App\Models\UnitCount;
@@ -72,7 +73,7 @@ class AddProduct
         $pr->video_src = $videoSrc;
         $pr->delivery_volume = $product->delivery_volume;
         $pr->warehouse_count = $product->warehouse_count;
-        $pr->warehouse_place = $product->warehouse_place;
+//        $pr->warehouse_place = $product->warehouse_place;
         $pr->barcode = $product->barcode;
         if (!empty($product->post_price))
             $pr->post_price = str_replace(',', '', $product->post_price);
@@ -83,29 +84,29 @@ class AddProduct
         //above line find product_id that now saved for use in pivot table
         // $lastProductId = Product::orderBy('created_at', 'desc')->offset(0)->limit(1)->value('id');
         //this block code save color array of product in color_product table
-        $countColor = count($product->color);
-        if ($countColor) {
-            for ($i = 0; $i < $countColor; $i++) {
-                $productColor = new ProductColor();
-                $productColor->product_id = $lastProductId;
-                $productColor->color_id = $product->color[$i];
-                $productColor->active = 1;
-                $productColor->save();
-            }
-        }
-        //this block code save size array of product in product_size table
-        $countSize = count($product->size);
-        if ($countSize) {
-            for ($i = 0; $i < $countSize; $i++) {
-                $productColor = new ProductSize();
-                $productColor->product_id = $lastProductId;
-                $productColor->size_id = $product->size[$i];
-                $productColor->active = 1;
-                $productColor->save();
-
-            }
-
-        }
+//        $countColor = count($product->color);
+//        if ($countColor) {
+//            for ($i = 0; $i < $countColor; $i++) {
+//                $productColor = new ProductColor();
+//                $productColor->product_id = $lastProductId;
+//                $productColor->color_id = $product->color[$i];
+//                $productColor->active = 1;
+//                $productColor->save();
+//            }
+//        }
+//        //this block code save size array of product in product_size table
+//        $countSize = count($product->size);
+//        if ($countSize) {
+//            for ($i = 0; $i < $countSize; $i++) {
+//                $productColor = new ProductSize();
+//                $productColor->product_id = $lastProductId;
+//                $productColor->size_id = $product->size[$i];
+//                $productColor->active = 1;
+//                $productColor->save();
+//
+//            }
+//
+//        }
         //this block code save and upload picture array of product in product_Images table
         $countPic = count($product->file);
         if ($countPic) {
@@ -113,9 +114,9 @@ class AddProduct
                 $productPicture = new ProductImage();
                 $productPicture->product_id = $lastProductId;
                 $imageExtension = $product->file[$i]->getClientOriginalExtension();
-                $imageName=microtime();
-                $productPicture->image_src = $imageName.'.'.$imageExtension;
-                $product->file[$i]->move('public/dashboard/productFiles/picture/', $imageName.'.'.$imageExtension);
+                $imageName = microtime(true);
+                $productPicture->image_src = $imageName . '.' . $imageExtension;
+                $product->file[$i]->move('public/dashboard/productFiles/picture/', $imageName . '.' . $imageExtension);
                 $productPicture->active = 1;
                 $productPicture->save();
             }
@@ -148,23 +149,26 @@ class AddProduct
         /**this section check user select which level of categories
          *and insert row to category_product table with latest product_id and category_id
          **/
-        $catId = 0;
-        if (empty($product->subCategories)) {
-            $catId = $product->categories;
-        } elseif (empty($product->brands)) {
-            $catId = $product->subCategories;
-        } else if (!empty($product->brands)) {
-            addCategoryProduct($lastProductId, $product->brands);
-        }
-        //find 'سایر' category_id
-        $subCatId = Category::where([['parent_id', $catId], ['active', 1]])->where('title', '=', 'سایر')->value('id');
-        if ($subCatId != 0 && $catId != 0) {
-            addCategoryProduct($lastProductId, $subCatId);
+        addCategoryProduct($lastProductId, $product->subCategories);
+
+        //add product options
+        $countOption = count($product->option);
+        //if any option send and not empty
+        if ($countOption && $product->option[0] != "") {
+            for ($i = 0; $i < $countOption; $i++) {
+                if ($product->option[$i] != "") {
+                    $productOption = new ProductOption();
+                    $productOption->product_id = $lastProductId;
+                    $productOption->title = $product->option[$i];
+                    $productOption->active = 1;
+                    $productOption->save();
+                }
+            }
         }
         return (true);
     }
 
-    //below function is related to convert jalali date to Miladi date
+    //below function is related to convert jalali date to Milady date
     function dateConvert($jalaliDate)
     {
         if (count($jalaliDate) > 0) {
@@ -180,7 +184,8 @@ class AddProduct
         return;
     }
 
-    public function jalaliToGregorian($year, $month, $day)
+    public
+    function jalaliToGregorian($year, $month, $day)
     {
         return Verta::getGregorian($year, $month, $day);
     }

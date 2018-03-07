@@ -6,6 +6,7 @@ use App\Models\Order;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use JWTAuth;
 
 class SyncController extends Controller
@@ -17,16 +18,18 @@ class SyncController extends Controller
             return response()->json(['msg' => 'User not found !'], 404);
         } else
             {
-                $orders =  Order::where('synchronize',null)->get();
-                if(count($orders) > 0)
+                $basketProducts =  DB::table('basket_product')->where('synchronize',null)->get();
+                if(count($basketProducts) > 0)
                 {
-                    foreach ($orders as $order) {
-                        $order->persianDate = $this->toPersian($order->date);
-                    }
-                    $update =  Order::where('synchronize',null)->update(['synchronize' => 'sync']);
+//                    foreach ($orders as $order) {
+//                        $order->Factor_Date = $this->toPersian($order->date);
+//                        $order->GoodsCode   = $orders[$i]->baskets->products[0]->id;
+//                        $i++;
+//                    }
+                    $update =  DB::tabe('basket_product')->where->('synchronize',null)->update(['synchronize' => 'sync']);
                     if($update)
                     {
-                        return response()->json(['orders'=> $orders]);
+                        return response()->json(['basketProducts'=> $basketProducts]);
                     }else
                     {
                         return response()->json(['message' => 'در عملیات سینک کردن خطایی رخ داده است']);

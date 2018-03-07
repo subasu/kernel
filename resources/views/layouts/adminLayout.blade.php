@@ -740,9 +740,10 @@
                         var audio = document.getElementById('audio');
                         audio.autoplay = true;
                         audio.load();
-//                        setTimeout(function(){
-//                            window.location.replace('ordersManagement');
-//                        },10000);
+                        setTimeout(function(){
+                            audio.pause();
+                           // window.location.replace('ordersManagement');
+                        },2000);
                     } else {
                         console.log('nothing new');
                     }
