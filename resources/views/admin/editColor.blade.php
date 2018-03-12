@@ -43,12 +43,12 @@
                                 <td style="font-size: 120%;">{{++$i}}</td>
                                 <td class="col-md-6 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$data[0]->title}}"></td>
                                 @if($data[0]->active == 1)
-                                    <td><a id="active" content="{{$data[0]->active}}" name="{{$data[0]->id}}" type="button"  data-content="غیر فعال" class="btn btn-danger col-md-8 col-md-offset-2" >غیر فعال</a></td>
+                                    <td><a id="active" content="{{$data[0]->active}}" name="{{$data[0]->id}}" type="button"  data-content="غیر فعال" class="btn btn-danger col-md-8 col-md-offset-2" >غیر فعال کردن</a></td>
                                 @endif
                                 @if($data[0]->active == 0)
-                                    <td><a id="active" content="{{$data[0]->active}}" name="{{$data[0]->id}}" type="button"  data-content="فعال" class="btn btn-success col-md-8 col-md-offset-2"> فعال</a></td>
+                                    <td><a id="active" content="{{$data[0]->active}}" name="{{$data[0]->id}}" type="button"  data-content="فعال" class="btn btn-success col-md-8 col-md-offset-2"> فعال کردن</a></td>
                                 @endif
-                                <td><button id="edit" type="button" class="btn btn-warning col-md-9 col-md-offset-1">ویرایش</button></td>
+                                <td><button id="edit" type="button" class="btn btn-warning col-md-9 col-md-offset-1">ویرایش عنوان</button></td>
                                 <input type="hidden" value="{{$data[0]->id}}" id="id" name="id">
                                 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
                             </tr>

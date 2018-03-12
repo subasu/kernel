@@ -18,18 +18,23 @@ class SyncController extends Controller
             return response()->json(['msg' => 'User not found !'], 404);
         } else
             {
-                $basketProducts =  DB::table('basket_product')->where('synchronize',null)->get();
+                $basketProducts =  DB::table('basket_product')->where('synchronize',null)->select('product_id AS GoodsCode','basket_id','count AS Tedad','product_price AS Price','comments AS GoodsComments')->get();
                 if(count($basketProducts) > 0)
                 {
-//                    foreach ($orders as $order) {
-//                        $order->Factor_Date = $this->toPersian($order->date);
-//                        $order->GoodsCode   = $orders[$i]->baskets->products[0]->id;
-//                        $i++;
-//                    }
-                    $update =  DB::tabe('basket_product')->where->('synchronize',null)->update(['synchronize' => 'sync']);
+                    foreach ($basketProducts as $basketProduct)
+                    {
+                        $basketProduct->Taraf                  =  DB::table('orders')->where('basket_id',$basketProduct->basket_id)->value('user_cellphone');
+                        $basketProduct->Factor_Num             =  DB::table('orders')->where('basket_id',$basketProduct->basket_id)->value('id');
+                        $basketProduct->factoreComments        =  DB::table('orders')->where('basket_id',$basketProduct->basket_id)->value('comments');
+                        $basketProduct->Pocket                 =  DB::table('orders')->where('basket_id',$basketProduct->basket_id)->value('pay_price');
+                        $basketProduct->Factor_Date            =  $this->toPersian(DB::table('orders')->where('basket_id',$basketProduct->basket_id)->value('date'));
+                        $basketProduct->Discount               =  DB::table('products')->where('id',$basketProduct->GoodsCode)->value('discount');
+                        $basketProduct->Product_Title          =  DB::table('products')->where('id',$basketProduct->GoodsCode)->value('title');
+                    }
+                    $update =  DB::table('basket_product')->where('synchronize',null)->update(['synchronize' => 'sync']);
                     if($update)
                     {
-                        return response()->json(['basketProducts'=> $basketProducts]);
+                        return response()->json(['synchronizeInfo'=> $basketProducts]);
                     }else
                     {
                         return response()->json(['message' => 'در عملیات سینک کردن خطایی رخ داده است']);
@@ -56,6 +61,6 @@ class SyncController extends Controller
             $myDate = $date[0] . '/' . $date[1] . '/' . $date[2];
             return $myDate;
         }
-        return;
+       // return;
     }
 }

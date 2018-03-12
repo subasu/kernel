@@ -65,21 +65,21 @@
                                                             name="description" value="{{$service->description}}"></td>
                                 <td>
                                     <button id="edit" type="button" class="btn btn-warning col-md-9 col-md-offset-1">
-                                        ویرایش
+                                        ویرایش کردن
                                     </button>
                                 </td>
                                 @if($service->active == 1)
                                     <td class="col-md-1"><a id="active" content="{{$service->active}}"
                                                             name="{{$service->id}}"
                                                             type="button" data-content="غیر فعال"
-                                                            class="btn btn-danger">غیر فعال</a>
+                                                            class="btn btn-danger">غیر فعال کردن</a>
                                     </td>
                                 @endif
                                 @if($service->active == 0)
                                     <td class="col-md-1"><a id="active" content="{{$service->active}}"
                                                             name="{{$service->id}}"
                                                             type="button" data-content="فعال"
-                                                            class="btn btn-success "> فعال</a>
+                                                            class="btn btn-success "> فعال کردن</a>
                                     </td>
                                 @endif <input type="hidden" value="{{$service->id}}" id="id" name="id">
                                 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">

@@ -42,13 +42,12 @@
                             <tr class="unit">
                                 <td style="font-size: 120%;">{{++$i}}</td>
                                 <td class="col-md-6 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$unitCount[0]->title}}"></td>
-                                <td><button id="edit" type="button" class="btn btn-warning col-md-9 col-md-offset-1">ویرایش</button></td>
+                                <td><button id="edit" type="button" class="btn btn-warning col-md-9 col-md-offset-1"> ویرایش عنوان</button></td>
                                 @if($unitCount[0]->active == 1)
-                                    <td><a id="active" content="{{$unitCount[0]->active}}" name="{{$unitCount[0]->id}}" type="button"  data-content="غیر فعال" class="btn btn-danger" >غیر فعال</a></td>
+                                    <td><a id="active" content="{{$unitCount[0]->active}}" name="{{$unitCount[0]->id}}" type="button"  data-content="غیر فعال" class="btn btn-danger" >غیر فعال کردن</a></td>
                                 @endif
                                 @if($unitCount[0]->active == 0)
-                                    <td><a id="active" content="{{$unitCount[0]->active}}" name="{{$unitCount[0]->id}}" type="button"  data-content="فعال" class="btn btn-success"> فعال</a></td>
-                                @endif
+                                    <td><a id="active" content="{{$unitCount[0]->active}}" name="{{$unitCount[0]->id}}" type="button"  data-content="فعال" class="btn btn-success"> فعال کردن </a></td>                                @endif
                                 <input type="hidden" value="{{$unitCount[0]->id}}" id="id" name="id">
                                 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">
                             </tr>

@@ -44,7 +44,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2> مدیریت دسته بندی ها</h2>
+                    <h2> مدیریت اسلایدرها</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link" data-toggle="tooltip" title="جمع کردن"><i
                                         class="fa fa-chevron-up"></i></a>
@@ -82,12 +82,12 @@
                                 <td style="font-size: 120%">{{++$i}}</td>
                                 <td class="col-md-4 "><input  class="form-control" style="width: 100%;" id="title" name="title" value="{{$slider->title}}"></td>
                                 <td><strong><a class="btn btn-default" id="openModal" >مشاهده و ویرایش تصویر</a></strong></td>
-                                <td><button id="edit" type="button" class="btn btn-warning">ویرایش</button></td>
+                                <td><button id="edit" type="button" class="btn btn-warning"> ویرایش عنوان</button></td>
                                 @if($slider->active == 1)
-                                    <td><a id="active" content="{{$slider->active}}" name="{{$slider->id}}" type="button"  data-content="غیر فعال" class="btn btn-danger" >غیر فعال</a></td>
+                                    <td><a id="active" content="{{$slider->active}}" name="{{$slider->id}}" type="button"  data-content="غیر فعال" class="btn btn-danger" >غیر فعال کردن</a></td>
                                 @endif
                                 @if($slider->active == 0)
-                                    <td><a id="active" content="{{$slider->active}}" name="{{$slider->id}}" type="button"  data-content="فعال" class="btn btn-success"> فعال</a></td>
+                                    <td><a id="active" content="{{$slider->active}}" name="{{$slider->id}}" type="button"  data-content="فعال" class="btn btn-success"> فعال کردن</a></td>
                                 @endif
                                 <input type="hidden" value="{{$slider->id}}" id="id" name="id">
                                 <input type="hidden" id="token" value="{{csrf_token()}}" name="_token">

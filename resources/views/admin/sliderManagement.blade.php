@@ -7,7 +7,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2 class="modal-title">نمایش تصویر دسته</h2>
+                    <h2 class="modal-title">نمایش تصویر اسلایدر</h2>
                 </div>
                 <div class="modal-body">
                     <img class="image" id="image"  style=" height: 350px; width: 350px; margin-left: 80%;"  src="">
@@ -25,7 +25,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2> مدیریت دسته بندی ها</h2>
+                    <h2> مدیریت اسلایدرها</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link" data-toggle="tooltip" title="جمع کردن"><i
                                         class="fa fa-chevron-up"></i></a>
@@ -37,8 +37,8 @@
                 </div>
 
 
-                <a href="{{url('admin/addCategory')}}" id="user-send" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style=" font-weight: bold;">
-                    <i class="fa fa-th-list"></i>                    افزودن دسته ی جدید                </a>
+                <a href="{{url('admin/addSlider')}}" id="user-send" type="button" class="col-md-2 col-md-offset-5 btn btn-info" style=" font-weight: bold;">
+                    <i class="fa fa-th-list"></i>                    افزودن اسلایدر                 </a>
                 {{--<div class="pull-right" style="direction: rtl"><i class="fa fa-square" style="font-size: 35px;color:#ffff80;"></i> مدیران واحد</div>--}}
                 <div class="x_content">
                     <table style="direction:rtl;text-align: center" id="example"
