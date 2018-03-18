@@ -174,11 +174,11 @@ class AdminController extends Controller
     {
         $pageTitle = 'ویرایش اسلایدر';
         $slider = Slider::find($id);
-        return view('admin.editSlider', compact('pageTitle', 'slider'));
+        return view('admin.editInternship', compact('pageTitle', 'slider'));
     }
 
 
-    //below function is related to edit category picture
+    //below function is related to edit slider picture
     public function editSliderPicture(Request $request)
     {
         $checkFiles = new CheckFiles();
@@ -198,7 +198,7 @@ class AdminController extends Controller
         }
     }
 
-    //below function is related to edit category title
+    //below function is related to edit slider image title
     public function editSliderTitle(Request $request)
     {
         $slider = Slider::find($request->id);
@@ -211,7 +211,7 @@ class AdminController extends Controller
         }
     }
 
-    //below function is related to make categories enable or disable
+    //below function is related to make slider image enable or disable
     public function enableOrDisableSlider(Request $request)
     {
         if (!$request->ajax()) {

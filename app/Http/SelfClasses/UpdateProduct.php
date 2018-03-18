@@ -79,16 +79,16 @@ class UpdateProduct
         if (!empty($videoSrc)) {
             $pr->video_src = $videoSrc;
         }
-        if (!empty($product->ready_time)) {
+        if (!empty($product->delivery_volume)) {
             $pr->delivery_volume = $product->delivery_volume;
         }
-        if (!empty($product->ready_time)) {
+        if (!empty($product->warehouse_count)) {
             $pr->warehouse_count = $product->warehouse_count;
         }
-        if (!empty($product->ready_time)) {
+        if (!empty($product->warehouse_place)) {
             $pr->warehouse_place = $product->warehouse_place;
         }
-        if (!empty($product->ready_time)) {
+        if (!empty($product->barcode)) {
             $pr->barcode = $product->barcode;
         }
         $pr->save();
